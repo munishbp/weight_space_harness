@@ -82,23 +82,46 @@ def encode(conversations: list[list[dict]], thinking: bool = False) -> dict:
         tokenize=True,
         return_dict=True,
         return_tensors="pt",
-        padding=True,
+        processor_kwargs={"padding": True},
         enable_thinking=thinking,
     )
     return inputs.to(MODEL.device)
 
 
+class PresencePenalty:
+    """Lower the logit of each token that the reply already holds, as `presence_penalty` does in vLLM."""
+
+    def __init__(self, penalty: float) -> None:
+        self.penalty = penalty
+        self.seen: torch.Tensor | None = None
+
+    def __call__(self, input_ids: torch.Tensor, scores: torch.Tensor) -> torch.Tensor:
+        if self.seen is None:
+            # The first call sees the prompt only. The prompt does not count as presence.
+            self.seen = torch.zeros_like(scores, dtype=torch.bool)
+        else:
+            self.seen.scatter_(1, input_ids[:, -1:], True)
+        return scores - self.penalty * self.seen
+
+
 def generate(
-    conversations: list[list[dict]], max_new_tokens: int = 64, thinking: bool = False, **options
+    conversations: list[list[dict]],
+    max_new_tokens: int = 64,
+    thinking: bool = False,
+    presence_penalty: float = 0.0,
+    **options,
 ) -> list[dict]:
     """One forward pass of kind `generate` for a batch of conversations.
 
     Decoding is greedy unless `options` say otherwise. `options` go to `model.generate`.
-    Each reply holds `text`, `new_tokens`, and `hit_limit`. `hit_limit` is true when the model
-    wrote `max_new_tokens` tokens and no end token.
+    Each reply holds `text`, `ids`, `new_tokens`, and `hit_limit`. `ids` are the token ids of the
+    reply. `hit_limit` is true when the model wrote `max_new_tokens` tokens and no end token.
     """
     started = time.time()
     inputs = encode(conversations, thinking)
+    if presence_penalty:
+        # The penalty holds state for one generation, so each call needs a new one.
+        options["logits_processor"] = [*options.get("logits_processor", []), PresencePenalty(presence_penalty)]
     output = MODEL.generate(**inputs, max_new_tokens=max_new_tokens, **({"do_sample": False} | options))
     new = output[:, inputs["input_ids"].shape[1] :]
     end_ids = MODEL.generation_config.eos_token_id
@@ -116,9 +139,55 @@ def generate(
         seconds=round(time.time() - started, 2),
     )
     return [
-        {"text": text, "new_tokens": int(length), "hit_limit": not bool(done)}
-        for text, length, done in zip(texts, lengths, ended)
+        {"text": text, "ids": row[: int(length)].tolist(), "new_tokens": int(length), "hit_limit": not bool(done)}
+        for text, row, length, done in zip(texts, new, lengths, ended)
     ]
+
+
+def prompt_ids(conversation: list[dict], thinking: bool = False) -> list[int]:
+    """The token ids of one prompt. `prompt_ids(c) + reply["ids"]` is the full text that the model saw."""
+    return encode([conversation], thinking)["input_ids"][0].tolist()
+
+
+def read_tokens(sequences: list[list[int]], modules: list[str]) -> dict[str, list[torch.Tensor]]:
+    """One forward pass of kind `read` over token sequences: the output of each named module at every position.
+
+    The result maps a module name to one float32 CPU tensor of shape [length, width] per sequence.
+    This works for text tokens only, because image tokens need their pixel input.
+    """
+    started = time.time()
+    named = dict(MODEL.named_modules())
+    missing = [name for name in modules if name not in named]
+    if missing:
+        raise KeyError(f"These module names do not exist in the model: {missing}. No forward pass ran.")
+    longest = max(len(sequence) for sequence in sequences)
+    pad = PROCESSOR.tokenizer.pad_token_id
+    # Left padding, as in `encode`, so position -1 is the last real token of every row.
+    ids = torch.tensor([[pad] * (longest - len(s)) + list(s) for s in sequences], device=MODEL.device)
+    mask = torch.tensor([[0] * (longest - len(s)) + [1] * len(s) for s in sequences], device=MODEL.device)
+    captured: dict[str, list[torch.Tensor]] = {}
+
+    def hook_for(name: str):
+        def hook(_module, _inputs, output):
+            hidden = output[0] if isinstance(output, tuple) else output
+            captured[name] = [row[longest - len(s) :].float().cpu() for row, s in zip(hidden, sequences)]
+
+        return hook
+
+    handles = [named[name].register_forward_hook(hook_for(name)) for name in modules]
+    try:
+        MODEL(input_ids=ids, attention_mask=mask)
+    finally:
+        for handle in handles:
+            handle.remove()
+    log(
+        "read",
+        n=len(sequences),
+        tokens=sum(len(s) for s in sequences),
+        modules=len(modules),
+        seconds=round(time.time() - started, 2),
+    )
+    return captured
 
 
 def read(conversations: list[list[dict]], modules: list[str], thinking: bool = False) -> dict[str, torch.Tensor]:

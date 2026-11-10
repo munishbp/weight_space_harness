@@ -8,6 +8,8 @@ about a benchmark, so a new target needs one new module and no change here.
 from collections import defaultdict
 from collections.abc import Callable
 
+import torch
+
 from wsp import tools
 from wsp.stats import wilson_interval
 
@@ -17,12 +19,18 @@ def run(
     conversation: Callable[[dict], list[dict]],
     score: Callable[[dict, str], dict],
     batch_size: int = 8,
+    seed: int = 0,
     **generate_options,
 ) -> list[dict]:
-    """Generate one reply per item and score it. Each batch is one forward pass in the ledger."""
+    """Generate one reply per item and score it. Each batch is one forward pass in the ledger.
+
+    The seed fixes the sampling of each batch, so the original and the edited model draw the
+    same random numbers on the same items.
+    """
     results = []
     for start in range(0, len(items), batch_size):
         chunk = items[start : start + batch_size]
+        torch.manual_seed(seed + start)
         replies = tools.generate([conversation(item) for item in chunk], **generate_options)
         for item, reply in zip(chunk, replies):
             results.append({"id": item["id"], **reply, **score(item, reply["text"])})

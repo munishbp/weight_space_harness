@@ -8,6 +8,7 @@ Start:  uv run python -m wsp.kernel --model Qwen/Qwen3.5-4B --run runs/<name>
 
 import argparse
 import contextlib
+import gc
 import io
 import json
 import os
@@ -45,7 +46,10 @@ class Handler(socketserver.StreamRequestHandler):
         except BaseException:  # noqa: BLE001 - SystemExit from teacher code must not stop the kernel
             ok = False
             out.write(traceback.format_exc())
-            # An out-of-memory error leaves large tensors alive in the traceback frames.
+        if not ok:
+            # A failed run leaves large tensors alive in the traceback frames. The frames are
+            # free only after the except block ends, so the cleanup must happen here.
+            gc.collect()
             torch.cuda.empty_cache()
         seconds = round(time.time() - started, 2)
         (code_dir / f"{index:03d}.out").write_text(out.getvalue())

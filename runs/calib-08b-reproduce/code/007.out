@@ -1,0 +1,4 @@
+{'model': 'edited (published p50c)', 'cap': 4096, 'seconds': 219.5, 'n': 128, 'correct_pct': 21.9, 'interval_95': [15.6, 29.8], 'hit_limit_pct': 76.6, 'mean_new_tokens': 3718.3}
+{'model': 'base', 'cap': 4096, 'seconds': 209.8, 'n': 128, 'correct_pct': 10.2, 'interval_95': [6.0, 16.6], 'hit_limit_pct': 93.8, 'mean_new_tokens': 3987.1}
+paired: {'correct': {'fixed': 20, 'broken': 5, 'p_value': 0.004077315330505371}, 'finished': {'fixed': 26, 'broken': 4, 'p_value': 5.947612226009369e-05}}
+saved; the edit is active again

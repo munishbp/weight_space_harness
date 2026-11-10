@@ -68,8 +68,8 @@ A negative result is a valid verdict.
 - **Assets that exist.** `wsp/kernel.py`, `wsp/client.py`, `wsp/tools.py`. The kernel has not run
   against a model yet. `tools.tensor_metrics` passes a check on synthetic tensors. The edit manifest
   records the edit size and the weight-space distance. `tools.output_deviation` measures the
-  output-space distance and is not yet run. The environment is in `.venv` (uv, Python 3.12, torch
-  2.15, transformers 5.22). The Qwen3.5-4B weights are in the Hugging Face cache.
+  output-space distance and is not yet run. The environment is in `.venv` (uv, Python 3.13, torch
+  2.15, transformers 5.22, flash-linear-attention 0.6). The Qwen3.5-4B weights are in the Hugging Face cache.
 - **Skills.** `/grilling` for decision tickets, `/research` for research tickets, `/prototype` for
   the playbook ticket. The user's `CLAUDE.md` governs all code and prose.
 
@@ -99,6 +99,9 @@ A negative result is a valid verdict.
 - [Find a way to run and edit the 27B model](issues/21-27b-run-and-edit-paths.md): no library loads
   the NVFP4 copy into PyTorch. The path is a custom loader that turns stored values into real weights
   inside each forward pass (about 20 GB on the GPU). Small edits can vanish in 4-bit rounding.
+- [Reproduce the published 0.8B edit](issues/04-reproduce-published-edit.md): the harness applies
+  the blog's edit bit for bit. Answers at the token limit drop from 93.8% to 76.6% at a 4,096 limit
+  (p = 0.00006). Six harness defects found and fixed.
 
 ## Not yet specified
 
