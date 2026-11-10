@@ -1,0 +1,24 @@
+K positions: 19 in 6 replies | B positions: 744
+tokens at K: [("'\\n'", 18), ("'\\n\\n'", 1)]
+next token chosen at K: [("'   '", 19)]
+alternative token: '   ' | cosine(g, g_abs) = 0.47
+logit(</think>) - logit(alt): mean at K -4.19, at B -3.22
+sum of parts equals the final residual: 0.0056 (relative error)
+most negative contributions to the closing token at K (mean at K | mean at B):
+  att23    -4.31 |   -2.90
+  att18    -2.44 |   -0.07
+  mlp22    -2.21 |   -0.09
+  mlp21    -1.61 |   -0.05
+  emb      -1.50 |   -0.84
+  mlp17    -0.52 |   -0.12
+  mlp20    -0.49 |   -0.25
+  att1     -0.10 |   -0.02
+  mlp13    -0.09 |   -0.08
+  mlp10    -0.08 |   -0.03
+most positive:
+  att21    +0.45 |   +0.36
+  att16    +0.53 |   +0.18
+  att17    +0.59 |   +0.09
+  att22    +0.77 |   -0.34
+  att0     +1.73 |   +0.86
+  mlp23    +2.31 |   -0.93

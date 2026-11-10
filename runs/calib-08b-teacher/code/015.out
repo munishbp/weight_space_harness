@@ -1,0 +1,11 @@
+newline ids: {198, 271}
+conclusion line breaks: 98 in 32 replies | control line breaks: 2480
+  conclusion line: "    *   Okay, I'm confident in the calculation."
+  conclusion line: '    I will write the reasoning first.'
+  conclusion line: '                *   Okay, so the answer is 135.'
+  conclusion line: '    *   The logic holds up perfectly.'
+  conclusion line: '        *   Result is 31.'
+  conclusion line: '    The result is 1172.'
+  conclusion line: '    Correct.'
+  conclusion line: '        *   Is it possible the answer is related to the fact that she *only* keeps 1/4?'
+base P(</think>): conclusion median 1.55e-06, mean 3.37e-03 | control median 3.69e-07, mean 1.85e-05

@@ -1,0 +1,6 @@
+cosine of the repeat direction between layers 13 and [8, 11, 16, 19, 22]: [0.77, 0.86, 0.83, 0.74, 0.61]
+{'trial': 'base', 'finished_pct': 3.1, 'correct_pct': 4.7, 'closed_thinking_pct': 3.1, 'wait_per_1000': 3.65, 'repeat_share': 0.124, 'mean_tokens': 2020}
+{'trial': 'repeat dir (layer 13), MLPs 8-22, alpha 1', 'finished_pct': 1.6, 'correct_pct': 1.6, 'closed_thinking_pct': 1.6, 'wait_per_1000': 6.9, 'repeat_share': 0.189, 'mean_tokens': 2035, 'weights_changed_pct': 5.113, 'model_rel_change': 0.0021, 'seconds': 47}
+{'trial': 'repeat dir (layer 13), MLPs + attention 8-22, alpha 1.5', 'finished_pct': 9.4, 'correct_pct': 9.4, 'closed_thinking_pct': 9.4, 'wait_per_1000': 6.8, 'repeat_share': 0.17, 'mean_tokens': 1968, 'weights_changed_pct': 8.575, 'model_rel_change': 0.0047, 'seconds': 52}
+{'trial': 'Wait dir (layer 16), MLPs 8-22, alpha 1', 'finished_pct': 4.7, 'correct_pct': 6.2, 'closed_thinking_pct': 4.7, 'wait_per_1000': 10.64, 'repeat_share': 0.184, 'mean_tokens': 2010, 'weights_changed_pct': 5.265, 'model_rel_change': 0.002, 'seconds': 46}
+{'trial': 'random dir, MLPs 8-22, alpha 1', 'finished_pct': 7.8, 'correct_pct': 9.4, 'closed_thinking_pct': 7.8, 'wait_per_1000': 3.71, 'repeat_share': 0.129, 'mean_tokens': 2005, 'weights_changed_pct': 5.446, 'model_rel_change': 0.0021, 'seconds': 46}

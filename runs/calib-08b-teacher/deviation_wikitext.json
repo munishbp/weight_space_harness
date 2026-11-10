@@ -1,0 +1,26 @@
+{
+ "teacher edit A (veto 1.75)": {
+  "mean_kl": 0.001143352769841613,
+  "max_kl": 0.038067564368247986,
+  "top1_agreement_pct": 98.13546977421704,
+  "perplexity_original": 24.761928660699414,
+  "perplexity_edited": 24.74830055801616,
+  "positions": 13730
+ },
+ "teacher edit B (wire +14)": {
+  "mean_kl": 0.005232728180968666,
+  "max_kl": 1.216034173965454,
+  "top1_agreement_pct": 96.49672250546249,
+  "perplexity_original": 24.761928660699414,
+  "perplexity_edited": 24.678964006992278,
+  "positions": 13730
+ },
+ "published edit": {
+  "mean_kl": 0.016213137132793296,
+  "max_kl": 0.708389401435852,
+  "top1_agreement_pct": 94.06409322651129,
+  "perplexity_original": 24.761928660699414,
+  "perplexity_edited": 25.041398883404852,
+  "positions": 13730
+ }
+}

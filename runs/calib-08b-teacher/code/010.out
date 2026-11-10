@@ -1,0 +1,3 @@
+{'trial': 'g out of MLP 21 and 22', 'finished_pct': 10.9, 'correct_pct': 10.9, 'closed_thinking_pct': 10.9, 'wait_per_1000': 3.36, 'repeat_share': 0.117, 'mean_tokens': 1985, 'weights_changed_pct': 0.716, 'model_rel_change': 0.00084, 'seconds': 44}
+{'trial': 'g out of MLP 21, 22 and attention 18', 'finished_pct': 17.2, 'correct_pct': 17.2, 'closed_thinking_pct': 20.3, 'wait_per_1000': 3.16, 'repeat_share': 0.109, 'mean_tokens': 1954, 'weights_changed_pct': 0.921, 'model_rel_change': 0.00097, 'seconds': 43}
+{'trial': 'g_abs out of MLP 21, 22 and attention 18', 'finished_pct': 0.0, 'correct_pct': 0.0, 'closed_thinking_pct': 0.0, 'wait_per_1000': 3.69, 'repeat_share': 0.113, 'mean_tokens': 2048, 'weights_changed_pct': 0.927, 'model_rel_change': 0.00095, 'seconds': 43}

@@ -1,0 +1,5 @@
+layer 15: the 64 top neurons carry 0.146 of the layer's gap of 0.155 along the repeat direction
+layer 19: the 64 top neurons carry 0.140 of the layer's gap of 0.157 along the repeat direction
+{'trial': 'repeat direction out of 64 neurons each in MLP 15 and 19, alpha 1', 'finished_pct': 1.6, 'correct_pct': 1.6, 'closed_thinking_pct': 1.6, 'wait_per_1000': 3.59, 'repeat_share': 0.107, 'mean_tokens': 2037, 'median_think_len': 1158, 'weights_changed_pct': 0.0148, 'model_rel_change': 0.00033, 'seconds': 42}
+{'trial': 'same, alpha 2', 'finished_pct': 3.1, 'correct_pct': 4.7, 'closed_thinking_pct': 3.1, 'wait_per_1000': 3.83, 'repeat_share': 0.112, 'mean_tokens': 2029, 'median_think_len': 1273, 'weights_changed_pct': 0.0151, 'model_rel_change': 0.00065, 'seconds': 42}
+{'trial': 'repeat direction out of all of MLP 15 and 19, alpha 1', 'finished_pct': 6.2, 'correct_pct': 7.8, 'closed_thinking_pct': 6.2, 'wait_per_1000': 3.53, 'repeat_share': 0.119, 'mean_tokens': 2012, 'median_think_len': 1549, 'weights_changed_pct': 0.6746, 'model_rel_change': 0.00084, 'seconds': 42}

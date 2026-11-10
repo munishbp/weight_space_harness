@@ -1,0 +1,19 @@
+train conclusions: 51 | test conclusions: 47
+layer | top neuron: d' on train, AUC on test | number of neurons with test AUC > 0.9 among the 50 best on train
+   12 | d'=2.41, AUC=0.867 | 0
+   13 | d'=2.70, AUC=0.861 | 0
+   14 | d'=2.54, AUC=0.877 | 2
+   15 | d'=2.26, AUC=0.858 | 1
+   16 | d'=2.49, AUC=0.875 | 3
+   17 | d'=2.84, AUC=0.899 | 4
+   18 | d'=2.58, AUC=0.890 | 9
+   19 | d'=3.00, AUC=0.900 | 7
+   20 | d'=2.50, AUC=0.920 | 3
+   21 | d'=2.62, AUC=0.905 | 4
+   22 | d'=2.47, AUC=0.889 | 2
+   23 | d'=2.48, AUC=0.916 | 1
+layer 17: weighted sum of 50 neurons: test AUC 0.915 | conclusion mean 7.40, control mean -3.97, control 99th pct 11.31, conclusion median 10.33
+layer 19: weighted sum of 50 neurons: test AUC 0.914 | conclusion mean 6.44, control mean -5.53, control 99th pct 8.51, conclusion median 8.98
+layer 21: weighted sum of 50 neurons: test AUC 0.895 | conclusion mean 4.63, control mean -5.62, control 99th pct 7.01, conclusion median 7.90
+layer 22: weighted sum of 50 neurons: test AUC 0.887 | conclusion mean 11.19, control mean -2.07, control 99th pct 13.94, conclusion median 15.17
+layer 23: weighted sum of 50 neurons: test AUC 0.884 | conclusion mean 8.95, control mean -4.87, control 99th pct 11.89, conclusion median 12.48

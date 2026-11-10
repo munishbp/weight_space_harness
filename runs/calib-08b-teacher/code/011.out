@@ -1,0 +1,4 @@
+{'trial': 'g out of MLP 21, 22, att 18, alpha 2', 'finished_pct': 50.0, 'correct_pct': 39.1, 'closed_thinking_pct': 79.7, 'wait_per_1000': 3.58, 'repeat_share': 0.122, 'mean_tokens': 1338, 'weights_changed_pct': 0.994, 'model_rel_change': 0.00193, 'seconds': 43}
+{'trial': 'g out of MLP 21, 22, att 18, att 23, alpha 1', 'finished_pct': 48.4, 'correct_pct': 34.4, 'closed_thinking_pct': 84.4, 'wait_per_1000': 3.3, 'repeat_share': 0.109, 'mean_tokens': 1298, 'weights_changed_pct': 1.127, 'model_rel_change': 0.00122, 'seconds': 42}
+{'trial': 'g out of MLP 21, 22, att 18, att 23, alpha 2', 'finished_pct': 70.3, 'correct_pct': 37.5, 'closed_thinking_pct': 100.0, 'wait_per_1000': 3.45, 'repeat_share': 0.132, 'mean_tokens': 925, 'weights_changed_pct': 1.216, 'model_rel_change': 0.00244, 'seconds': 42}
+teacher time so far: 15 min | generate passes: 11 | read passes: 9 | code runs: 10

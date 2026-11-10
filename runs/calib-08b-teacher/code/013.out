@@ -1,0 +1,8 @@
+{'trial': 'BASE, thinking off', 'finished_pct': 85.9, 'correct_pct': 53.1, 'mean_tokens': 805, 'seconds': 46}
+{'trial': 'g out of MLP 21, 22, att 18, alpha 1.25', 'finished_pct': 15.6, 'correct_pct': 14.1, 'closed_thinking_pct': 18.8, 'wait_per_1000': 4.12, 'repeat_share': 0.137, 'mean_tokens': 1912, 'weights_changed_pct': 0.948, 'model_rel_change': 0.00121, 'seconds': 45}
+   median thinking length when closed: 939 | finished-and-correct share of finished: 0.9
+{'trial': 'g out of MLP 21, 22, att 18, alpha 1.5', 'finished_pct': 29.7, 'correct_pct': 28.1, 'closed_thinking_pct': 29.7, 'wait_per_1000': 3.05, 'repeat_share': 0.114, 'mean_tokens': 1796, 'weights_changed_pct': 0.968, 'model_rel_change': 0.00145, 'seconds': 42}
+   median thinking length when closed: 961 | finished-and-correct share of finished: 0.95
+{'trial': 'g out of MLP 21, 22, att 18, alpha 1.75', 'finished_pct': 35.9, 'correct_pct': 35.9, 'closed_thinking_pct': 46.9, 'wait_per_1000': 3.33, 'repeat_share': 0.118, 'mean_tokens': 1720, 'weights_changed_pct': 0.983, 'model_rel_change': 0.00169, 'seconds': 42}
+   median thinking length when closed: 759 | finished-and-correct share of finished: 1.0
+alpha 1.0: median thinking length 1480 | alpha 2.0: 129

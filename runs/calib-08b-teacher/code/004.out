@@ -1,0 +1,9 @@
+62 stuck replies | prompt length example: 90 | total length: 2138
+prompt tail: ' answer within \\boxed{}.<|im_end|>\n<|im_start|>assistant\n<think>\n'
+/home/munish-persaud/weight_space/.venv/lib/python3.13/site-packages/triton/knobs.py:504: UserWarning: TRITON_DEFAULT_FP_FUSION is unset: defaulting to FP fusion ENABLED for backward compatibility in Triton 3.9. The default will change to DISABLED in Triton 3.10; set TRITON_DEFAULT_FP_FUSION=1 to keep fusion enabled or =0 to adopt the new default early and silence this warning.
+  warn_once(FP_FUSION_DEFAULT_WARNING)
+{'model.language_model.layers.5.mlp.down_proj': [(2, 1024), (1, 1024)], 'model.language_model.layers.5': [(2, 1024), (1, 1024)]}
+down_proj input: (50, 3584)
+padding does not change the result: True 0.00390625
+logprob shape: (130, 5) | P(</think>) over the first 40 reply tokens: max 3.7233812690828927e-06
+P(first reply token | prompt) = 0.975 'Here'

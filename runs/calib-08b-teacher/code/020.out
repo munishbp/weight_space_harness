@@ -1,0 +1,2 @@
+repeat direction of layer 16: total gap 1.126. Top writers (gap | at repeat | at new): [('mlp15', 0.167, 0.223, 0.055), ('att16', 0.141, 0.18, 0.039), ('att13', 0.097, 0.106, 0.009), ('mlp16', 0.092, 0.095, 0.003), ('att19', 0.09, 0.063, -0.026), ('mlp19', 0.08, 0.138, 0.057)]
+repeat direction of layer 20: total gap 1.686. Top writers (gap | at repeat | at new): [('mlp19', 0.157, 0.195, 0.038), ('mlp15', 0.155, 0.167, 0.012), ('att19', 0.137, 0.105, -0.033), ('att16', 0.113, 0.196, 0.083), ('att20', 0.11, 0.256, 0.146), ('att17', 0.105, 0.145, 0.041)]

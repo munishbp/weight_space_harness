@@ -1,0 +1,49 @@
+max P(</think>) per stuck reply: min 6.06e-06 | median 0.000 | max 0.291
+replies whose peak is above 0.5: 0 | above 0.1: 1 | above 0.01: 2 of 62
+positions with P > 0.1: 1 | P > 0.01: 6 of 126976
+--- P=0.291 at reply token 796 | chosen next token: '   '
+3 = 30$
+    $1 \times 3 = 3$
+    $30 + 3 = 33$
+    $90 + 33 = 123$
+    Correct.
+
+    Final Answer: 123.
+
+--- P=0.037 at reply token 1989 | chosen next token: '   '
+ bought 5 books..."
+    "Each of which cost $2."
+    "How much money does Reggie have left?"
+    The logic is strictly $48 - (5 \times 2)$.
+    There is no ambiguity.
+
+    I will write the solution now.
+
+--- P=0.005 at reply token 1123 | chosen next token: '   '
+28$.
+    Step 4: Total removed = $14 + 28 = 42$.
+    Step 5: Remaining = $74 - 42 = 32$.
+
+    Result is 32.
+
+    Let's format it nicely.
+
+--- P=0.001 at reply token 1915 | chosen next token: '   '
+
+
+    *   Okay, I'm confident in the calculation.
+        *   Step 1: Calculate Tax.
+        *   Step 2: Calculate Fees.
+        *   Step 3: Subtract fees from winnings.
+
+    *   Let's write down the steps clearly.
+
+--- P=0.001 at reply token 1249 | chosen next token: '   '
+ correct.
+
+    Double check the math one last time.
+    $14 \times 60 = 840$.
+    $11 \times 75 = 825$.
+    $840 - 825 = 15$.
+
+tokens at positions with P(</think>) > 0.05: [("'\\n'", 1)]

@@ -20,6 +20,18 @@ def load_jsonl(path: Path) -> list[dict]:
     return [json.loads(line) for line in Path(path).read_text().split("\n") if line.strip()]
 
 
+def load_gsm8k_test(count: int, seed: int = 0) -> list[dict]:
+    """A fixed random subset of the GSM8K test split (`openai/gsm8k`, MIT licence)."""
+    import random
+
+    from datasets import load_dataset
+
+    rows = load_dataset("openai/gsm8k", "main", split="test")
+    picks = sorted(random.Random(seed).sample(range(len(rows)), count))
+    # The reference solution ends with "#### <number>".
+    return [{"id": f"gsm8k_test_{i}", "problem": rows[i]["question"], "answer": rows[i]["answer"].split("####")[-1].strip()} for i in picks]
+
+
 def conversation(item: dict) -> list[dict]:
     return [{"role": "user", "content": [{"type": "text", "text": item["problem"] + SUFFIX}]}]
 

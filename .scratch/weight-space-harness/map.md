@@ -67,8 +67,8 @@ A negative result is a valid verdict.
 - **Machine.** RTX 5090 with 32 GB VRAM, 45 GB RAM, 24 cores, 692 GB free disk on 2026-11-10.
 - **Assets that exist.** `wsp/kernel.py`, `wsp/client.py`, `wsp/tools.py`. The kernel has not run
   against a model yet. `tools.tensor_metrics` passes a check on synthetic tensors. The edit manifest
-  records the edit size and the weight-space distance. `tools.output_deviation` measures the
-  output-space distance and is not yet run. The environment is in `.venv` (uv, Python 3.13, torch
+  records the edit size and the weight-space distance. `tools.deviation` measures the
+  output-space distance on text. `wsp/battery.py` holds the generalization battery. The environment is in `.venv` (uv, Python 3.13, torch
   2.15, transformers 5.22, flash-linear-attention 0.6). The Qwen3.5-4B weights are in the Hugging Face cache.
 - **Skills.** `/grilling` for decision tickets, `/research` for research tickets, `/prototype` for
   the playbook ticket. The user's `CLAUDE.md` governs all code and prose.
@@ -102,6 +102,10 @@ A negative result is a valid verdict.
 - [Reproduce the published 0.8B edit](issues/04-reproduce-published-edit.md): the harness applies
   the blog's edit bit for bit. Answers at the token limit drop from 93.8% to 76.6% at a 4,096 limit
   (p = 0.00006). Six harness defects found and fixed.
+- [Find the 0.8B repetition fault again as the teacher](issues/06-teacher-refinds-fault.md): in 29
+  minutes the teacher found that three components suppress the closing token of the thinking. Two
+  edits raise held-out accuracy from 10.2% to about 38%, above the published edit (21.9%). The base
+  model with thinking off scores 56.2% with no edit.
 
 ## Not yet specified
 

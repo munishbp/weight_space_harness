@@ -1,0 +1,71 @@
+{
+  "tensors_changed": 3,
+  "tensors_changed_pct": 0.6342494714587738,
+  "layers_changed": [
+    18,
+    21,
+    22
+  ],
+  "changed_weights": 8381736,
+  "changed_weights_pct": 0.9826347426696094,
+  "relative_change_of_model": 0.0016898748458802379,
+  "tensors": [
+    {
+      "name": "model.language_model.layers.18.linear_attn.out_proj.weight",
+      "shape": [
+        1024,
+        2048
+      ],
+      "weights": 2097152,
+      "changed_weights": 1865825,
+      "changed_weights_pct": 88.96946907043457,
+      "relative_change": 0.05408509094383748,
+      "max_abs_change": 0.0118560791015625,
+      "cosine_to_original": 0.99853711211847,
+      "delta_squared_norm": 0.626978110503088,
+      "rows_changed": 1021,
+      "rows_changed_pct": 99.70703125,
+      "columns_changed": 2048,
+      "columns_changed_pct": 100.0,
+      "delta_rank": 1
+    },
+    {
+      "name": "model.language_model.layers.21.mlp.down_proj.weight",
+      "shape": [
+        1024,
+        3584
+      ],
+      "weights": 3670016,
+      "changed_weights": 3254850,
+      "changed_weights_pct": 88.6876242501395,
+      "relative_change": 0.05423628313989368,
+      "max_abs_change": 0.01324462890625,
+      "cosine_to_original": 0.9985289230531293,
+      "delta_squared_norm": 0.9219162566399377,
+      "rows_changed": 1021,
+      "rows_changed_pct": 99.70703125,
+      "columns_changed": 3584,
+      "columns_changed_pct": 100.0,
+      "delta_rank": 1
+    },
+    {
+      "name": "model.language_model.layers.22.mlp.down_proj.weight",
+      "shape": [
+        1024,
+        3584
+      ],
+      "weights": 3670016,
+      "changed_weights": 3261061,
+      "changed_weights_pct": 88.8568605695452,
+      "relative_change": 0.05498517231036921,
+      "max_abs_change": 0.015106201171875,
+      "cosine_to_original": 0.9984880105201002,
+      "delta_squared_norm": 0.9280002282274036,
+      "rows_changed": 1021,
+      "rows_changed_pct": 99.70703125,
+      "columns_changed": 3583,
+      "columns_changed_pct": 99.97209821428571,
+      "delta_rank": 1
+    }
+  ]
+}

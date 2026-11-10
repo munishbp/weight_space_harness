@@ -5,6 +5,7 @@ The ledger is the record of the forward-pass count and the wall-clock time of a 
 """
 
 import json
+import math
 import re
 import time
 from pathlib import Path
@@ -149,10 +150,32 @@ def prompt_ids(conversation: list[dict], thinking: bool = False) -> list[int]:
     return encode([conversation], thinking)["input_ids"][0].tolist()
 
 
-def read_tokens(sequences: list[list[int]], modules: list[str]) -> dict[str, list[torch.Tensor]]:
-    """One forward pass of kind `read` over token sequences: the output of each named module at every position.
+def _text_inputs(sequences: list[list[int]]) -> tuple[torch.Tensor, torch.Tensor, list[int]]:
+    """Left-padded ids, their mask, and the padding length of each row."""
+    longest = max(len(sequence) for sequence in sequences)
+    pad = PROCESSOR.tokenizer.pad_token_id
+    offsets = [longest - len(sequence) for sequence in sequences]
+    ids = torch.tensor([[pad] * o + list(s) for o, s in zip(offsets, sequences)], device=MODEL.device)
+    mask = torch.tensor([[0] * o + [1] * len(s) for o, s in zip(offsets, sequences)], device=MODEL.device)
+    return ids, mask, offsets
 
-    The result maps a module name to one float32 CPU tensor of shape [length, width] per sequence.
+
+def _final_hidden(ids: torch.Tensor, mask: torch.Tensor) -> torch.Tensor:
+    """Run the model without its output head. Full logits for a long batch do not fit in memory."""
+    return MODEL.base_model(input_ids=ids, attention_mask=mask).last_hidden_state
+
+
+def read_tokens(
+    sequences: list[list[int]],
+    modules: list[str],
+    positions: list[list[int]] | None = None,
+    inputs: bool = False,
+) -> dict[str, list[torch.Tensor]]:
+    """One forward pass of kind `read` over token sequences: activations of the named modules.
+
+    The result maps a module name to one float32 CPU tensor of shape [positions, width] per sequence.
+    `positions` selects token indexes per sequence; without it, every position returns.
+    `inputs` returns the input of each module in place of its output.
     This works for text tokens only, because image tokens need their pixel input.
     """
     started = time.time()
@@ -160,23 +183,27 @@ def read_tokens(sequences: list[list[int]], modules: list[str]) -> dict[str, lis
     missing = [name for name in modules if name not in named]
     if missing:
         raise KeyError(f"These module names do not exist in the model: {missing}. No forward pass ran.")
-    longest = max(len(sequence) for sequence in sequences)
-    pad = PROCESSOR.tokenizer.pad_token_id
-    # Left padding, as in `encode`, so position -1 is the last real token of every row.
-    ids = torch.tensor([[pad] * (longest - len(s)) + list(s) for s in sequences], device=MODEL.device)
-    mask = torch.tensor([[0] * (longest - len(s)) + [1] * len(s) for s in sequences], device=MODEL.device)
+    ids, mask, offsets = _text_inputs(sequences)
     captured: dict[str, list[torch.Tensor]] = {}
 
+    def keep(name: str, hidden: torch.Tensor) -> None:
+        rows = []
+        for index, offset in enumerate(offsets):
+            row = hidden[index, offset:]
+            if positions is not None:
+                row = row[torch.tensor(positions[index], dtype=torch.long, device=row.device)]
+            rows.append(row.float().cpu())
+        captured[name] = rows
+
     def hook_for(name: str):
-        def hook(_module, _inputs, output):
-            hidden = output[0] if isinstance(output, tuple) else output
-            captured[name] = [row[longest - len(s) :].float().cpu() for row, s in zip(hidden, sequences)]
+        if inputs:
+            return lambda _module, args: keep(name, args[0])
+        return lambda _module, _args, output: keep(name, output[0] if isinstance(output, tuple) else output)
 
-        return hook
-
-    handles = [named[name].register_forward_hook(hook_for(name)) for name in modules]
+    register = "register_forward_pre_hook" if inputs else "register_forward_hook"
+    handles = [getattr(named[name], register)(hook_for(name)) for name in modules]
     try:
-        MODEL(input_ids=ids, attention_mask=mask)
+        _final_hidden(ids, mask)
     finally:
         for handle in handles:
             handle.remove()
@@ -190,10 +217,36 @@ def read_tokens(sequences: list[list[int]], modules: list[str]) -> dict[str, lis
     return captured
 
 
+def read_logprobs(
+    sequences: list[list[int]], token_ids: list[int], positions: list[list[int]] | None = None
+) -> list[torch.Tensor]:
+    """One forward pass of kind `read`: the log-probability that each chosen token comes next.
+
+    The result holds one float32 CPU tensor of shape [positions, len(token_ids)] per sequence.
+    """
+    started = time.time()
+    ids, mask, offsets = _text_inputs(sequences)
+    hidden = _final_hidden(ids, mask)
+    head = MODEL.get_output_embeddings()
+    chosen = torch.tensor(token_ids, device=hidden.device)
+    result = []
+    for index, offset in enumerate(offsets):
+        row = hidden[index, offset:]
+        if positions is not None:
+            row = row[torch.tensor(positions[index], dtype=torch.long, device=row.device)]
+        # The vocabulary is large, so the head runs on a few hundred positions at a time.
+        parts = [torch.log_softmax(head(chunk).float(), dim=-1)[:, chosen] for chunk in row.split(256)]
+        result.append(torch.cat(parts).cpu() if parts else torch.empty(0, len(token_ids)))
+    log("read", n=len(sequences), tokens=sum(len(s) for s in sequences), logprobs=len(token_ids),
+        seconds=round(time.time() - started, 2))
+    return result
+
+
 def read(conversations: list[list[dict]], modules: list[str], thinking: bool = False) -> dict[str, torch.Tensor]:
-    """One forward pass of kind `read`: the output of each named module at the last prompt position.
+    """One forward pass of kind `read` over conversations: the output of each named module at the last prompt position.
 
     The result maps a module name to a float32 CPU tensor of shape [batch, width].
+    Conversations can hold images, which `read_tokens` cannot.
     """
     started = time.time()
     named = dict(MODEL.named_modules())
@@ -203,7 +256,7 @@ def read(conversations: list[list[dict]], modules: list[str], thinking: bool = F
     captured: dict[str, torch.Tensor] = {}
 
     def hook_for(name: str):
-        def hook(_module, _inputs, output):
+        def hook(_module, _args, output):
             hidden = output[0] if isinstance(output, tuple) else output
             captured[name] = hidden[:, -1, :].float().cpu()
 
@@ -211,8 +264,8 @@ def read(conversations: list[list[dict]], modules: list[str], thinking: bool = F
 
     handles = [named[name].register_forward_hook(hook_for(name)) for name in modules]
     try:
-        inputs = encode(conversations, thinking)
-        MODEL(**inputs)
+        # The base model skips the output head, which no read needs.
+        MODEL.base_model(**encode(conversations, thinking))
     finally:
         for handle in handles:
             handle.remove()
@@ -284,36 +337,57 @@ def tensor_metrics(original: torch.Tensor, edited: torch.Tensor) -> dict:
     return metrics
 
 
-def output_deviation(conversations: list[list[dict]], thinking: bool = False) -> dict:
-    """Two forward passes: the distance between the next-token distributions of the original and the edited model.
+def deviation(sequences: list[list[int]]) -> dict:
+    """Two forward passes over text: the distance between the original and the edited model in output space.
 
-    The result holds the mean KL divergence from the original to the edited model and the share of
-    positions where both models rank the same token first, over all attended positions.
+    The result holds the mean KL divergence from the original to the edited next-token distribution,
+    the share of positions where both models rank the same token first, and the perplexity of each
+    model on the text. Use neutral text that is not part of the target of the edit.
     """
+    head = MODEL.get_output_embeddings()
+    if any(MODEL.get_parameter(name) is head.weight for name in ORIGINALS):
+        raise ValueError("`deviation` applies one output head to both models, so it cannot measure an edit of the head.")
     started = time.time()
-    inputs = encode(conversations, thinking)
-    mask = inputs["attention_mask"].bool()
-    edited = torch.log_softmax(MODEL(**inputs).logits.float(), dim=-1)
+    ids, mask, offsets = _text_inputs(sequences)
+    edited_hidden = _final_hidden(ids, mask)
     edited_values = {name: MODEL.get_parameter(name).detach().clone() for name in ORIGINALS}
     try:
         for name, original in ORIGINALS.items():
             parameter = MODEL.get_parameter(name)
             parameter.copy_(original.to(parameter.device))
-        base = torch.log_softmax(MODEL(**inputs).logits.float(), dim=-1)
+        base_hidden = _final_hidden(ids, mask)
     finally:
         # The edit must return when the second pass fails. If it does not, the kernel holds
         # the original model while the edit files say that the edit is active.
         for name, value in edited_values.items():
             MODEL.get_parameter(name).copy_(value)
-    kl = (base.exp() * (base - edited)).sum(dim=-1)[mask]
-    agree = (base.argmax(dim=-1) == edited.argmax(dim=-1))[mask]
+    positions = 0
+    kl_sum = kl_max = agree = base_nll = edited_nll = 0.0
+    for index, offset in enumerate(offsets):
+        targets = ids[index, offset + 1 :]
+        chunks = zip(
+            base_hidden[index, offset:-1].split(256), edited_hidden[index, offset:-1].split(256), targets.split(256)
+        )
+        # The vocabulary is large, so the head runs on a few hundred positions at a time.
+        for base_chunk, edited_chunk, target in chunks:
+            base = torch.log_softmax(head(base_chunk).float(), dim=-1)
+            edited = torch.log_softmax(head(edited_chunk).float(), dim=-1)
+            kl = (base.exp() * (base - edited)).sum(dim=-1)
+            kl_sum += float(kl.sum())
+            kl_max = max(kl_max, float(kl.max()))
+            agree += float((base.argmax(dim=-1) == edited.argmax(dim=-1)).sum())
+            base_nll -= float(base.gather(1, target[:, None]).sum())
+            edited_nll -= float(edited.gather(1, target[:, None]).sum())
+            positions += len(target)
     result = {
-        "mean_kl": float(kl.mean()),
-        "max_kl": float(kl.max()),
-        "top1_agreement_pct": 100 * float(agree.float().mean()),
-        "positions": int(mask.sum()),
+        "mean_kl": kl_sum / positions,
+        "max_kl": kl_max,
+        "top1_agreement_pct": 100 * agree / positions,
+        "perplexity_original": math.exp(base_nll / positions),
+        "perplexity_edited": math.exp(edited_nll / positions),
+        "positions": positions,
     }
-    log("output_deviation", n=len(conversations), seconds=round(time.time() - started, 2), **result)
+    log("deviation", n=len(sequences), seconds=round(time.time() - started, 2), **result)
     return result
 
 

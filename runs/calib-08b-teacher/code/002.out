@@ -1,0 +1,7 @@
+</think> id: 248069 | appears in 2 of 64 replies
+wait ids: [3655, 11158, 13428, 13784] [' wait', 'wait', ' Wait', 'Wait']
+Wait tokens per reply: mean 7.375 | median 7 | zero in 1
+replies that state an answer inside the thinking: 34 of 64 | median position of the first statement: 122
+after Wait: [(',', 443), ('.', 21), ('...', 4), ('*,', 4)]
+line starts: [("Let's", 592), ('Wait,', 371), ('If', 356), ('Is', 202), ('Total', 161), ('This', 134), ('The', 123), ('Step', 123), ('1.', 107), ('So,', 95), ('2.', 94), ('Maybe', 92), ('Does', 85), ('Let', 80)]
+Wait per 1000 tokens by block of 256: [1.5, 3.0, 3.4, 3.2, 3.9, 3.9, 5.0, 5.3]
