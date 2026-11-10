@@ -38,6 +38,11 @@ A negative result is a valid verdict.
 
 - **This map carries execution.** The verdict is empirical, so `task` tickets run experiments. This
   overrides the planning-only default of wayfinder.
+- **Delegation.** On 2026-11-10 the user said: "I think you can do the rest without me. So, get
+  started on it." The teacher makes the open decisions, including the `grilling` tickets, and writes
+  each decision with its reason in the ticket. The user can overrule a decision at any time.
+- **No pass and no fail.** The harness is the deliverable and 15 minutes per edit is the ideal. Every
+  measured result is reported as information.
 - **Teacher.** Claude is the teacher for every run of this effort. The harness itself is neutral: the
   teacher interface is a command line plus a plain-text playbook, so another frontier model with a
   shell tool can take the role.
@@ -85,6 +90,15 @@ A negative result is a valid verdict.
 - [Survey Qwen3.5 spatial outputs and action interfaces](issues/13-qwen-spatial-outputs.md): point
   and box formats exist only in the Qwen3-VL cookbooks. Small open models score low zero-shot in every
   published interface. Qwen-VLA reaches 97.9 on LIBERO with Qwen3.5-4B only through a trained action decoder.
+- [Set the pass criteria and the time boxes](issues/05-pass-criteria-and-time-boxes.md): no pass and
+  no fail. Time boxes of 2 to 4 hours per block only stop an open-ended search.
+- [Choose the generalization battery](issues/16-retention-battery.md): six fixed sets (MMLU-Pro,
+  GSM8K, CountBench, ChartQA, RefCOCO, WikiText-2). A drop of 5 points with p below 0.05 is "major".
+- [Choose the long-horizon computer use target](issues/17-long-horizon-computer-use-target.md):
+  ScreenSpot Pro first, then one portion of OSWorld-Verified or AndroidWorld.
+- [Find a way to run and edit the 27B model](issues/21-27b-run-and-edit-paths.md): no library loads
+  the NVFP4 copy into PyTorch. The path is a custom loader that turns stored values into real weights
+  inside each forward pass (about 20 GB on the GPU). Small edits can vanish in 4-bit rounding.
 
 ## Not yet specified
 

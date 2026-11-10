@@ -1,7 +1,7 @@
 # Find a way to run and edit the 27B model
 
 Type: research
-Status: claimed
+Status: resolved
 
 ## Question
 
@@ -38,3 +38,33 @@ Report for each path what works, what it costs, and what is unknown:
    quantization step that needs.
 
 Findings: `../research/27b-run-and-edit-paths.md`
+
+## Answer
+
+Resolved on 2026-11-10 by a research subagent. The findings file holds the on-disk format, the number
+format, six designs, and the sources.
+
+- **No library loads this checkpoint into PyTorch.** transformers 5.22 does not accept the
+  `modelopt` quantization method, and the ModelOpt restore needs a saved state that the directory
+  does not have. A custom loader is possible, because the rule that turns stored values into real
+  weights needs no full-precision weights.
+- **The checkpoint mixes formats.** 193 layers (all MLPs and the output head) are NVFP4, and 208
+  attention layers are FP8. The vision tower stays bfloat16.
+- **Activations are quantized too.** SGLang runs 4-bit and FP8 layer inputs. A PyTorch pass with
+  bfloat16 activations reads slightly different values from the ones that SGLang serves.
+- **Rounding can erase a small edit.** One step of the 4-bit format is about a third of the largest
+  value in its block of 16 values. Quantizing one changed tensor again needs only that tensor.
+- **Memory.** The stored tensors need about 20 GB on the GPU. SGLang holds about 30 GB while it
+  runs, so the kernel and SGLang cannot hold the model at the same time. A bfloat16 copy (55.6 GB)
+  fits neither the GPU nor the RAM.
+
+**Path chosen by the teacher under the user's delegation: design D2.** A custom loader keeps the
+stored tensors on the GPU and turns each quantized layer into real weights inside its forward pass.
+The kernel then reads activations, writes edits, and generates in PyTorch, as it does for the other
+students. An edited tensor goes back to its stored format, so the edit that the verdict measures is
+the edit that survives 4-bit rounding.
+
+**Limits that the writeup must state.** The run uses 4-bit weights with bfloat16 activations, which
+is not what SGLang serves. The dequantize rule is not yet checked against real tensor bytes. The
+generation speed in PyTorch for this model is not measured. A test of the edited checkpoint in
+SGLang is a later step, not part of the first 27B run.
