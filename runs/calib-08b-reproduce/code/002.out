@@ -1,0 +1,9 @@
+probe: 16 problems, cap 512, 14.8 s, 554 tokens/s total
+hit limit: 16 correct: 0 (edited model)
+--- sample reply tail ---
+iginal Total = 20.
+            2.  Number of people sharing = Matilda (1 person) + Sisters (4 people) = 5 people.
+            3.  Distribution: Each shares $\frac{20}{5} = 4$ bars.
+            4.  Calculation: $4 \text{ bars} \times 5 \text{ people} = 20$.
+            5.  Fathers' action: "Each gave up half."
+                *   Interpretation A: They each gave up half of their *own* bar stock? No

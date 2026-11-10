@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+# Third-party downloads. Fetch them again from their sources.
+data/
+# Edited tensors are large. The manifest and the ledger of a run stay in git.
+runs/**/edit.safetensors
+*.log

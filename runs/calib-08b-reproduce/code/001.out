@@ -1,0 +1,9 @@
+bit-exact: model.language_model.layers.15.mlp.down_proj.weight
+{'shape': [1024, 3584], 'weights': 3670016, 'changed_weights': 65260, 'changed_weights_pct': 1.77819, 'relative_change': 0.10636, 'max_abs_change': 0.14636, 'cosine_to_original': 0.99437, 'delta_squared_norm': 3.05861, 'rows_changed': 1024, 'rows_changed_pct': 100.0, 'columns_changed': 64, 'columns_changed_pct': 1.78571, 'delta_rank': 1}
+  blog manifest: changed_entries 65260 columns 64 rows 1024 relative_change 0.10636
+bit-exact: model.language_model.layers.19.mlp.down_proj.weight
+{'shape': [1024, 3584], 'weights': 3670016, 'changed_weights': 64928, 'changed_weights_pct': 1.76915, 'relative_change': 0.08106, 'max_abs_change': 0.21484, 'cosine_to_original': 0.99672, 'delta_squared_norm': 1.95654, 'rows_changed': 1023, 'rows_changed_pct': 99.90234, 'columns_changed': 64, 'columns_changed_pct': 1.78571, 'delta_rank': 1}
+  blog manifest: changed_entries 64928 columns 64 rows 1023 relative_change 0.08106
+{'tensors_changed': 2, 'tensors_changed_pct': 0.42283298097251587, 'layers_changed': [15, 19], 'changed_weights': 130188, 'changed_weights_pct': 0.01526262004418549, 'relative_change_of_model': 0.0024045985739562428}
+undo restores the original bits
+edit applied again
