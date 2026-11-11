@@ -1,0 +1,8 @@
+{'layers': (32, 'model.language_model.layers.31'), 'mlps': (32, 'model.language_model.layers.31.mlp'), 'attentions': (32, 'model.language_model.layers.31.self_attn'), 'mlp_outputs': (32, 'model.language_model.layers.31.mlp.down_proj'), 'attention_outputs': (32, 'model.language_model.layers.31.self_attn.o_proj'), 'final_norm': 'model.language_model.norm', 'embedding': 'model.language_model.embed_tokens'}
+contexts built in 477 s | turn 3 contexts: {'reach': 13, 'push': 20, 'pick-place': 20, 'door-open': 20, 'drawer-open': 20, 'drawer-close': 20, 'button-press-topdown': 20, 'peg-insert-side': 20, 'window-open': 19, 'window-close': 19}
+Traceback (most recent call last):
+  File "~/weight_space/wsp/kernel.py", line 70, in handle
+    exec(compile(source, "<teacher>", "exec"), self.server.namespace)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<teacher>", line 17, in <module>
+NameError: name 'battery' is not defined

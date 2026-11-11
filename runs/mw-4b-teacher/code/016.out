@@ -1,0 +1,6 @@
+L28 token fit, margin 6.0 | relative change of the matrix 0.8823 | rank 8
+   edited, seeds 40-79 (unseen): object token ahead in 24 of 35 | mean P(object) 0.38 | mean P(goal) 0.23
+   push seeds 40-79 in the simulator: base 21 of 40 -> edited 24 of 40 | {'fixed': 3, 'broken': 0, 'p_value': 0.25}
+L28 token fit, margin 12.0 | relative change of the matrix 1.7646 | rank 8
+   edited, seeds 40-79 (unseen): object token ahead in 23 of 35 | mean P(object) 0.39 | mean P(goal) 0.19
+   push seeds 40-79 in the simulator: base 21 of 40 -> edited 25 of 40 | {'fixed': 4, 'broken': 0, 'p_value': 0.125}

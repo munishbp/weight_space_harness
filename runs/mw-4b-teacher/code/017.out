@@ -1,0 +1,34 @@
+base held-out | reach-v3                   {'n': 20, 'success': 20, 'invalid': 0, 'mean_primitives': 1.9}
+base held-out | push-v3                    {'n': 20, 'success': 14, 'invalid': 0, 'mean_primitives': 4.3}
+base held-out | pick-place-v3              {'n': 20, 'success': 20, 'invalid': 0, 'mean_primitives': 3.0}
+base held-out | door-open-v3               {'n': 20, 'success': 0, 'invalid': 0, 'mean_primitives': 10.4}
+base held-out | drawer-open-v3             {'n': 20, 'success': 0, 'invalid': 0, 'mean_primitives': 5.0}
+base held-out | drawer-close-v3            {'n': 20, 'success': 20, 'invalid': 0, 'mean_primitives': 3.0}
+base held-out | button-press-topdown-v3    {'n': 20, 'success': 0, 'invalid': 0, 'mean_primitives': 4.0}
+base held-out | peg-insert-side-v3         {'n': 20, 'success': 17, 'invalid': 0, 'mean_primitives': 4.0}
+base held-out | window-open-v3             {'n': 20, 'success': 15, 'invalid': 0, 'mean_primitives': 6.7}
+base held-out | window-close-v3            {'n': 20, 'success': 20, 'invalid': 0, 'mean_primitives': 3.5}
+base held-out | all                        {'n': 200, 'success': 126, 'success_pct': 63.0, 'interval_95': [56.1, 69.4]}
+base held-out | 252 s
+random control | relative change 0.152 | button held-out success 2 of 20
+edit: {'tensors_changed': 1, 'tensors_changed_pct': 0.13831, 'layers_changed': [28], 'changed_weights': 21939415, 'changed_weights_pct': 0.48333, 'relative_change_of_model': 0.00491}
+edit held-out | reach-v3                   {'n': 20, 'success': 20, 'invalid': 0, 'mean_primitives': 2.0}
+edit held-out | push-v3                    {'n': 20, 'success': 13, 'invalid': 0, 'mean_primitives': 4.5}
+edit held-out | pick-place-v3              {'n': 20, 'success': 20, 'invalid': 0, 'mean_primitives': 3.0}
+edit held-out | door-open-v3               {'n': 20, 'success': 0, 'invalid': 0, 'mean_primitives': 10.0}
+edit held-out | drawer-open-v3             {'n': 20, 'success': 0, 'invalid': 0, 'mean_primitives': 5.0}
+edit held-out | drawer-close-v3            {'n': 20, 'success': 20, 'invalid': 0, 'mean_primitives': 3.1}
+edit held-out | button-press-topdown-v3    {'n': 20, 'success': 18, 'invalid': 0, 'mean_primitives': 2.5}
+edit held-out | peg-insert-side-v3         {'n': 20, 'success': 17, 'invalid': 0, 'mean_primitives': 4.0}
+edit held-out | window-open-v3             {'n': 20, 'success': 15, 'invalid': 0, 'mean_primitives': 6.2}
+edit held-out | window-close-v3            {'n': 20, 'success': 20, 'invalid': 0, 'mean_primitives': 3.5}
+edit held-out | all                        {'n': 200, 'success': 143, 'success_pct': 71.5, 'interval_95': [64.9, 77.3]}
+edit held-out | against reference: {'fixed': 18, 'broken': 1, 'p_value': 7.62939453125e-05}
+edit held-out | 257 s
+deviation: {'mean_kl': 0.0003, 'max_kl': 0.006, 'top1_agreement_pct': 99.279, 'perplexity_original': 13.3841, 'perplexity_edited': 13.3878, 'positions': 13730}
+battery mmlu_pro {'before_pct': 48.0, 'after_pct': 47.0, 'change_points': -1.0, 'fixed': 0, 'broken': 2, 'p_value': 0.5, 'major_drop': False}
+battery countbench {'before_pct': 85.0, 'after_pct': 85.0, 'change_points': 0.0, 'fixed': 0, 'broken': 0, 'p_value': 1.0, 'major_drop': False}
+battery chartqa {'before_pct': 85.0, 'after_pct': 85.0, 'change_points': 0.0, 'fixed': 0, 'broken': 0, 'p_value': 1.0, 'major_drop': False}
+battery refcoco {'before_pct': 90.0, 'after_pct': 89.5, 'change_points': -0.5, 'fixed': 0, 'broken': 1, 'p_value': 1.0, 'major_drop': False}
+battery gsm8k_thinking {'before_pct': 75.0, 'after_pct': 75.0, 'change_points': 0.0, 'fixed': 12, 'broken': 12, 'p_value': 1.0, 'major_drop': False}
+verdict done

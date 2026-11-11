@@ -1,0 +1,6 @@
+fit on button seeds 0-9 | L28 | margin 8.0 | relative change 0.0939 | weights changed 90.1% of the matrix
+   edited | P(move) at turn 2, seeds 0-9 and 10-19: {'reach': (0.11, 0.14), 'push': (0.15, 0.18), 'pick-place': (0.01, 0.01), 'door-open': (0.13, 0.12), 'drawer-open': (0.12, 0.16), 'drawer-close': (0.06, 0.07), 'button-press-topdown': (0.76, 0.74), 'peg-insert-side': (0.04, 0.04), 'window-open': (0.42, 0.4), 'window-close': (0.62, 0.58)}
+fit on button seeds 0-9 | L28 | margin 12.0 | relative change 0.1408 | weights changed 92.6% of the matrix
+   edited | P(move) at turn 2, seeds 0-9 and 10-19: {'reach': (0.11, 0.14), 'push': (0.14, 0.18), 'pick-place': (0.01, 0.01), 'door-open': (0.13, 0.12), 'drawer-open': (0.12, 0.16), 'drawer-close': (0.06, 0.06), 'button-press-topdown': (0.93, 0.92), 'peg-insert-side': (0.04, 0.03), 'window-open': (0.42, 0.39), 'window-close': (0.62, 0.57)}
+fit on button seeds 0-9 | L28 | margin 16.0 | relative change 0.1877 | weights changed 93.9% of the matrix
+   edited | P(move) at turn 2, seeds 0-9 and 10-19: {'reach': (0.1, 0.14), 'push': (0.14, 0.17), 'pick-place': (0.01, 0.01), 'door-open': (0.12, 0.11), 'drawer-open': (0.12, 0.16), 'drawer-close': (0.06, 0.06), 'button-press-topdown': (0.97, 0.97), 'peg-insert-side': (0.04, 0.03), 'window-open': (0.41, 0.38), 'window-close': (0.61, 0.56)}

@@ -1,0 +1,12 @@
+base, seeds 0-39: object token ahead in 17 of 36 | mean P(object) 0.34 | mean P(goal) 0.27
+base, seeds 40-79: object token ahead in 20 of 35 | mean P(object) 0.35 | mean P(goal) 0.24
+L12 alpha 1.0 | relative change of the matrix 0.0506 | rank 1
+   edited, seeds 40-79 (unseen): object token ahead in 20 of 35 | mean P(object) 0.34 | mean P(goal) 0.24
+L12 alpha 2.0 | relative change of the matrix 0.1011 | rank 1
+   edited, seeds 40-79 (unseen): object token ahead in 20 of 35 | mean P(object) 0.33 | mean P(goal) 0.24
+L12 alpha 4.0 | relative change of the matrix 0.2021 | rank 1
+   edited, seeds 40-79 (unseen): object token ahead in 20 of 35 | mean P(object) 0.31 | mean P(goal) 0.25
+L20 alpha 1.0 | relative change of the matrix 0.1064 | rank 1
+   edited, seeds 40-79 (unseen): object token ahead in 19 of 35 | mean P(object) 0.34 | mean P(goal) 0.22
+L20 alpha 2.0 | relative change of the matrix 0.2129 | rank 1
+   edited, seeds 40-79 (unseen): object token ahead in 21 of 35 | mean P(object) 0.36 | mean P(goal) 0.19

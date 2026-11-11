@@ -1,0 +1,17 @@
+setup done: 200 practice episodes, 200 held-out episodes
+prefix tokens: ['{"', 'action', '":', ' "']
+move ['{"', 'action', '":', ' "', 'move', '"}']
+close ['{"', 'action', '":', ' "', 'close', '"}']
+open ['{"', 'action', '":', ' "', 'open', '"}']
+done ['{"', 'action', '":', ' "', 'done', '"}']
+{'move': 3288, 'close': 5378, 'open': 2428, 'done': 10128}
+reach-v3                   mean P at turn 2: {'move': 0.136, 'close': 0.639, 'open': 0.088, 'done': 0.129} | min P(move) 0.0283 | max P(move) 0.445
+push-v3                    mean P at turn 2: {'move': 0.177, 'close': 0.537, 'open': 0.104, 'done': 0.096} | min P(move) 0.0305 | max P(move) 0.427
+pick-place-v3              mean P at turn 2: {'move': 0.012, 'close': 0.976, 'open': 0.009, 'done': 0.001} | min P(move) 0.0075 | max P(move) 0.026
+door-open-v3               mean P at turn 2: {'move': 0.138, 'close': 0.622, 'open': 0.22, 'done': 0.01} | min P(move) 0.1019 | max P(move) 0.173
+drawer-open-v3             mean P at turn 2: {'move': 0.154, 'close': 0.661, 'open': 0.148, 'done': 0.011} | min P(move) 0.0791 | max P(move) 0.301
+drawer-close-v3            mean P at turn 2: {'move': 0.07, 'close': 0.872, 'open': 0.027, 'done': 0.003} | min P(move) 0.032 | max P(move) 0.135
+button-press-topdown-v3    mean P at turn 2: {'move': 0.121, 'close': 0.82, 'open': 0.019, 'done': 0.011} | min P(move) 0.0812 | max P(move) 0.192
+peg-insert-side-v3         mean P at turn 2: {'move': 0.042, 'close': 0.922, 'open': 0.029, 'done': 0.002} | min P(move) 0.0283 | max P(move) 0.072
+window-open-v3             mean P at turn 2: {'move': 0.427, 'close': 0.339, 'open': 0.199, 'done': 0.027} | min P(move) 0.1493 | max P(move) 0.807
+window-close-v3            mean P at turn 2: {'move': 0.616, 'close': 0.23, 'open': 0.136, 'done': 0.013} | min P(move) 0.3154 | max P(move) 0.868

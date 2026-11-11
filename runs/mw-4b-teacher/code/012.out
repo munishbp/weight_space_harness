@@ -1,0 +1,14 @@
+base, fit seeds: object token ahead of goal token in 8 of 17 | mean P(object) 0.38 | mean P(goal) 0.36
+base, test seeds: object token ahead of goal token in 10 of 18 | mean P(object) 0.44 | mean P(goal) 0.31
+L28 margin 6.0 | relative change 0.3021 | rank 8
+   edited, fit seeds: object token ahead of goal token in 13 of 17 | mean P(object) 0.55 | mean P(goal) 0.20
+   edited, test seeds: object token ahead of goal token in 13 of 18 | mean P(object) 0.56 | mean P(goal) 0.23
+L28 margin 12.0 | relative change 0.6043 | rank 8
+   edited, fit seeds: object token ahead of goal token in 14 of 17 | mean P(object) 0.66 | mean P(goal) 0.12
+   edited, test seeds: object token ahead of goal token in 15 of 18 | mean P(object) 0.64 | mean P(goal) 0.17
+L20 margin 6.0 | relative change 0.6052 | rank 8
+   edited, fit seeds: object token ahead of goal token in 11 of 17 | mean P(object) 0.46 | mean P(goal) 0.25
+   edited, test seeds: object token ahead of goal token in 11 of 18 | mean P(object) 0.50 | mean P(goal) 0.21
+L20 margin 12.0 | relative change 1.2104 | rank 8
+   edited, fit seeds: object token ahead of goal token in 13 of 17 | mean P(object) 0.49 | mean P(goal) 0.15
+   edited, test seeds: object token ahead of goal token in 15 of 18 | mean P(object) 0.50 | mean P(goal) 0.13

@@ -1,0 +1,13 @@
+prompt hint, no edit | reach-v3                   {'n': 20, 'success': 20, 'invalid': 0, 'mean_primitives': 1.8}
+prompt hint, no edit | push-v3                    {'n': 20, 'success': 6, 'invalid': 0, 'mean_primitives': 5.8}
+prompt hint, no edit | pick-place-v3              {'n': 20, 'success': 20, 'invalid': 0, 'mean_primitives': 3.0}
+prompt hint, no edit | door-open-v3               {'n': 20, 'success': 0, 'invalid': 0, 'mean_primitives': 8.8}
+prompt hint, no edit | drawer-open-v3             {'n': 20, 'success': 0, 'invalid': 0, 'mean_primitives': 5.0}
+prompt hint, no edit | drawer-close-v3            {'n': 20, 'success': 20, 'invalid': 0, 'mean_primitives': 3.2}
+prompt hint, no edit | button-press-topdown-v3    {'n': 20, 'success': 18, 'invalid': 0, 'mean_primitives': 2.9}
+prompt hint, no edit | peg-insert-side-v3         {'n': 20, 'success': 19, 'invalid': 0, 'mean_primitives': 3.4}
+prompt hint, no edit | window-open-v3             {'n': 20, 'success': 12, 'invalid': 0, 'mean_primitives': 6.2}
+prompt hint, no edit | window-close-v3            {'n': 20, 'success': 20, 'invalid': 0, 'mean_primitives': 4.9}
+prompt hint, no edit | all                        {'n': 200, 'success': 135, 'success_pct': 67.5, 'interval_95': [60.7, 73.6]}
+prompt hint, no edit | against reference: {'fixed': 18, 'broken': 9, 'p_value': 0.12207812070846558}
+prompt hint, no edit | 260 s

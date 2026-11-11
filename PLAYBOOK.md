@@ -1,6 +1,7 @@
 # Teacher playbook
 
-Draft 0, written after the calibration run on Qwen3.5-0.8B. A later run on a larger model will change it.
+Draft 1, written after three runs: the calibration on Qwen3.5-0.8B, ScreenSpot Pro on Qwen3.5-4B, and
+Meta-World on Qwen3.5-4B.
 
 This playbook is for the teacher: a frontier model with a shell tool. The teacher reads the weights
 and the activations of a smaller open model (the student) and writes edits to the weights directly.
@@ -55,7 +56,8 @@ The run directory records the work:
 | `attribution.token_direction` and `attribution.attribute` | The share of each model part in the logit of one token. |
 | `layout.find(model)` | The names of the layers, MLPs, attention blocks, and output matrices of the student. |
 | `tools.get_weight(name)` | One weight tensor as float32 on the CPU. |
-| `edits.remove_direction`, `edits.remove_direction_from_neurons`, `edits.add_to_neurons` | Closed-form edits. |
+| `edits.remove_direction`, `edits.remove_direction_from_neurons`, `edits.add_to_neurons`, `edits.fit_keys_to_values` | Closed-form edits. Section 5 says which edit fits which fault. |
+| `attribution.attribute_last` | The same split as `attribution.attribute` for conversations with images. |
 | `tools.save_edit`, `tools.reset_edit`, `tools.load_edit` | Write one tensor, undo, and load an edit file. |
 | `tools.deviation(sequences)` | Distance between the original and the edited model on neutral text. |
 | `battery.run()` and `battery.compare(before, after)` | The generalization battery, and the change of each set with a paired test. |
@@ -69,7 +71,10 @@ The run directory records the work:
    on and thinking off). A weight edit that a prompt switch beats has a weak claim. In the
    calibration run, the thinking-off prompt beat every edit.
 3. **Sort the failures by cause.** Read 10 to 20 failed replies. Count each cause. Look for one cause
-   that covers most failures.
+   that covers most failures. In a simulator, replay the plan of the student with one change at a
+   time (one step removed, one step replaced). The change that turns a failure into a success names
+   the fault exactly. In the Meta-World run, the plan of the student with no `close` step solved the
+   button task 8 times of 10.
 4. **Find where the student almost succeeds.** Use `tools.read_logprobs` on the failed replies. A
    correct token that has a visible probability but loses is a fault that hides an ability. A correct
    token with no probability at all points to a missing ability, and an edit is unlikely to add it.
@@ -79,18 +84,46 @@ The run directory records the work:
    target. Check that `error` is small.
 6. **Edit and run a trial.** Apply one edit, generate on the practice items, compare with the
    baseline, and call `tools.reset_edit()`. One trial must be cheap, so keep the practice set and the
-   token limit small.
+   token limit small. Before a slow trial, read the probability of the correct token with the edit
+   active, on practice items that the edit did not use. That check takes seconds. Run the slow
+   trial only when it moves.
 7. **Sweep the strength** and watch for a collapse. A strong edit can reach a good score through a
    trivial behavior. Measure a second quantity that shows the collapse (in the calibration run: the
    length of the thinking).
 8. **Run a random control.** Apply an edit of the same form with a random direction. The size of its
    effect is the noise of the trial.
-9. **Run the verdict.** Evaluate the final edit on the held-out items. Run the battery and
-   `tools.deviation`. Copy `edit/manifest.json`.
+9. **Run the verdict.** Evaluate the final edit on the held-out items and on a near-transfer set:
+   items of the same benchmark that are not the target. Run the battery and `tools.deviation`. Copy
+   `edit/manifest.json`. The battery alone can miss a loss next to the target.
 10. **Record** the time, the passes, the edit size, the held-out change, the battery, the deviation,
     and each failed trial.
 
-## 5. Lessons from the calibration run
+## 5. Which edit fits which fault
+
+Three kinds of fault appeared in the runs. Find the kind first. It decides the edit.
+
+| Fault | How it shows | Edit | Result |
+|---|---|---|---|
+| **A suppressed token.** The student has the answer and a few parts block it. | The correct token has a visible probability at the failure step. Attribution finds parts that push against it there and write almost nothing elsewhere. | `edits.remove_direction` on those parts, with a strength sweep. | 0.8B, thinking that never closes: held-out 10.2% to 38.3%. |
+| **A habit in the wrong context.** The student applies a default that is right in most contexts. | The correct token has a visible probability (12% in our case). The same parts write the habit in every context, so removal would break the other contexts. | `edits.fit_keys_to_values` on one late MLP. The keys are the neuron activations at the failure step of the target context. The value is one fixed token direction (correct token minus habit token). The protection set holds the same step of the other contexts. | 4B, Meta-World button press: 1 of 20 to 19 of 20 practice episodes. No other task changed. |
+| **A wrong choice between candidates from the input.** Two screen elements, or two positions to copy. | Both candidates have a visible probability. The late layers write the choice of the student, right or wrong. No part pushes against the correct one. | None found. A fit with one value per example copies the belief of the student. A difference-of-means direction with a perfect AUC did not steer the choice. | 4B, ScreenSpot Pro icons and Meta-World push: negative. A LoRA fine-tune fixes this kind. |
+
+The recipe for the second kind:
+
+```python
+g = attribution.token_direction(correct_token, [habit_token])
+keys = tools.read(target_contexts, [mlp_out], append_ids=prefix, inputs=True)[mlp_out]
+scale = tools.read(target_contexts, [last_layer], append_ids=prefix)[last_layer].pow(2).mean(1).sqrt()
+values = edits.logit_shift_values(g, scale, margin)               # raises the logit gap by about `margin`
+protect = second moment of the same MLP input on the other contexts and on neutral text
+edits.fit_keys_to_values(mlp_out + ".weight", keys, values, protect)
+```
+
+Fit on one half of the practice contexts and read the probability on the other half. In our run a
+margin of 4 moved the probability from 0.12 to 0.39, and a margin of 12 moved it to 0.92. Later
+layers undo a part of the shift, so sweep the margin.
+
+## 6. Lessons from the runs
 
 - **Removal sets a component to zero.** `remove_direction` on a direction from a difference of means
   made the fault worse two times. The normal state sat on the negative side, so zero was closer to
@@ -106,8 +139,18 @@ The run directory records the work:
   direction. Our trial of the same layers at a strength of 1 and 2 had no effect.
 - **64 items give a noise of about 5 points.** Do not act on a smaller difference.
 - **A change to `wsp/tools.py` needs a kernel restart.** Save the state that you need to a file first.
+- **A perfect AUC is not a lever.** In the Meta-World push task, a direction after layer 12 separates
+  "first move to the object" from "first move to the goal" with an AUC of 1.00 on unseen episodes.
+  A write of that direction into the weights did not change one choice.
+- **A simulator gives more practice items at no cost.** When 20 episodes cannot separate a gain from
+  noise, run 40 new seeds. A gain of 5 episodes on 20 became 4 on 40, with p = 0.13.
+- **A prompt sentence can fix the same fault and break a neighbour.** A hint in the system prompt
+  fixed the button task (18 of 20) and cost 8 episodes in two other tasks. The edit cost none.
+- **Training has a price next to the target.** A LoRA fine-tune on icon targets raised held-out icons
+  by 12 points and lowered text targets of the same benchmark by 12.5 points. The battery did not
+  show it.
 
-## 6. When to stop
+## 7. When to stop
 
 Stop the search and record a negative result when the time box ends, when step 4 shows no position
 where the student almost succeeds, or when no trial beats the random control.

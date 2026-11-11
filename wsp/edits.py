@@ -46,6 +46,17 @@ def add_to_neurons(name: str, neurons: torch.Tensor, direction: torch.Tensor, am
     return tools.save_edit(name, weight)
 
 
+def logit_shift_values(direction: torch.Tensor, scales: torch.Tensor, margin: float) -> torch.Tensor:
+    """Values for `fit_keys_to_values` that raise the logit gap along `direction` by about `margin`.
+
+    `direction` comes from `attribution.token_direction`: one direction for all keys, or one row
+    per key. `scales` holds the RMS of the final residual stream at each key position. Later
+    layers undo a part of the shift, so the gap that results is smaller than `margin`.
+    """
+    rows = direction if direction.ndim == 2 else direction[None, :].expand(len(scales), -1)
+    return margin * scales[:, None] * rows / rows.pow(2).sum(dim=1, keepdim=True)
+
+
 def fit_keys_to_values(
     name: str, keys: torch.Tensor, values: torch.Tensor, protect: torch.Tensor, strength: float = 1.0
 ) -> dict:

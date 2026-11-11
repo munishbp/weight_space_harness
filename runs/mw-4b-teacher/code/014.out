@@ -1,0 +1,12 @@
+push seeds 0-39: success 21 of 40 | first move to the object 24 (success 21) | to the goal 14 (success 0)
+push seeds 40-79: success 21 of 40 | first move to the object 27 (success 21) | to the goal 10 (success 0)
+155 s
+  8 | |difference|   0.11 | residual norm     5.3 | AUC on seeds 40-79: 0.69
+ 12 | |difference|   0.60 | residual norm     6.6 | AUC on seeds 40-79: 1.00
+ 16 | |difference|   0.80 | residual norm     7.4 | AUC on seeds 40-79: 0.99
+ 20 | |difference|   3.58 | residual norm    14.2 | AUC on seeds 40-79: 0.98
+ 22 | |difference|   3.95 | residual norm    16.0 | AUC on seeds 40-79: 0.98
+ 24 | |difference|   4.59 | residual norm    19.5 | AUC on seeds 40-79: 0.97
+ 26 | |difference|   5.19 | residual norm    22.1 | AUC on seeds 40-79: 0.96
+ 28 | |difference|   8.59 | residual norm    35.3 | AUC on seeds 40-79: 0.73
+ 30 | |difference|  10.95 | residual norm    46.3 | AUC on seeds 40-79: 0.68

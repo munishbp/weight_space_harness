@@ -1,0 +1,11 @@
+turn 3 contexts: {'reach': 13, 'push': 20, 'pick-place': 20, 'door-open': 20, 'drawer-open': 20, 'drawer-close': 20, 'button-press-topdown': 20, 'peg-insert-side': 20, 'window-open': 19, 'window-close': 19}
+   protection set: 551 robot steps, 13794 text positions
+protect in 70 s
+keys (20, 9216) | final rms 1.29 | |g| 1.892
+base | P(move) at turn 2, seeds 0-9 and 10-19: {'reach': (0.12, 0.15), 'push': (0.16, 0.19), 'pick-place': (0.01, 0.01), 'door-open': (0.14, 0.14), 'drawer-open': (0.13, 0.18), 'drawer-close': (0.07, 0.07), 'button-press-topdown': (0.12, 0.12), 'peg-insert-side': (0.04, 0.04), 'window-open': (0.44, 0.42), 'window-close': (0.64, 0.6)}
+fit on button seeds 0-9 | L28 | strength 1.0 | margin 4.0 | relative change 0.0470 | rank 1
+   edited | P(move) at turn 2, seeds 0-9 and 10-19: {'reach': (0.11, 0.15), 'push': (0.15, 0.19), 'pick-place': (0.01, 0.01), 'door-open': (0.14, 0.13), 'drawer-open': (0.13, 0.17), 'drawer-close': (0.07, 0.07), 'button-press-topdown': (0.39, 0.37), 'peg-insert-side': (0.04, 0.04), 'window-open': (0.43, 0.41), 'window-close': (0.63, 0.59)}
+fit on button seeds 0-9 | L28 | strength 0.1 | margin 4.0 | relative change 0.0473 | rank 1
+   edited | P(move) at turn 2, seeds 0-9 and 10-19: {'reach': (0.11, 0.15), 'push': (0.15, 0.19), 'pick-place': (0.01, 0.01), 'door-open': (0.13, 0.13), 'drawer-open': (0.13, 0.17), 'drawer-close': (0.07, 0.07), 'button-press-topdown': (0.39, 0.37), 'peg-insert-side': (0.04, 0.04), 'window-open': (0.42, 0.4), 'window-close': (0.63, 0.59)}
+fit on button seeds 0-9 | L28 | strength 0.01 | margin 4.0 | relative change 0.0473 | rank 1
+   edited | P(move) at turn 2, seeds 0-9 and 10-19: {'reach': (0.11, 0.15), 'push': (0.16, 0.19), 'pick-place': (0.01, 0.01), 'door-open': (0.14, 0.13), 'drawer-open': (0.13, 0.18), 'drawer-close': (0.07, 0.07), 'button-press-topdown': (0.39, 0.38), 'peg-insert-side': (0.04, 0.04), 'window-open': (0.43, 0.4), 'window-close': (0.63, 0.58)}
