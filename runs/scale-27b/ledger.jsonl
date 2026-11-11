@@ -1,10 +1,10 @@
-{"t": 1794411068.32, "kind": "load_model", "model": "/home/munish-persaud/models/Qwen3.8-27B-NVFP4", "seconds": 35.91}
+{"t": 1794411068.32, "kind": "load_model", "model": "~/models/Qwen3.8-27B-NVFP4", "seconds": 35.91}
 {"t": 1794411091.13, "kind": "generate", "n": 2, "prompt_tokens": 51, "new_tokens": 10, "hit_limit": 0, "seconds": 18.61}
 {"t": 1794411124.39, "kind": "generate", "n": 1, "prompt_tokens": 22, "new_tokens": 96, "hit_limit": 1, "seconds": 33.27}
 {"t": 1794411124.4, "kind": "python", "index": 1, "ok": true, "seconds": 51.88}
 {"t": 1794411137.27, "kind": "python", "index": 2, "ok": true, "seconds": 0.19}
 {"t": 1794411148.62, "kind": "python", "index": 3, "ok": false, "seconds": 10.38}
-{"t": 1794411461.41, "kind": "load_model", "model": "/home/munish-persaud/models/Qwen3.8-27B-NVFP4", "seconds": 35.93}
+{"t": 1794411461.41, "kind": "load_model", "model": "~/models/Qwen3.8-27B-NVFP4", "seconds": 35.93}
 {"t": 1794411465.66, "kind": "python", "index": 4, "ok": true, "seconds": 0.09}
 {"t": 1794411490.25, "kind": "generate", "n": 6, "prompt_tokens": 3210, "new_tokens": 279, "hit_limit": 5, "seconds": 19.35}
 {"t": 1794411508.82, "kind": "generate", "n": 5, "prompt_tokens": 2786, "new_tokens": 234, "hit_limit": 2, "seconds": 18.42}
@@ -18,7 +18,7 @@
 {"t": 1794411621.5, "kind": "generate", "n": 6, "prompt_tokens": 3189, "new_tokens": 262, "hit_limit": 0, "seconds": 16.95}
 {"t": 1794411641.16, "kind": "generate", "n": 6, "prompt_tokens": 3190, "new_tokens": 236, "hit_limit": 0, "seconds": 15.47}
 {"t": 1794411661.31, "kind": "generate", "n": 6, "prompt_tokens": 3191, "new_tokens": 233, "hit_limit": 0, "seconds": 15.36}
-{"t": 1794411724.74, "kind": "load_model", "model": "/home/munish-persaud/models/Qwen3.8-27B-NVFP4", "seconds": 36.56}
+{"t": 1794411724.74, "kind": "load_model", "model": "~/models/Qwen3.8-27B-NVFP4", "seconds": 36.56}
 {"t": 1794411728.3, "kind": "python", "index": 6, "ok": true, "seconds": 0.08}
 {"t": 1794411755.68, "kind": "generate", "n": 10, "prompt_tokens": 5363, "new_tokens": 464, "hit_limit": 9, "seconds": 19.58}
 {"t": 1794411775.2, "kind": "generate", "n": 9, "prompt_tokens": 5031, "new_tokens": 418, "hit_limit": 5, "seconds": 19.29}

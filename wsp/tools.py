@@ -32,7 +32,8 @@ def start_run(run_dir: Path) -> None:
 def log(kind: str, **fields) -> None:
     line = {"t": round(time.time(), 2), "kind": kind, **fields}
     with (RUN_DIR / "ledger.jsonl").open("a") as ledger:
-        ledger.write(json.dumps(line) + "\n")
+        # The run directory can go to a public repository, so the ledger does not hold the home path.
+        ledger.write(json.dumps(line).replace(str(Path.home()), "~") + "\n")
 
 
 def load_model(name: str, revision: str | None = None) -> None:
