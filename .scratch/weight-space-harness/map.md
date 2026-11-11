@@ -123,21 +123,24 @@ A negative result is a valid verdict.
 - [Choose the simulator and the action interface](issues/14-choose-simulator-and-interface.md):
   Meta-World from PyPI, with text waypoints and the scene state in the prompt. VLABench fits better
   but its install is blocked.
+- [Install one simulator benchmark and run the base model](issues/24-simulator-install.md): the base
+  4B model solves 63.0% of 200 Meta-World practice episodes. Two faults are a wrong choice at one
+  step: a `close` before a button press, and a first move to the goal in place of the object.
+- [Check which multi-step computer use benchmark runs here](issues/22-multi-step-benchmark-setup.md):
+  MiniWoB++ first, because one pass takes minutes. A portion of OSWorld-Verified follows. KVM and
+  Docker work here with no sudo. Both installs reach outside PyPI.
 
 ## Not yet specified
 
-- **The robotics block after the simulator choice.** A baseline, a target portion, an edit attempt,
-  and a LoRA comparison. These become tickets when
-  [Choose the simulator and the action interface](issues/14-choose-simulator-and-interface.md) resolves.
-- **The long-horizon computer use block.** If
-  [Choose the long-horizon computer use target](issues/17-long-horizon-computer-use-target.md) adds a
-  multi-step benchmark, that block needs an environment setup, a baseline, and an edit attempt.
+- **The OSWorld-Verified portion.** The application, the number of tasks, the agent class for the
+  local model, and the time per pass. It becomes a ticket after
+  [Install MiniWoB++, run the base model, and choose a portion](issues/27-miniwob-base-and-portion.md).
 - **The 27B block after the path choice.** A target, a baseline, an edit attempt, and the measures.
   These become tickets when [Find a way to run and edit the 27B model](issues/21-27b-run-and-edit-paths.md)
   resolves and the user picks a path.
-- **The simulator install.** The session blocked an install from third-party git repositories, which
-  VLABench needs. The user must allow it, or the block uses a benchmark that installs from PyPI. See
-  [Install one simulator benchmark and run the base model](issues/24-simulator-install.md).
+- **VLABench.** It has long composite tasks and fits the goal better than Meta-World. Its install
+  needs a git repository and two Google Drive archives, which the session blocks. The user must
+  allow that install.
 - **Tool gaps.** `tools.read` returns only the last prompt position of a named module. The teacher
   may need attention patterns, values at other positions, or a logit lens. The calibration block
   shows which.

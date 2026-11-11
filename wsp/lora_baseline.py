@@ -60,7 +60,11 @@ def metaworld_examples(args) -> list:
 
     first, last = (int(part) for part in args.seeds.split(":"))
     examples = []
-    for task in mw.INSTRUCTIONS:
+    tasks = args.tasks.split(",") if args.tasks else list(mw.INSTRUCTIONS)
+    unknown = [task for task in tasks if task not in mw.INSTRUCTIONS]
+    if unknown:
+        raise SystemExit(f"Unknown Meta-World tasks: {unknown}. Nothing was trained.")
+    for task in tasks:
         for seed in range(first, last):
             episode = mw.Episode(task, seed)
             steps = []
@@ -85,6 +89,7 @@ def main() -> None:
     parser.add_argument("--split", help="screenspot_pro: JSON file that maps a key to a list of item ids.")
     parser.add_argument("--key", default="practice")
     parser.add_argument("--seeds", default="0:20", help="metaworld: range of seeds, first:last, last excluded.")
+    parser.add_argument("--tasks", help="metaworld: task names with commas between them. The default is every task.")
     parser.add_argument("--minutes", type=float, required=True, help="Wall-clock budget for the training loop.")
     parser.add_argument("--out", required=True)
     parser.add_argument("--rank", type=int, default=16)

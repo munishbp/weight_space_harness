@@ -24,7 +24,7 @@ def table(results):
         out[task] = {"n": len(rs), "success": sum(r["correct"] for r in rs), "invalid": sum(r["invalid"] for r in rs),
                      "mean_primitives": round(sum(len(r["primitives"]) for r in rs) / len(rs), 1)}
     wins = sum(r["correct"] for r in results); low, high = wilson_interval(wins, len(results))
-    out["all"] = {"n": len(results), "success": wins, "success_pct": round(100 * wins / len(results), 1), "interval_95": [round(100 * low, 1), round(100 * high, 1)]}
+    out["all"] = {"n": len(results), "success": wins, "success_pct": round(100 * wins / len(results), 1), "interval_95": [round(low, 1), round(high, 1)]}
     return out
 
 def episodes(label, specs, path=None, reference=None):
