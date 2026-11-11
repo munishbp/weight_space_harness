@@ -44,3 +44,25 @@ def add_to_neurons(name: str, neurons: torch.Tensor, direction: torch.Tensor, am
     weight = tools.get_weight(name)
     weight[:, neurons] += torch.outer(unit(direction), amounts)
     return tools.save_edit(name, weight)
+
+
+def fit_keys_to_values(
+    name: str, keys: torch.Tensor, values: torch.Tensor, protect: torch.Tensor, strength: float = 1.0
+) -> dict:
+    """Solve one least-squares problem for a weight change that maps each key to its value.
+
+    `keys` has one row per example: the input of the matrix `name` (for an MLP output matrix, the
+    neuron activations). `values` has one row per example: the vector to add to the output of the
+    matrix for that key. `protect` is the second moment of the same input on unrelated data,
+    `mean(k k^T)`. The change is
+
+        delta = values^T keys (strength * n * protect + keys^T keys)^-1
+
+    A larger `strength` keeps the output on unrelated data closer to the original and fits the
+    examples less. This is the closed form of the MEMIT update (Meng et al., 2022). It uses no
+    gradient and no iteration.
+    """
+    keys, values, protect = keys.double(), values.double(), protect.double()
+    system = strength * len(keys) * protect + keys.T @ keys
+    delta = torch.linalg.solve(system, keys.T @ values).T
+    return tools.save_edit(name, tools.get_weight(name) + delta.float())

@@ -1,0 +1,8 @@
+dev key pass: 175 s | keys (1168, 9216)
+strength 1.0: fit items {'target is the most-raised token': 1.0, 'digits only': 1.0, 'mean gain of the target (nats)': 2.8, 'digits only gain': 2.74}
+              unseen items {'target is the most-raised token': 0.558, 'digits only': 0.409, 'mean gain of the target (nats)': 1.66, 'digits only gain': 1.24} | change on neutral text, mean norm of the added vector: 0.595 vs on GUI keys: 2.872
+strength 0.1: fit items {'target is the most-raised token': 1.0, 'digits only': 1.0, 'mean gain of the target (nats)': 2.97, 'digits only gain': 2.96}
+              unseen items {'target is the most-raised token': 0.543, 'digits only': 0.389, 'mean gain of the target (nats)': 1.67, 'digits only gain': 1.25} | change on neutral text, mean norm of the added vector: 0.808 vs on GUI keys: 3.221
+strength 0.001: fit items {'target is the most-raised token': 1.0, 'digits only': 1.0, 'mean gain of the target (nats)': 3.0, 'digits only gain': 3.0}
+              unseen items {'target is the most-raised token': 0.543, 'digits only': 0.39, 'mean gain of the target (nats)': 1.68, 'digits only gain': 1.25} | change on neutral text, mean norm of the added vector: 0.853 vs on GUI keys: 3.294
+chance level for 'most-raised token' is about 0.083

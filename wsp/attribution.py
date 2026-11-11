@@ -45,3 +45,29 @@ def attribute(sequences: list[list[int]], positions: list[list[int]], direction:
         "total": (final @ direction) / scale,
         "error": error,
     }
+
+
+def attribute_last(
+    conversations: list[list[dict]],
+    direction: torch.Tensor,
+    thinking: bool = False,
+    append_ids: list[list[int]] | None = None,
+) -> dict:
+    """The same split as `attribute`, at the last position of each conversation. Conversations can hold images.
+
+    `direction` is one direction for all conversations, or one row per conversation.
+    """
+    parts = layout.find(tools.MODEL)
+    last = parts["layers"][-1]
+    modules = parts["mlps"] + parts["attentions"] + [last, parts["embedding"]]
+    outputs = tools.read(conversations, modules, thinking=thinking, append_ids=append_ids)
+    final = outputs[last]
+    scale = final.pow(2).mean(dim=1).sqrt()
+    joined = {name: value for name, value in outputs.items() if name != last}
+    error = float((sum(joined.values()) - final).norm() / final.norm())
+    along = (lambda value: (value * direction).sum(dim=1)) if direction.ndim == 2 else (lambda value: value @ direction)
+    return {
+        "shares": {name: along(value) / scale for name, value in joined.items()},
+        "total": along(final) / scale,
+        "error": error,
+    }

@@ -1,0 +1,101 @@
+mmlu_pro {'n': 200, 'correct_pct': 48.0, 'interval_95': [41.2, 54.9], 'hit_limit_pct': 0.5, 'mean_new_tokens': 3.0} 10 s
+Traceback (most recent call last):
+  File "/home/munish-persaud/weight_space/wsp/kernel.py", line 66, in handle
+    exec(compile(source, "<teacher>", "exec"), self.server.namespace)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<teacher>", line 7, in <module>
+  File "/home/munish-persaud/weight_space/wsp/battery.py", line 44, in run
+    rows = evaluate.run(items(name), conversation, score, batch_size=batch_size, **options)
+  File "/home/munish-persaud/weight_space/wsp/evaluate.py", line 34, in run
+    replies = tools.generate([conversation(item) for item in chunk], **generate_options)
+  File "/home/munish-persaud/weight_space/wsp/tools.py", line 143, in generate
+    output = MODEL.generate(**inputs, max_new_tokens=max_new_tokens, **({"do_sample": False} | options))
+  File "/home/munish-persaud/weight_space/.venv/lib/python3.13/site-packages/torch/utils/_contextlib.py", line 158, in no_grad
+    return func(*args, **kwargs)
+  File "/home/munish-persaud/weight_space/.venv/lib/python3.13/site-packages/transformers/generation/utils.py", line 3000, in generate
+    result = decoding_method(
+        self,
+    ...<5 lines>...
+        **model_kwargs,
+    )
+  File "/home/munish-persaud/weight_space/.venv/lib/python3.13/site-packages/transformers/generation/utils.py", line 3200, in _sample
+    outputs = self._prefill(
+        input_ids,
+    ...<2 lines>...
+        is_first_iteration=not generation_config.is_assistant,
+    )
+  File "/home/munish-persaud/weight_space/.venv/lib/python3.13/site-packages/transformers/generation/utils.py", line 4312, in _prefill
+    return self(**model_inputs, return_dict=True)
+  File "/home/munish-persaud/weight_space/.venv/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1787, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/munish-persaud/weight_space/.venv/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1798, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/munish-persaud/weight_space/.venv/lib/python3.13/site-packages/transformers/utils/generic.py", line 943, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/home/munish-persaud/weight_space/.venv/lib/python3.13/site-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 1850, in forward
+    outputs = self.model(
+        input_ids=input_ids,
+    ...<10 lines>...
+        **kwargs,
+    )
+  File "/home/munish-persaud/weight_space/.venv/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1787, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/munish-persaud/weight_space/.venv/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1798, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/munish-persaud/weight_space/.venv/lib/python3.13/site-packages/transformers/utils/generic.py", line 943, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/home/munish-persaud/weight_space/.venv/lib/python3.13/site-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 1643, in forward
+    outputs = self.language_model(
+        input_ids=None,
+    ...<5 lines>...
+        **kwargs,
+    )
+  File "/home/munish-persaud/weight_space/.venv/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1787, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/munish-persaud/weight_space/.venv/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1798, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/munish-persaud/weight_space/.venv/lib/python3.13/site-packages/transformers/utils/generic.py", line 1081, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/home/munish-persaud/weight_space/.venv/lib/python3.13/site-packages/transformers/utils/output_capturing.py", line 287, in wrapper
+    outputs = func(self, *args, **kwargs)
+  File "/home/munish-persaud/weight_space/.venv/lib/python3.13/site-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 1279, in forward
+    hidden_states = decoder_layer(
+        hidden_states,
+    ...<5 lines>...
+        **kwargs,
+    )
+  File "/home/munish-persaud/weight_space/.venv/lib/python3.13/site-packages/transformers/modeling_layers.py", line 111, in __call__
+    return super().__call__(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/munish-persaud/weight_space/.venv/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1787, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/munish-persaud/weight_space/.venv/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1798, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/munish-persaud/weight_space/.venv/lib/python3.13/site-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 876, in forward
+    hidden_states = self.linear_attn(
+        hidden_states=hidden_states,
+    ...<2 lines>...
+        **kwargs,
+    )
+  File "/home/munish-persaud/weight_space/.venv/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1787, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/munish-persaud/weight_space/.venv/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1798, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/munish-persaud/weight_space/.venv/lib/python3.13/site-packages/transformers/integrations/accelerate.py", line 1012, in wrapped
+    output = forward_func(self, *args, **kwargs)
+  File "/home/munish-persaud/weight_space/.venv/lib/python3.13/site-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 554, in forward
+    mixed_qkv = self.in_proj_qkv(hidden_states)
+  File "/home/munish-persaud/weight_space/.venv/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1787, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/munish-persaud/weight_space/.venv/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1798, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/munish-persaud/weight_space/.venv/lib/python3.13/site-packages/torch/nn/modules/linear.py", line 134, in forward
+    return F.linear(input, self.weight, self.bias)
+           ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 3.97 GiB. GPU 0 has a total capacity of 31.44 GiB of which 4.13 GiB is free. Process 2747 has 504.71 MiB memory in use. Process 5346 has 535.75 MiB memory in use. Process 8854 has 67.05 MiB memory in use. Process 125136 has 52.34 MiB memory in use. Process 1849409 has 128.68 MiB memory in use. Process 3783457 has 52.09 MiB memory in use. Process 4112025 has 52.34 MiB memory in use. Process 1207896 has 102.74 MiB memory in use. Process 1261404 has 125.70 MiB memory in use. Including non-PyTorch memory, this process has 24.63 GiB memory in use. Of the allocated memory 17.03 GiB is allocated by PyTorch, and 6.20 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)

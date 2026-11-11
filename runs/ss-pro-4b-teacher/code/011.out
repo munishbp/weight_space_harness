@@ -1,0 +1,8 @@
+base model, first digit of x in range: 105 of 156
+correction alone picks an in-range first digit: 92 of 156 (chance about 24 )
+on the 51 items where the base model is wrong: correction alone is right in 7
+  margin   3 nats: in range 101 | fixed 3 | broken 7
+  margin   6 nats: in range 101 | fixed 4 | broken 8
+  margin  12 nats: in range 97 | fixed 5 | broken 13
+  margin  24 nats: in range 96 | fixed 5 | broken 14
+  margin  48 nats: in range 93 | fixed 5 | broken 17

@@ -1,0 +1,4 @@
+   solve 5 s | relative change of the matrix 0.7230 | rank 11 | weights changed 99.5%
+{'trial': 'least-squares fit on L29 MLP, strength 1.0, margin 3.0', 'n': 156, 'correct_pct': 35.9, 'interval_95': [28.8, 43.7], 'base_pct': 35.9, 'fixed': 2, 'broken': 2, 'p_value': 1.0, 'no_point': 0, 'seconds': 220}
+   solve 5 s | relative change of the matrix 0.9505 | rank 11 | weights changed 99.6%
+{'trial': 'least-squares fit on L29 MLP, strength 0.1, margin 3.0', 'n': 156, 'correct_pct': 35.9, 'interval_95': [28.8, 43.7], 'base_pct': 35.9, 'fixed': 2, 'broken': 2, 'p_value': 1.0, 'no_point': 0, 'seconds': 227}

@@ -75,8 +75,14 @@ def _write_run_file(name: str, revision: str | None) -> None:
     (RUN_DIR / "run.json").write_text(json.dumps(info, indent=2))
 
 
-def encode(conversations: list[list[dict]], thinking: bool = False) -> dict:
-    """Turn a batch of chat conversations into model inputs on the GPU."""
+def encode(
+    conversations: list[list[dict]], thinking: bool = False, append_ids: list[list[int]] | None = None
+) -> dict:
+    """Turn a batch of chat conversations into model inputs on the GPU.
+
+    `append_ids` holds token ids to place after each prompt: the forced start of the reply.
+    All rows must have the same length, because the prompts are padded on the left.
+    """
     inputs = PROCESSOR.apply_chat_template(
         conversations,
         add_generation_prompt=True,
@@ -85,8 +91,19 @@ def encode(conversations: list[list[dict]], thinking: bool = False) -> dict:
         return_tensors="pt",
         processor_kwargs={"padding": True},
         enable_thinking=thinking,
-    )
-    return inputs.to(MODEL.device)
+    ).to(MODEL.device)
+    if append_ids is not None:
+        if len({len(row) for row in append_ids}) != 1 or len(append_ids) != len(conversations):
+            raise ValueError("`append_ids` needs one row per conversation, and all rows must have the same length.")
+        extra = torch.tensor(append_ids, device=MODEL.device)
+        shape = inputs["input_ids"].shape
+        for key, value in list(inputs.items()):
+            # Every per-token tensor must grow with the ids. The new tokens are text: attended,
+            # and of type zero in a token-type tensor.
+            if torch.is_tensor(value) and value.shape == shape:
+                fill = extra if key == "input_ids" else torch.full_like(extra, 1 if key == "attention_mask" else 0)
+                inputs[key] = torch.cat([value, fill.to(value.dtype)], dim=1)
+    return inputs
 
 
 class PresencePenalty:
@@ -242,11 +259,24 @@ def read_logprobs(
     return result
 
 
-def read(conversations: list[list[dict]], modules: list[str], thinking: bool = False) -> dict[str, torch.Tensor]:
-    """One forward pass of kind `read` over conversations: the output of each named module at the last prompt position.
+def read(
+    conversations: list[list[dict]],
+    modules: list[str],
+    thinking: bool = False,
+    append_ids: list[list[int]] | None = None,
+    logprobs_of: list[int] | None = None,
+    last_positions: int = 1,
+    inputs: bool = False,
+) -> dict[str, torch.Tensor]:
+    """One forward pass of kind `read` over conversations: the output of each named module at the last position.
 
     The result maps a module name to a float32 CPU tensor of shape [batch, width].
     Conversations can hold images, which `read_tokens` cannot.
+    `append_ids` forces the start of each reply, so the last position is a chosen step of the reply.
+    With `logprobs_of`, the result also holds the key "logprobs": the log-probability that each
+    of those tokens comes next, of shape [batch, len(logprobs_of)].
+    With `last_positions` above 1, each tensor has shape [batch, last_positions, width] and holds
+    the last positions in order. `inputs` returns the input of each module in place of its output.
     """
     started = time.time()
     named = dict(MODEL.named_modules())
@@ -255,20 +285,27 @@ def read(conversations: list[list[dict]], modules: list[str], thinking: bool = F
         raise KeyError(f"These module names do not exist in the model: {missing}. No forward pass ran.")
     captured: dict[str, torch.Tensor] = {}
 
+    def keep(name: str, hidden: torch.Tensor) -> None:
+        tail = hidden[:, -last_positions:, :].float().cpu()
+        captured[name] = tail[:, 0, :] if last_positions == 1 else tail
+
     def hook_for(name: str):
-        def hook(_module, _args, output):
-            hidden = output[0] if isinstance(output, tuple) else output
-            captured[name] = hidden[:, -1, :].float().cpu()
+        if inputs:
+            return lambda _module, args: keep(name, args[0])
+        return lambda _module, _args, output: keep(name, output[0] if isinstance(output, tuple) else output)
 
-        return hook
-
-    handles = [named[name].register_forward_hook(hook_for(name)) for name in modules]
+    register = "register_forward_pre_hook" if inputs else "register_forward_hook"
+    handles = [getattr(named[name], register)(hook_for(name)) for name in modules]
     try:
-        # The base model skips the output head, which no read needs.
-        MODEL.base_model(**encode(conversations, thinking))
+        # The base model skips the output head. The head runs below on the last position only.
+        hidden = MODEL.base_model(**encode(conversations, thinking, append_ids)).last_hidden_state
     finally:
         for handle in handles:
             handle.remove()
+    if logprobs_of is not None:
+        logits = MODEL.get_output_embeddings()(hidden[:, -1, :]).float()
+        chosen = torch.tensor(logprobs_of, device=logits.device)
+        captured["logprobs"] = torch.log_softmax(logits, dim=-1)[:, chosen].cpu()
     log("read", n=len(conversations), modules=len(modules), seconds=round(time.time() - started, 2))
     return captured
 
@@ -278,8 +315,12 @@ def get_weight(name: str) -> torch.Tensor:
     return MODEL.get_parameter(name).detach().float().cpu()
 
 
-def save_edit(name: str, tensor: torch.Tensor) -> dict:
-    """Replace one parameter with `tensor`, in the model and in the edit directory of the run."""
+def save_edit(name: str, tensor: torch.Tensor, write: bool = True) -> dict:
+    """Replace one parameter with `tensor`, in the model and in the edit directory of the run.
+
+    `write=False` skips the edit files. A caller that saves many tensors writes the files one time
+    at the end, because each write holds every edited tensor.
+    """
     parameter = MODEL.get_parameter(name)
     if tuple(tensor.shape) != tuple(parameter.shape):
         raise ValueError(
@@ -296,7 +337,8 @@ def save_edit(name: str, tensor: torch.Tensor) -> dict:
     original = ORIGINALS[name].to(parameter.device).float()
     entry = {"name": name, **tensor_metrics(original, parameter.detach().float())}
     ENTRIES[name] = entry
-    _write_edit_files()
+    if write:
+        _write_edit_files()
     log("save_edit", **entry)
     return entry
 
@@ -403,7 +445,9 @@ def reset_edit(names: list[str] | None = None) -> None:
 
 def load_edit(path: str) -> list[dict]:
     """Apply an `edit.safetensors` file from an earlier run to the model."""
-    return [save_edit(name, tensor) for name, tensor in load_file(path).items()]
+    entries = [save_edit(name, tensor, write=False) for name, tensor in load_file(path).items()]
+    _write_edit_files()
+    return entries
 
 
 def _model_squared_norm() -> float:

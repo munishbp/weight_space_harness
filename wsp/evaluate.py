@@ -14,6 +14,14 @@ from wsp import tools
 from wsp.stats import wilson_interval
 
 
+def limit_pixels(image, max_pixels: int = 1_048_576):
+    """Scale an image down when it holds more than `max_pixels`. A large photo costs thousands of tokens."""
+    scale = min(1.0, (max_pixels / (image.width * image.height)) ** 0.5)
+    if scale == 1.0:
+        return image
+    return image.resize((max(32, round(image.width * scale)), max(32, round(image.height * scale))))
+
+
 def run(
     items: list[dict],
     conversation: Callable[[dict], list[dict]],

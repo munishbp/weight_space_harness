@@ -1,7 +1,7 @@
 # Run the LoRA baseline on the same slice
 
 Type: task
-Status: open
+Status: claimed
 Blocked by: 09, 10
 
 ## Question

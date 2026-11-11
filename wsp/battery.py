@@ -19,11 +19,11 @@ SETS = {
         boxed_math.conversation,
         boxed_math.score,
         {**boxed_math.BLOG_SAMPLING, "max_new_tokens": 4096},
-        50,
+        25,
     ),
-    "countbench": (lambda: countbench.load(200), countbench.conversation, countbench.score, countbench.GENERATE, 16),
-    "chartqa": (lambda: chartqa.load(200), chartqa.conversation, chartqa.score, chartqa.GENERATE, 16),
-    "refcoco": (lambda: refcoco.load(200), refcoco.conversation, refcoco.score, refcoco.GENERATE, 16),
+    "countbench": (lambda: countbench.load(200), countbench.conversation, countbench.score, countbench.GENERATE, 8),
+    "chartqa": (lambda: chartqa.load(200), chartqa.conversation, chartqa.score, chartqa.GENERATE, 8),
+    "refcoco": (lambda: refcoco.load(200), refcoco.conversation, refcoco.score, refcoco.GENERATE, 8),
 }
 
 _ITEMS: dict[str, list[dict]] = {}

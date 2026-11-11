@@ -8,6 +8,8 @@ import re
 
 from datasets import load_dataset
 
+from wsp.evaluate import limit_pixels
+
 GENERATE = {"thinking": False, "max_new_tokens": 16}
 
 
@@ -20,7 +22,7 @@ def load(count: int, seed: int = 0) -> list[dict]:
 
 def conversation(item: dict) -> list[dict]:
     text = f"{item['question']} Answer with a number only."
-    return [{"role": "user", "content": [{"type": "image", "image": item["image"].convert("RGB")}, {"type": "text", "text": text}]}]
+    return [{"role": "user", "content": [{"type": "image", "image": limit_pixels(item["image"].convert("RGB"))}, {"type": "text", "text": text}]}]
 
 
 def score(item: dict, text: str) -> dict:

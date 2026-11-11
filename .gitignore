@@ -5,3 +5,5 @@ data/
 # Edited tensors are large. The manifest and the ledger of a run stay in git.
 *.safetensors
 *.log
+# Saved activations are large. A run can compute them again.
+*.pt

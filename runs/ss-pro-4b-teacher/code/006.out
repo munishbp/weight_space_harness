@@ -1,0 +1,27 @@
+Counter({'success': 105, 'failure': 51})
+attribution pass: 200 s | mean split error 0.0032
+logit gap toward the correct digit, from the attribution: success +1.53, failure -1.09 | from the recorded log-probs: success +2.26, failure -1.49
+components that push AWAY from the correct digit in failures (mean share in failures | in successes):
+  L29.mlp                 -0.72 |  +0.88
+  L28.mlp                 -0.39 |  +0.59
+  L27.mlp                 -0.28 |  +0.21
+  L30.mlp                 -0.23 |  +0.32
+  L23.self_attn           -0.22 |  +0.36
+  L27.self_attn           -0.07 |  +0.05
+  L24.mlp                 -0.06 |  +0.03
+  L19.self_attn           -0.05 |  +0.14
+  L26.mlp                 -0.05 |  +0.10
+  L25.mlp                 -0.04 |  +0.02
+  L23.mlp                 -0.03 |  +0.01
+  L20.mlp                 -0.03 |  +0.02
+components that push TOWARD the correct digit in failures:
+  L21.linear_attn         +0.01 |  +0.00
+  L13.linear_attn         +0.01 |  -0.00
+  L28.linear_attn         +0.01 |  -0.03
+  L11.self_attn           +0.01 |  +0.00
+  L25.linear_attn         +0.01 |  -0.00
+  L15.self_attn           +0.01 |  -0.01
+  L0.linear_attn          +0.01 |  -0.01
+  L30.linear_attn         +0.05 |  +0.27
+  L31.mlp                 +0.22 |  -0.39
+  L31.self_attn           +0.84 |  -1.07

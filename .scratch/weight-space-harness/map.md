@@ -109,6 +109,14 @@ A negative result is a valid verdict.
 - [How the blog's teacher found the direction](issues/07-blog-direction-method.md): it wrote four
   text pairs by hand, took the activation difference after layers 15 and 19, and reversed that
   direction at strength 6 in 64 neurons per layer. Its first prompt named the fault.
+- [Measure the 4B baseline on ScreenSpot Pro](issues/08-baseline-4b-screenspot-pro.md): 59.4% in
+  our harness against a published 60.3. Text targets 74.1%, icon targets 35.6%. Thinking off is the
+  reference setting.
+- [Choose the ScreenSpot Pro slice and the split](issues/09-choose-screenspot-slice.md): icon
+  targets, 311 practice items and 293 held-out items, split inside each application.
+- [Edit the 4B model for the ScreenSpot Pro slice](issues/10-teacher-edit-4b-slice.md): negative
+  after 48 minutes. The model almost succeeds in 60% of failures, but no part suppresses the right
+  answer, and a closed-form fit only copies the belief of the model.
 
 ## Not yet specified
 

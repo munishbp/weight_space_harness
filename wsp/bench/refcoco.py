@@ -11,6 +11,8 @@ import re
 
 from datasets import load_dataset
 
+from wsp.evaluate import limit_pixels
+
 GENERATE = {"thinking": False, "max_new_tokens": 64}
 
 
@@ -25,7 +27,7 @@ def load(count: int, seed: int = 0) -> list[dict]:
 def conversation(item: dict) -> list[dict]:
     phrase = item["answer"][0].strip().rstrip(".")
     text = f"Locate {phrase}, output its bbox coordinates using JSON format."
-    return [{"role": "user", "content": [{"type": "image", "image": item["image"].convert("RGB")}, {"type": "text", "text": text}]}]
+    return [{"role": "user", "content": [{"type": "image", "image": limit_pixels(item["image"].convert("RGB"))}, {"type": "text", "text": text}]}]
 
 
 def parse_box(text: str) -> list[float] | None:
