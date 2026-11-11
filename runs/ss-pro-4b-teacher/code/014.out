@@ -3,3 +3,6 @@
 mmlu_pro {'n': 200, 'correct_pct': 48.0, 'interval_95': [41.2, 54.9], 'hit_limit_pct': 0.5, 'mean_new_tokens': 3.0} 10 s
 countbench {'n': 200, 'correct_pct': 85.0, 'interval_95': [79.4, 89.3], 'hit_limit_pct': 0.0, 'mean_new_tokens': 3.1} 16 s
 chartqa {'n': 200, 'correct_pct': 85.0, 'interval_95': [79.4, 89.3], 'hit_limit_pct': 0.0, 'mean_new_tokens': 5.3} 22 s
+refcoco {'n': 200, 'correct_pct': 90.0, 'interval_95': [85.1, 93.4], 'hit_limit_pct': 1.0, 'mean_new_tokens': 46.5} 36 s
+gsm8k_thinking {'n': 100, 'correct_pct': 75.0, 'interval_95': [65.7, 82.5], 'hit_limit_pct': 33.0, 'mean_new_tokens': 2500.5} 482 s
+battery done

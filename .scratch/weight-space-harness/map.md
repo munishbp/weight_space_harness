@@ -129,6 +129,9 @@ A negative result is a valid verdict.
 - **The 27B block after the path choice.** A target, a baseline, an edit attempt, and the measures.
   These become tickets when [Find a way to run and edit the 27B model](issues/21-27b-run-and-edit-paths.md)
   resolves and the user picks a path.
+- **The simulator install.** The session blocked an install from third-party git repositories, which
+  VLABench needs. The user must allow it, or the block uses a benchmark that installs from PyPI. See
+  [Install one simulator benchmark and run the base model](issues/24-simulator-install.md).
 - **Tool gaps.** `tools.read` returns only the last prompt position of a named module. The teacher
   may need attention patterns, values at other positions, or a logit lens. The calibration block
   shows which.
