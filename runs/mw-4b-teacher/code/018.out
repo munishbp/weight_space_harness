@@ -1,0 +1,34 @@
+LoRA loaded in 116 s | {'tensors_changed': 176, 'tensors_changed_pct': 24.34302, 'changed_weights': 2742225156, 'changed_weights_pct': 60.41121, 'relative_change_of_model': 0.00533}
+LoRA held-out | reach-v3                   {'n': 20, 'success': 20, 'invalid': 0, 'mean_primitives': 3.4}
+LoRA held-out | push-v3                    {'n': 20, 'success': 17, 'invalid': 0, 'mean_primitives': 3.7}
+LoRA held-out | pick-place-v3              {'n': 20, 'success': 2, 'invalid': 0, 'mean_primitives': 8.1}
+LoRA held-out | door-open-v3               {'n': 20, 'success': 0, 'invalid': 0, 'mean_primitives': 11.0}
+LoRA held-out | drawer-open-v3             {'n': 20, 'success': 1, 'invalid': 0, 'mean_primitives': 8.8}
+LoRA held-out | drawer-close-v3            {'n': 20, 'success': 20, 'invalid': 0, 'mean_primitives': 2.6}
+LoRA held-out | button-press-topdown-v3    {'n': 20, 'success': 20, 'invalid': 0, 'mean_primitives': 2.0}
+LoRA held-out | peg-insert-side-v3         {'n': 20, 'success': 0, 'invalid': 0, 'mean_primitives': 7.2}
+LoRA held-out | window-open-v3             {'n': 20, 'success': 20, 'invalid': 0, 'mean_primitives': 2.0}
+LoRA held-out | window-close-v3            {'n': 20, 'success': 20, 'invalid': 0, 'mean_primitives': 2.0}
+LoRA held-out | all                        {'n': 200, 'success': 120, 'success_pct': 60.0, 'interval_95': [53.1, 66.5]}
+LoRA held-out | against reference: {'fixed': 31, 'broken': 37, 'p_value': 0.5446122234192591}
+LoRA held-out | 264 s
+LoRA practice | reach-v3                   {'n': 20, 'success': 20, 'invalid': 0, 'mean_primitives': 3.1}
+LoRA practice | push-v3                    {'n': 20, 'success': 16, 'invalid': 0, 'mean_primitives': 3.7}
+LoRA practice | pick-place-v3              {'n': 20, 'success': 4, 'invalid': 0, 'mean_primitives': 9.2}
+LoRA practice | door-open-v3               {'n': 20, 'success': 0, 'invalid': 0, 'mean_primitives': 10.6}
+LoRA practice | drawer-open-v3             {'n': 20, 'success': 1, 'invalid': 0, 'mean_primitives': 9.5}
+LoRA practice | drawer-close-v3            {'n': 20, 'success': 20, 'invalid': 0, 'mean_primitives': 2.4}
+LoRA practice | button-press-topdown-v3    {'n': 20, 'success': 20, 'invalid': 0, 'mean_primitives': 2.0}
+LoRA practice | peg-insert-side-v3         {'n': 20, 'success': 0, 'invalid': 1, 'mean_primitives': 7.3}
+LoRA practice | window-open-v3             {'n': 20, 'success': 20, 'invalid': 0, 'mean_primitives': 2.0}
+LoRA practice | window-close-v3            {'n': 20, 'success': 20, 'invalid': 0, 'mean_primitives': 2.0}
+LoRA practice | all                        {'n': 200, 'success': 121, 'success_pct': 60.5, 'interval_95': [53.6, 67.0]}
+LoRA practice | against reference: {'fixed': 30, 'broken': 35, 'p_value': 0.620144765081303}
+LoRA practice | 276 s
+deviation: {'mean_kl': 0.0155, 'max_kl': 3.3274, 'top1_agreement_pct': 93.9403, 'perplexity_original': 13.3841, 'perplexity_edited': 13.5321, 'positions': 13730}
+battery mmlu_pro {'before_pct': 48.0, 'after_pct': 46.0, 'change_points': -2.0, 'fixed': 5, 'broken': 9, 'p_value': 0.4239501953125, 'major_drop': False}
+battery countbench {'before_pct': 85.0, 'after_pct': 86.0, 'change_points': 1.0, 'fixed': 6, 'broken': 4, 'p_value': 0.75390625, 'major_drop': False}
+battery chartqa {'before_pct': 85.0, 'after_pct': 84.5, 'change_points': -0.5, 'fixed': 3, 'broken': 4, 'p_value': 1.0, 'major_drop': False}
+battery refcoco {'before_pct': 90.0, 'after_pct': 88.5, 'change_points': -1.5, 'fixed': 0, 'broken': 3, 'p_value': 0.25, 'major_drop': False}
+battery gsm8k_thinking {'before_pct': 75.0, 'after_pct': 85.0, 'change_points': 10.0, 'fixed': 13, 'broken': 3, 'p_value': 0.021270751953125, 'major_drop': False}
+LoRA evaluation done in 21 min

@@ -11,7 +11,7 @@ has a pass or a fail. Each number is a measurement.
 |---|---|---|---|
 | Calibration: thinking that never ends, GSM8K | Qwen3.5-0.8B | Held-out 10.2% to 38.3% in 29 minutes. 0.98% of the weights. The published edit of the blog reaches 21.9%. | not run |
 | Computer use: ScreenSpot Pro icon targets | Qwen3.5-4B | No edit found in 48 minutes. | Held-out icons 38.2% to 50.2%. Text targets 76.0% to 63.5%. 55% of the weights. |
-| Robotics: Meta-World through text waypoints | Qwen3.5-4B | in progress | in progress |
+| Robotics: Meta-World through text waypoints | Qwen3.5-4B | Button-press 0 to 18 of 20 held-out episodes in 27 minutes. One matrix, 0.48% of the weights. Nothing else changes. A second fault did not yield. | Target tasks 29 to 57 of 60. Two other tasks fall from 37 to 2 of 40. A second run on all tasks is pending. |
 | Thinking fault on the 4B model, GSM8K | Qwen3.5-4B | planned | |
 | Scaling: quantized 27B | Qwen3.8-27B NVFP4 | loader written, run planned | |
 
@@ -52,12 +52,54 @@ has a pass or a fail. Each number is a measurement.
 | RefCOCO | 90.0 | 89.0 |
 | GSM8K with thinking | 75.0 | 78.0 |
 
-## What the two blocks show
+## 3. Robotics: Meta-World on Qwen3.5-4B
+
+The interface is ours: the model sees a camera image and the positions of the gripper, the object,
+and the goal, and it writes one primitive per turn (`move` to a position, `close`, `open`, `done`).
+The ten MT10 tasks, 20 practice seeds and 20 held-out seeds per task.
+
+- Base model: 63.0% of 200 episodes, on practice seeds and on held-out seeds.
+- Fault 1: the model closes the gripper before a button press. At that step the correct action has
+  a probability of 12%.
+- **Teacher edit: a least-squares fit on the MLP output matrix of layer 28, rank 1.** It raises
+  `move` over `close` at that step of the button task only.
+
+| Held-out episodes (20 per task) | Base | Teacher edit | LoRA, 15 minutes, target tasks only |
+|---|---|---|---|
+| button-press-topdown (target) | 0 | **18** | 20 |
+| push (target) | 14 | 13 | 17 |
+| window-open (target) | 15 | 15 | 20 |
+| pick-place | 20 | 20 | **2** |
+| peg-insert-side | 17 | 17 | **0** |
+| the other five tasks | 60 | 60 | 61 |
+| All ten tasks | 63.0% | **71.5%** | 60.0% |
+
+| Measure | Teacher edit | LoRA, target tasks only |
+|---|---|---|
+| Time | 27 minutes to the edit (first time, fault unknown) | 15 minutes of training, plus hand-written reference plans |
+| Weights changed | 0.48% (1 tensor, 1 layer) | 60.4% (176 tensors, 32 layers) |
+| WikiText-2: top-token agreement with the original | 99.3% | 93.9% |
+| Battery, largest drop | 1.0 point (MMLU-Pro) | 2.0 points (MMLU-Pro) |
+| Random control (same fit, random direction) | 2 of 20 on button-press | |
+
+- A sentence in the system prompt also fixes the button task (18 of 20 practice episodes), and it
+  costs 8 episodes in push and window-open.
+- Fault 2 (in push, the first move goes to the goal in place of the object): two closed-form edits
+  gave no significant gain on 40 unseen episodes. The LoRA model fixes it.
+- The LoRA model saw only the three target tasks. None of their plans holds a `close`, and the tasks
+  that need a grasp broke.
+- Limits: the tasks are short (2 to 6 primitives), and the prompt holds positions from the simulator
+  state. This block does not show a long-horizon gain.
+
+## What the blocks show
 
 - A closed-form edit works when a fault hides an ability that the model has. The 0.8B model knew
   when to close its thinking, and three parts blocked it.
-- A closed-form edit did not add an ability. The icon failures of the 4B model are a wrong choice
-  between screen elements. Training adds that ability in 15 minutes, and it costs 12.5 points on the
-  nearest neighbour of the target.
+- A closed-form edit also works on the 4B model for a habit that is wrong in one context, when the
+  right action already has a visible probability. The edit changed one robot task and nothing else.
+- A closed-form edit did not fix a wrong choice between candidates from the input (two screen
+  elements, two positions). Training fixes that kind in 15 minutes.
+- Training has a price next to the target, in both blocks: 12.5 points on text targets, and two
+  robot tasks lost.
 - The generalization battery alone does not show the cost of the LoRA model. A near-transfer set
   next to the target does.
