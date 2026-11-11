@@ -158,24 +158,27 @@ A negative result is a valid verdict.
   (10.3B). Every tool ran with no change. The habit recipe raises held-out Meta-World from 51.5% to
   57.0% (pick-place 12 to 20 of 20) in 30 minutes. The layout now handles a norm between the MLP
   and the residual stream.
+- [Test the closing-token recipe on the 4B model](issues/23-thinking-fault-4b.md): one removal on
+  the MLP of layer 30 raises held-out GSM8K with thinking from 77.3% to 89.1% and cuts the replies
+  at the token limit from 30.5% to 8.6%. The working edit came at 8 minutes. Thinking off scores 93.0%.
 
 ## Not yet specified
 
-- **The OSWorld-Verified portion.** The application, the number of tasks, the agent class for the
-  local model, and the time per pass. It becomes a ticket after
-  [Install MiniWoB++, run the base model, and choose a portion](issues/27-miniwob-base-and-portion.md).
-- **VLABench.** It has long composite tasks and fits the goal better than Meta-World. Its install
-  needs a git repository and two Google Drive archives, which the session blocks. The user must
-  allow that install.
-- **Tool gaps.** `tools.read` returns only the last prompt position of a named module. The teacher
-  may need attention patterns, values at other positions, or a logit lens. The calibration block
-  shows which.
-- **The fallback when no hidden fault exists.** The blog's edit removed a fault that hid an ability.
-  If the 4B model has no such fault on the target, the next edit family is not clear. The line
-  between a closed-form fit and training also needs a rule at that point.
-- **The release form for other users.** The licence, the README, the install path, and how a user
-  adds a new target. This becomes sharp after two students have passed through the harness.
-- **The form of the final verdict.** A report, a table, or an artifact, and who reads it.
+All tickets of the map are resolved. The destination has its six items: the general harness, the
+0.8B calibration, the computer use verdict, the robotics verdict, the 27B run, and the playbook.
+`RESULTS.md` holds the verdict, with the answer to the question at its top. What stays open needs a
+decision of the user:
+
+- **A long-horizon benchmark.** OSWorld-Verified (a portion: the application, the number of tasks,
+  the agent class) and VLABench. Both installs reach outside PyPI (a git repository, Google Drive
+  archives, a VM image), and the session may not run them without the user.
+- **A teacher from another vendor.** It needs an account from the user.
+- **The release form for other users.** The licence of the repository and how a user adds a new
+  target. The repository is public and has no licence file.
+- **The user name in the git history.** Some run outputs in earlier commits hold the home path. The
+  newest commit does not. A history rewrite needs the request of the user.
+- **The next edit family.** No closed-form edit fixed a wrong choice between candidates from the
+  input. That kind is the largest share of the failures on ScreenSpot Pro and in the push task.
 
 ## Out of scope
 

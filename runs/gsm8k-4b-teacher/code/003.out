@@ -1,0 +1,41 @@
+37 replies never close their thinking
+peak P(</think>) per stuck reply: min 2.55e-06 | median 0.0 | max 0.293 | above 0.1: 1 | above 0.01: 5
+K positions (P above 0.0003): 17 in 10 replies | B positions: 444
+tokens at K: [("'\\n'", 17)]
+next token chosen at K: [("'   '", 17)]
+Traceback (most recent call last):
+  File "~/weight_space/wsp/kernel.py", line 70, in handle
+    exec(compile(source, "<teacher>", "exec"), self.server.namespace)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<teacher>", line 21, in <module>
+  File "~/weight_space/wsp/attribution.py", line 51, in attribute
+    outputs = tools.read_tokens(sequences, [*writers.values(), last], positions=positions)
+  File "~/weight_space/wsp/tools.py", line 239, in read_tokens
+    _final_hidden(ids, mask)
+    ~~~~~~~~~~~~~^^^^^^^^^^^
+  File "~/weight_space/wsp/tools.py", line 198, in _final_hidden
+    return torch.cat([MODEL.base_model(input_ids=ids[i : i + 8], attention_mask=mask[i : i + 8]).last_hidden_state for i in rows])
+                      ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "~/weight_space/.venv/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1787, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "~/weight_space/.venv/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1798, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "~/weight_space/.venv/lib/python3.13/site-packages/transformers/utils/generic.py", line 943, in wrapper
+    output = func(self, *args, **kwargs)
+  File "~/weight_space/.venv/lib/python3.13/site-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 1601, in forward
+    inputs_embeds = self.get_input_embeddings()(input_ids)
+  File "~/weight_space/.venv/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1787, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "~/weight_space/.venv/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1893, in _call_impl
+    return inner()
+  File "~/weight_space/.venv/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1854, in inner
+    hook_result = hook(self, args, result)
+  File "~/weight_space/wsp/tools.py", line 234, in <lambda>
+    return lambda _module, _args, output: keep(name, output[0] if isinstance(output, tuple) else output)
+                                          ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "~/weight_space/wsp/tools.py", line 225, in keep
+    row = hidden[index, offset:]
+          ~~~~~~^^^^^^^^^^^^^^^^
+IndexError: index 8 is out of bounds for dimension 0 with size 8

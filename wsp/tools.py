@@ -220,13 +220,14 @@ def read_tokens(
     captured: dict[str, list[torch.Tensor]] = {}
 
     def keep(name: str, hidden: torch.Tensor) -> None:
-        rows = []
-        for index, offset in enumerate(offsets):
-            row = hidden[index, offset:]
+        # `_final_hidden` runs a few rows per pass, so a hook fires one time per pass. The rows arrive in order.
+        rows = captured.setdefault(name, [])
+        for part in hidden:
+            index = len(rows)
+            row = part[offsets[index] :]
             if positions is not None:
                 row = row[torch.tensor(positions[index], dtype=torch.long, device=row.device)]
             rows.append(row.float().cpu())
-        captured[name] = rows
 
     def hook_for(name: str):
         if inputs:

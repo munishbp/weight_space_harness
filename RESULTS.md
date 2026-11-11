@@ -5,7 +5,53 @@ Updated: 2026-11-11. Teacher: Claude (Fable 5.2). Machine: one RTX 5090 (32 GB).
 Each block has a ticket with the full numbers in `.scratch/weight-space-harness/issues/`. No block
 has a pass or a fail. Each number is a measurement.
 
-## Summary so far
+## Answer to the question
+
+The question: can a frontier model edit the weights of a small open model directly, with no training
+loop, so that the model gets good at one portion of a realistic task in 10 to 15 minutes and keeps
+its general ability? Does this scale to a 4B model, and is it feasible?
+
+- **It is feasible for two kinds of fault.** In the first kind the student has the ability and
+  writes a wrong default at one step: `close` before a button press, `type` before a click on
+  Reply. One closed-form fit on one MLP matrix fixes that step. It worked in all five cases of this
+  kind that we tried (one of them two times, with two teachers), on three students from 4B to 27B
+  and from two families. In the second kind a part of the model blocks a token that the model
+  needs (the fault of the blog). One removal on one matrix fixes it on the 0.8B and the 4B model.
+- **It scales.** The same recipe and the same code ran on Qwen3.5-4B, GLM-4.6V-Flash (10B), and a
+  4-bit Qwen3.8-27B. The gain on the 27B model is the largest.
+- **The time is 8 to 30 minutes on a 4B model.** The fault of the blog took 8 minutes. A habit
+  fault took 15 to 30 minutes. The 27B model needs about an hour, because one forward pass is slow.
+- **The model keeps its general ability.** Each edit changes 0.2% to 0.5% of the weights in one
+  matrix. The top token on neutral text stays the same in 99% of the positions. No battery set
+  drops by more than 1 point with significance, and tasks next to the target do not change.
+- **The gain is local, and the portion does not become "super great".** An edit fixes the steps that
+  it targets. The email tasks go from 29% to 57% on the 4B model, because a later click is also
+  wrong and no edit of this kind fixes a wrong position.
+- **It does not work when the fault is a wrong choice between things in the input** (which icon,
+  which position). ScreenSpot Pro and the Meta-World push task gave no edit. Training fixes that kind.
+- **A LoRA fine-tune of 15 minutes gains more on the target when correct examples exist** (87%
+  against 57% on the email tasks). It changes 60% of the weights and moves tasks next to the target.
+  The edit needs no examples, only a fault that the teacher can locate.
+
+| Case | Student | Time to a working edit | Target, held-out | All tasks of the benchmark portion |
+|---|---|---|---|---|
+| Button-press, Meta-World | Qwen3.5-4B | 27 min | 0 to 18 of 20 | 63.0% to 71.5% |
+| Door-open, stacked, Meta-World | Qwen3.5-4B | 15 min | 0 to 7 of 20 | 71.5% to 76.0% |
+| Button-press, second teacher | Qwen3.5-4B | 30 min | 0 to 16 of 20 | 63.0% to 71.5% |
+| Email tasks, MiniWoB++ | Qwen3.5-4B | 19 min | 29 to 57 of 100 | other task types 63.8% to 65.4% |
+| Email tasks, MiniWoB++ | Qwen3.8-27B, 4-bit | 56 min | 30 to 68 of 100 | other task types 73.1% to 73.1% |
+| Pick-place, Meta-World | GLM-4.6V-Flash | 30 min | 12 to 20 of 20 | 51.5% to 57.0% |
+| Thinking that does not end, GSM8K | Qwen3.5-4B | 8 min | 77.3% to 89.1% | battery within 0.5 points |
+
+What this effort does not show:
+
+- A long-horizon benchmark. The tasks here have 2 to 10 steps. OSWorld-Verified and VLABench need
+  installs from outside PyPI, which this session may not run without a decision of the user.
+- A teacher from another vendor. The second teacher was another Claude model.
+- Qwen4. The harness loads a student by name, so a new model needs no code change if its layers
+  follow the names in `wsp/layout.py`.
+
+## Summary
 
 | Block | Student | Teacher edit | LoRA, 15 minutes |
 |---|---|---|---|
@@ -15,7 +61,7 @@ has a pass or a fail. Each number is a measurement.
 | Computer use, multi-step: MiniWoB++ email tasks through screenshots | Qwen3.5-4B | Held-out 29.0% to 57.0% (29 episodes fixed, 1 broken). First working edit at 19 minutes. One matrix, 0.51% of the weights. The other 78 task types: 63.8% to 65.4%. | Held-out 29.0% to 87.0%. The other 78 task types: 63.8% to 61.5%, with 61 of 312 episodes changed. 65% of the weights. |
 | Scaling: MiniWoB++ email tasks on a quantized 27B model | Qwen3.8-27B NVFP4 | Held-out 30.0% to 68.0% (39 episodes fixed, 1 broken). The recipe and the contexts of the 4B run, layer 60. One matrix, 0.22% of the weights. The other 78 task types: 73.1% to 73.1%. 56 minutes at 3 tokens per second. | not run: no memory for training |
 | A student outside Qwen: Meta-World | GLM-4.6V-Flash (10.3B) | Held-out 51.5% to 57.0% (11 episodes fixed, 0 broken). Pick-place 12 to 20 of 20. Practice trial 30 minutes after the first pass. 0.50% of the weights. | not run |
-| Thinking fault on the 4B model, GSM8K | Qwen3.5-4B | not run | |
+| Thinking that does not end, GSM8K | Qwen3.5-4B | Held-out 77.3% to 89.1% (17 items fixed, 2 broken). Replies at the token limit: 30.5% to 8.6%. Working edit at 8 minutes. One matrix, 0.44% of the weights. Thinking off scores 93.0% with no edit. | not run |
 
 ## 1. Calibration on Qwen3.5-0.8B
 
@@ -224,6 +270,34 @@ on the 32 GB GPU (19.2 GB).
 - The 30 minutes include 6 minutes on the button-press habit, which a forced replay ruled out, and
   6 minutes on the norm.
 - No LoRA comparison and no second benchmark ran on this student.
+
+## 7. The fault of the blog on the 4B model: thinking that does not end
+
+GSM8K with thinking on. 64 practice items at a limit of 2,048 tokens, 128 held-out items at 4,096.
+
+- Base model on the practice items: 48.4% correct, 62.5% of the replies at the limit. The stuck
+  replies do not repeat text. The model plans again and questions its answer.
+- At the few positions where the closing token of the thinking has a visible probability, the MLP
+  of layer 30 pushes against it.
+- **Teacher edit: `edits.remove_direction` on the MLP output matrix of layer 30, strength 2.**
+
+| Held-out, 128 items | Base, thinking on | Teacher edit | Base, thinking off |
+|---|---|---|---|
+| Correct | 77.3% | **89.1%** (17 fixed, 2 broken, p = 0.0007) | 93.0% |
+| At the token limit | 30.5% | 8.6% | 0.8% |
+| Median thinking length (tokens) | 1,229 | 991 | no thinking |
+
+| Measure | Teacher edit |
+|---|---|
+| Time | 8 minutes to the working edit. 14 minutes with the strength sweep and the random control. |
+| Weights changed | 0.44% (1 tensor, 1 layer) |
+| WikiText-2: top-token agreement with the original | 98.8% (KL 0.0006) |
+| Battery | MMLU-Pro, CountBench, ChartQA, RefCOCO: within 0.5 points. GSM8K with thinking: 75.0 to 90.0. |
+| Random control (random direction, same strength) | 46.9% on the practice items (base 48.4%) |
+
+- A strength of 3 gives the same accuracy with a median thinking of 22 tokens. The model then skips
+  its thinking. The thinking length is the second measure that shows this.
+- The thinking-off prompt still beats the edit, as on the 0.8B model.
 
 ## What the blocks show
 

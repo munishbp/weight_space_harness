@@ -1,0 +1,24 @@
+37 replies never close their thinking
+peak P(</think>) per stuck reply: min 2.55e-06 | median 0.0 | max 0.293 | above 0.1: 1 | above 0.01: 5
+K positions (P above 0.0003): 17 in 10 replies | B positions: 444
+tokens at K: [("'\\n'", 17)]
+next token chosen at K: [("'   '", 17)]
+split error 0.0055 | logit(</think>) - logit(alt): mean at K -2.86, at B -2.16
+parts that push hardest against the closing token at K (mean at K | mean at B):
+  L30 mlp        -5.71 |   -1.10
+  L31 att        -1.66 |   -2.00
+  L28 mlp        -0.64 |   +0.10
+  L25 att        -0.62 |   +0.13
+  embed_tokens   -0.37 |   -0.20
+  L29 mlp        -0.27 |   +0.10
+  L18 mlp        -0.20 |   -0.02
+  L24 mlp        -0.16 |   -0.05
+  L29 att        -0.16 |   +0.25
+  L27 att        -0.15 |   +0.19
+parts that push hardest for it:
+  L27 mlp        +0.28 |   +0.10
+  L19 mlp        +0.30 |   +0.13
+  L0 att         +0.36 |   +0.20
+  L22 mlp        +0.41 |   -0.16
+  L30 att        +0.70 |   +0.02
+  L31 mlp        +3.25 |   -1.04
