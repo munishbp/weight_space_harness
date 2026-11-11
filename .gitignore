@@ -7,3 +7,4 @@ data/
 *.log
 # Saved activations are large. A run can compute them again.
 *.pt
+.venv-osworld/
