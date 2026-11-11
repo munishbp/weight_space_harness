@@ -1,0 +1,20 @@
+peg-insert-side-v3
+  base  ok : [('m c m', 19)]
+  base  bad: [('m c m o m c m d', 1)]
+  stack ok : [('m c m', 7), ('m c o m m m m o m c m', 1)]
+  stack bad: [('m c o m d', 7), ('m c o m m c o m m m', 2), ('m c m o m c m o m c m', 1), ('m c o m m c o m m c m', 1)]
+pick-place-v3
+  base  ok : [('m c m', 20)]
+  base  bad: []
+  stack ok : [('m c m', 14), ('m c o m', 1)]
+  stack bad: [('m c o m d', 4), ('m c o m m m m m m', 1)]
+push-v3
+  base  ok : [('m c m', 10)]
+  base  bad: [('m c o m m m m m', 3), ('m m m m m c o m', 3), ('m m m c o m m m', 1), ('m o m m m m m m', 1)]
+  stack ok : [('m c o m', 5), ('m c m', 2)]
+  stack bad: [('m c o m d', 3), ('m c o m m m m m', 2), ('m d', 2), ('m o m m m m m m', 2)]
+door-open-v3
+  base  ok : []
+  base  bad: [('m c o m m m m m m m', 7), ('m c o m m m m m m c o m', 4), ('m c o m m m m m m m m', 3), ('m c o m m m m m m', 2)]
+  stack ok : [('m c m', 12), ('m c m o', 1)]
+  stack bad: [('m c m o m m m m m c m m', 1), ('m c m o m m m m d', 1), ('m c m o m m m d', 1), ('m c m o d', 1)]

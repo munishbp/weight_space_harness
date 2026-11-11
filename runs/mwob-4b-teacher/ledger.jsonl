@@ -1,0 +1,8 @@
+{"t": 1794402825.55, "kind": "load_model", "model": "Qwen/Qwen3.5-4B", "seconds": 16.12}
+{"t": 1794402834.92, "kind": "python", "index": 1, "ok": true, "seconds": 0.19}
+{"t": 1794402835.85, "kind": "teacher_start", "note": "MiniWoB++ through screenshots: base scan"}
+{"t": 1794402860.75, "kind": "generate", "n": 24, "prompt_tokens": 18233, "new_tokens": 502, "hit_limit": 0, "seconds": 11.59}
+{"t": 1794402864.93, "kind": "generate", "n": 16, "prompt_tokens": 12475, "new_tokens": 318, "hit_limit": 0, "seconds": 1.93}
+{"t": 1794402867.41, "kind": "generate", "n": 10, "prompt_tokens": 7980, "new_tokens": 197, "hit_limit": 0, "seconds": 1.37}
+{"t": 1794402869.29, "kind": "generate", "n": 9, "prompt_tokens": 7333, "new_tokens": 174, "hit_limit": 0, "seconds": 1.25}
+{"t": 1794402870.95, "kind": "generate", "n": 7, "prompt_tokens": 5828, "new_tokens": 142, "hit_limit": 0, "seconds": 1.2}

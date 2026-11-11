@@ -1,0 +1,23 @@
+stacked edit: {'tensors_changed': 1, 'tensors_changed_pct': 0.13831, 'changed_weights': 23230595, 'changed_weights_pct': 0.51177, 'relative_change_of_model': 0.01335} | matrix relative change 0.414
+[  2.2 min] button + door | P(move) at turn 3, first half and second half: {'reach': (0.29, 0.3), 'push': (0.38, 0.37), 'pick-place': (0.5, 0.52), 'door-open': (0.95, 0.95), 'drawer-open': (0.17, 0.17), 'drawer-close': (0.39, 0.36), 'button-press-topdown': (0.82, 0.8), 'peg-insert-side': (0.48, 0.47), 'window-open': (0.36, 0.48), 'window-close': (0.37, 0.37)}
+button turn 2 with the stack: P(move) 0.91, P(close) 0.01
+~/weight_space/.venv/lib/python3.13/site-packages/gymnasium/utils/passive_env_checker.py:39: UserWarning: [33mWARN: A Box observation space maximum and minimum values are equal.[0m
+  logger.warn("A Box observation space maximum and minimum values are equal.")
+~/weight_space/.venv/lib/python3.13/site-packages/gymnasium/utils/passive_env_checker.py:174: UserWarning: [33mWARN: The obs returned by the `reset()` method is not within the observation space.[0m
+  logger.warn(f"{pre} is not within the observation space.")
+~/weight_space/.venv/lib/python3.13/site-packages/gymnasium/utils/passive_env_checker.py:174: UserWarning: [33mWARN: The obs returned by the `step()` method is not within the observation space.[0m
+  logger.warn(f"{pre} is not within the observation space.")
+button + door practice | reach-v3                   {'n': 20, 'success': 20, 'invalid': 0, 'mean_primitives': 3.0}
+button + door practice | push-v3                    {'n': 20, 'success': 7, 'invalid': 0, 'mean_primitives': 5.5}
+button + door practice | pick-place-v3              {'n': 20, 'success': 15, 'invalid': 0, 'mean_primitives': 3.8}
+button + door practice | door-open-v3               {'n': 20, 'success': 13, 'invalid': 0, 'mean_primitives': 5.3}
+button + door practice | drawer-open-v3             {'n': 20, 'success': 0, 'invalid': 0, 'mean_primitives': 5.0}
+button + door practice | drawer-close-v3            {'n': 20, 'success': 20, 'invalid': 0, 'mean_primitives': 3.8}
+button + door practice | button-press-topdown-v3    {'n': 20, 'success': 19, 'invalid': 0, 'mean_primitives': 2.2}
+button + door practice | peg-insert-side-v3         {'n': 20, 'success': 8, 'invalid': 0, 'mean_primitives': 6.0}
+button + door practice | window-open-v3             {'n': 20, 'success': 17, 'invalid': 0, 'mean_primitives': 5.9}
+button + door practice | window-close-v3            {'n': 20, 'success': 20, 'invalid': 0, 'mean_primitives': 4.0}
+button + door practice | all                        {'n': 200, 'success': 139, 'success_pct': 69.5, 'interval_95': [62.8, 75.5]}
+button + door practice | against reference: {'fixed': 32, 'broken': 19, 'p_value': 0.09191454981585423}
+button + door practice | 190 s
+trial done in 3.4 min

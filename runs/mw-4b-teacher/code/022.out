@@ -1,0 +1,12 @@
+~/weight_space/.venv/lib/python3.13/site-packages/gymnasium/utils/passive_env_checker.py:39: UserWarning: [33mWARN: A Box observation space maximum and minimum values are equal.[0m
+  logger.warn("A Box observation space maximum and minimum values are equal.")
+~/weight_space/.venv/lib/python3.13/site-packages/gymnasium/utils/passive_env_checker.py:174: UserWarning: [33mWARN: The obs returned by the `reset()` method is not within the observation space.[0m
+  logger.warn(f"{pre} is not within the observation space.")
+~/weight_space/.venv/lib/python3.13/site-packages/gymnasium/utils/passive_env_checker.py:174: UserWarning: [33mWARN: The obs returned by the `step()` method is not within the observation space.[0m
+  logger.warn(f"{pre} is not within the observation space.")
+Traceback (most recent call last):
+  File "~/weight_space/wsp/kernel.py", line 70, in handle
+    exec(compile(source, "<teacher>", "exec"), self.server.namespace)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<teacher>", line 30, in <module>
+NameError: name 'battery' is not defined

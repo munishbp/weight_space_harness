@@ -1,6 +1,6 @@
 # Results
 
-Updated: 2026-11-10. Teacher: Claude (Fable 5.2). Machine: one RTX 5090 (32 GB).
+Updated: 2026-11-11. Teacher: Claude (Fable 5.2). Machine: one RTX 5090 (32 GB).
 
 Each block has a ticket with the full numbers in `.scratch/weight-space-harness/issues/`. No block
 has a pass or a fail. Each number is a measurement.
@@ -11,7 +11,7 @@ has a pass or a fail. Each number is a measurement.
 |---|---|---|---|
 | Calibration: thinking that never ends, GSM8K | Qwen3.5-0.8B | Held-out 10.2% to 38.3% in 29 minutes. 0.98% of the weights. The published edit of the blog reaches 21.9%. | not run |
 | Computer use: ScreenSpot Pro icon targets | Qwen3.5-4B | No edit found in 48 minutes. | Held-out icons 38.2% to 50.2%. Text targets 76.0% to 63.5%. 55% of the weights. |
-| Robotics: Meta-World through text waypoints | Qwen3.5-4B | Button-press 0 to 18 of 20 held-out episodes in 27 minutes. One matrix, 0.48% of the weights. Nothing else changes. A second fault did not yield. | Three target tasks only: 60.0% of all episodes, two grasp tasks lost. Nine tasks: 63.0% to 87.5%, no task lost. 64% of the weights. |
+| Robotics: Meta-World through text waypoints | Qwen3.5-4B | First fault: button-press 0 to 18 of 20 held-out episodes in 27 minutes. Second fault, stacked: 15 minutes. Both: 63.0% to 76.0%, 26 episodes fixed, 0 broken, 0.50% of the weights. | Three target tasks only: 60.0% of all episodes, two grasp tasks lost. Nine tasks: 63.0% to 87.5%, no task lost. 64% of the weights. |
 | Thinking fault on the 4B model, GSM8K | Qwen3.5-4B | planned | |
 | Scaling: quantized 27B | Qwen3.8-27B NVFP4 | loader written, run planned | |
 
@@ -85,6 +85,12 @@ The ten MT10 tasks, 20 practice seeds and 20 held-out seeds per task.
 | Battery, largest drop | 1.0 point (MMLU-Pro) | 2.0 points (MMLU-Pro) | 2.5 points (ChartQA) |
 | Random control (same fit, random direction) | 2 of 20 on button-press | | |
 
+- **A second edit, stacked.** The same recipe on the door-open fault (the model opens the gripper
+  after the grasp) took 14.8 minutes, with one failed attempt and its diagnosis. Both edits in one
+  matrix: 76.0% of the held-out episodes, 26 fixed and 0 broken. Door-open goes from 0 to 7 of 20.
+  The edit is rank 2, 0.50% of the weights, and the top-token agreement stays at 99.3%.
+- The failed attempt showed a defect in the recipe: the protection set must hold every position of
+  the prompts, not only the step that the edit targets.
 - A sentence in the system prompt also fixes the button task (18 of 20 practice episodes), and it
   costs 8 episodes in push and window-open.
 - Fault 2 (in push, the first move goes to the goal in place of the object): two closed-form edits

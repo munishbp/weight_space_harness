@@ -22,7 +22,7 @@ Status: research code. The results so far are in [RESULTS.md](RESULTS.md).
 | `wsp/layout.py` | Finds the layers, MLPs, and attention blocks of a student by name. |
 | `wsp/evaluate.py`, `wsp/stats.py` | Benchmark runs with a fixed seed, intervals, and paired tests. |
 | `wsp/battery.py` | The generalization battery: fixed subsets of general benchmarks that run before and after an edit. |
-| `wsp/bench/` | Benchmarks: ScreenSpot Pro, boxed math (GSM8K), MMLU-Pro, CountBench, ChartQA, RefCOCO, and Meta-World through text waypoints. |
+| `wsp/bench/` | Benchmarks: ScreenSpot Pro, boxed math (GSM8K), MMLU-Pro, CountBench, ChartQA, RefCOCO, Meta-World through text waypoints, and MiniWoB++ through screenshots. |
 | `wsp/modelopt.py` | Loads a ModelOpt mixed-precision checkpoint. The weights stay in their 4-bit and 8-bit formats, and an edit goes back into the same format. |
 | `wsp/lora_baseline.py` | A LoRA fine-tune with a fixed wall-clock budget. It is the comparison, not the method. |
 | `runs/` | One directory per run: the ledger, the teacher code, the outputs, and the edit manifest. |
@@ -57,3 +57,5 @@ A negative result is a valid result, and the harness records it in the same form
 - The benchmark loaders download public datasets from the Hugging Face Hub at first use.
 - The Meta-World interface (text waypoints with positions from the simulator state) is specific to
   this harness. No published score exists for it.
+- The MiniWoB++ interface (one screenshot per turn, JSON actions, no time limit) is also specific to
+  this harness. The benchmark needs Chrome, and Selenium downloads the matching ChromeDriver.

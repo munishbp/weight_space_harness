@@ -1,0 +1,8 @@
+[  9.5 min] protection from 100594 robot positions and 13794 text positions
+Traceback (most recent call last):
+  File "~/weight_space/wsp/kernel.py", line 70, in handle
+    exec(compile(source, "<teacher>", "exec"), self.server.namespace)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<teacher>", line 30, in <module>
+  File "<teacher>", line 24, in written
+RuntimeError: Expected all tensors to be on the same device, but got mat is on cuda:0, different from other tensors on cpu (when checking argument in method wrapper_CUDA_addmv_)

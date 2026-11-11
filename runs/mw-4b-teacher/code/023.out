@@ -1,0 +1,1 @@
+turn 3 contexts: {'reach': 13, 'push': 20, 'pick-place': 20, 'door-open': 20, 'drawer-open': 20, 'drawer-close': 20, 'button-press-topdown': 20, 'peg-insert-side': 20, 'window-open': 19, 'window-close': 19}

@@ -135,6 +135,9 @@ A negative result is a valid verdict.
 - [Run the LoRA baseline on the Meta-World target tasks](issues/26-lora-baseline-metaworld.md): LoRA
   on the three target tasks reaches 57 of 60 there and breaks two grasp tasks (60.0% overall). LoRA
   on nine tasks reaches 87.5% with no broken task. Both change about 60% of the weights.
+- [Repeat the habit recipe on a second Meta-World fault and stack the edits](issues/29-repeat-recipe-door-open.md):
+  the repeat took 14.8 minutes with one failed attempt. The stacked edit reaches 76.0% held-out with
+  26 episodes fixed and 0 broken. The protection must hold every prompt position.
 
 ## Not yet specified
 

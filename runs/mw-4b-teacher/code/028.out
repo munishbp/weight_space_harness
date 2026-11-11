@@ -1,0 +1,12 @@
+rank of the change (singular values over 1% of the top): 1
+door, seeds in the fit      (along g, norm): [8.27, 8.27]
+door, unseen seeds          (along g, norm): [8.0, 8.0]
+reach-v3                   in fit   0.01  unseen  -0.01 (norm 0.10)
+push-v3                    in fit   0.01  unseen  -0.04 (norm 0.10)
+pick-place-v3              in fit   0.00  unseen  -0.03 (norm 0.10)
+drawer-open-v3             in fit   0.06  unseen   0.02 (norm 0.24)
+drawer-close-v3            in fit  -0.01  unseen   0.11 (norm 0.15)
+button-press-topdown-v3    in fit  -0.00  unseen  -0.03 (norm 0.13)
+peg-insert-side-v3         in fit  -0.01  unseen   0.10 (norm 0.15)
+window-open-v3             in fit   0.03  unseen   0.05 (norm 0.13)
+window-close-v3            in fit   0.00  unseen  -0.00 (norm 0.14)

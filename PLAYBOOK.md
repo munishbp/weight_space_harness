@@ -115,11 +115,13 @@ g = attribution.token_direction(correct_token, [habit_token])
 keys = tools.read(target_contexts, [mlp_out], append_ids=prefix, inputs=True)[mlp_out]
 scale = tools.read(target_contexts, [last_layer], append_ids=prefix)[last_layer].pow(2).mean(1).sqrt()
 values = edits.logit_shift_values(g, scale, margin)               # raises the logit gap by about `margin`
-protect = second moment of the same MLP input on the other contexts and on neutral text
+protect = second moment of the same MLP input at every position of the task prompts and on neutral text
 edits.fit_keys_to_values(mlp_out + ".weight", keys, values, protect)
 ```
 
-Fit on one half of the practice contexts and read the probability on the other half. In our run a
+Build `protect` from all positions of the prompts (`tools.read(..., last_positions=100000,
+inputs=True)` with one prompt per call), and leave out only the target step. Fit on one half of the
+practice contexts and read the probability on the other half. In our run a
 margin of 4 moved the probability from 0.12 to 0.39, and a margin of 12 moved it to 0.92. Later
 layers undo a part of the shift, so sweep the margin.
 
@@ -146,6 +148,13 @@ layers undo a part of the shift, so sweep the margin.
   noise, run 40 new seeds. A gain of 5 episodes on 20 became 4 on 40, with p = 0.13.
 - **A prompt sentence can fix the same fault and break a neighbour.** A hint in the system prompt
   fixed the button task (18 of 20) and cost 8 episodes in two other tasks. The edit cost none.
+- **Protect every position of the prompt, not only the step that you edit.** A fit that protected
+  the action step alone wrote its direction at image and template positions, 170 times the intended
+  amount per prompt. The later layers read those positions, and three other tasks broke. With all
+  positions in the protection, the stray writes fell to 2% and no task broke. Measure the write at
+  every position of one unrelated prompt before a trial.
+- **A repeat of a known recipe is fast.** The first habit edit took 27 minutes. The second, on the
+  same matrix, took 15 minutes with one failed attempt and its diagnosis. The two edits stack.
 - **Training has a price next to the target.** A LoRA fine-tune on icon targets raised held-out icons
   by 12 points and lowered text targets of the same benchmark by 12.5 points. The battery did not
   show it.
