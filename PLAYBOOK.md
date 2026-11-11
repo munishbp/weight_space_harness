@@ -1,7 +1,7 @@
 # Teacher playbook
 
-Draft 1, written after three runs: the calibration on Qwen3.5-0.8B, ScreenSpot Pro on Qwen3.5-4B, and
-Meta-World on Qwen3.5-4B.
+Draft 2, written after six runs: the calibration on Qwen3.5-0.8B; ScreenSpot Pro, Meta-World (two
+faults), and MiniWoB++ on Qwen3.5-4B; and MiniWoB++ on a quantized Qwen3.8-27B.
 
 This playbook is for the teacher: a frontier model with a shell tool. The teacher reads the weights
 and the activations of a smaller open model (the student) and writes edits to the weights directly.
@@ -75,6 +75,9 @@ The run directory records the work:
    time (one step removed, one step replaced). The change that turns a failure into a success names
    the fault exactly. In the Meta-World run, the plan of the student with no `close` step solved the
    button task 8 times of 10.
+   Where no simulator replay fits, force the correct token at the step and let the student write
+   the rest (`tools.encode` with `append_ids`). The success rate with the forced token is the
+   ceiling of an edit at that step.
 4. **Find where the student almost succeeds.** Use `tools.read_logprobs` on the failed replies. A
    correct token that has a visible probability but loses is a fault that hides an ability. A correct
    token with no probability at all points to a missing ability, and an edit is unlikely to add it.
@@ -151,6 +154,12 @@ Rules for the recipe, each from a failed attempt:
 - **Sweep the strength far past 1.** The blog's final edit uses a strength of 6, which reverses the
   direction. Our trial of the same layers at a strength of 1 and 2 had no effect.
 - **64 items give a noise of about 5 points.** Do not act on a smaller difference.
+- **A larger student can have the same fault.** The 27B model made the same three wrong choices in
+  the email tasks as the 4B model. The contexts and the recipe carried over with a new layer number.
+- **A slow student changes the plan.** At 3 tokens per second one pass of 100 browser episodes takes
+  20 minutes. Read probabilities on unseen seeds in place of a trial, and keep trials for the verdict.
+- **Batch composition changes the activations.** Two batch sizes gave keys with a cosine of 0.994 to
+  0.998. Run the original and the edited model with the same batches.
 - **A change to `wsp/tools.py` needs a kernel restart.** Save the state that you need to a file first.
 - **A perfect AUC is not a lever.** In the Meta-World push task, a direction after layer 12 separates
   "first move to the object" from "first move to the goal" with an AUC of 1.00 on unseen episodes.

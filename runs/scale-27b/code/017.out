@@ -1,0 +1,14 @@
+weights outside the range before the clamp: 1 | limit 1.1719
+Traceback (most recent call last):
+  File "~/weight_space/wsp/kernel.py", line 70, in handle
+    exec(compile(source, "<teacher>", "exec"), self.server.namespace)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<teacher>", line 17, in <module>
+  File "~/weight_space/wsp/tools.py", line 383, in save_edit
+    raise ValueError(f"The edit for {name} contains NaN or infinity. The model is unchanged.")
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "~/weight_space/wsp/modelopt.py", line 129, in set_weight
+    raise ValueError(
+    ...<2 lines>...
+    )
+ValueError: The largest new weight is 1.172, but the stored format holds at most 1.172 with the scale of this tensor. The model is unchanged. Use a smaller edit.

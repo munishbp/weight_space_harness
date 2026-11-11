@@ -1,0 +1,15 @@
+weights outside the range before the clamp: 1 | limit 1.1719
+control fit: {'name': 'model.language_model.layers.60.mlp.down_proj.weight', 'weights': 89128960, 'changed_weights': 61655060, 'changed_weights_pct': 69.1751, 'relative_change': 0.3287, 'max_abs_change': 0.136, 'cosine_to_original': 0.95, 'delta_squared_norm': 1468.4059, 'rows_changed': 5111, 'rows_changed_pct': 99.8242, 'columns_changed': 17408, 'columns_changed_pct': 100.0, 'delta_rank': 7, 'kept_share_of_request': 1.0299}
+27B random control | A (after the email click)  n=55 | seeds 0-9 {'click': 0.51, 'type': 0.47, 'key': 0.0, 'done': 0.01} | seeds 10-19 {'click': 0.31, 'type': 0.67, 'key': 0.0, 'done': 0.01}
+27B random control | B (after the Reply click)  n=55 | seeds 0-9 {'click': 0.07, 'type': 0.93, 'key': 0.0, 'done': 0.0} | seeds 10-19 {'click': 0.14, 'type': 0.84, 'key': 0.01, 'done': 0.01}
+27B random control | T (after the field click)  n=55 | seeds 0-9 {'click': 0.19, 'type': 0.8, 'key': 0.0, 'done': 0.01} | seeds 10-19 {'click': 0.25, 'type': 0.71, 'key': 0.01, 'done': 0.03}
+27B random control | C (after the text)         n=55 | seeds 0-9 {'click': 0.6, 'type': 0.02, 'key': 0.08, 'done': 0.3} | seeds 10-19 {'click': 0.39, 'type': 0.03, 'key': 0.11, 'done': 0.47}
+27B random control email held-out | email-inbox-reply          {'n': 20, 'success': 0, 'invalid': 0, 'mean_actions': 3.4}
+27B random control email held-out | email-inbox-forward        {'n': 20, 'success': 0, 'invalid': 0, 'mean_actions': 4.4}
+27B random control email held-out | email-inbox                {'n': 20, 'success': 6, 'invalid': 0, 'mean_actions': 4.5}
+27B random control email held-out | email-inbox-noscroll       {'n': 20, 'success': 12, 'invalid': 0, 'mean_actions': 1.9}
+27B random control email held-out | email-inbox-star-reply     {'n': 20, 'success': 12, 'invalid': 0, 'mean_actions': 1.9}
+27B random control email held-out | all                        {'n': 100, 'success': 30, 'success_pct': 30.0, 'interval_95': [21.9, 39.6]}
+27B random control email held-out | against reference: {'fixed': 0, 'broken': 0, 'p_value': 1.0}
+27B random control email held-out | 1176 s
+[168.6 min] random control done

@@ -24,7 +24,7 @@ Status: research code. The results so far are in [RESULTS.md](RESULTS.md).
 | `wsp/evaluate.py`, `wsp/stats.py` | Benchmark runs with a fixed seed, intervals, and paired tests. |
 | `wsp/battery.py` | The generalization battery: fixed subsets of general benchmarks that run before and after an edit. |
 | `wsp/bench/` | Benchmarks: ScreenSpot Pro, boxed math (GSM8K), MMLU-Pro, CountBench, ChartQA, RefCOCO, Meta-World through text waypoints, and MiniWoB++ through screenshots. |
-| `wsp/modelopt.py` | Loads a ModelOpt mixed-precision checkpoint. The weights stay in their 4-bit and 8-bit formats, and an edit goes back into the same format. |
+| `wsp/modelopt.py` | Loads a ModelOpt mixed-precision checkpoint. The weights stay in their 4-bit and 8-bit formats, and an edit goes back into the same format. A 27B checkpoint runs on one 32 GB GPU at about 3 tokens per second. |
 | `wsp/lora_baseline.py` | A LoRA fine-tune with a fixed wall-clock budget. It is the comparison, not the method. |
 | `runs/` | One directory per run: the ledger, the teacher code, the outputs, and the edit manifest. |
 | `.scratch/weight-space-harness/` | The map of the effort and one file per decision. |

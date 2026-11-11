@@ -13,8 +13,8 @@ has a pass or a fail. Each number is a measurement.
 | Computer use: ScreenSpot Pro icon targets | Qwen3.5-4B | No edit found in 48 minutes. | Held-out icons 38.2% to 50.2%. Text targets 76.0% to 63.5%. 55% of the weights. |
 | Robotics: Meta-World through text waypoints | Qwen3.5-4B | First fault: button-press 0 to 18 of 20 held-out episodes in 27 minutes. Second fault, stacked: 15 minutes. Both: 63.0% to 76.0%, 26 episodes fixed, 0 broken, 0.50% of the weights. | Three target tasks only: 60.0% of all episodes, two grasp tasks lost. Nine tasks: 63.0% to 87.5%, no task lost. 64% of the weights. |
 | Computer use, multi-step: MiniWoB++ email tasks through screenshots | Qwen3.5-4B | Held-out 29.0% to 57.0% (29 episodes fixed, 1 broken). First working edit at 19 minutes. One matrix, 0.51% of the weights. The other 78 task types: 63.8% to 65.4%. | Held-out 29.0% to 87.0%. The other 78 task types: 63.8% to 61.5%, with 61 of 312 episodes changed. 65% of the weights. |
-| Thinking fault on the 4B model, GSM8K | Qwen3.5-4B | planned | |
-| Scaling: quantized 27B | Qwen3.8-27B NVFP4 | loader written, run planned | |
+| Scaling: MiniWoB++ email tasks on a quantized 27B model | Qwen3.8-27B NVFP4 | Held-out 30.0% to 68.0% (39 episodes fixed, 1 broken). The recipe and the contexts of the 4B run, layer 60. One matrix, 0.22% of the weights. The other 78 task types: 73.1% to 73.1%. 56 minutes at 3 tokens per second. | not run: no memory for training |
+| Thinking fault on the 4B model, GSM8K | Qwen3.5-4B | not run | |
 
 ## 1. Calibration on Qwen3.5-0.8B
 
@@ -142,6 +142,47 @@ point, `type`, `key`, `done`). It gets no DOM. 83 task types, at most 10 actions
 - Two base runs with different batches differ in 12 of 312 episodes. A side effect needs that
   number next to it.
 
+## 5. Scaling: the quantized Qwen3.8-27B
+
+The checkpoint is a ModelOpt NVFP4 copy (4-bit weights with a scale per block of 16). `wsp/modelopt.py`
+keeps the weights in that format on the GPU and decodes them inside each forward pass. An edit goes
+back into the same format.
+
+- Load: 40 seconds, 19.6 GB on a 32 GB GPU. Speed: 2.9 tokens per second.
+- Meta-World, base model: 77.5% of 200 practice episodes (4B: 63.0%). The two habit faults of the 4B
+  model do not exist here (button-press 17 of 20, door-open 14 of 20). No edit was tried.
+- MiniWoB++ email tasks, base model: reply and forward 0 of 40, the same fault as on the 4B model.
+  At the three fault steps `click` has a probability of 0.31, 0.15, and 0.38.
+- **Teacher edit: the recipe of block 4 on the MLP output matrix of layer 60 of 64.** The page
+  states at the fault steps came from the 4B run. One fit takes 32 seconds.
+
+| Held-out episodes | Base | Teacher edit |
+|---|---|---|
+| email-inbox-reply (20) | 0 | **20** |
+| email-inbox-forward (20) | 0 | 1 |
+| email-inbox, three mixed types (60) | 30 | 47 |
+| All five email task types | 30.0% | **68.0%** (39 fixed, 1 broken, p = 7e-11) |
+| The other 78 task types (1 seed each) | 73.1% | 73.1% (1 fixed, 1 broken) |
+
+| Measure | Teacher edit |
+|---|---|
+| Time | 56 minutes from the first base pass to the fit. 20 minutes of that are one base pass. |
+| Weights changed | 0.22% (1 tensor of 1,184, 1 layer) |
+| WikiText-2: top-token agreement with the original | 98.9% (KL 0.0007) |
+| Battery, 100 items per set | MMLU-Pro 60 to 61. CountBench 94, ChartQA 75, RefCOCO 94: no change. |
+| Share of the requested change that the 4-bit format keeps | 1.03 |
+| `reset_edit` restores the stored bytes | yes |
+| Random control (same fit, random directions) | 30 of 100, no episode changes |
+
+- The same closed-form recipe works at 27B and through 4-bit weights. The gain is larger than on the
+  4B model (38 points against 28), because the 27B model clicks the right places after the fix.
+- The cost of one teacher step grows with the student. One pass of 100 browser episodes takes 20
+  minutes, so the teacher reads probabilities on unseen seeds in place of practice trials.
+- This run is a transfer of a known fault, not a discovery. The teacher did not search the 27B model
+  for a new fault.
+- No LoRA comparison ran. Training does not fit next to a 27B model on this GPU.
+- The 27B model is a newer generation and a quantized copy. The two sizes differ in more than size.
+
 ## What the blocks show
 
 - A closed-form edit works when a fault hides an ability that the model has. The 0.8B model knew
@@ -151,6 +192,8 @@ point, `type`, `key`, `done`). It gets no DOM. 83 task types, at most 10 actions
   email tasks of a web benchmark. Each edit changed its target and nothing else that we measured.
 - The time to a working edit fell with each use of the recipe: 27 minutes, 15 minutes, and 19
   minutes on a new benchmark.
+- The recipe scales to a 27B student in a 4-bit format. The same fault, the same contexts, and a new
+  layer number gave a larger gain there. The time grows with the cost of a forward pass.
 - A closed-form edit did not fix a wrong choice between candidates from the input (two screen
   elements, two positions). Training fixes that kind in 15 minutes.
 - Training on the target alone has a price next to the target, in both blocks: 12.5 points on text

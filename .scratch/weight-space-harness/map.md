@@ -142,6 +142,14 @@ A negative result is a valid verdict.
   the base model solves 59.0% of 83 task types through screenshots. A rank-2 edit raises the five
   email task types from 29.0% to 57.0% held-out, with no loss on the other 78 task types. The first
   working edit came at 19 minutes.
+- [Draft the teacher playbook](issues/15-teacher-playbook.md): `PLAYBOOK.md`, from five teacher
+  runs. The recipe that worked three times is code in `wsp/habit.py`.
+- [Choose the metric set for the writeup](issues/20-writeup-metrics.md): the six README measures in
+  every block, plus a random control, a base repeat for noise, stacking, and quantization.
+- [Run the harness on the quantized 27B model](issues/28-27b-scaling-run.md): the 27B model loads in
+  40 seconds at 19.6 GB and runs at 3 tokens per second. The email recipe of the 4B model raises
+  held-out email tasks from 30.0% to 68.0% on it, with 0.22% of the weights changed. The 4-bit
+  format keeps the full change, and the reset is exact.
 
 ## Not yet specified
 

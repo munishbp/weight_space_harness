@@ -1,7 +1,7 @@
 # Choose the metric set for the writeup
 
 Type: grilling
-Status: open
+Status: resolved
 
 ## Question
 
@@ -56,3 +56,35 @@ are required. The free items go into the harness without a decision.
   reports them from its own client.
 - **Edits that stack.** Do two edits for two targets work together? This matters for a user with more
   than one application.
+
+## Answer
+
+Decided by the teacher on 2026-11-11 under the user's delegation ("I think you can do the rest
+without me"). The rule: every block reports the six measures of the README, and the costly items
+run where a block gives them at low cost.
+
+| Item | State | Where |
+|---|---|---|
+| Provenance | recorded | `run.json` and `ledger.jsonl` of each run |
+| Cost of the search | recorded | the ledger, and a time table in each ticket |
+| Edit size, weight-space deviation, rank | recorded | `edit/manifest.json`, `verdict*.json` |
+| Rounding loss | recorded | `kept_share_of_request` in each edit entry |
+| Exact undo | checked | calibration (bit-exact), 27B (stored bytes) |
+| Uncertainty | recorded | Wilson interval and paired flips in each table |
+| Output-space deviation | recorded | KL, top-token agreement, perplexity on WikiText-2 |
+| Practice against held-out gap | recorded | each ticket |
+| Near transfer | recorded | text targets (ScreenSpot Pro), nine other robot tasks, 78 other web task types |
+| Random control | done | Meta-World (two edits), MiniWoB++ |
+| Dose response | partly | margin sweeps on unseen seeds |
+| Prompt-only baseline | done | thinking off (0.8B), a system-prompt hint (Meta-World) |
+| Edits that stack | done | button + door on Meta-World |
+| Survival under quantization | done | the 27B edit lives in the NVFP4 format |
+| Gap to the next model size | done for Meta-World | 4B base 63.0%, 4B with two edits 76.0%, 27B base 77.5% (practice seeds) |
+| Base repeat for noise | added | MiniWoB++: 12 of 312 episodes differ between two base runs |
+| Representation drift per layer | not done | the output-space measures cover the claim |
+| Activation steering baseline | not done | it does not give the user a changed model |
+| Repeat runs of the teacher | open | [Show that the teacher is interchangeable](18-teacher-interchange.md) |
+| Teacher cost in tokens and money | not visible | the harness cannot see the tokens of the teacher |
+
+One item is new: a repeat of the base run with the same batches. Without it a side-effect scan
+reads noise as an effect.
