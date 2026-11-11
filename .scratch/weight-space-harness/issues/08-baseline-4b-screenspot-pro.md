@@ -1,7 +1,7 @@
 # Measure the 4B baseline on ScreenSpot Pro
 
 Type: task
-Status: open
+Status: claimed
 Blocked by: 04
 
 ## Question

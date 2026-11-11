@@ -26,6 +26,26 @@ SOCKET_PATH = Path(os.environ.get("WSP_SOCKET", "/tmp/wsp-kernel.sock"))
 PID_PATH = SOCKET_PATH.with_suffix(".pid")
 
 
+class Tee(io.TextIOBase):
+    """Collect printed text for the reply and write it to a file at the same time."""
+
+    def __init__(self, path: Path) -> None:
+        self.text = io.StringIO()
+        self.file = path.open("w")
+
+    def write(self, chunk: str) -> int:
+        self.text.write(chunk)
+        self.file.write(chunk)
+        self.file.flush()
+        return len(chunk)
+
+    def getvalue(self) -> str:
+        return self.text.getvalue()
+
+    def close(self) -> None:
+        self.file.close()
+
+
 class Handler(socketserver.StreamRequestHandler):
     def handle(self) -> None:
         source = self.rfile.read().decode("utf-8")
@@ -36,7 +56,8 @@ class Handler(socketserver.StreamRequestHandler):
         code_dir = tools.RUN_DIR / "code"
         (code_dir / f"{index:03d}.py").write_text(source)
         started = time.time()
-        out = io.StringIO()
+        # The output file fills during the run, so `tail -f` shows the progress of a long run.
+        out = Tee(code_dir / f"{index:03d}.out")
         ok = True
         # A defect in teacher code is an expected failure. The kernel returns the traceback
         # as text and stays alive, because a restart costs a full model load.
@@ -52,7 +73,7 @@ class Handler(socketserver.StreamRequestHandler):
             gc.collect()
             torch.cuda.empty_cache()
         seconds = round(time.time() - started, 2)
-        (code_dir / f"{index:03d}.out").write_text(out.getvalue())
+        out.close()
         tools.log("python", index=index, ok=ok, seconds=seconds)
         reply = {"ok": ok, "seconds": seconds, "output": out.getvalue()}
         self.wfile.write(json.dumps(reply).encode("utf-8"))

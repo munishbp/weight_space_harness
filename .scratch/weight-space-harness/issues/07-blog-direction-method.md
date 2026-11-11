@@ -1,7 +1,7 @@
 # How the blog's teacher found the direction
 
 Type: research
-Status: open
+Status: claimed
 Blocked by: 06
 
 ## Question
