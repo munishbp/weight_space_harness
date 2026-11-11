@@ -108,22 +108,33 @@ Three kinds of fault appeared in the runs. Find the kind first. It decides the e
 | **A habit in the wrong context.** The student applies a default that is right in most contexts. | The correct token has a visible probability (12% in our case). The same parts write the habit in every context, so removal would break the other contexts. | `edits.fit_keys_to_values` on one late MLP. The keys are the neuron activations at the failure step of the target context. The value is one fixed token direction (correct token minus habit token). The protection set holds the same step of the other contexts. | 4B, Meta-World button press: 1 of 20 to 19 of 20 practice episodes. No other task changed. |
 | **A wrong choice between candidates from the input.** Two screen elements, or two positions to copy. | Both candidates have a visible probability. The late layers write the choice of the student, right or wrong. No part pushes against the correct one. | None found. A fit with one value per example copies the belief of the student. A difference-of-means direction with a perfect AUC did not steer the choice. | 4B, ScreenSpot Pro icons and Meta-World push: negative. A LoRA fine-tune fixes this kind. |
 
-The recipe for the second kind:
+The recipe for the second kind is in `wsp/habit.py`:
 
 ```python
+from wsp import habit
 g = attribution.token_direction(correct_token, [habit_token])
-keys = tools.read(target_contexts, [mlp_out], append_ids=prefix, inputs=True)[mlp_out]
-scale = tools.read(target_contexts, [last_layer], append_ids=prefix)[last_layer].pow(2).mean(1).sqrt()
-values = edits.logit_shift_values(g, scale, margin)               # raises the logit gap by about `margin`
-protect = second moment of the same MLP input at every position of the task prompts and on neutral text
-edits.fit_keys_to_values(mlp_out + ".weight", keys, values, protect)
+keys, scale = habit.step_keys(target_prompts, mlp_out, last_layer, prefix)   # the step that writes the token
+keep, _ = habit.step_keys(other_prompts, mlp_out, last_layer, prefix)        # the same step of other contexts
+protect = habit.protection(prompts_with_replies, battery.neutral_text(64, 256), mlp_out)
+habit.fit(mlp_out, [(keys, scale, g)], keep, protect, margin=12.0)
+habit.stray_write(another_prompt, reply_ids, mlp_out, original_weight, g)    # check before a trial
 ```
 
-Build `protect` from all positions of the prompts (`tools.read(..., last_positions=100000,
-inputs=True)` with one prompt per call), and leave out only the target step. Fit on one half of the
-practice contexts and read the probability on the other half. In our run a
-margin of 4 moved the probability from 0.12 to 0.39, and a margin of 12 moved it to 0.92. Later
-layers undo a part of the shift, so sweep the margin.
+Rules for the recipe, each from a failed attempt:
+
+1. **Check the fault with a forced replay first.** Force the correct token at the step and let the
+   student continue. If the task still fails, the fault is elsewhere. In the email tasks the replay
+   found a third missing step that the failures did not show.
+2. **Protect every position.** `prompts_with_replies` holds the prompts of the target and of other
+   contexts, each with the reply that the student wrote. Leave out only the target step. A
+   protection of the target step alone wrote the direction at image and template positions.
+3. **Give the same step of other contexts as `keep`.** In the protection, one step is one position
+   among hundreds, so it has no weight there.
+4. **Fit on one half of the practice seeds and read the probability on the other half.** Sweep the
+   margin. A margin of 4 moved a probability from 0.12 to 0.39, and a margin of 12 moved it to 0.92.
+5. **Run the base model two times before you read a side effect.** Two base runs on 312 browser
+   episodes differed in 12 episodes. A side-effect scan needs that number next to it.
+6. **Two fits on one matrix stack.** Fit the second with the first loaded.
 
 ## 6. Lessons from the runs
 

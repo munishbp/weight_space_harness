@@ -1,0 +1,13 @@
+prefix ['{"', 'action', '":', ' "'] | names {'click': 'click', 'type': 'type', 'key': 'key', 'done': 'done'}
+forced click | email-inbox-reply          {'n': 20, 'success': 0, 'invalid': 0, 'mean_actions': 4.9}
+forced click | email-inbox-forward        {'n': 20, 'success': 0, 'invalid': 1, 'mean_actions': 4.3}
+forced click | email-inbox                {'n': 20, 'success': 7, 'invalid': 9, 'mean_actions': 4.6}
+forced click | email-inbox-noscroll       {'n': 20, 'success': 14, 'invalid': 0, 'mean_actions': 2.2}
+forced click | email-inbox-star-reply     {'n': 20, 'success': 14, 'invalid': 0, 'mean_actions': 2.0}
+forced click | all                        {'n': 100, 'success': 35, 'success_pct': 35.0, 'interval_95': [26.4, 44.7]}
+email-inbox-reply | ok: [] | failed: [('c c t c', 14), ('c c t c k k k k k k', 2), ('c c t c k d', 1), ('c c t c c', 1)]
+email-inbox-forward | ok: [] | failed: [('c c t c', 18), ('c c t c c c k k k k', 1), ('c c t x c', 1)]
+email-inbox | ok: [('c', 7)] | failed: [('c c t c', 6), ('c c t c c t c d', 1), ('c c c c c c c c', 1), ('c t c c d', 1)]
+email-inbox-noscroll | ok: [('c', 14)] | failed: [('c c t c', 4), ('c c t c c c k k k k', 1), ('c c t c d', 1)]
+email-inbox-star-reply | ok: [('c', 14)] | failed: [('c c t c', 4), ('c c t c d', 1), ('c c t c c d', 1)]
+[  5.3 min] forced replay done

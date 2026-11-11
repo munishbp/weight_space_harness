@@ -1,0 +1,13 @@
+base email practice | email-inbox-reply          {'n': 20, 'success': 0, 'invalid': 0, 'mean_actions': 9.2}
+base email practice | email-inbox-forward        {'n': 20, 'success': 0, 'invalid': 0, 'mean_actions': 8.3}
+base email practice | email-inbox                {'n': 20, 'success': 8, 'invalid': 4, 'mean_actions': 6.2}
+base email practice | email-inbox-noscroll       {'n': 20, 'success': 14, 'invalid': 0, 'mean_actions': 3.5}
+base email practice | email-inbox-star-reply     {'n': 20, 'success': 14, 'invalid': 0, 'mean_actions': 3.7}
+base email practice | all                        {'n': 100, 'success': 36, 'success_pct': 36.0, 'interval_95': [2727.1, 4576.5]}
+base email practice | 177 s
+email-inbox-reply | ok: [] | failed: [('c t k k k k k k k k', 13), ('c c t k k k k k k k', 4), ('c c t k c', 1), ('c c t k k c', 1)]
+email-inbox-forward | ok: [] | failed: [('c t k k k k k k k k', 11), ('c c t k c', 6), ('c c t k k k k k k k', 2), ('c c t k c d', 1)]
+email-inbox | ok: [('c', 7), ('c c c c c c c c c', 1)] | failed: [('c t k k k k k k k k', 4), ('c c t k c', 1), ('c t c c t k k k k k', 1), ('c c t k x k k k k k', 1)]
+email-inbox-noscroll | ok: [('c', 14)] | failed: [('c t k k k k k k k k', 4), ('c c t k c d', 1), ('c c t k k k k k k k', 1)]
+email-inbox-star-reply | ok: [('c', 14)] | failed: [('c t k k k k k k k k', 4), ('c c t k k k k k k k', 2)]
+[  2.9 min] base practice done

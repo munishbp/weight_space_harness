@@ -32,7 +32,7 @@ def table(results):
         rows[task] = {"n": len(rs), "success": sum(r["correct"] for r in rs), "invalid": sum(r["invalid"] for r in rs),
                       "mean_actions": round(sum(len(r["actions"]) for r in rs) / len(rs), 1)}
     n, k = len(results), sum(r["correct"] for r in results)
-    rows["all"] = {"n": n, "success": k, "success_pct": round(100 * k / n, 1), "interval_95": [round(100 * v, 1) for v in wilson_interval(k, n)]}
+    rows["all"] = {"n": n, "success": k, "success_pct": round(100 * k / n, 1), "interval_95": [round(v, 1) for v in wilson_interval(k, n)]}
     return rows
 
 def episodes(label, specs, path=None, reference=None, chunk=24, quiet=False):

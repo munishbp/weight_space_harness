@@ -1,0 +1,14 @@
+ascending-numbers/3        BROKEN | base: c c                    | edit: c c c
+choose-date-easy/1         BROKEN | base: c c c t c              | edit: c c c c c t c c t c
+choose-date-medium/0       BROKEN | base: c c x c c c c c        | edit: c c c k t c c c k t
+click-checkboxes-large/3   fixed  | base: c c c c c c c c c c    | edit: c c c c c c c c c
+click-checkboxes-soft/0    fixed  | base: c c c c                | edit: c c c c c
+click-collapsible-2/1      BROKEN | base: c c c c c              | edit: c x x x c c c c c c
+click-collapsible/1        BROKEN | base: c x c c                | edit: c x c c c c c c c c
+click-pie/0                BROKEN | base: c k c                  | edit: c c c c c c c c c c
+click-pie/2                BROKEN | base: c k c                  | edit: c c c c c c c c c c
+click-pie/3                BROKEN | base: c k c                  | edit: c c c c c c c c c c
+grid-coordinate/1          BROKEN | base: c c c                  | edit: c c c c c c c c c c
+search-engine/2            fixed  | base: c t c c                | edit: c t c c c c x c c
+text-transform/2           BROKEN | base: c t c                  | edit: c t c
+visual-addition/3          fixed  | base: c t c                  | edit: c t c

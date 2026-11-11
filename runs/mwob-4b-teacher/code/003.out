@@ -1,0 +1,46 @@
+== enter-date
+   Enter 05/20/2010 as the date and hit submit. || c[429, 343] t(05/20/2010) c[335, 486]
+   Enter 10/11/2011 as the date and hit submit. || c[321, 343] t(10/11/2011) c[335, 483]
+== enter-time
+   Enter 9:37 PM as the time and press submit. || c[273, 345] t(09) c[439, 345] t(37) c[622, 345] c[953, 345] c[335, 501]
+   Enter 8:04 PM as the time and press submit. || c[273, 345] t(08) c[437, 345] t(04) c[621, 345] c[900, 345] c[335, 501]
+== form-sequence-2
+   Check the 1st radio button and enter the number "-5" into the 2nd textbox. || c[94, 335] c[394, 473] t(-5) done
+   Check the 1st radio button and enter the number "3" into the 2nd textbox. || c[103, 336] c[394, 473] t(3) done
+== form-sequence-3
+   Choose 5ft 9in from the dropdown, then click the button labeled "Yes". || c[493, 386] k(Enter) t(5ft 9in) k(Enter) c[535, 601]
+   Choose 5ft 9in from the dropdown, then click the button labeled "Yes". || c[493, 386] k(Enter) t(5ft 9in) k(Enter) c[535, 601]
+== email-inbox-forward
+   Find the email by Audrey and forward that email to Orel. || c[219, 423] c[600, 822] t(Orel) k(Enter) c[915, 973] done
+   Find the email by Coletta and forward that email to Odette. || c[160, 383] c[600, 836] t(Odette) k(Enter) c[915, 293]
+== email-inbox-reply
+   Find the email by Audrey and reply to them with the text "Vel quis varius. Semper.". || c[300, 432] c[275, 823] t(Vel quis varius. Semper.) k(Enter) k(Enter) k(Enter) k(Enter) k(Enter) k(Enter) k(Enter)
+   Find the email by Coletta and reply to them with the text "Odio fermentum quam auctor.". || c[312, 423] c[275, 826] t(Odio fermentum quam auctor.) k(Enter) k(Enter) k(Enter) k(Enter) k(Enter) k(Enter) k(Enter)
+== social-media-some
+   Click the "Share" button on 1 post by @annis and then click Submit. || c[762, 492] c[936, 920] c[762, 492] c[762, 492] c[762, 492] c[762, 492] c[762, 492] c[762, 492] c[762, 492] c[762, 492]
+   Click the "Reply" button on 2 posts by @dis and then click Submit. || c[146, 785] c[146, 785] c[250, 120] done
+== use-spinner
+   Select -10 with the spinner and hit Submit. || c[900, 350] k(ArrowDown) k(ArrowDown) k(ArrowDown) k(ArrowDown) k(ArrowDown) k(ArrowDown) k(Enter) c[275, 501]
+   Select -7 with the spinner and hit Submit. || c[939, 353] k(ArrowDown) k(ArrowDown) k(ArrowDown) k(ArrowDown) k(ArrowDown) k(ArrowDown) k(Enter) c[313, 503]
+== number-checkboxes
+   Draw the number "0" in the checkboxes using the example on the right and press Submit when finished. || c[137, 262] c[380, 262] c[137, 322] c[380, 322] c[137, 382] c[380, 382] c[137, 442] c[380, 442] c[137, 502] c[380, 502]
+   Draw the number "1" in the checkboxes using the example on the right and press Submit when finished. || c[137, 163] c[137, 222] c[137, 282] c[137, 342] c[137, 402] c[137, 462] c[137, 522] c[137, 582] c[312, 163] c[312, 222]
+== guess-number
+   Guess the number between 0-9 and press Submit. Use the feedback below to find the right number. || c[202, 553] t(5) k(Backspace) t(7) c[624, 553] done
+   Guess the number between 0-9 and press Submit. Use the feedback below to find the right number. || c[202, 553] t(5) k(Backspace) t(5) c[626, 553] done
+== daily-calendar
+   Create a 30 mins event named "Meeting", between 4PM and 8PM. || invalid invalid invalid invalid invalid invalid invalid invalid invalid invalid
+     invalid reply: '{"action": "swipe", "position": [497, 832], "size": [497, 750]}\n'
+   Create a 0.5 hours event named "Food", between 8AM and 12PM. || invalid invalid invalid invalid invalid invalid invalid invalid invalid invalid
+     invalid reply: '{"action": "swipe", "position": [500, 750], "size": [500, 500]}\n'
+== order-food
+   Order one of each item: Garlic bread, Spaghetti and Meatballs || c[765, 719] invalid invalid invalid invalid invalid invalid invalid invalid invalid
+     invalid reply: '{"action": "click", "position": [765, 719]}\n'
+   Order one of each item: Spinach and goat cheese dip, Grilled Pork Tenderloin || c[765, 928] invalid invalid invalid invalid invalid invalid invalid invalid invalid
+     invalid reply: '{"action": "click", "position": [765, 928]}\n'
+== choose-date
+   Select 01/14/2016 as the date and hit submit. || c[574, 293] c[574, 672] c[574, 672] k(Backspace) t(01/14/2016) c[463, 466]
+   Select 03/05/2016 as the date and hit submit. || c[574, 293] c[363, 607] c[252, 607] k(Backspace) t(03/05/2016) c[463, 467]
+== form-sequence
+   Select 1 with the slider, click the 3rd checkbox, then hit Submit. || c[250, 336] c[350, 463] c[321, 642]
+   Select 2 with the slider, click the 1st checkbox, then hit Submit. || c[166, 336] k(ArrowRight) k(ArrowRight) k(Enter) c[118, 460] c[316, 642]

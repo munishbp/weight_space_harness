@@ -18,6 +18,7 @@ Status: research code. The results so far are in [RESULTS.md](RESULTS.md).
 | `wsp/kernel.py`, `wsp/client.py` | A process that holds the student in memory and runs teacher code. It records each code run and its output. |
 | `wsp/tools.py` | Generate, read activations, read log-probabilities, write an edit, undo an edit, and measure the distance from the original model. Every call goes to a ledger. |
 | `wsp/edits.py` | Closed-form edits: remove a direction, wire neurons to a direction, and a least-squares fit of keys to values. |
+| `wsp/habit.py` | The recipe for a habit in the wrong context: keys, protection over all positions, the fit, and a check for stray writes. |
 | `wsp/attribution.py` | The share of each layer part in the logit of one token. |
 | `wsp/layout.py` | Finds the layers, MLPs, and attention blocks of a student by name. |
 | `wsp/evaluate.py`, `wsp/stats.py` | Benchmark runs with a fixed seed, intervals, and paired tests. |

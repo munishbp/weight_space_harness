@@ -12,6 +12,7 @@ has a pass or a fail. Each number is a measurement.
 | Calibration: thinking that never ends, GSM8K | Qwen3.5-0.8B | Held-out 10.2% to 38.3% in 29 minutes. 0.98% of the weights. The published edit of the blog reaches 21.9%. | not run |
 | Computer use: ScreenSpot Pro icon targets | Qwen3.5-4B | No edit found in 48 minutes. | Held-out icons 38.2% to 50.2%. Text targets 76.0% to 63.5%. 55% of the weights. |
 | Robotics: Meta-World through text waypoints | Qwen3.5-4B | First fault: button-press 0 to 18 of 20 held-out episodes in 27 minutes. Second fault, stacked: 15 minutes. Both: 63.0% to 76.0%, 26 episodes fixed, 0 broken, 0.50% of the weights. | Three target tasks only: 60.0% of all episodes, two grasp tasks lost. Nine tasks: 63.0% to 87.5%, no task lost. 64% of the weights. |
+| Computer use, multi-step: MiniWoB++ email tasks through screenshots | Qwen3.5-4B | Held-out 29.0% to 57.0% (29 episodes fixed, 1 broken). First working edit at 19 minutes. One matrix, 0.51% of the weights. The other 78 task types: 63.8% to 65.4%. | pending |
 | Thinking fault on the 4B model, GSM8K | Qwen3.5-4B | planned | |
 | Scaling: quantized 27B | Qwen3.8-27B NVFP4 | loader written, run planned | |
 
@@ -102,12 +103,51 @@ The ten MT10 tasks, 20 practice seeds and 20 held-out seeds per task.
 - Limits: the tasks are short (2 to 6 primitives), and the prompt holds positions from the simulator
   state. This block does not show a long-horizon gain.
 
+## 4. Computer use, multi-step: MiniWoB++ on Qwen3.5-4B
+
+The interface is ours: the model sees one screenshot per turn and writes one action (`click` at a
+point, `type`, `key`, `done`). It gets no DOM. 83 task types, at most 10 actions per episode.
+
+- Base model: 59.0% of 332 episodes (4 seeds per task type). One pass takes 6.4 minutes.
+- Target portion: five email task types (reply, forward, mixed inbox), 20 practice seeds and 20
+  held-out seeds each. Base: reply and forward 0 of 40.
+- The fault: three wrong action names in a row. The model types before it clicks Reply, types
+  before the text field has the focus, and presses Enter where the page needs a click on Send.
+- **Teacher edit: one least-squares fit on the MLP output matrix of layer 28, rank 2.** It raises
+  `click` over `type` and over `key` at those three steps of the email tasks only.
+
+| Held-out episodes | Base | Teacher edit |
+|---|---|---|
+| email-inbox-reply (20) | 0 | **11** |
+| email-inbox-forward (20) | 0 | 3 |
+| email-inbox, three mixed types (60) | 29 | 43 |
+| All five email task types | 29.0% | **57.0%** |
+| The other 78 task types (312 episodes) | 63.8% | 65.4% |
+
+| Measure | Teacher edit |
+|---|---|
+| Time | 19 minutes to the first edit that works. 58 minutes with the search for side effects. |
+| Weights changed | 0.51% (1 tensor, 1 layer, rank 2) |
+| WikiText-2: top-token agreement with the original | 99.2% |
+| Battery, largest drop | 1.0 point (GSM8K with thinking) |
+| Random control (same fit, random directions) | 29 of 100, no episode changes |
+
+- A forced replay set the ceiling before the fit: with the three action names forced, the model
+  solves 58 of 100 practice episodes. The edit reaches 56.
+- Forward stays low. The edit fixes the choice of the action, and the click on the field goes to a
+  wrong place in the forward form.
+- Two base runs with different batches differ in 12 of 312 episodes. A side effect needs that
+  number next to it.
+
 ## What the blocks show
 
 - A closed-form edit works when a fault hides an ability that the model has. The 0.8B model knew
   when to close its thinking, and three parts blocked it.
 - A closed-form edit also works on the 4B model for a habit that is wrong in one context, when the
-  right action already has a visible probability. The edit changed one robot task and nothing else.
+  right action already has a visible probability. This holds in three cases: two robot tasks and the
+  email tasks of a web benchmark. Each edit changed its target and nothing else that we measured.
+- The time to a working edit fell with each use of the recipe: 27 minutes, 15 minutes, and 19
+  minutes on a new benchmark.
 - A closed-form edit did not fix a wrong choice between candidates from the input (two screen
   elements, two positions). Training fixes that kind in 15 minutes.
 - Training on the target alone has a price next to the target, in both blocks: 12.5 points on text

@@ -1,0 +1,25 @@
+edit: {'tensors_changed': 1, 'tensors_changed_pct': 0.13831, 'changed_weights': 23087725, 'changed_weights_pct': 0.50862, 'relative_change_of_model': 0.00934} | matrix relative change 0.289
+edit 2 email practice | email-inbox-reply          {'n': 20, 'success': 10, 'invalid': 1, 'mean_actions': 6.6}
+edit 2 email practice | email-inbox-forward        {'n': 20, 'success': 1, 'invalid': 0, 'mean_actions': 4.7}
+edit 2 email practice | email-inbox                {'n': 20, 'success': 13, 'invalid': 0, 'mean_actions': 5.2}
+edit 2 email practice | email-inbox-noscroll       {'n': 20, 'success': 17, 'invalid': 0, 'mean_actions': 2.7}
+edit 2 email practice | email-inbox-star-reply     {'n': 20, 'success': 18, 'invalid': 0, 'mean_actions': 2.7}
+edit 2 email practice | all                        {'n': 100, 'success': 59, 'success_pct': 59.0, 'interval_95': [49.2, 68.1]}
+edit 2 email practice | against reference: {'fixed': 23, 'broken': 0, 'p_value': 2.384185791015625e-07}
+edit 2 email practice | 149 s
+[ 33.1 min] practice trial 2 done
+edit 2, other task types | all {'n': 312, 'success': 183, 'success_pct': 58.7, 'interval_95': [53.1, 64.0]}
+edit 2, other task types | against reference: {'fixed': 1, 'broken': 9, 'p_value': 0.021484375}
+edit 2, other task types | 346 s
+ascending-numbers/3        BROKEN | base: c c                    | edit: c c c c
+choose-date-medium/0       BROKEN | base: c c x c c c c c        | edit: c c c c k t t t t t
+click-collapsible/1        BROKEN | base: c x c c                | edit: c k x c c
+click-pie/2                BROKEN | base: c k c                  | edit: c c c c c c c c c c
+click-tab-2-medium/1       BROKEN | base: c                      | edit: c
+count-shape/2              BROKEN | base: c                      | edit: c
+grid-coordinate/1          BROKEN | base: c c c                  | edit: c c c c c c c c c c
+odd-or-even/3              BROKEN | base: c c c c c c c          | edit: c c c c c c c
+text-transform/2           BROKEN | base: c t c                  | edit: c t c
+visual-addition/3          fixed  | base: c t c                  | edit: c t c
+seeds 0-1 (in the keep set): {'fixed': 0, 'broken': 4, 'p_value': 0.125} | seeds 2-3 (not in it): {'fixed': 1, 'broken': 5, 'p_value': 0.21875}
+[ 38.9 min] scan 2 of the other task types done

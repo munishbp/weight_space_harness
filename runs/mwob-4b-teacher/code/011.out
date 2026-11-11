@@ -1,0 +1,21 @@
+edit: {'tensors_changed': 1, 'tensors_changed_pct': 0.13831, 'changed_weights': 23031189, 'changed_weights_pct': 0.50738, 'relative_change_of_model': 0.00985} | matrix relative change 0.305
+[ 16.6 min] edit saved
+edit email practice | email-inbox-reply          {'n': 20, 'success': 10, 'invalid': 1, 'mean_actions': 6.2}
+edit email practice | email-inbox-forward        {'n': 20, 'success': 0, 'invalid': 0, 'mean_actions': 4.9}
+edit email practice | email-inbox                {'n': 20, 'success': 11, 'invalid': 0, 'mean_actions': 5.5}
+edit email practice | email-inbox-noscroll       {'n': 20, 'success': 17, 'invalid': 0, 'mean_actions': 2.4}
+edit email practice | email-inbox-star-reply     {'n': 20, 'success': 18, 'invalid': 0, 'mean_actions': 2.7}
+edit email practice | all                        {'n': 100, 'success': 56, 'success_pct': 56.0, 'interval_95': [46.2, 65.3]}
+edit email practice | against reference: {'fixed': 21, 'broken': 1, 'p_value': 1.0967254638671875e-05}
+edit email practice | 147 s
+email-inbox-reply | ok: [('c c c t c', 9), ('c c c t x c', 1)] | failed: [('c c c t c c c c c c', 4), ('c c c t c c', 3), ('c c c t c', 2), ('c c t c', 1)]
+email-inbox-forward | ok: [] | failed: [('c c c', 9), ('c c c t c', 7), ('c c c t c c c c c c', 3), ('c c c t c c', 1)]
+email-inbox | ok: [('c', 7), ('c c c t c', 4)] | failed: [('c c c t c c c c c c', 5), ('c c c t c', 1), ('c c c c c c c c', 1), ('c c c t c c t c c t', 1)]
+email-inbox-noscroll | ok: [('c', 14), ('c c c t c', 3)] | failed: [('c c c', 1), ('c c c t c c c c c c', 1), ('c c c t c', 1)]
+email-inbox-star-reply | ok: [('c', 14), ('c c c t c', 4)] | failed: [('c c c t c c c c c c', 2)]
+[ 19.0 min] practice trial done
+edit, other task types | all {'n': 312, 'success': 185, 'success_pct': 59.3, 'interval_95': [53.8, 64.6]}
+edit, other task types | against reference: {'fixed': 4, 'broken': 10, 'p_value': 0.1795654296875}
+edit, other task types | 366 s
+task types with a changed episode: {'ascending-numbers': ['broken'], 'choose-date-easy': ['broken'], 'choose-date-medium': ['broken'], 'click-checkboxes-large': ['fixed'], 'click-checkboxes-soft': ['fixed'], 'click-collapsible-2': ['broken'], 'click-collapsible': ['broken'], 'click-pie': ['broken', 'broken', 'broken'], 'grid-coordinate': ['broken'], 'search-engine': ['fixed'], 'text-transform': ['broken'], 'visual-addition': ['fixed']}
+[ 25.1 min] scan of the other task types done

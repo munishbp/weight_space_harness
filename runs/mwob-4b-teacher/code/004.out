@@ -1,0 +1,58 @@
+== order-food | invalid replies: ['{"action": "swipe", "position": [497, 826], "size": [497, 524]}\n', '{"action": "swipe", "position": [497, 825], "size": [497, 524]}\n']
+== click-collapsible | invalid replies: ['{"action": "click", [312, 506]}\n']
+== click-collapsible-2 | invalid replies: ['{"action": "click", [497, 413]}\n', '{"action": "click", [497, 413]}\n']
+== search-engine | invalid replies: ['{"action": "click", [526, 950]}\n']
+== click-menu
+   Select Alvera>Terza>Ludovika || c[192, 462]
+   Select Evy>Tammara || c[197, 463]
+== click-scroll-list
+   Select Corrine, Catherine from the scroll list and click Submit. || c[227, 389] c[295, 783]
+   Select Christal from the scroll list and click Submit. || t(christal) k(Enter) c[305, 791]
+== click-shades
+   Select all the shades of red and press Submit. || c[345, 330] c[582, 330] c[345, 686] c[856, 686] c[560, 876]
+   Select all the shades of red and press Submit. || c[126, 333] c[345, 333] c[345, 692] c[893, 692] c[126, 333] c[126, 508] c[126, 333] c[126, 333] c[126, 333] c[126, 333]
+== count-shape
+   How many large yellow items are there? || c[672, 768]
+   How many aqua items are there? || c[463, 666]
+== generate-number
+   Generate a number less than 5, then press submit. || c[260, 705] c[756, 705]
+   Generate a number less than 5, then press submit. || c[260, 705] c[756, 705]
+== read-table-2
+   Enter the value that corresponds with each label into the form and submit when done. || c[715, 653] t(orange) c[715, 750] t(Male) c[323, 856]
+   Enter the value that corresponds with each label into the form and submit when done. || c[715, 642] t(red) c[715, 753] t(Vietnamese) c[321, 863]
+== use-autocomplete
+   Enter an item that starts with "Ce" and ends with "lic". || c[430, 383] t(Celsius) c[362, 531]
+   Enter an item that starts with "Gua" and ends with "la". || c[445, 384] t(Guatemala) c[355, 531] done
+== phone-book
+   Find Casie in the contact book and click on their address. || k(ArrowDown) k(ArrowDown) k(ArrowDown) k(ArrowDown) k(ArrowDown) k(ArrowDown) k(ArrowDown) k(ArrowDown) k(ArrowDown) k(ArrowDown)
+   Find Sayre in the contact book and click on their address. || k(ArrowDown) k(Enter) k(ArrowDown) k(Enter) k(ArrowDown) k(Enter) k(ArrowDown) k(ArrowDown) k(ArrowDown) k(ArrowDown)
+== search-engine
+   Use the textbox to enter "Renda" and press "Search", then find and click the 7th search result. || c[292, 303] t(Renda) c[773, 303] c[351, 950] c[458, 950] invalid c[526, 950] c[351, 950] c[458, 950] c[526, 950]
+   Use the textbox to enter "Dolores" and press "Search", then find and click the 7th search result. || c[292, 305] t(Dolores) c[773, 305] c[110, 400]
+== email-inbox
+   Find the email by Audrey and forward that email to Hedy. || c[151, 382] c[613, 822] t(Hedy) k(Enter) c[915, 295]
+   Find the email by Bettine and reply to them with the text "Gravida.". || c[233, 620] t(Gravida.) k(Enter) k(Enter) k(Enter) k(Enter) k(Enter) k(Enter) k(Enter) k(Enter)
+== grid-coordinate
+   Click on the grid coordinate (-2,-2). || c[156, 953] done
+   Click on the grid coordinate (-1,1). || c[267, 267] c[166, 267] c[166, 267] c[166, 267] c[166, 267] c[166, 267] c[166, 267] c[166, 267] c[166, 267] c[166, 267]
+== social-media
+   For the user @leo, click on the "Mute" button. || c[773, 786] c[773, 786] c[773, 786] c[773, 786] c[773, 786] c[773, 786] c[773, 786] c[773, 786] c[773, 786] c[773, 786]
+   For the user @leo, click on the "Share via DM" button. || c[773, 786] c[532, 873]
+== click-collapsible
+   Expand the section below and click submit. || c[500, 296] invalid c[312, 506] c[312, 506] c[312, 506] c[312, 506] c[312, 506] c[312, 506] c[312, 506] c[312, 506]
+   Expand the section below and click submit. || c[500, 296] k(Enter) c[366, 811] done
+== login-user-popup
+   Enter the username "vina" and the password "US" into the text fields and press login. || c[437, 417] t(vina) c[500, 500] t(US) c[500, 801] done
+   Enter the username "nathalie" and the password "fzzq" into the text fields and press login. || c[432, 417] t(nathalie) c[432, 508] t(fzzq) c[292, 800]
+== find-word
+   Find the 6th word in the paragraph, type that into the textbox and press "Submit". || c[312, 503] t(leo) c[312, 642]
+   Find the 8th word in the paragraph, type that into the textbox and press "Submit". || c[497, 560] t(viverra) c[307, 696]
+== email-inbox-noscroll
+   Find the email by Audrey and forward that email to Orel. || c[219, 423] c[600, 822] t(Orel) k(Enter) c[915, 973] done
+   Find the email by Coletta and reply to them with the text "Odio fermentum quam auctor.". || c[312, 423] c[275, 826] t(Odio fermentum quam auctor.) k(Enter) k(Enter) k(Enter) k(Enter) k(Enter) k(Enter) k(Enter)
+== email-inbox-star-reply
+   Find the email by Audrey and reply to them with the text "Vel quis varius. Semper.". || c[300, 432] c[275, 823] t(Vel quis varius. Semper.) k(Enter) k(Enter) k(Enter) k(Enter) k(Enter) k(Enter) k(Enter)
+   Find the email by Coletta and reply to them with the text "Odio fermentum quam auctor.". || c[312, 423] c[275, 826] t(Odio fermentum quam auctor.) k(Enter) k(Enter) k(Enter) k(Enter) k(Enter) k(Enter) k(Enter)
+== social-media-all
+   Click the "Share" button on all posts by @annis and then click Submit. || c[762, 492] c[762, 785] done
+   Click the "Reply" button on all posts by @dis and then click Submit. || c[146, 785] c[950, 923] c[950, 923] c[146, 545] c[146, 785] c[950, 923] done

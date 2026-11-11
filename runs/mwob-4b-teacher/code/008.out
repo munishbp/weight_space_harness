@@ -1,0 +1,12 @@
+forced, rule 2 | email-inbox-reply          {'n': 20, 'success': 11, 'invalid': 1, 'mean_actions': 6.1}
+forced, rule 2 | email-inbox-forward        {'n': 20, 'success': 0, 'invalid': 0, 'mean_actions': 5.2}
+forced, rule 2 | email-inbox                {'n': 20, 'success': 13, 'invalid': 2, 'mean_actions': 4.5}
+forced, rule 2 | email-inbox-noscroll       {'n': 20, 'success': 17, 'invalid': 0, 'mean_actions': 2.5}
+forced, rule 2 | email-inbox-star-reply     {'n': 20, 'success': 17, 'invalid': 0, 'mean_actions': 2.7}
+forced, rule 2 | all                        {'n': 100, 'success': 58, 'success_pct': 58.0, 'interval_95': [48.2, 67.2]}
+email-inbox-reply | ok: [('c c c t c', 10), ('c c c t x c', 1)] | failed: [('c c c t c k k k k k', 3), ('c c c t c', 2), ('c c c t c k d', 2), ('c c c t c c', 2)]
+email-inbox-forward | ok: [] | failed: [('c c c', 7), ('c c c t c', 7), ('c c c t c d', 2), ('c c c t c c k k k k', 1)]
+email-inbox | ok: [('c', 7), ('c c c t c', 5), ('c x x k k c', 1)] | failed: [('c c c t c c c c c c', 2), ('c c c t c', 1), ('c c c c c c c', 1), ('c t c c d', 1)]
+email-inbox-noscroll | ok: [('c', 14), ('c c c t c', 3)] | failed: [('c c c t c d', 1), ('c c c t c k k k k k', 1), ('c c c t c', 1)]
+email-inbox-star-reply | ok: [('c', 14), ('c c c t c', 3)] | failed: [('c c c t c', 1), ('c c c t c k k k k k', 1), ('c c c t c c c c c c', 1)]
+[  8.1 min] forced replay 2 done

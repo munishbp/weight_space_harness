@@ -1,0 +1,15 @@
+choose-date-easy/1         BROKEN | first: c c c t c              | repeat: c c k t c
+choose-date-easy/3         fixed  | first: c c k k k k k t c      | repeat: c c k c
+choose-date-medium/0       BROKEN | first: c c x c c c c c        | repeat: c c c c k t k t k k
+choose-date-medium/3       BROKEN | first: c c c k k k t c        | repeat: c c c k t c
+choose-date/3              fixed  | first: c c c k t k t k t k    | repeat: c t c c c c c c c
+click-collapsible-2/1      BROKEN | first: c c c c c              | repeat: c x x x c c c c c c
+click-collapsible/1        BROKEN | first: c x c c                | repeat: c k c c
+click-collapsible/3        fixed  | first: c x c c c c c c c c    | repeat: c x c c
+click-tab-2-medium/1       BROKEN | first: c                      | repeat: c
+count-shape/2              BROKEN | first: c                      | repeat: c
+text-transform/2           BROKEN | first: c t c                  | repeat: c t c
+visual-addition/3          fixed  | first: c t c                  | repeat: c t c
+edit 3 against the base repeat: {'fixed': 4, 'broken': 6, 'p_value': 0.75390625}
+edit 2 against the base repeat: {'fixed': 3, 'broken': 7, 'p_value': 0.34375}
+edit 1 against the base repeat: {'fixed': 6, 'broken': 8, 'p_value': 0.79052734375}

@@ -1,0 +1,20 @@
+== email-inbox-reply/0 Find the email by Audrey and reply to them with the text "Vel quis varius. Semper.".
+  start: [('div', 'email-sender', 'Audrey', "val=''", '', [317, 386]), ('div', 'email-sender', 'Cora', "val=''", '', [317, 571]), ('div', 'email-sender', 'Bobine', "val=''", '', [317, 757])]
+  after {"action": "click", "position": [292, 432]} | ended False False
+      [('div', 'email-sender', 'Audrey', "val=''", '', [344, 467]), ('div', 'email-send', '', "val=''", '', [450, 843]), ('span', 'email-reply', '', "val=''", '', [273, 845]), ('div', 'icon', '', "val=''", '', [273, 824]), ('span', 'email-forward', '', "val=''", '', [627, 845]), ('div', 'icon', '', "val=''", '', [627, 824])]
+  after {"action": "click", "position": [280, 826]} | ended False False
+      [('span', 'reply-sender', 'Audrey', "val=''", '', [221, 383]), ('textarea', '', '', "val=''", '', [494, 736])]
+  after {"action": "type", "text": "Vel quis varius. Semper."} | ended False False
+      [('span', 'reply-sender', 'Audrey', "val=''", '', [221, 383]), ('textarea', '', '', "val=''", '', [494, 736])]
+  after {"action": "click", "position": [915, 292]} | ended True False
+      []
+== email-inbox-reply/10 Find the email by Claude and reply to them with the text "Potenti aliquet. Mattis pellentesque.".
+  start: [('div', 'email-sender', 'Deloria', "val=''", '', [317, 386]), ('div', 'email-sender', 'Claude', "val=''", '', [317, 571]), ('div', 'email-sender', 'Mariel', "val=''", '', [317, 757])]
+  after {"action": "click", "position": [172, 620]} | ended False False
+      [('div', 'email-sender', 'Claude', "val=''", '', [344, 467]), ('div', 'email-send', '', "val=''", '', [450, 843]), ('span', 'email-reply', '', "val=''", '', [273, 845]), ('div', 'icon', '', "val=''", '', [273, 824]), ('span', 'email-forward', '', "val=''", '', [627, 845]), ('div', 'icon', '', "val=''", '', [627, 824])]
+  after {"action": "click", "position": [290, 815]} | ended False False
+      [('span', 'reply-sender', 'Claude', "val=''", '', [221, 383]), ('textarea', '', '', "val=''", '', [494, 736])]
+  after {"action": "type", "text": "Potenti aliquet. Mattis pellentesque."} | ended False False
+      [('span', 'reply-sender', 'Claude', "val=''", '', [221, 383]), ('textarea', '', '', "val=''", '', [494, 736])]
+  after {"action": "click", "position": [915, 295]} | ended True False
+      []

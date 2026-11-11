@@ -138,6 +138,10 @@ A negative result is a valid verdict.
 - [Repeat the habit recipe on a second Meta-World fault and stack the edits](issues/29-repeat-recipe-door-open.md):
   the repeat took 14.8 minutes with one failed attempt. The stacked edit reaches 76.0% held-out with
   26 episodes fixed and 0 broken. The protection must hold every prompt position.
+- [Install MiniWoB++, run the base model, and choose a portion](issues/27-miniwob-base-and-portion.md):
+  the base model solves 59.0% of 83 task types through screenshots. A rank-2 edit raises the five
+  email task types from 29.0% to 57.0% held-out, with no loss on the other 78 task types. The first
+  working edit came at 19 minutes.
 
 ## Not yet specified
 

@@ -1,0 +1,9 @@
+base held-out per task: {'email-inbox-reply': 0, 'email-inbox-forward': 0, 'email-inbox': 5, 'email-inbox-noscroll': 12, 'email-inbox-star-reply': 12} | invalid {'email-inbox-reply': 0, 'email-inbox-forward': 1, 'email-inbox': 23, 'email-inbox-noscroll': 0, 'email-inbox-star-reply': 0}
+edit held-out, email-inbox failures: [('c c c', 2), ('c c c t c c c c c c', 2), ('x x x x x x x x x x', 2), ('c c c t c c c c t c', 1)]
+module fit equals the saved edit: True | largest difference 0.0
+rank of the change: 2
+step_keys equals the run keys: False (5, 9216)
+stray write on a click-pie prompt: {'positions': 793, 'sum_abs': 336.33, 'max_abs': 3.45, 'last': 2.69}
+write at a target step: {'positions': 811, 'sum_abs': 315.02, 'max_abs': 10.06, 'last': 10.06}
+protection: (9216, 9216) torch.float64 symmetric True
+empty input: The protection needs at least one prompt. No forward pass ran.

@@ -1,0 +1,5 @@
+base | A (after the email click)  n=55 | seeds 0-9 {'click': 0.44, 'type': 0.52, 'key': 0.03, 'done': 0.01} | seeds 10-19 {'click': 0.22, 'type': 0.72, 'key': 0.03, 'done': 0.01}
+base | B (after the Reply click)  n=55 | seeds 0-9 {'click': 0.06, 'type': 0.9, 'key': 0.04, 'done': 0.0} | seeds 10-19 {'click': 0.06, 'type': 0.89, 'key': 0.04, 'done': 0.0}
+base | T (after the field click)  n=55 | seeds 0-9 {'click': 0.06, 'type': 0.91, 'key': 0.03, 'done': 0.0} | seeds 10-19 {'click': 0.07, 'type': 0.89, 'key': 0.04, 'done': 0.0}
+base | C (after the text)         n=55 | seeds 0-9 {'click': 0.39, 'type': 0.05, 'key': 0.54, 'done': 0.02} | seeds 10-19 {'click': 0.27, 'type': 0.05, 'key': 0.67, 'done': 0.01}
+[  9.9 min] contexts and base probabilities done
