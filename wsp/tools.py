@@ -514,9 +514,15 @@ def _model_squared_norm() -> float:
                 "The model norm must be measured before the first edit. "
                 "Call tools.reset_edit(), then save the edit again."
             )
-        _MODEL_SQUARED_NORM = sum(float(p.detach().double().pow(2).sum()) for p in MODEL.parameters())
-        _MODEL_SQUARED_NORM += sum(float(layer.weight_float().double().pow(2).sum()) for layer in _packed_layers())
+        _MODEL_SQUARED_NORM = sum(_squared_sum(p.detach()) for p in MODEL.parameters())
+        _MODEL_SQUARED_NORM += sum(layer.squared_sum() for layer in _packed_layers())
     return _MODEL_SQUARED_NORM
+
+
+def _squared_sum(tensor: torch.Tensor) -> float:
+    """The sum of squares in float64. It works in pieces, because a float64 copy of a large tensor does not fit on the GPU."""
+    flat = tensor.reshape(-1)
+    return sum(float(piece.double().pow(2).sum()) for piece in flat.split(1 << 26))
 
 
 def _weight_counts() -> tuple[int, int]:

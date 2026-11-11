@@ -1,0 +1,54 @@
+~/weight_space/.venv/lib/python3.13/site-packages/gymnasium/utils/passive_env_checker.py:39: UserWarning: [33mWARN: A Box observation space maximum and minimum values are equal.[0m
+  logger.warn("A Box observation space maximum and minimum values are equal.")
+~/weight_space/.venv/lib/python3.13/site-packages/gymnasium/utils/passive_env_checker.py:174: UserWarning: [33mWARN: The obs returned by the `reset()` method is not within the observation space.[0m
+  logger.warn(f"{pre} is not within the observation space.")
+~/weight_space/.venv/lib/python3.13/site-packages/gymnasium/utils/passive_env_checker.py:174: UserWarning: [33mWARN: The obs returned by the `step()` method is not within the observation space.[0m
+  logger.warn(f"{pre} is not within the observation space.")
+Traceback (most recent call last):
+  File "~/weight_space/wsp/kernel.py", line 70, in handle
+    exec(compile(source, "<teacher>", "exec"), self.server.namespace)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<teacher>", line 2, in <module>
+  File "~/weight_space/wsp/bench/metaworld_text.py", line 220, in run_episodes
+    replies = generate([conversation(episodes[index]) for index in active])
+  File "<teacher>", line 17, in gen
+  File "~/weight_space/wsp/tools.py", line 150, in generate
+    output = MODEL.generate(**inputs, max_new_tokens=max_new_tokens, **({"do_sample": False} | options))
+  File "~/weight_space/.venv/lib/python3.13/site-packages/torch/utils/_contextlib.py", line 158, in no_grad
+    return func(*args, **kwargs)
+  File "~/weight_space/.venv/lib/python3.13/site-packages/transformers/generation/utils.py", line 3000, in generate
+    result = decoding_method(
+        self,
+    ...<5 lines>...
+        **model_kwargs,
+    )
+  File "~/weight_space/.venv/lib/python3.13/site-packages/transformers/generation/utils.py", line 3200, in _sample
+    outputs = self._prefill(
+        input_ids,
+    ...<2 lines>...
+        is_first_iteration=not generation_config.is_assistant,
+    )
+  File "~/weight_space/.venv/lib/python3.13/site-packages/transformers/generation/utils.py", line 4312, in _prefill
+    return self(**model_inputs, return_dict=True)
+  File "~/weight_space/.venv/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1787, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "~/weight_space/.venv/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1798, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "~/weight_space/.venv/lib/python3.13/site-packages/transformers/utils/generic.py", line 943, in wrapper
+    output = func(self, *args, **kwargs)
+  File "~/weight_space/.venv/lib/python3.13/site-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 1868, in forward
+    logits = self.lm_head(hidden_states)
+  File "~/weight_space/.venv/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1787, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "~/weight_space/.venv/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1798, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "~/weight_space/wsp/modelopt.py", line 145, in forward
+    return torch.nn.functional.linear(x, self.weight_float(dtype=x.dtype))
+                                         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "~/weight_space/wsp/modelopt.py", line 99, in weight_float
+    return decode_nvfp4(stored["weight_packed"], stored["weight_scale"], stored["weight_scale_2"], dtype)
+  File "~/weight_space/wsp/modelopt.py", line 48, in decode_nvfp4
+    out = torch.empty(rows, 2 * columns, dtype=dtype, device=packed.device)
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 2.37 GiB. GPU 0 has a total capacity of 31.44 GiB of which 1.28 GiB is free. Process 2747 has 504.71 MiB memory in use. Process 5346 has 534.56 MiB memory in use. Process 8854 has 67.05 MiB memory in use. Process 125136 has 52.34 MiB memory in use. Process 1849409 has 128.68 MiB memory in use. Process 3783457 has 52.09 MiB memory in use. Process 4112025 has 52.34 MiB memory in use. Process 1207896 has 228.55 MiB memory in use. Process 1538575 has 55.09 MiB memory in use. Including non-PyTorch memory, this process has 27.41 GiB memory in use. Of the allocated memory 21.55 GiB is allocated by PyTorch, and 3.82 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)

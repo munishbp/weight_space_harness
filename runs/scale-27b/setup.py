@@ -6,6 +6,8 @@ from wsp.bench import metaworld_text as mw
 from wsp.stats import paired_flips, wilson_interval
 
 RUN = "runs/scale-27b"
+# The 27B model leaves about 8 GB for activations, so a batch is small.
+BATCH = 14
 tok = processor.tokenizer
 LAY = layout.find(model)
 TASKS = list(mw.INSTRUCTIONS)
@@ -29,7 +31,7 @@ def table(results):
 
 def episodes(label, specs, path=None, reference=None):
     """Run the episodes, print the table per task, and save the results."""
-    t = time.time(); results = mw.run_episodes(specs, gen, batch_size=16); tab = table(results)
+    t = time.time(); results = mw.run_episodes(specs, gen, batch_size=BATCH); tab = table(results)
     for task, row in tab.items(): print(f"{label} | {task:26s} {row}", flush=True)
     if reference:
         ref = {r["id"]: r["correct"] for r in reference}

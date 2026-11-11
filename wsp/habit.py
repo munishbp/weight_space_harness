@@ -55,6 +55,7 @@ def protection(prompts: list[Prompt], neutral: list[list[int]], mlp_out: str) ->
     if not prompts:
         raise ValueError("The protection needs at least one prompt. No forward pass ran.")
     device = tools.MODEL.device
+    # One accumulator, changed in place: for a wide MLP the matrix takes gigabytes, and a second copy may not fit.
     total, count = None, 0
     for conversation, reply_ids, skip in prompts:
         keys = all_position_keys(conversation, reply_ids, mlp_out).to(device).double()
@@ -62,10 +63,17 @@ def protection(prompts: list[Prompt], neutral: list[list[int]], mlp_out: str) ->
             # `skip` counts from the start of the reply. The prompt positions come before the reply.
             index = len(keys) - len(reply_ids) + skip
             keys = torch.cat([keys[:index], keys[index + 1 :]])
-        total = keys.T @ keys if total is None else total + keys.T @ keys
+        if total is None:
+            total = torch.zeros(keys.shape[1], keys.shape[1], dtype=torch.float64, device=device)
+        total.addmm_(keys.T, keys)
         count += len(keys)
-    text = torch.cat(tools.read_tokens(neutral, [mlp_out], inputs=True)[mlp_out]).to(device).double()
-    return (total / count + text.T @ text / len(text)).cpu()
+    total.div_(count)
+    text = tools.read_tokens(neutral, [mlp_out], inputs=True)[mlp_out]
+    positions = sum(len(part) for part in text)
+    for part in text:
+        part = part.to(device).double()
+        total.addmm_(part.T, part, alpha=1.0 / positions)
+    return total.cpu()
 
 
 def fit(

@@ -1,0 +1,9 @@
+load report: {'packed_layers': 401, 'skipped_tensors': 15, 'skipped_examples': ['mtp.fc.weight', 'mtp.layers.0.input_layernorm.weight', 'mtp.layers.0.mlp.down_proj.weight', 'mtp.layers.0.mlp.gate_proj.weight', 'mtp.layers.0.mlp.up_proj.weight']}
+GPU memory after load: 19.6 GB
+layers: 64
+~/weight_space/.venv/lib/python3.13/site-packages/triton/knobs.py:504: UserWarning: TRITON_DEFAULT_FP_FUSION is unset: defaulting to FP fusion ENABLED for backward compatibility in Triton 3.9. The default will change to DISABLED in Triton 3.10; set TRITON_DEFAULT_FP_FUSION=1 to keep fusion enabled or =0 to adopt the new default early and silence this warning.
+  warn_once(FP_FUSION_DEFAULT_WARNING)
+2 replies in 18.6 s: ['Paris\n', '391\n'] [5, 5]
+96 tokens in 33.3 s = 2.89 tokens per second
+A bicycle maintains stability primarily through the gyroscopic effect of its spinning wheels, which creates angular momentum that resists changes in orientation. Additionally, the geometry of the frame, specifically the trail created by the front fork, allows the front wheel to steer automatically into a fall, generating a corrective force that brings the bike back to an upright position. Finally, the rider’s active balance and subtle steering inputs work in conjunction with these physical principles to keep the center of mass aligned over the wheel
+peak GPU memory: 22.9 GB

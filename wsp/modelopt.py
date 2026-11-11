@@ -28,6 +28,10 @@ from safetensors import safe_open
 E2M1 = [0.0, 0.5, 1.0, 1.5, 2.0, 3.0, 4.0, 6.0]
 E2M1_MAX, E4M3_MAX = 6.0, 448.0
 BLOCK = 16
+# The number of stored bytes that one step of the decoder handles.
+DECODE_BYTES = 1 << 25
+# A layer with more weights than this computes its output in row pieces.
+FORWARD_WEIGHTS = 1 << 28
 # The midpoints between neighbouring E2M1 values. `bucketize` maps a magnitude to its nearest code.
 _BOUNDS = torch.tensor([0.25, 0.75, 1.25, 1.75, 2.5, 3.5, 5.0])
 
@@ -41,9 +45,17 @@ def _pair_table(device, dtype) -> torch.Tensor:
 
 def decode_nvfp4(packed: torch.Tensor, block_scale: torch.Tensor, scale_2: torch.Tensor, dtype=torch.float32) -> torch.Tensor:
     """The real weights of one NVFP4 tensor, with shape [rows, 2 * packed columns]."""
-    values = _pair_table(packed.device, dtype)[packed.int()].flatten(1)
-    scale = (block_scale.float() * scale_2.float()).to(dtype).repeat_interleave(BLOCK, dim=1)
-    return values * scale
+    table = _pair_table(packed.device, dtype)
+    rows, columns = packed.shape
+    out = torch.empty(rows, 2 * columns, dtype=dtype, device=packed.device)
+    # The lookup needs a 4-byte index per stored byte. Rows go in pieces so that this copy stays small.
+    step = max(1, DECODE_BYTES // columns)
+    for start in range(0, rows, step):
+        part = slice(start, start + step)
+        values = table[packed[part].int()].view(-1, 2 * columns // BLOCK, BLOCK)
+        scale = (block_scale[part].float() * scale_2.float()).to(dtype)
+        out[part] = (values * scale[:, :, None]).flatten(1)
+    return out
 
 
 def encode_nvfp4(weight: torch.Tensor, scale_2: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
@@ -89,6 +101,18 @@ class PackedLinear(torch.nn.Module):
             return decode_nvfp4(stored["weight_packed"], stored["weight_scale"], stored["weight_scale_2"], dtype)
         return stored["weight_packed"].to(dtype) * stored["weight_scale"].to(dtype)
 
+    def weight_rows(self, part: slice, dtype=torch.float32) -> torch.Tensor:
+        """The real weights of the rows in `part`."""
+        if self.kind == "nvfp4":
+            return decode_nvfp4(self.weight_packed[part], self.weight_scale[part], self.weight_scale_2, dtype)
+        return self.weight_packed[part].to(dtype) * self.weight_scale.to(dtype)
+
+    def squared_sum(self) -> float:
+        """The sum of the squared real weights in float64, row piece by row piece."""
+        rows, columns = self.shape
+        step = max(1, (1 << 26) // columns)
+        return sum(float(self.weight_rows(slice(start, start + step)).double().pow(2).sum()) for start in range(0, rows, step))
+
     @property
     def weight(self) -> torch.Tensor:
         return self.weight_float()
@@ -118,7 +142,16 @@ class PackedLinear(torch.nn.Module):
             self.weight_packed.copy_(torch.where(tensor != current, new, self.weight_packed))
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        return torch.nn.functional.linear(x, self.weight_float(dtype=x.dtype))
+        rows, columns = self.shape
+        if rows * columns <= FORWARD_WEIGHTS:
+            return torch.nn.functional.linear(x, self.weight_float(dtype=x.dtype))
+        # A very large layer (the output head) goes in row pieces, so its real weights never exist all at one time.
+        step = max(1, FORWARD_WEIGHTS // columns)
+        pieces = [
+            torch.nn.functional.linear(x, self.weight_rows(slice(start, start + step), x.dtype))
+            for start in range(0, rows, step)
+        ]
+        return torch.cat(pieces, dim=-1)
 
 
 def load(path: str, device: str = "cuda"):

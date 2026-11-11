@@ -1,0 +1,10 @@
+~/weight_space/.venv/lib/python3.13/site-packages/gymnasium/utils/passive_env_checker.py:39: UserWarning: [33mWARN: A Box observation space maximum and minimum values are equal.[0m
+  logger.warn("A Box observation space maximum and minimum values are equal.")
+~/weight_space/.venv/lib/python3.13/site-packages/gymnasium/utils/passive_env_checker.py:174: UserWarning: [33mWARN: The obs returned by the `reset()` method is not within the observation space.[0m
+  logger.warn(f"{pre} is not within the observation space.")
+~/weight_space/.venv/lib/python3.13/site-packages/gymnasium/utils/passive_env_checker.py:174: UserWarning: [33mWARN: The obs returned by the `step()` method is not within the observation space.[0m
+  logger.warn(f"{pre} is not within the observation space.")
+~/weight_space/.venv/lib/python3.13/site-packages/triton/knobs.py:504: UserWarning: TRITON_DEFAULT_FP_FUSION is unset: defaulting to FP fusion ENABLED for backward compatibility in Triton 3.9. The default will change to DISABLED in Triton 3.10; set TRITON_DEFAULT_FP_FUSION=1 to keep fusion enabled or =0 to adopt the new default early and silence this warning.
+  warn_once(FP_FUSION_DEFAULT_WARNING)
+10 episodes (one per task) in 133 s: {'reach': (1, 1), 'push': (0, 3), 'pick-place': (1, 4), 'door-open': (0, 5), 'drawer-open': (0, 4), 'drawer-close': (1, 2), 'button-press-topdown': (1, 2), 'peg-insert-side': (1, 4), 'window-open': (1, 4), 'window-close': (1, 4)}
+peak GPU memory: 21.9 GB

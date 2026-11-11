@@ -1,0 +1,22 @@
+~/weight_space/.venv/lib/python3.13/site-packages/gymnasium/utils/passive_env_checker.py:39: UserWarning: [33mWARN: A Box observation space maximum and minimum values are equal.[0m
+  logger.warn("A Box observation space maximum and minimum values are equal.")
+~/weight_space/.venv/lib/python3.13/site-packages/gymnasium/utils/passive_env_checker.py:174: UserWarning: [33mWARN: The obs returned by the `reset()` method is not within the observation space.[0m
+  logger.warn(f"{pre} is not within the observation space.")
+~/weight_space/.venv/lib/python3.13/site-packages/gymnasium/utils/passive_env_checker.py:174: UserWarning: [33mWARN: The obs returned by the `step()` method is not within the observation space.[0m
+  logger.warn(f"{pre} is not within the observation space.")
+~/weight_space/.venv/lib/python3.13/site-packages/triton/knobs.py:504: UserWarning: TRITON_DEFAULT_FP_FUSION is unset: defaulting to FP fusion ENABLED for backward compatibility in Triton 3.9. The default will change to DISABLED in Triton 3.10; set TRITON_DEFAULT_FP_FUSION=1 to keep fusion enabled or =0 to adopt the new default early and silence this warning.
+  warn_once(FP_FUSION_DEFAULT_WARNING)
+10 episodes (one per task) in 76 s: {'reach': (1, 1), 'push': (0, 3), 'pick-place': (1, 3), 'door-open': (0, 4), 'drawer-open': (0, 4), 'drawer-close': (1, 2), 'button-press-topdown': (1, 2), 'peg-insert-side': (1, 4), 'window-open': (1, 4), 'window-close': (1, 4)}
+peak GPU memory: 22.7 GB
+base practice | reach-v3                   {'n': 20, 'success': 20, 'invalid': 0, 'mean_primitives': 1.0}
+base practice | push-v3                    {'n': 20, 'success': 6, 'invalid': 0, 'mean_primitives': 2.7}
+base practice | pick-place-v3              {'n': 20, 'success': 20, 'invalid': 0, 'mean_primitives': 3.7}
+base practice | door-open-v3               {'n': 20, 'success': 14, 'invalid': 0, 'mean_primitives': 3.5}
+base practice | drawer-open-v3             {'n': 20, 'success': 0, 'invalid': 0, 'mean_primitives': 4.0}
+base practice | drawer-close-v3            {'n': 20, 'success': 20, 'invalid': 0, 'mean_primitives': 2.0}
+base practice | button-press-topdown-v3    {'n': 20, 'success': 17, 'invalid': 0, 'mean_primitives': 2.1}
+base practice | peg-insert-side-v3         {'n': 20, 'success': 18, 'invalid': 0, 'mean_primitives': 4.2}
+base practice | window-open-v3             {'n': 20, 'success': 20, 'invalid': 0, 'mean_primitives': 5.0}
+base practice | window-close-v3            {'n': 20, 'success': 20, 'invalid': 0, 'mean_primitives': 3.7}
+base practice | all                        {'n': 200, 'success': 155, 'success_pct': 77.5, 'interval_95': [71.2, 82.7]}
+base practice | 1160 s
