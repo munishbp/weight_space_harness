@@ -1,0 +1,10 @@
+base held-out {'reach-v3': 20, 'push-v3': 14, 'pick-place-v3': 20, 'door-open-v3': 0, 'drawer-open-v3': 0, 'drawer-close-v3': 20, 'button-press-topdown-v3': 0, 'peg-insert-side-v3': 17, 'window-open-v3': 15, 'window-close-v3': 20, 'all': {'n': 200, 'success': 126, 'success_pct': 63.0, 'interval_95': [56.1, 69.4]}} 248 s
+edit: {'tensors_changed': 1, 'tensors_changed_pct': 0.13831258644536654, 'layers_changed': [27], 'changed_weights': 21636435, 'changed_weights_pct': 0.4766505688729993, 'relative_change_of_model': 0.0036992383811825335}
+edit held-out {'reach-v3': 20, 'push-v3': 15, 'pick-place-v3': 20, 'door-open-v3': 0, 'drawer-open-v3': 0, 'drawer-close-v3': 20, 'button-press-topdown-v3': 16, 'peg-insert-side-v3': 17, 'window-open-v3': 15, 'window-close-v3': 20, 'all': {'n': 200, 'success': 143, 'success_pct': 71.5, 'interval_95': [64.9, 77.3]}} {'fixed': 17, 'broken': 0, 'p_value': 1.52587890625e-05}
+deviation: {'mean_kl': 0.0003, 'max_kl': 0.0073, 'top1_agreement_pct': 99.2134, 'perplexity_original': 13.3773, 'perplexity_edited': 13.3764, 'positions': 13730}
+battery mmlu_pro {'before_pct': 48.0, 'after_pct': 47.5, 'change_points': -0.5, 'fixed': 0, 'broken': 1, 'p_value': 1.0, 'major_drop': False}
+battery countbench {'before_pct': 85.0, 'after_pct': 85.0, 'change_points': 0.0, 'fixed': 0, 'broken': 0, 'p_value': 1.0, 'major_drop': False}
+battery chartqa {'before_pct': 85.0, 'after_pct': 84.5, 'change_points': -0.5, 'fixed': 0, 'broken': 1, 'p_value': 1.0, 'major_drop': False}
+battery refcoco {'before_pct': 90.0, 'after_pct': 89.5, 'change_points': -0.5, 'fixed': 0, 'broken': 1, 'p_value': 1.0, 'major_drop': False}
+battery gsm8k_thinking {'before_pct': 75.0, 'after_pct': 77.0, 'change_points': 2.0, 'fixed': 9, 'broken': 7, 'p_value': 0.803619384765625, 'major_drop': False}
+verdict done 17.4 min

@@ -1,0 +1,7 @@
+first reply: '{"action": "move", "position": [-83, 855, 250]}' | ids: ['{"', 'action', '":', ' "', 'move', '",', ' "', 'position']
+prefix ['{"', 'action', '":', ' "'] | names {'move': 'move', 'close': 'close', 'open': 'open', 'done': 'done'} | prefix matches the reply: True
+button episodes with a close: 19 | step of the close: Counter({1: 11, 4: 4, 2: 4, None: 1})
+base, button at the close step: {'move': 0.15, 'close': 0.82, 'open': 0.01, 'done': 0.02} | move above 0.05 in 9 of 19
+[  6.4 min] probabilities done
+forced replay, button: 1 of 20 | [('move move move move move move move', 19), ('move move', 1)]
+[  7.2 min] forced replay done

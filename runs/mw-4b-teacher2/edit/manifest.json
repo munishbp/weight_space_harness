@@ -1,0 +1,32 @@
+{
+  "tensors_changed": 1,
+  "tensors_changed_pct": 0.13831258644536654,
+  "layers_changed": [
+    27
+  ],
+  "changed_weights": 21636435,
+  "changed_weights_pct": 0.4766505688729993,
+  "relative_change_of_model": 0.0036992383811825335,
+  "tensors": [
+    {
+      "name": "model.language_model.layers.27.mlp.down_proj.weight",
+      "shape": [
+        2560,
+        9216
+      ],
+      "weights": 23592960,
+      "changed_weights": 21636435,
+      "changed_weights_pct": 91.70716603597005,
+      "relative_change": 0.11561997380122642,
+      "max_abs_change": 0.0472412109375,
+      "cosine_to_original": 0.9933814275237303,
+      "delta_squared_norm": 27.17156503016735,
+      "rows_changed": 2557,
+      "rows_changed_pct": 99.8828125,
+      "columns_changed": 9216,
+      "columns_changed_pct": 100.0,
+      "delta_rank": 1,
+      "kept_share_of_request": 1.0
+    }
+  ]
+}

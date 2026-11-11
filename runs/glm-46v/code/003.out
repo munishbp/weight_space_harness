@@ -1,0 +1,23 @@
+base practice | reach-v3                   {'n': 20, 'success': 19, 'invalid': 0, 'mean_primitives': 1.6}
+base practice | push-v3                    {'n': 20, 'success': 6, 'invalid': 0, 'mean_primitives': 6.7}
+base practice | pick-place-v3              {'n': 20, 'success': 11, 'invalid': 0, 'mean_primitives': 4.8}
+base practice | door-open-v3               {'n': 20, 'success': 17, 'invalid': 0, 'mean_primitives': 4.9}
+base practice | drawer-open-v3             {'n': 20, 'success': 1, 'invalid': 0, 'mean_primitives': 11.1}
+base practice | drawer-close-v3            {'n': 20, 'success': 13, 'invalid': 0, 'mean_primitives': 3.1}
+base practice | button-press-topdown-v3    {'n': 20, 'success': 1, 'invalid': 0, 'mean_primitives': 4.3}
+base practice | peg-insert-side-v3         {'n': 20, 'success': 8, 'invalid': 0, 'mean_primitives': 8.0}
+base practice | window-open-v3             {'n': 20, 'success': 20, 'invalid': 0, 'mean_primitives': 6.3}
+base practice | window-close-v3            {'n': 20, 'success': 17, 'invalid': 0, 'mean_primitives': 5.2}
+base practice | all                        {'n': 200, 'success': 113, 'success_pct': 56.5, 'interval_95': [49.6, 63.2]}
+base practice | 336 s
+[  5.6 min] base practice done
+reach-v3                   [('move', 18), ('move move move move move move move move move move move move', 1), ('move move', 1)]
+push-v3                    [('move move move move move move move', 5), ('move move move', 4), ('move move move close move move move move move', 2)]
+pick-place-v3              [('move move close move', 8), ('move close move move done', 6), ('move close move', 2)]
+door-open-v3               [('move close move', 8), ('move move close move', 5), ('move move close move open move move move move move move move', 2)]
+drawer-open-v3             [('move move close move move move move move move move move move', 7), ('move move close move move move move move move move', 4), ('move move close move open move close move move move move move', 2)]
+drawer-close-v3            [('move move', 9), ('move close move done', 5), ('move move close move', 3)]
+button-press-topdown-v3    [('move close move done', 11), ('move move move move close done', 4), ('move move close done', 4)]
+peg-insert-side-v3         [('move move close move move move move move', 4), ('move move close move', 3), ('move move close move move move move move move move move move', 3)]
+window-open-v3             [('move move close move move', 8), ('move move move move move move', 4), ('move move move move move move close move move', 2)]
+window-close-v3            [('move move', 3), ('move move close move move move move move move move move move', 3), ('move', 3)]

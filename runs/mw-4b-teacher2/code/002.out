@@ -1,0 +1,11 @@
+{'layers': (32, 'model.language_model.layers.31'), 'mlps': (32, 'model.language_model.layers.31.mlp'), 'attentions': (32, 'model.language_model.layers.31.self_attn'), 'mlp_outputs': (32, 'model.language_model.layers.31.mlp.down_proj'), 'attention_outputs': (32, 'model.language_model.layers.31.self_attn.o_proj'), 'final_norm': 'model.language_model.norm', 'embedding': 'model.language_model.embed_tokens'}
+reach-v3 20 [('m c o m OK', 8), ('m c m OK', 6), ('m OK', 6)]
+push-v3 10 [('m c m OK', 10), ('m c o m m m m m', 5), ('m m m m m c o m', 1), ('m o m m m m m m', 1)]
+pick-place-v3 20 [('m c m OK', 20)]
+door-open-v3 0 [('m c o m m m m m m m', 8), ('m c o m m m m m m m m', 4), ('m c o m m m m m m c o m', 3), ('m c o m m m m m m', 2)]
+drawer-open-v3 0 [('m c o m d', 20)]
+drawer-close-v3 20 [('m c m OK', 16), ('m c o m OK', 4)]
+button-press-topdown-v3 0 [('m c m d', 20)]
+peg-insert-side-v3 19 [('m c m OK', 19), ('m c m o m c m d', 1)]
+window-open-v3 15 [('m c o m OK', 6), ('m m m m OK', 2), ('m o m OK', 2), ('m m o m c m m o m', 1)]
+window-close-v3 20 [('m m c m OK', 5), ('m m c m m OK', 3), ('m m c OK', 3), ('m m m c OK', 2)]

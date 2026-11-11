@@ -1,0 +1,12 @@
+button-press-topdown-v3 0 {'gripper': [5, 400, 195], 'object': [-83, 855, 308], 'goal': [-83, 855, 215]} [{'action': 'move', 'position': [-83, 855, 308]}, {'action': 'close'}, {'action': 'move', 'position': [-83, 855, 215]}, {'action': 'done'}] {'gripper': [-82, 820, 246], 'object': [-83, 855, 244], 'goal': [-83, 855, 215]}
+button-press-topdown-v3 1 {'gripper': [5, 400, 195], 'object': [-73, 806, 308], 'goal': [-73, 806, 215]} [{'action': 'move', 'position': [-73, 806, 308]}, {'action': 'close'}, {'action': 'move', 'position': [-73, 806, 215]}, {'action': 'done'}] {'gripper': [-74, 774, 246], 'object': [-73, 806, 239], 'goal': [-73, 806, 215]}
+button-press-topdown-v3 drop close 17 / 20
+button-press-topdown-v3 drop close+open 17 / 20
+button-press-topdown-v3 drop open 0 / 20
+button-press-topdown-v3 reference plan 20
+drawer-open-v3 0 {'gripper': [5, 601, 195], 'object': [-83, 730, 90], 'goal': [-83, 540, 90]} [{'action': 'move', 'position': [-83, 730, 90]}, {'action': 'close'}, {'action': 'open'}, {'action': 'move', 'position': [-83, 540, 90]}, {'action': 'done'}] {'gripper': [-82, 542, 86], 'object': [-83, 728, 90], 'goal': [-83, 540, 90]}
+drawer-open-v3 1 {'gripper': [5, 601, 195], 'object': [-73, 730, 90], 'goal': [-73, 540, 90]} [{'action': 'move', 'position': [-73, 730, 90]}, {'action': 'close'}, {'action': 'open'}, {'action': 'move', 'position': [-73, 540, 90]}, {'action': 'done'}] {'gripper': [-72, 542, 86], 'object': [-73, 728, 90], 'goal': [-73, 540, 90]}
+drawer-open-v3 drop close 0 / 20
+drawer-open-v3 drop close+open 0 / 20
+drawer-open-v3 drop open 0 / 20
+drawer-open-v3 reference plan 20

@@ -92,6 +92,10 @@ The ten MT10 tasks, 20 practice seeds and 20 held-out seeds per task.
   The edit is rank 2, 0.50% of the weights, and the top-token agreement stays at 99.3%.
 - The failed attempt showed a defect in the recipe: the protection set must hold every position of
   the prompts, not only the step that the edit targets.
+- **A second teacher.** Claude Opus 5.5, with a fresh context and only `PLAYBOOK.md` and the code,
+  repeated the button edit in 30 minutes. It chose layer 27. Held-out: 63.0% to 71.5%, 17 episodes
+  fixed and 0 broken, button-press 0 to 16 of 20. The playbook names this fault, so the run shows
+  that a second model can operate the harness. It does not show a second discovery.
 - A sentence in the system prompt also fixes the button task (18 of 20 practice episodes), and it
   costs 8 episodes in push and window-open.
 - Fault 2 (in push, the first move goes to the goal in place of the object): two closed-form edits

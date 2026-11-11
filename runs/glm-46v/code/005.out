@@ -1,0 +1,36 @@
+--- button-press-topdown-v3/0 success=False start={'gripper': [5, 400, 195], 'object': [-83, 855, 308], 'goal': [-83, 855, 215]}
+    model:     {"action": "move", "position": [-83, 855, 250]} | {"action": "move", "position": [-83, 855, 215]} | {"action": "move", "position": [-83, 855, 215]} | {"action": "move", "position": [-83, 855, 215]} | {"action": "move", "position": [-83, 855, 215]} | {"action": "move", "position": [-83, 855, 215]} | {"action": "move", "position": [-83, 855, 215]}
+    reference: {"action": "move", "position": [-83, 855, 428]} | {"action": "move", "position": [-83, 855, 185]}
+    final:     {'gripper': [-83, 854, 249], 'object': [-83, 855, 287], 'goal': [-83, 855, 215]}
+--- button-press-topdown-v3/1 success=False start={'gripper': [5, 400, 195], 'object': [-73, 806, 308], 'goal': [-73, 806, 215]}
+    model:     {"action": "move", "position": [-73, 806, 250]} | {"action": "move", "position": [-73, 806, 230]} | {"action": "move", "position": [-73, 806, 220]} | {"action": "move", "position": [-73, 806, 215]} | {"action": "move", "position": [-73, 806, 215]} | {"action": "move", "position": [-73, 806, 215]} | {"action": "move", "position": [-73, 806, 215]}
+    reference: {"action": "move", "position": [-73, 806, 428]} | {"action": "move", "position": [-73, 806, 185]}
+    final:     {'gripper': [-74, 805, 243], 'object': [-73, 806, 302], 'goal': [-73, 806, 215]}
+--- button-press-topdown-v3/2 success=False start={'gripper': [5, 400, 195], 'object': [52, 812, 308], 'goal': [52, 812, 215]}
+    model:     {"action": "move", "position": [52, 812, 195]} | {"action": "move", "position": [52, 812, 215]} | {"action": "move", "position": [52, 812, 215]} | {"action": "move", "position": [52, 812, 215]} | {"action": "move", "position": [52, 812, 215]} | {"action": "move", "position": [52, 812, 215]} | {"action": "move", "position": [52, 812, 215]}
+    reference: {"action": "move", "position": [52, 812, 428]} | {"action": "move", "position": [52, 812, 185]}
+    final:     {'gripper': [53, 676, 204], 'object': [52, 812, 308], 'goal': [52, 812, 215]}
+--- drawer-close-v3/0 success=False start={'gripper': [4, 602, 196], 'object': [-83, 580, 140], 'goal': [-83, 740, 90]}
+    model:     {"action": "move", "position": [-83, 740, 196]} | {"action": "close"} | {"action": "move", "position": [-83, 740, 90]} | {"action": "done"}
+    reference: {"action": "move", "position": [-83, 460, 220]} | {"action": "move", "position": [-83, 460, 140]} | {"action": "move", "position": [-83, 740, 140]}
+    final:     {'gripper': [-82, 741, 107], 'object': [-83, 668, 140], 'goal': [-83, 740, 90]}
+--- drawer-close-v3/1 success=False start={'gripper': [4, 601, 196], 'object': [-73, 580, 140], 'goal': [-73, 740, 90]}
+    model:     {"action": "move", "position": [-73, 740, 196]} | {"action": "close"} | {"action": "move", "position": [-73, 740, 90]} | {"action": "done"}
+    reference: {"action": "move", "position": [-73, 460, 220]} | {"action": "move", "position": [-73, 460, 140]} | {"action": "move", "position": [-73, 740, 140]}
+    final:     {'gripper': [-74, 740, 191], 'object': [-73, 657, 140], 'goal': [-73, 740, 90]}
+--- pick-place-v3/1 success=False start={'gripper': [5, 601, 195], 'object': [3, 648, 20], 'goal': [24, 854, 214]}
+    model:     {"action": "move", "position": [3, 648, 195]} | {"action": "close"} | {"action": "move", "position": [24, 854, 195]} | {"action": "move", "position": [24, 854, 214]} | {"action": "done"}
+    reference: {"action": "move", "position": [3, 648, 140]} | {"action": "move", "position": [3, 648, 20]} | {"action": "close"} | {"action": "move", "position": [24, 854, 214]}
+    final:     {'gripper': [24, 859, 213], 'object': [3, 648, 19], 'goal': [24, 854, 214]}
+--- pick-place-v3/3 success=False start={'gripper': [5, 601, 195], 'object': [-45, 639, 20], 'goal': [95, 875, 297]}
+    model:     {"action": "move", "position": [-45, 639, 195]} | {"action": "close"} | {"action": "move", "position": [95, 875, 195]} | {"action": "move", "position": [95, 875, 297]} | {"action": "done"}
+    reference: {"action": "move", "position": [-45, 639, 140]} | {"action": "move", "position": [-45, 639, 20]} | {"action": "close"} | {"action": "move", "position": [95, 875, 297]}
+    final:     {'gripper': [92, 876, 295], 'object': [-45, 639, 19], 'goal': [95, 875, 297]}
+--- peg-insert-side-v3/0 success=False start={'gripper': [5, 601, 195], 'object': [51, 570, 29], 'goal': [-252, 587, 130]}
+    model:     {"action": "move", "position": [51, 570, 100]} | {"action": "move", "position": [51, 570, 25]} | {"action": "close"} | {"action": "move", "position": [-252, 587, 100]} | {"action": "move", "position": [-252, 587, 25]} | {"action": "open"} | {"action": "move", "position": [-36, 590, 100]} | {"action": "move", "position": [-36, 590, 25]} | {"action": "close"} | {"action": "move", "position": [-252, 587, 130]}
+    reference: {"action": "move", "position": [31, 570, 149]} | {"action": "move", "position": [31, 570, 29]} | {"action": "close"} | {"action": "move", "position": [51, 570, 130]} | {"action": "move", "position": [48, 587, 130]} | {"action": "move", "position": [-172, 587, 130]}
+    final:     {'gripper': [-170, 582, 161], 'object': [-12, 591, 25], 'goal': [-252, 587, 130]}
+--- peg-insert-side-v3/1 success=False start={'gripper': [5, 601, 195], 'object': [163, 554, 29], 'goal': [-235, 558, 131]}
+    model:     {"action": "move", "position": [163, 554, 100]} | {"action": "move", "position": [163, 554, 25]} | {"action": "close"} | {"action": "move", "position": [163, 554, 5]} | {"action": "move", "position": [163, 554, -10]} | {"action": "move", "position": [163, 554, -35]} | {"action": "move", "position": [163, 554, -70]} | {"action": "move", "position": [163, 554, -105]}
+    reference: {"action": "move", "position": [143, 554, 149]} | {"action": "move", "position": [143, 554, 29]} | {"action": "close"} | {"action": "move", "position": [163, 554, 131]} | {"action": "move", "position": [65, 558, 131]} | {"action": "move", "position": [-155, 558, 131]}
+    final:     {'gripper': [163, 554, 46], 'object': [163, 558, 25], 'goal': [-235, 558, 131]}

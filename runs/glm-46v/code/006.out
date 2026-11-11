@@ -1,0 +1,1 @@
+history length of a step-1 prompt: 1 | text: on: [-83, 855, 326] / Goal position: [-83, 855, 215] / Gripper is open. / Primitives so far: / {"action": "move", "position": [-83, 855, 250]} / Write the next primitive.

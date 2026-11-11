@@ -1,0 +1,11 @@
+{
+  "student": "zai-org/GLM-4.6V-Flash",
+  "student_revision": "411bb4d77144a3f03accbf4b780f5acb8b7cde4e",
+  "student_weights": 10292777472,
+  "student_dtype": "torch.bfloat16",
+  "harness_commit": "d702e612625d4f4b7cd2bc95c3b78c3fab33e13d",
+  "torch": "2.15.0+cu132",
+  "transformers": "5.22.2",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "started": "2026-11-11T14:44:49-0500"
+}

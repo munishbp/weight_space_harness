@@ -150,6 +150,10 @@ A negative result is a valid verdict.
   40 seconds at 19.6 GB and runs at 3 tokens per second. The email recipe of the 4B model raises
   held-out email tasks from 30.0% to 68.0% on it, with 0.22% of the weights changed. The 4-bit
   format keeps the full change, and the reset is exact.
+- [Show that the teacher is interchangeable](issues/18-teacher-interchange.md): a second teacher
+  (Opus 5.5, the playbook and the code only) reached the button edit in 30 minutes. Held-out: 63.0%
+  to 71.5%, 17 fixed and 0 broken. It reported four gaps, and all four are closed. A teacher from
+  another vendor needs an account from the user.
 
 ## Not yet specified
 

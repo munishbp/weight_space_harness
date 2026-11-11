@@ -1,0 +1,3 @@
+forced no-close at step 2: 19 / 20
+[('m m', 17), ('m m c', 1), ('m m c d', 1)]
+['{"action": "move", "position": [-83, 855, 308]}\n', '{"action": "move", "position": [-83, 855, 215]}\n']

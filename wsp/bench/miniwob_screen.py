@@ -136,6 +136,19 @@ def conversation(episode: Episode) -> list[dict]:
     ]
 
 
+def replay(result: dict, steps: int) -> list[dict] | None:
+    """The prompt of one recorded episode after its first `steps` actions. `result` comes from `run_episodes`.
+
+    The result is None when the page ends the episode before that step.
+    """
+    episode = Episode(result["task"], result["seed"])
+    for action in result["actions"][:steps]:
+        episode.apply(action)
+        if episode.ended:
+            return None
+    return conversation(episode)
+
+
 def parse_action(text: str) -> dict | None:
     """The first JSON object in the reply, or None when the reply holds no valid JSON object."""
     match = re.search(r"\{.*?\}", text, flags=re.DOTALL)

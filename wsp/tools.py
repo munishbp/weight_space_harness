@@ -135,6 +135,7 @@ def generate(
     max_new_tokens: int = 64,
     thinking: bool = False,
     presence_penalty: float = 0.0,
+    append_ids: list[list[int]] | None = None,
     **options,
 ) -> list[dict]:
     """One forward pass of kind `generate` for a batch of conversations.
@@ -142,14 +143,19 @@ def generate(
     Decoding is greedy unless `options` say otherwise. `options` go to `model.generate`.
     Each reply holds `text`, `ids`, `new_tokens`, and `hit_limit`. `ids` are the token ids of the
     reply. `hit_limit` is true when the model wrote `max_new_tokens` tokens and no end token.
+
+    `append_ids` forces the start of each reply (one row per conversation, all rows of one length).
+    The student writes the rest. The reply then holds the forced start followed by the new tokens,
+    and `new_tokens` counts both.
     """
     started = time.time()
-    inputs = encode(conversations, thinking)
+    inputs = encode(conversations, thinking, append_ids)
     if presence_penalty:
         # The penalty holds state for one generation, so each call needs a new one.
         options["logits_processor"] = [*options.get("logits_processor", []), PresencePenalty(presence_penalty)]
     output = MODEL.generate(**inputs, max_new_tokens=max_new_tokens, **({"do_sample": False} | options))
-    new = output[:, inputs["input_ids"].shape[1] :]
+    forced = len(append_ids[0]) if append_ids else 0
+    new = output[:, inputs["input_ids"].shape[1] - forced :]
     end_ids = MODEL.generation_config.eos_token_id
     end_ids = torch.tensor(end_ids if isinstance(end_ids, list) else [end_ids], device=new.device)
     ended = torch.isin(new, end_ids).any(dim=1)

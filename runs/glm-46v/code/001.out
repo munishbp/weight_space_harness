@@ -1,0 +1,21 @@
+class: Glm4vForConditionalGeneration | GPU memory after load: 19.2 GB
+layers: 40 | first MLP output: model.language_model.layers.0.mlp.down_proj | last layer: model.language_model.layers.39 | final norm: model.language_model.norm
+generate, text: 0.7 s ['Paris', '391'] [2, 3]
+generate, thinking on: "<think>Got it, let's calculate 17 multiplied by 23. First, I can use the distributive property: 17 * 23 = 17 * (20 + 3) = 17*20 + 17*3. 17*20 is 340, and 17*3 i" 97
+~/weight_space/.venv/lib/python3.13/site-packages/gymnasium/utils/passive_env_checker.py:39: UserWarning: [33mWARN: A Box observation space maximum and minimum values are equal.[0m
+  logger.warn("A Box observation space maximum and minimum values are equal.")
+~/weight_space/.venv/lib/python3.13/site-packages/gymnasium/utils/passive_env_checker.py:174: UserWarning: [33mWARN: The obs returned by the `reset()` method is not within the observation space.[0m
+  logger.warn(f"{pre} is not within the observation space.")
+~/weight_space/.venv/lib/python3.13/site-packages/gymnasium/utils/passive_env_checker.py:174: UserWarning: [33mWARN: The obs returned by the `step()` method is not within the observation space.[0m
+  logger.warn(f"{pre} is not within the observation space.")
+generate, image: 0.7 s, 20 tokens: '{"action": "move", "position": [-83, 855, 250]}'
+read: {'model.language_model.layers.36.mlp.down_proj': (1, 4096), 'model.language_model.layers.39': (1, 4096)}
+read inputs: (1, 13696)
+token_direction: (4096,) 2.239
+logprobs of ' Paris' and ' London' as the first reply token: [-7.23, -16.07]
+edit: {'name': 'model.language_model.layers.36.mlp.down_proj.weight', 'weights': 56098816, 'changed_weights': 56098816, 'changed_weights_pct': 100.0, 'relative_change': 0.00991, 'max_abs_change': 0.00781, 'cosine_to_original': 1.0, 'delta_squared_norm': 0.95989, 'rows_changed': 4096, 'rows_changed_pct': 100.0, 'columns_changed': 13696, 'columns_changed_pct': 100.0, 'delta_rank': 4096, 'kept_share_of_request': 0.99107}
+manifest: {'tensors_changed': 1, 'tensors_changed_pct': 0.14204545454545456, 'layers_changed': [36], 'changed_weights': 56098816, 'changed_weights_pct': 0.5450308835745128, 'relative_change_of_model': 0.0005014557585020586}
+deviation with the edit: {'mean_kl': 0.0003, 'max_kl': 0.0026, 'top1_agreement_pct': 98.5512, 'perplexity_original': 12.9157, 'perplexity_edited': 12.918, 'positions': 3037}
+reset is exact: True
+deviation after the reset: {'mean_kl': 0.0, 'max_kl': 0.0, 'top1_agreement_pct': 100.0, 'perplexity_original': 12.9157, 'perplexity_edited': 12.9157, 'positions': 3037}
+peak GPU memory: 21.9 GB

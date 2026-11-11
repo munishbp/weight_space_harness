@@ -147,6 +147,16 @@ def conversation(episode: Episode) -> list[dict]:
     ]
 
 
+def replay(result: dict, steps: int) -> list[dict]:
+    """The prompt of one recorded episode after its first `steps` primitives. `result` comes from `run_episodes`."""
+    episode = Episode(result["task"], result["seed"])
+    for primitive in result["primitives"][:steps]:
+        episode.apply(primitive)
+    prompt = conversation(episode)
+    episode.close()
+    return prompt
+
+
 def parse_primitive(text: str) -> dict | None:
     """The first JSON object in the reply, or None when the reply holds no valid JSON object."""
     match = re.search(r"\{.*?\}", text, flags=re.DOTALL)

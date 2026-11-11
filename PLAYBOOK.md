@@ -1,7 +1,9 @@
 # Teacher playbook
 
-Draft 2, written after six runs: the calibration on Qwen3.5-0.8B; ScreenSpot Pro, Meta-World (two
-faults), and MiniWoB++ on Qwen3.5-4B; and MiniWoB++ on a quantized Qwen3.8-27B.
+Draft 3, written after six runs: the calibration on Qwen3.5-0.8B; ScreenSpot Pro, Meta-World (two
+faults), and MiniWoB++ on Qwen3.5-4B; and MiniWoB++ on a quantized Qwen3.8-27B. A second teacher
+(a different model with this file and the code only) then repeated the Meta-World edit in 30 minutes.
+Draft 3 closes the gaps that it reported.
 
 This playbook is for the teacher: a frontier model with a shell tool. The teacher reads the weights
 and the activations of a smaller open model (the student) and writes edits to the weights directly.
@@ -48,11 +50,12 @@ The run directory records the work:
 
 | Call | Purpose |
 |---|---|
-| `tools.generate(conversations, max_new_tokens, thinking, **options)` | Generate replies. Each reply has `text`, `ids`, `new_tokens`, `hit_limit`. |
+| `tools.generate(conversations, max_new_tokens, thinking, append_ids, **options)` | Generate replies. Each reply has `text`, `ids`, `new_tokens`, `hit_limit`. `append_ids` forces the start of each reply, and the student writes the rest. |
 | `evaluate.run(items, conversation, score, batch_size, **options)` | Generate and score a benchmark. `evaluate.summarize` gives the score with a 95% interval. |
-| `tools.read(conversations, modules)` | Activations at the last prompt position. Works with images. |
+| `tools.read(conversations, modules, append_ids, logprobs_of, inputs)` | Activations at the last position. Works with images. `append_ids` puts the start of a reply after each prompt, so the last position is a chosen step of the reply. `logprobs_of=[token ids]` adds the key `logprobs`: the log-probability of each token at that step. |
 | `tools.read_tokens(sequences, modules, positions, inputs)` | Activations at chosen positions of a text. `inputs=True` gives the input of a module, which for an MLP output matrix is the neuron activations. |
-| `tools.read_logprobs(sequences, token_ids, positions)` | The log-probability that each chosen token comes next. |
+| `tools.read_logprobs(sequences, token_ids, positions)` | The log-probability that each chosen token comes next. Text only. For a prompt with an image, use `tools.read` with `logprobs_of`. |
+| `replay(result, steps)` in `wsp/bench/metaworld_text.py` and `wsp/bench/miniwob_screen.py` | The prompt of a recorded episode after its first `steps` actions. It gives the prompt at a fault step. |
 | `attribution.token_direction` and `attribution.attribute` | The share of each model part in the logit of one token. |
 | `layout.find(model)` | The names of the layers, MLPs, attention blocks, and output matrices of the student. |
 | `tools.get_weight(name)` | One weight tensor as float32 on the CPU. |
@@ -76,9 +79,12 @@ The run directory records the work:
    the fault exactly. In the Meta-World run, the plan of the student with no `close` step solved the
    button task 8 times of 10.
    Where no simulator replay fits, force the correct token at the step and let the student write
-   the rest (`tools.encode` with `append_ids`). The success rate with the forced token is the
-   ceiling of an edit at that step.
-4. **Find where the student almost succeeds.** Use `tools.read_logprobs` on the failed replies. A
+   the rest: `tools.generate(conversations, append_ids=[prefix + [token]] * len(conversations))`.
+   `prefix` holds the token ids of the reply before the step. The success rate with the forced
+   token is the ceiling of an edit at that step.
+4. **Find where the student almost succeeds.** Read the probability of the correct token at the
+   failure step: `tools.read_logprobs` on text, or `tools.read` with `append_ids` and `logprobs_of`
+   on a prompt with an image. A
    correct token that has a visible probability but loses is a fault that hides an ability. A correct
    token with no probability at all points to a missing ability, and an edit is unlikely to add it.
 5. **Attribute.** At the positions from step 4, use `attribution.attribute` on the direction
@@ -122,6 +128,21 @@ protect = habit.protection(prompts_with_replies, battery.neutral_text(64, 256), 
 habit.fit(mlp_out, [(keys, scale, g)], keep, protect, margin=12.0)
 habit.stray_write(another_prompt, reply_ids, mlp_out, original_weight, g)    # check before a trial
 ```
+
+How the pieces fit:
+
+- `prefix` holds the token ids of the reply before the step (for a JSON action: `{"action": "`).
+  `habit.step_keys` reads the last position of the prefix, which is the position that writes the token.
+- `mlp_out` is one name from `layout.find(model)["mlp_outputs"]`. Take a layer in the last quarter of
+  the model. `attribution.attribute_last` on the direction `g` at the step ranks the layers: the MLP
+  that pushes hardest against the correct token is a good choice. Layers 27 and 28 of 32 both
+  worked on the 4B model, and layer 60 of 64 on the 27B model.
+- Each entry of `prompts_with_replies` is `(conversation, reply_ids, skip)`. `reply_ids` are the
+  token ids of the reply that the student wrote (encode the reply text again). `skip` is the index
+  of the target step inside `reply_ids`, counted from the start of the reply (`len(prefix) - 1`), or
+  `None` for a prompt of another context.
+- `replay(result, steps)` of the benchmark module gives the prompt at step `steps` of a recorded
+  episode. One call starts one episode, so 200 prompts take minutes. Build them one time.
 
 Rules for the recipe, each from a failed attempt:
 
