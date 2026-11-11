@@ -117,6 +117,9 @@ A negative result is a valid verdict.
 - [Edit the 4B model for the ScreenSpot Pro slice](issues/10-teacher-edit-4b-slice.md): negative
   after 48 minutes. The model almost succeeds in 60% of failures, but no part suppresses the right
   answer, and a closed-form fit only copies the belief of the model.
+- [Choose the simulator and the action interface](issues/14-choose-simulator-and-interface.md):
+  Meta-World from PyPI, with text waypoints and the scene state in the prompt. VLABench fits better
+  but its install is blocked.
 
 ## Not yet specified
 
