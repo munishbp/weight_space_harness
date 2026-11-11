@@ -1,6 +1,15 @@
 Fetching 1619 files:   0%|          | 0/1619 [00:00<?, ?it/s]Fetching 1619 files:  12%|#2        | 197/1619 [00:00<00:00, 1956.38it/s]Fetching 1619 files:  35%|###5      | 573/1619 [00:00<00:00, 3006.92it/s]Fetching 1619 files:  75%|#######4  | 1208/1619 [00:00<00:00, 4509.39it/s]Fetching 1619 files: 100%|##########| 1619/1619 [00:00<00:00, 4485.55it/s]
 setup done: 311 practice, 293 held-out, 156 quick
 LoRA 15 min | loaded in 97 s | {'tensors_changed': 176, 'tensors_changed_pct': 24.343015214384508, 'layers_changed': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31], 'changed_weights': 2510304994, 'changed_weights_pct': 55.302008091204996, 'relative_change_of_model': 0.0033593419373437725, 'delta_rank_min_max': [16, 2155], 'relative_change_per_tensor_min_max': [0.0043, 0.0115]}
-/home/munish-persaud/weight_space/.venv/lib/python3.13/site-packages/triton/knobs.py:504: UserWarning: TRITON_DEFAULT_FP_FUSION is unset: defaulting to FP fusion ENABLED for backward compatibility in Triton 3.9. The default will change to DISABLED in Triton 3.10; set TRITON_DEFAULT_FP_FUSION=1 to keep fusion enabled or =0 to adopt the new default early and silence this warning.
+~/weight_space/.venv/lib/python3.13/site-packages/triton/knobs.py:504: UserWarning: TRITON_DEFAULT_FP_FUSION is unset: defaulting to FP fusion ENABLED for backward compatibility in Triton 3.9. The default will change to DISABLED in Triton 3.10; set TRITON_DEFAULT_FP_FUSION=1 to keep fusion enabled or =0 to adopt the new default early and silence this warning.
   warn_once(FP_FUSION_DEFAULT_WARNING)
 deviation: {'mean_kl': 0.0056, 'max_kl': 1.7136, 'top1_agreement_pct': 96.3074, 'perplexity_original': 13.3841, 'perplexity_edited': 13.2826, 'positions': 13730}
+{'trial': 'LoRA 15 min: heldout_icons', 'n': 293, 'correct_pct': 50.2, 'interval_95': [44.5, 55.9], 'base_pct': 38.2, 'fixed': 47, 'broken': 12, 'p_value': 5.1256292496887346e-06, 'no_point': 0, 'seconds': 454}
+{'trial': 'LoRA 15 min: text_targets', 'n': 200, 'correct_pct': 63.5, 'interval_95': [56.6, 69.9], 'base_pct': 76.0, 'fixed': 6, 'broken': 31, 'p_value': 4.12575900554657e-05, 'no_point': 0, 'seconds': 320}
+{'trial': 'LoRA 15 min: practice_icons', 'n': 311, 'correct_pct': 70.7, 'interval_95': [65.5, 75.5], 'base_pct': 33.1, 'fixed': 121, 'broken': 4, 'p_value': 4.709971235072482e-31, 'no_point': 0, 'seconds': 513}
+battery mmlu_pro {'before_pct': 48.0, 'after_pct': 47.0, 'change_points': -1.0, 'fixed': 5, 'broken': 7, 'p_value': 0.7744140625, 'major_drop': False}
+battery countbench {'before_pct': 85.0, 'after_pct': 82.5, 'change_points': -2.5, 'fixed': 2, 'broken': 7, 'p_value': 0.1796875, 'major_drop': False}
+battery chartqa {'before_pct': 85.0, 'after_pct': 84.5, 'change_points': -0.5, 'fixed': 0, 'broken': 1, 'p_value': 1.0, 'major_drop': False}
+battery refcoco {'before_pct': 90.0, 'after_pct': 89.0, 'change_points': -1.0, 'fixed': 1, 'broken': 3, 'p_value': 0.625, 'major_drop': False}
+battery gsm8k_thinking {'before_pct': 75.0, 'after_pct': 78.0, 'change_points': 3.0, 'fixed': 10, 'broken': 7, 'p_value': 0.629058837890625, 'major_drop': False}
+evaluation done in 34 min

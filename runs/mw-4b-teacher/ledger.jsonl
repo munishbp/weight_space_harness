@@ -1,0 +1,19 @@
+{"t": 1794364168.03, "kind": "load_model", "model": "Qwen/Qwen3.5-4B", "seconds": 16.56}
+{"t": 1794364179.73, "kind": "generate", "n": 10, "prompt_tokens": 5363, "new_tokens": 246, "hit_limit": 0, "seconds": 2.53}
+{"t": 1794364180.98, "kind": "generate", "n": 10, "prompt_tokens": 5583, "new_tokens": 114, "hit_limit": 0, "seconds": 1.02}
+{"t": 1794364182.14, "kind": "generate", "n": 10, "prompt_tokens": 5685, "new_tokens": 199, "hit_limit": 0, "seconds": 1.08}
+{"t": 1794364183.73, "kind": "generate", "n": 6, "prompt_tokens": 3528, "new_tokens": 115, "hit_limit": 0, "seconds": 1.49}
+{"t": 1794364184.5, "kind": "generate", "n": 3, "prompt_tokens": 1789, "new_tokens": 57, "hit_limit": 0, "seconds": 0.69}
+{"t": 1794364185.19, "kind": "generate", "n": 2, "prompt_tokens": 1241, "new_tokens": 48, "hit_limit": 0, "seconds": 0.62}
+{"t": 1794364185.89, "kind": "generate", "n": 2, "prompt_tokens": 1287, "new_tokens": 49, "hit_limit": 0, "seconds": 0.63}
+{"t": 1794364186.6, "kind": "generate", "n": 2, "prompt_tokens": 1336, "new_tokens": 50, "hit_limit": 0, "seconds": 0.64}
+{"t": 1794364187.22, "kind": "generate", "n": 1, "prompt_tokens": 702, "new_tokens": 26, "hit_limit": 0, "seconds": 0.56}
+{"t": 1794364187.78, "kind": "generate", "n": 1, "prompt_tokens": 727, "new_tokens": 26, "hit_limit": 0, "seconds": 0.54}
+{"t": 1794364188.01, "kind": "generate", "n": 1, "prompt_tokens": 752, "new_tokens": 8, "hit_limit": 0, "seconds": 0.21}
+{"t": 1794364188.05, "kind": "python", "index": 1, "ok": true, "seconds": 18.44}
+{"t": 1794364194.35, "kind": "teacher_start", "note": "Meta-World MT10 through text waypoints, base run"}
+{"t": 1794364207.15, "kind": "generate", "n": 16, "prompt_tokens": 8506, "new_tokens": 387, "hit_limit": 0, "seconds": 1.3}
+{"t": 1794364208.79, "kind": "generate", "n": 11, "prompt_tokens": 6073, "new_tokens": 88, "hit_limit": 0, "seconds": 1.36}
+{"t": 1794364209.93, "kind": "generate", "n": 11, "prompt_tokens": 6150, "new_tokens": 155, "hit_limit": 0, "seconds": 1.07}
+{"t": 1794364211.43, "kind": "generate", "n": 7, "prompt_tokens": 3966, "new_tokens": 172, "hit_limit": 0, "seconds": 1.42}
+{"t": 1794364224.41, "kind": "generate", "n": 16, "prompt_tokens": 8557, "new_tokens": 385, "hit_limit": 0, "seconds": 1.22}

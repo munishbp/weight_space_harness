@@ -1,0 +1,5 @@
+exec(open("runs/mw-4b-teacher/setup.py").read())
+t = time.time()
+probe = mw.run_episodes([(task, 0) for task in TASKS], gen, batch_size=16)
+print(round(time.time() - t), "s for 10 episodes")
+for r in probe: print(r["id"], r["correct"], "|", " ; ".join(x.replace("\n", " ")[:70] for x in r["replies"][:4]))

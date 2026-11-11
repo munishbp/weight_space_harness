@@ -26,6 +26,9 @@ SOCKET_PATH = Path(os.environ.get("WSP_SOCKET", "/tmp/wsp-kernel.sock"))
 PID_PATH = SOCKET_PATH.with_suffix(".pid")
 
 
+HOME = str(Path.home())
+
+
 class Tee(io.TextIOBase):
     """Collect printed text for the reply and write it to a file at the same time."""
 
@@ -35,7 +38,8 @@ class Tee(io.TextIOBase):
 
     def write(self, chunk: str) -> int:
         self.text.write(chunk)
-        self.file.write(chunk)
+        # The run directory can go to a public repository, so the file does not hold the home path.
+        self.file.write(chunk.replace(HOME, "~"))
         self.file.flush()
         return len(chunk)
 

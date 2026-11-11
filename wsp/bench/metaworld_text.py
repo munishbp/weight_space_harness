@@ -70,6 +70,9 @@ class Episode:
         self.out_of_time = False
         self.history: list[dict] = []
         self.invalid = 0
+        # The observation from `reset` can hold a stale object position (window-close-v3 does).
+        # One step with no motion gives the true start positions.
+        self._step(np.zeros(3))
 
     @property
     def over(self) -> bool:
@@ -153,6 +156,52 @@ def parse_primitive(text: str) -> dict | None:
         return json.loads(match.group())
     except json.JSONDecodeError:
         return None
+
+
+def reference_plan(task: str, positions: dict[str, list[int]]) -> list[dict] | None:
+    """A hand-written plan of primitives that solves the task from the start positions, or None.
+
+    The plans show that the interface can solve a task. They also give the examples for a
+    training baseline. A task with no plan returns None.
+    """
+    obj, goal = np.array(positions["object"], float), np.array(positions["goal"], float)
+    move = lambda vector: {"action": "move", "position": [int(round(float(value))) for value in vector]}
+
+    def unit(vector) -> np.ndarray:
+        return vector / (np.linalg.norm(vector) + 1e-9)
+
+    if task == "reach-v3":
+        return [move(goal)]
+    if task == "push-v3":
+        # Start 70 mm behind the puck on the line to the goal, then move through the puck.
+        behind = obj - 70 * unit((goal - obj) * [1, 1, 0])
+        return [move([behind[0], behind[1], obj[2] + 120]), move([behind[0], behind[1], obj[2]]), move([goal[0], goal[1], obj[2]])]
+    if task == "pick-place-v3":
+        return [move(obj + [0, 0, 120]), move(obj), {"action": "close"}, move(goal)]
+    if task == "drawer-close-v3":
+        return [move([obj[0], obj[1] - 120, obj[2] + 80]), move([obj[0], obj[1] - 120, obj[2]]), move([goal[0], goal[1], obj[2]])]
+    if task == "drawer-open-v3":
+        # Put the fingers behind the handle, then pull toward the robot base.
+        return [move(obj + [0, 0, 120]), move(obj + [0, 0, -20]), move([goal[0], goal[1] - 40, obj[2] - 20])]
+    if task == "button-press-topdown-v3":
+        return [move(obj + [0, 0, 120]), move([obj[0], obj[1], goal[2] - 30])]
+    if task in ("window-open-v3", "window-close-v3"):
+        side = unit((goal - obj) * [1, 0, 0])
+        beside = obj - 80 * side
+        return [move([beside[0], beside[1], obj[2]]), move([goal[0] + 40 * side[0], obj[1], obj[2]])]
+    if task == "peg-insert-side-v3":
+        # Grasp the peg, lift it to the height of the hole, then push it into the hole along -x.
+        grasp = obj + [-20, 0, 0]
+        return [
+            move(grasp + [0, 0, 120]),
+            move(grasp),
+            {"action": "close"},
+            move([obj[0], obj[1], goal[2]]),
+            move([goal[0] + 300, goal[1], goal[2]]),
+            move([goal[0] + 80, goal[1], goal[2]]),
+        ]
+    # door-open-v3 has no plan: one move of 80 control steps cannot drag the door to the goal.
+    return None
 
 
 def run_episodes(specs: list[tuple[str, int]], generate, batch_size: int = 16) -> list[dict]:

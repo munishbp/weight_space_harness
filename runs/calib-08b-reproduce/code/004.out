@@ -1,19 +1,19 @@
 edit reloaded from the run directory, bit-exact
 Traceback (most recent call last):
-  File "/home/munish-persaud/weight_space/wsp/kernel.py", line 45, in handle
+  File "~/weight_space/wsp/kernel.py", line 45, in handle
     exec(compile(source, "<teacher>", "exec"), self.server.namespace)
     ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "<teacher>", line 10, in <module>
-  File "/home/munish-persaud/weight_space/wsp/bench/boxed_math.py", line 19, in load_jsonl
+  File "~/weight_space/wsp/bench/boxed_math.py", line 19, in load_jsonl
     return [json.loads(line) for line in Path(path).read_text().splitlines() if line.strip()]
             ~~~~~~~~~~^^^^^^
-  File "/home/munish-persaud/.local/share/uv/python/cpython-3.13.13-linux-x86_64-gnu/lib/python3.13/json/__init__.py", line 352, in loads
+  File "~/.local/share/uv/python/cpython-3.13.13-linux-x86_64-gnu/lib/python3.13/json/__init__.py", line 352, in loads
     return _default_decoder.decode(s)
            ~~~~~~~~~~~~~~~~~~~~~~~^^^
-  File "/home/munish-persaud/.local/share/uv/python/cpython-3.13.13-linux-x86_64-gnu/lib/python3.13/json/decoder.py", line 345, in decode
+  File "~/.local/share/uv/python/cpython-3.13.13-linux-x86_64-gnu/lib/python3.13/json/decoder.py", line 345, in decode
     obj, end = self.raw_decode(s, idx=_w(s, 0).end())
                ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/munish-persaud/.local/share/uv/python/cpython-3.13.13-linux-x86_64-gnu/lib/python3.13/json/decoder.py", line 361, in raw_decode
+  File "~/.local/share/uv/python/cpython-3.13.13-linux-x86_64-gnu/lib/python3.13/json/decoder.py", line 361, in raw_decode
     obj, end = self.scan_once(s, idx)
                ~~~~~~~~~~~~~~^^^^^^^^
 json.decoder.JSONDecodeError: Unterminated string starting at: line 1 column 58 (char 57)

@@ -117,6 +117,9 @@ A negative result is a valid verdict.
 - [Edit the 4B model for the ScreenSpot Pro slice](issues/10-teacher-edit-4b-slice.md): negative
   after 48 minutes. The model almost succeeds in 60% of failures, but no part suppresses the right
   answer, and a closed-form fit only copies the belief of the model.
+- [Run the LoRA baseline on the same slice](issues/11-lora-baseline.md): 15 minutes of LoRA raise
+  held-out icons from 38.2% to 50.2% and drop text targets from 76.0% to 63.5%. The battery shows no
+  major drop. The change touches 55% of the weights in all 32 layers.
 - [Choose the simulator and the action interface](issues/14-choose-simulator-and-interface.md):
   Meta-World from PyPI, with text waypoints and the scene state in the prompt. VLABench fits better
   but its install is blocked.

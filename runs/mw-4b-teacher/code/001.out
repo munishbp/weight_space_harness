@@ -1,0 +1,20 @@
+setup done: 200 practice episodes, 200 held-out episodes
+~/weight_space/.venv/lib/python3.13/site-packages/gymnasium/utils/passive_env_checker.py:39: UserWarning: [33mWARN: A Box observation space maximum and minimum values are equal.[0m
+  logger.warn("A Box observation space maximum and minimum values are equal.")
+~/weight_space/.venv/lib/python3.13/site-packages/gymnasium/utils/passive_env_checker.py:174: UserWarning: [33mWARN: The obs returned by the `reset()` method is not within the observation space.[0m
+  logger.warn(f"{pre} is not within the observation space.")
+~/weight_space/.venv/lib/python3.13/site-packages/gymnasium/utils/passive_env_checker.py:174: UserWarning: [33mWARN: The obs returned by the `step()` method is not within the observation space.[0m
+  logger.warn(f"{pre} is not within the observation space.")
+~/weight_space/.venv/lib/python3.13/site-packages/triton/knobs.py:504: UserWarning: TRITON_DEFAULT_FP_FUSION is unset: defaulting to FP fusion ENABLED for backward compatibility in Triton 3.9. The default will change to DISABLED in Triton 3.10; set TRITON_DEFAULT_FP_FUSION=1 to keep fusion enabled or =0 to adopt the new default early and silence this warning.
+  warn_once(FP_FUSION_DEFAULT_WARNING)
+18 s for 10 episodes
+reach-v3/0 True | {"action": "move", "position": [1, 692, 20]}  ; {"action": "close"}  ; {"action": "move", "position": [85, 883, 292]} 
+push-v3/0 False | {"action": "move", "position": [85, 883, 19]}  ; {"action": "close"}  ; {"action": "open"}  ; {"action": "move", "position": [85, 883, 19]} 
+pick-place-v3/0 True | {"action": "move", "position": [1, 692, 20]}  ; {"action": "close"}  ; {"action": "move", "position": [85, 883, 292]} 
+door-open-v3/0 False | {"action": "move", "position": [199, 698, 150]}  ; {"action": "close"}  ; {"action": "open"}  ; {"action": "move", "position": [-292, 455, 150]} 
+drawer-open-v3/0 False | {"action": "move", "position": [-83, 730, 90]}  ; {"action": "close"}  ; {"action": "open"}  ; {"action": "move", "position": [-83, 540, 90]} 
+drawer-close-v3/0 True | {"action": "move", "position": [-83, 600, 140]}  ; {"action": "close"}  ; {"action": "move", "position": [-83, 740, 90]} 
+button-press-topdown-v3/0 False | {"action": "move", "position": [-83, 855, 308]}  ; {"action": "close"}  ; {"action": "move", "position": [-83, 855, 215]}  ; {"action": "done"} 
+peg-insert-side-v3/0 True | {"action": "move", "position": [51, 570, 29]}  ; {"action": "close"}  ; {"action": "move", "position": [-252, 587, 130]} 
+window-open-v3/0 True | {"action": "move", "position": [-123, 715, 160]}  ; {"action": "move", "position": [-73, 715, 160]}  ; {"action": "move", "position": [18, 715, 160]}  ; {"action": "move", "position": [56, 715, 160]} 
+window-close-v3/0 True | {"action": "move", "position": [210, 738, 200]}  ; {"action": "move", "position": [91, 738, 200]}  ; {"action": "move", "position": [66, 738, 200]}  ; {"action": "close"} 

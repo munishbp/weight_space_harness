@@ -3,13 +3,15 @@
 This script uses gradient descent. It is not part of the teacher method. It exists so that a
 teacher edit and ordinary training can be compared on the same items with the same time.
 
-The script trains on ScreenSpot Pro items from a split file, then writes the merged weights of
-every adapted matrix to one safetensors file. The kernel loads that file with `tools.load_edit`,
-so the harness measures the LoRA model with the same tools as a teacher edit.
+The script trains on the examples of one benchmark, then writes the merged weights of every
+adapted matrix to one safetensors file. The kernel loads that file with `tools.load_edit`, so the
+harness measures the LoRA model with the same tools as a teacher edit.
 
 Use:
-    uv run python -m wsp.lora_baseline --model Qwen/Qwen3.5-4B --split runs/<run>/split.json \\
-        --key practice --minutes 15 --out runs/<run>/lora
+    uv run python -m wsp.lora_baseline --model Qwen/Qwen3.5-4B --bench screenspot_pro \\
+        --split runs/<run>/split.json --key practice --minutes 15 --out runs/<run>/lora
+    uv run python -m wsp.lora_baseline --model Qwen/Qwen3.5-4B --bench metaworld \\
+        --seeds 0:20 --minutes 15 --out runs/<run>/lora
 """
 
 import argparse
@@ -24,26 +26,65 @@ from safetensors.torch import save_file
 from transformers import AutoModelForImageTextToText, AutoProcessor
 
 from wsp import layout
-from wsp.bench import screenspot_pro as sp
 
 # The linear layers inside each attention block and MLP of the Qwen3.5 language model.
 TARGETS = ("q_proj", "k_proj", "v_proj", "o_proj", "in_proj_qkv", "out_proj", "gate_proj", "up_proj", "down_proj")
 
 
-def reply_text(item: dict) -> str:
-    """The reply that the model must learn: a click on the centre of the target, in the model's own format."""
-    width, height = item["img_size"]
-    x1, y1, x2, y2 = item["bbox"]
-    x, y = round(500 * (x1 + x2) / width), round(500 * (y1 + y2) / height)
-    call = {"name": "computer_use", "arguments": {"action": "left_click", "coordinate": [x, y]}}
-    return f"<tool_call>\n{json.dumps(call)}\n</tool_call><|im_end|>"
+END = "<|im_end|>"
+
+
+def screenspot_examples(args) -> list:
+    """One example per ScreenSpot Pro item of the split: the reply is a click on the centre of the target."""
+    from wsp.bench import screenspot_pro as sp
+
+    if not args.split:
+        raise SystemExit("The screenspot_pro benchmark needs --split. Nothing was trained.")
+    items, images = sp.load()
+    wanted = set(json.loads(Path(args.split).read_text())[args.key])
+
+    def reply_text(item: dict) -> str:
+        width, height = item["img_size"]
+        x1, y1, x2, y2 = item["bbox"]
+        x, y = round(500 * (x1 + x2) / width), round(500 * (y1 + y2) / height)
+        call = {"name": "computer_use", "arguments": {"action": "left_click", "coordinate": [x, y]}}
+        return f"<tool_call>\n{json.dumps(call)}\n</tool_call>{END}"
+
+    # The screenshots are large, so each conversation is built when the loop needs it.
+    return [lambda item=item: (sp.conversation(item, images), reply_text(item)) for item in items if item["id"] in wanted]
+
+
+def metaworld_examples(args) -> list:
+    """One example per step of each reference plan that succeeds from a seed in the range."""
+    from wsp.bench import metaworld_text as mw
+
+    first, last = (int(part) for part in args.seeds.split(":"))
+    examples = []
+    for task in mw.INSTRUCTIONS:
+        for seed in range(first, last):
+            episode = mw.Episode(task, seed)
+            steps = []
+            for primitive in mw.reference_plan(task, episode.positions()) or []:
+                if episode.over:
+                    break
+                steps.append((mw.conversation(episode), json.dumps(primitive) + END))
+                episode.apply(primitive)
+            if episode.success:
+                examples += [lambda step=step: step for step in steps]
+            episode.close()
+    return examples
+
+
+BENCHES = {"screenspot_pro": screenspot_examples, "metaworld": metaworld_examples}
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", required=True)
-    parser.add_argument("--split", required=True, help="JSON file that maps a key to a list of item ids.")
+    parser.add_argument("--bench", required=True, choices=sorted(BENCHES))
+    parser.add_argument("--split", help="screenspot_pro: JSON file that maps a key to a list of item ids.")
     parser.add_argument("--key", default="practice")
+    parser.add_argument("--seeds", default="0:20", help="metaworld: range of seeds, first:last, last excluded.")
     parser.add_argument("--minutes", type=float, required=True, help="Wall-clock budget for the training loop.")
     parser.add_argument("--out", required=True)
     parser.add_argument("--rank", type=int, default=16)
@@ -54,11 +95,9 @@ def main() -> None:
 
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
-    items, images = sp.load()
-    wanted = set(json.loads(Path(args.split).read_text())[args.key])
-    train = [item for item in items if item["id"] in wanted]
+    train = BENCHES[args.bench](args)
     if not train:
-        raise SystemExit(f"The split key {args.key!r} matches no item. Nothing was trained.")
+        raise SystemExit(f"The benchmark {args.bench!r} gave no example. Nothing was trained.")
 
     processor = AutoProcessor.from_pretrained(args.model)
     model = AutoModelForImageTextToText.from_pretrained(args.model, dtype=torch.bfloat16, device_map="cuda")
@@ -74,7 +113,7 @@ def main() -> None:
     get_peft_model(model, config)  # The adapters go into `model` in place.
     parameters = [parameter for parameter in model.parameters() if parameter.requires_grad]
     optimizer = torch.optim.AdamW(parameters, lr=args.learning_rate)
-    print(f"{len(train)} items | {len(names)} adapted matrices | {sum(p.numel() for p in parameters):,} trainable weights")
+    print(f"{len(train)} examples | {len(names)} adapted matrices | {sum(p.numel() for p in parameters):,} trainable weights")
 
     random.seed(args.seed)
     torch.manual_seed(args.seed)
@@ -85,18 +124,19 @@ def main() -> None:
     model.train()
     while time.time() < deadline:
         order = random.sample(train, len(train))
-        for item in order:
+        for build in order:
             if time.time() >= deadline:
                 break
+            conversation, reply_text = build()
             inputs = processor.apply_chat_template(
-                [sp.conversation(item, images)],
+                [conversation],
                 add_generation_prompt=True,
                 tokenize=True,
                 return_dict=True,
                 return_tensors="pt",
                 enable_thinking=False,
             ).to("cuda")
-            reply = processor.tokenizer(reply_text(item), add_special_tokens=False, return_tensors="pt")["input_ids"].to("cuda")
+            reply = processor.tokenizer(reply_text, add_special_tokens=False, return_tensors="pt")["input_ids"].to("cuda")
             shape = inputs["input_ids"].shape
             for key, value in list(inputs.items()):
                 if torch.is_tensor(value) and value.shape == shape:
@@ -131,7 +171,8 @@ def main() -> None:
     save_file(merged, str(out / "lora_edit.safetensors"))
     summary = {
         "model": args.model,
-        "items": len(train),
+        "bench": args.bench,
+        "examples": len(train),
         "examples_seen": seen,
         "epochs": round(seen / len(train), 2),
         "training_seconds": round(training_seconds, 1),

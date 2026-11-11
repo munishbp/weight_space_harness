@@ -3,29 +3,29 @@ setup done: 311 practice, 293 held-out, 156 quick
 forced prefix: '<tool_call>\n{"name": "computer_use", "arguments": {"action": "left_click", "coordinate": [' 23 tokens
 Counter({'success': 105, 'failure': 51})
 Traceback (most recent call last):
-  File "/home/munish-persaud/weight_space/wsp/kernel.py", line 66, in handle
+  File "~/weight_space/wsp/kernel.py", line 66, in handle
     exec(compile(source, "<teacher>", "exec"), self.server.namespace)
     ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "<teacher>", line 24, in <module>
-  File "/home/munish-persaud/weight_space/wsp/attribution.py", line 63, in attribute_last
+  File "~/weight_space/wsp/attribution.py", line 63, in attribute_last
     outputs = tools.read(conversations, modules, thinking=thinking, append_ids=append_ids)
-  File "/home/munish-persaud/weight_space/wsp/tools.py", line 289, in read
+  File "~/weight_space/wsp/tools.py", line 289, in read
     hidden = MODEL.base_model(**encode(conversations, thinking, append_ids)).last_hidden_state
              ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/munish-persaud/weight_space/.venv/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1787, in _wrapped_call_impl
+  File "~/weight_space/.venv/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1787, in _wrapped_call_impl
     return self._call_impl(*args, **kwargs)
            ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
-  File "/home/munish-persaud/weight_space/.venv/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1798, in _call_impl
+  File "~/weight_space/.venv/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1798, in _call_impl
     return forward_call(*args, **kwargs)
-  File "/home/munish-persaud/weight_space/.venv/lib/python3.13/site-packages/transformers/utils/generic.py", line 943, in wrapper
+  File "~/weight_space/.venv/lib/python3.13/site-packages/transformers/utils/generic.py", line 943, in wrapper
     output = func(self, *args, **kwargs)
-  File "/home/munish-persaud/weight_space/.venv/lib/python3.13/site-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 1633, in forward
+  File "~/weight_space/.venv/lib/python3.13/site-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 1633, in forward
     position_ids = self.compute_3d_position_ids(
         input_ids=input_ids,
     ...<5 lines>...
         mm_token_type_ids=mm_token_type_ids,
     )
-  File "/home/munish-persaud/weight_space/.venv/lib/python3.13/site-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 1549, in compute_3d_position_ids
+  File "~/weight_space/.venv/lib/python3.13/site-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 1549, in compute_3d_position_ids
     position_ids, rope_deltas = self.get_rope_index(
                                 ~~~~~~~~~~~~~~~~~~~^
         input_ids,
@@ -35,7 +35,7 @@ Traceback (most recent call last):
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     )
     ^
-  File "/home/munish-persaud/weight_space/.venv/lib/python3.13/site-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 1423, in get_rope_index
+  File "~/weight_space/.venv/lib/python3.13/site-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 1423, in get_rope_index
     input_token_type = input_token_type[attention_mask[batch_idx].bool()]
                        ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 IndexError: The shape of the mask [8554] at index 0 does not match the shape of the indexed tensor [8531] at index 0

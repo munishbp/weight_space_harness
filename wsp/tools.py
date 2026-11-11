@@ -43,9 +43,15 @@ def load_model(name: str, revision: str | None = None) -> None:
     # Left padding keeps the last position of every row on the final prompt token,
     # which batched generation and last-token reads both need.
     PROCESSOR.tokenizer.padding_side = "left"
-    MODEL = AutoModelForImageTextToText.from_pretrained(
-        name, revision=revision, dtype=torch.bfloat16, device_map="cuda"
-    )
+    if (Path(name).expanduser() / "hf_quant_config.json").exists():
+        # A ModelOpt checkpoint directory. transformers cannot load its packed weights.
+        from wsp import modelopt
+
+        MODEL = modelopt.load(name)
+    else:
+        MODEL = AutoModelForImageTextToText.from_pretrained(
+            name, revision=revision, dtype=torch.bfloat16, device_map="cuda"
+        )
     MODEL.eval()
     # The manifest reports each edit as a share of this norm, so measure it before any edit exists.
     _model_squared_norm()
@@ -60,10 +66,11 @@ def _write_run_file(name: str, revision: str | None) -> None:
 
     git = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True)
     info = {
-        "student": name,
+        # A local checkpoint path goes to the file with no home directory in it.
+        "student": name.replace(str(Path.home()), "~"),
         # No value means that the run used the newest revision at the time of the download.
         "student_revision": revision,
-        "student_weights": sum(parameter.numel() for parameter in MODEL.parameters()),
+        "student_weights": _weight_counts()[0],
         "student_dtype": str(MODEL.dtype),
         # No value means that the harness code had no commit when the run started.
         "harness_commit": git.stdout.strip() if git.returncode == 0 else None,
@@ -310,9 +317,50 @@ def read(
     return captured
 
 
+def _packed(name: str):
+    """The layer that keeps this weight in a packed number format, or None for a plain parameter.
+
+    A packed layer (see `wsp/modelopt.py`) has `shape`, `state`, `load_state`, `weight_float`, and `set_weight`.
+    """
+    owner, _, leaf = name.rpartition(".")
+    try:
+        module = MODEL.get_submodule(owner)
+    except AttributeError:
+        return None
+    return module if leaf == "weight" and hasattr(module, "set_weight") else None
+
+
+def _packed_layers() -> list:
+    return [module for module in MODEL.modules() if hasattr(module, "set_weight")]
+
+
+def _snapshot(name: str):
+    """A CPU copy of one weight in its stored format."""
+    packed = _packed(name)
+    return packed.state() if packed else MODEL.get_parameter(name).detach().cpu().clone()
+
+
+def _restore(name: str, snapshot) -> None:
+    packed = _packed(name)
+    if packed:
+        packed.load_state(snapshot)
+    else:
+        parameter = MODEL.get_parameter(name)
+        parameter.copy_(snapshot.to(parameter.device))
+
+
+def _float(name: str, snapshot=None) -> torch.Tensor:
+    """One weight as float32 on its device: the current value, or the value of a snapshot."""
+    packed = _packed(name)
+    if packed:
+        return packed.weight_float(snapshot)
+    parameter = MODEL.get_parameter(name)
+    return (parameter.detach() if snapshot is None else snapshot.to(parameter.device)).float()
+
+
 def get_weight(name: str) -> torch.Tensor:
-    """A float32 CPU copy of one parameter."""
-    return MODEL.get_parameter(name).detach().float().cpu()
+    """A float32 CPU copy of one weight."""
+    return _float(name).cpu()
 
 
 def save_edit(name: str, tensor: torch.Tensor, write: bool = True) -> dict:
@@ -321,21 +369,30 @@ def save_edit(name: str, tensor: torch.Tensor, write: bool = True) -> dict:
     `write=False` skips the edit files. A caller that saves many tensors writes the files one time
     at the end, because each write holds every edited tensor.
     """
-    parameter = MODEL.get_parameter(name)
-    if tuple(tensor.shape) != tuple(parameter.shape):
+    packed = _packed(name)
+    shape = tuple(packed.shape if packed else MODEL.get_parameter(name).shape)
+    if tuple(tensor.shape) != shape:
         raise ValueError(
-            f"The edit for {name} has shape {tuple(tensor.shape)}, but the parameter has shape "
-            f"{tuple(parameter.shape)}. The model is unchanged."
+            f"The edit for {name} has shape {tuple(tensor.shape)}, but the weight has shape {shape}. "
+            "The model is unchanged."
         )
     if not torch.isfinite(tensor).all():
         raise ValueError(f"The edit for {name} contains NaN or infinity. The model is unchanged.")
-    if name not in ORIGINALS:
-        ORIGINALS[name] = parameter.detach().cpu().clone()
-    parameter.copy_(tensor.to(device=parameter.device, dtype=parameter.dtype))
-    # The stored dtype can be bfloat16, so a small change can round to zero.
+    snapshot = ORIGINALS[name] if name in ORIGINALS else _snapshot(name)
+    if packed:
+        packed.set_weight(tensor)
+    else:
+        parameter = MODEL.get_parameter(name)
+        parameter.copy_(tensor.to(device=parameter.device, dtype=parameter.dtype))
+    # A failed write raises before this line, so ORIGINALS names only weights that hold an edit.
+    ORIGINALS[name] = snapshot
+    # The stored format can be bfloat16 or a 4-bit format, so a small change can round to zero.
     # The metrics describe the change that survives in the model, not the change that the teacher asked for.
-    original = ORIGINALS[name].to(parameter.device).float()
-    entry = {"name": name, **tensor_metrics(original, parameter.detach().float())}
+    original = _float(name, ORIGINALS[name])
+    entry = {"name": name, **tensor_metrics(original, _float(name))}
+    requested = float((tensor.to(original.device).float() - original).double().pow(2).sum())
+    # The share of the requested change that the stored format kept. 1.0 means that nothing rounded away.
+    entry["kept_share_of_request"] = (entry["delta_squared_norm"] / requested) ** 0.5 if requested else 1.0
     ENTRIES[name] = entry
     if write:
         _write_edit_files()
@@ -387,22 +444,21 @@ def deviation(sequences: list[list[int]]) -> dict:
     model on the text. Use neutral text that is not part of the target of the edit.
     """
     head = MODEL.get_output_embeddings()
-    if any(MODEL.get_parameter(name) is head.weight for name in ORIGINALS):
+    if any(_packed(name) is head if _packed(name) else MODEL.get_parameter(name) is head.weight for name in ORIGINALS):
         raise ValueError("`deviation` applies one output head to both models, so it cannot measure an edit of the head.")
     started = time.time()
     ids, mask, offsets = _text_inputs(sequences)
     edited_hidden = _final_hidden(ids, mask)
-    edited_values = {name: MODEL.get_parameter(name).detach().clone() for name in ORIGINALS}
+    edited_values = {name: _snapshot(name) for name in ORIGINALS}
     try:
         for name, original in ORIGINALS.items():
-            parameter = MODEL.get_parameter(name)
-            parameter.copy_(original.to(parameter.device))
+            _restore(name, original)
         base_hidden = _final_hidden(ids, mask)
     finally:
         # The edit must return when the second pass fails. If it does not, the kernel holds
         # the original model while the edit files say that the edit is active.
         for name, value in edited_values.items():
-            MODEL.get_parameter(name).copy_(value)
+            _restore(name, value)
     positions = 0
     kl_sum = kl_max = agree = base_nll = edited_nll = 0.0
     for index, offset in enumerate(offsets):
@@ -436,8 +492,7 @@ def deviation(sequences: list[list[int]]) -> dict:
 def reset_edit(names: list[str] | None = None) -> None:
     """Restore the original value of the named parameters, or of every edited parameter."""
     for name in list(ORIGINALS) if names is None else names:
-        parameter = MODEL.get_parameter(name)
-        parameter.copy_(ORIGINALS.pop(name).to(parameter.device))
+        _restore(name, ORIGINALS.pop(name))
         ENTRIES.pop(name)
     _write_edit_files()
     log("reset_edit", names=names)
@@ -460,14 +515,22 @@ def _model_squared_norm() -> float:
                 "Call tools.reset_edit(), then save the edit again."
             )
         _MODEL_SQUARED_NORM = sum(float(p.detach().double().pow(2).sum()) for p in MODEL.parameters())
+        _MODEL_SQUARED_NORM += sum(float(layer.weight_float().double().pow(2).sum()) for layer in _packed_layers())
     return _MODEL_SQUARED_NORM
+
+
+def _weight_counts() -> tuple[int, int]:
+    """The number of weights and the number of weight tensors of the model, packed layers included."""
+    packed = _packed_layers()
+    weights = sum(parameter.numel() for parameter in MODEL.parameters()) + sum(math.prod(layer.shape) for layer in packed)
+    return weights, sum(1 for _ in MODEL.parameters()) + len(packed)
 
 
 def _write_edit_files() -> None:
     edit_dir = RUN_DIR / "edit"
-    tensors = {name: MODEL.get_parameter(name).detach().cpu() for name in ORIGINALS}
-    total_weights = sum(parameter.numel() for parameter in MODEL.parameters())
-    total_tensors = sum(1 for _ in MODEL.parameters())
+    # A packed weight goes to the file as float32, so a later load gives the same stored bits.
+    tensors = {name: _float(name).cpu() if _packed(name) else MODEL.get_parameter(name).detach().cpu() for name in ORIGINALS}
+    total_weights, total_tensors = _weight_counts()
     changed = sum(entry["changed_weights"] for entry in ENTRIES.values())
     delta_squared_norm = sum(entry["delta_squared_norm"] for entry in ENTRIES.values())
     layers = {int(match.group(1)) for name in ENTRIES if (match := re.search(r"layers\.(\d+)\.", name))}
