@@ -187,7 +187,9 @@ def _text_inputs(sequences: list[list[int]]) -> tuple[torch.Tensor, torch.Tensor
 
 def _final_hidden(ids: torch.Tensor, mask: torch.Tensor) -> torch.Tensor:
     """Run the model without its output head. Full logits for a long batch do not fit in memory."""
-    return MODEL.base_model(input_ids=ids, attention_mask=mask).last_hidden_state
+    # Eight rows per pass: one pass over all rows does not fit next to a large student.
+    rows = range(0, len(ids), 8)
+    return torch.cat([MODEL.base_model(input_ids=ids[i : i + 8], attention_mask=mask[i : i + 8]).last_hidden_state for i in rows])
 
 
 def read_tokens(

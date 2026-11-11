@@ -1,0 +1,9 @@
+prefix ['{"', 'action', '":', ' "'] | names {'click': 'click', 'type': 'type', 'key': 'key', 'done': 'done'}
+27B base | A (after the email click)  n=55 | seeds 0-9 {'click': 0.51, 'type': 0.48, 'key': 0.01, 'done': 0.01} | seeds 10-19 {'click': 0.31, 'type': 0.68, 'key': 0.0, 'done': 0.01}
+27B base | B (after the Reply click)  n=55 | seeds 0-9 {'click': 0.07, 'type': 0.93, 'key': 0.0, 'done': 0.0} | seeds 10-19 {'click': 0.15, 'type': 0.84, 'key': 0.01, 'done': 0.0}
+27B base | T (after the field click)  n=55 | seeds 0-9 {'click': 0.18, 'type': 0.8, 'key': 0.0, 'done': 0.01} | seeds 10-19 {'click': 0.25, 'type': 0.71, 'key': 0.01, 'done': 0.03}
+27B base | C (after the text)         n=55 | seeds 0-9 {'click': 0.58, 'type': 0.03, 'key': 0.08, 'done': 0.32} | seeds 10-19 {'click': 0.38, 'type': 0.04, 'key': 0.1, 'done': 0.48}
+[ 23.1 min] contexts and base probabilities done
+model.language_model.layers.52.mlp.down_proj PackedLinear nvfp4 (5120, 17408)
+model.language_model.layers.56.mlp.down_proj PackedLinear nvfp4 (5120, 17408)
+model.language_model.layers.60.mlp.down_proj PackedLinear nvfp4 (5120, 17408)

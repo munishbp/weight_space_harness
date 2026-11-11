@@ -20,8 +20,14 @@ def token_direction(token_id: int, against: list[int]) -> torch.Tensor:
             f"The final norm is {type(norm).__name__}. This attribution handles an RMS norm only, "
             "because another norm also subtracts a mean."
         )
-    head = tools.MODEL.get_output_embeddings().weight.detach().float().cpu()
-    return (head[token_id] - head[against].mean(dim=0)) * norm.weight.detach().float().cpu()
+    head = tools.MODEL.get_output_embeddings()
+    tokens = [token_id, *against]
+    if hasattr(head, "weight_rows"):
+        # A packed head decodes only the rows of these tokens. Its full float copy can be larger than the free memory.
+        rows = torch.cat([head.weight_rows(slice(token, token + 1)) for token in tokens]).float().cpu()
+    else:
+        rows = head.weight.detach()[tokens].float().cpu()
+    return (rows[0] - rows[1:].mean(dim=0)) * norm.weight.detach().float().cpu()
 
 
 def attribute(sequences: list[list[int]], positions: list[list[int]], direction: torch.Tensor) -> dict:

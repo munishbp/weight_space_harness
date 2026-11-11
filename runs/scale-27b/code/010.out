@@ -1,0 +1,14 @@
+27B base email practice | email-inbox-reply          {'n': 20, 'success': 0, 'invalid': 0, 'mean_actions': 3.3}
+27B base email practice | email-inbox-forward        {'n': 20, 'success': 0, 'invalid': 0, 'mean_actions': 4.8}
+27B base email practice | email-inbox                {'n': 20, 'success': 8, 'invalid': 0, 'mean_actions': 4.3}
+27B base email practice | email-inbox-noscroll       {'n': 20, 'success': 14, 'invalid': 0, 'mean_actions': 1.8}
+27B base email practice | email-inbox-star-reply     {'n': 20, 'success': 14, 'invalid': 0, 'mean_actions': 1.7}
+27B base email practice | all                        {'n': 100, 'success': 36, 'success_pct': 36.0, 'interval_95': [27.3, 45.8]}
+27B base email practice | 1204 s
+email-inbox-reply | ok: [] | failed: [('c t d', 14), ('c c t c', 4), ('c c t d', 2)]
+email-inbox-forward | ok: [] | failed: [('c c t c', 9), ('c c t c d', 7), ('c c c c c c c c c c', 2), ('c t d', 2)]
+email-inbox | ok: [('c', 7), ('c c c c', 1)] | failed: [('c c c c c c c c c c', 4), ('c c t c', 3), ('c t d', 2), ('c c c c c c c t d', 1)]
+email-inbox-noscroll | ok: [('c', 14)] | failed: [('c t d', 3), ('c c t c', 2), ('c c t c d', 1)]
+email-inbox-star-reply | ok: [('c', 14)] | failed: [('c t d', 4), ('c c t d', 1), ('c c t c', 1)]
+peak GPU memory: 24.0 GB
+[ 20.1 min] base practice done

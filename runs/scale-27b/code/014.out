@@ -1,0 +1,14 @@
+[ 37.1 min] 487 prompts for the protection, 403 action steps to keep
+[ 45.8 min] protection done
+[ 52.6 min] keys done
+margin 8: fit in 32 s | {'name': 'model.language_model.layers.60.mlp.down_proj.weight', 'weights': 89128960, 'changed_weights': 44717859, 'changed_weights_pct': 50.1721, 'relative_change': 0.1879, 'max_abs_change': 0.0706, 'cosine_to_original': 0.9829, 'delta_squared_norm': 479.9535, 'rows_changed': 5101, 'rows_changed_pct': 99.6289, 'columns_changed': 17408, 'columns_changed_pct': 100.0, 'delta_rank': 550, 'kept_share_of_request': 1.0604}
+layer 60, margin 8 | A (after the email click)  n=55 | seeds 0-9 {'click': 0.97, 'type': 0.03, 'key': 0.0, 'done': 0.0} | seeds 10-19 {'click': 0.87, 'type': 0.12, 'key': 0.0, 'done': 0.0}
+layer 60, margin 8 | B (after the Reply click)  n=55 | seeds 0-9 {'click': 0.54, 'type': 0.46, 'key': 0.0, 'done': 0.0} | seeds 10-19 {'click': 0.69, 'type': 0.3, 'key': 0.0, 'done': 0.0}
+layer 60, margin 8 | T (after the field click)  n=55 | seeds 0-9 {'click': 0.17, 'type': 0.81, 'key': 0.0, 'done': 0.01} | seeds 10-19 {'click': 0.27, 'type': 0.7, 'key': 0.01, 'done': 0.02}
+layer 60, margin 8 | C (after the text)         n=55 | seeds 0-9 {'click': 0.96, 'type': 0.01, 'key': 0.02, 'done': 0.0} | seeds 10-19 {'click': 0.92, 'type': 0.02, 'key': 0.05, 'done': 0.01}
+margin 16: fit in 32 s | {'name': 'model.language_model.layers.60.mlp.down_proj.weight', 'weights': 89128960, 'changed_weights': 63668570, 'changed_weights_pct': 71.4342, 'relative_change': 0.3636, 'max_abs_change': 0.1491, 'cosine_to_original': 0.9397, 'delta_squared_norm': 1796.8479, 'rows_changed': 5114, 'rows_changed_pct': 99.8828, 'columns_changed': 17408, 'columns_changed_pct': 100.0, 'delta_rank': 6, 'kept_share_of_request': 1.0259}
+layer 60, margin 16 | A (after the email click)  n=55 | seeds 0-9 {'click': 1.0, 'type': 0.0, 'key': 0.0, 'done': 0.0} | seeds 10-19 {'click': 1.0, 'type': 0.0, 'key': 0.0, 'done': 0.0}
+layer 60, margin 16 | B (after the Reply click)  n=55 | seeds 0-9 {'click': 1.0, 'type': 0.0, 'key': 0.0, 'done': 0.0} | seeds 10-19 {'click': 1.0, 'type': 0.0, 'key': 0.0, 'done': 0.0}
+layer 60, margin 16 | T (after the field click)  n=55 | seeds 0-9 {'click': 0.16, 'type': 0.82, 'key': 0.0, 'done': 0.01} | seeds 10-19 {'click': 0.3, 'type': 0.66, 'key': 0.01, 'done': 0.02}
+layer 60, margin 16 | C (after the text)         n=55 | seeds 0-9 {'click': 0.99, 'type': 0.0, 'key': 0.01, 'done': 0.0} | seeds 10-19 {'click': 0.98, 'type': 0.01, 'key': 0.01, 'done': 0.0}
+[ 56.1 min] fit sweep done

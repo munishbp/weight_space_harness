@@ -68,11 +68,12 @@ def protection(prompts: list[Prompt], neutral: list[list[int]], mlp_out: str) ->
         total.addmm_(keys.T, keys)
         count += len(keys)
     total.div_(count)
-    text = tools.read_tokens(neutral, [mlp_out], inputs=True)[mlp_out]
-    positions = sum(len(part) for part in text)
-    for part in text:
-        part = part.to(device).double()
-        total.addmm_(part.T, part, alpha=1.0 / positions)
+    positions = sum(len(sequence) for sequence in neutral)
+    # The text goes in small batches. One batch of all sequences does not fit next to a large student.
+    for start in range(0, len(neutral), 8):
+        for part in tools.read_tokens(neutral[start : start + 8], [mlp_out], inputs=True)[mlp_out]:
+            part = part.to(device).double()
+            total.addmm_(part.T, part, alpha=1.0 / positions)
     return total.cpu()
 
 
