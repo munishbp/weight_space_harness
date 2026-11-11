@@ -1,0 +1,6 @@
+22 tasks Counter({'chrome': 4, 'libreoffice_calc': 3, 'vs_code': 3, 'gimp': 2, 'libreoffice_impress': 2, 'libreoffice_writer': 2, 'os': 2, 'thunderbird': 2, 'vlc': 2})
+sample | chrome               bb5e4c0d score 1.0  153 s | click click click click click click wait wait click click click wait wait click click | 
+sample | chrome               7b6c7e24 score 0.0  145 s | click click click click click click click click click click click click click click click | 
+sample | chrome               35253b65 score 0.0  147 s | key type key key key key key key key key key key key key key | 
+sample | chrome               a96b564e score 0.0  148 s | click type key type key key key key key key key key key key key | 
+sample | gimp                 7a4deb26 score 0.0  145 s | click click type key key done | 

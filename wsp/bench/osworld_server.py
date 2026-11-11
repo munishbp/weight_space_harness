@@ -6,6 +6,8 @@ Unix socket. Run it with the Python of that environment, from the directory that
 
     .venv-osworld/bin/python wsp/bench/osworld_server.py --socket /tmp/wsp-osworld.sock
 
+Add `--user-network` on a host that has no `ip_tables` kernel module (the VM boots, but no port reaches it).
+
 This file imports only the standard library and `desktop_env`. It must not import `wsp`.
 
 Protocol: one JSON object per line in each direction.
@@ -66,12 +68,34 @@ def serve(env, path: str) -> None:
                     stream.flush()
 
 
+def use_user_network() -> None:
+    """Make the Docker provider start the VM with user-mode networking and forward the three service ports.
+
+    The default network of the VM container needs the `ip_tables` kernel module on the host. On a host
+    without it the VM boots and no port reaches it. The package has this setup for another case
+    (a Docker without Linux capabilities), so this function only turns it on.
+    """
+    from desktop_env.providers.docker.provider import DockerProvider
+
+    start = DockerProvider.start_emulator
+
+    def start_with_user_network(self, *args, **kwargs):
+        self.environment = {**self.environment, "NETWORK": "user", "USER_PORTS": "5000,9222,8080"}
+        return start(self, *args, **kwargs)
+
+    DockerProvider.start_emulator = start_with_user_network
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--socket", default="/tmp/wsp-osworld.sock")
     parser.add_argument("--provider", default="docker")
+    parser.add_argument("--user-network", action="store_true", help="For a host without the ip_tables kernel module.")
     args = parser.parse_args()
     from desktop_env.desktop_env import DesktopEnv
+
+    if args.user_network:
+        use_user_network()
 
     # No accessibility tree: the student sees the screenshot only, as in the other benchmarks of the harness.
     env = DesktopEnv(provider_name=args.provider, action_space="pyautogui", headless=True, require_a11y_tree=False, os_type="Ubuntu")

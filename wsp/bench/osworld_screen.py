@@ -44,7 +44,9 @@ At each turn you write exactly one action as a JSON object, and nothing else:
 {"action": "fail"}  ends the task when it is not possible."""
 
 MAX_STEPS = 15
-# The reference runner of OSWorld waits 20 seconds before it evaluates, so that the desktop settles.
+# The reference runner of OSWorld waits 60 seconds after a reset, so that the applications of the task open,
+# and 20 seconds before it evaluates, so that the desktop settles.
+READY_SECONDS = 60
 SETTLE_SECONDS = 20
 SOCKET_PATH = "/tmp/wsp-osworld.sock"
 TASK_ROOT = Path("data/OSWorld/evaluation_examples")
@@ -169,12 +171,17 @@ def _image(encoded: str) -> Image.Image:
     return Image.open(io.BytesIO(base64.b64decode(encoded))).convert("RGB")
 
 
-def run_episodes(task_list: list[dict], generate, client: Client | None = None, max_steps: int = MAX_STEPS) -> list[dict]:
+def run_episodes(
+    task_list: list[dict], generate, client: Client | None = None, max_steps: int = MAX_STEPS, shots_dir: str | None = None
+) -> list[dict]:
     """Run each task with a model, one after the other. `generate` maps conversations to replies, as `tools.generate` does.
 
     One virtual machine runs one task at a time. A result holds `score` (0 to 1 from the OSWorld
     evaluator) and `correct` (a score of 1). When the bridge fails in a task, the result holds `error`
     and no score, so a failure of the machine does not count as a failure of the model.
+
+    `shots_dir` saves the screenshot of each step as `<task id>-<step>.png`. With the saved
+    screenshots, `conversation` rebuilds the prompt of any step with no virtual machine.
     """
     client = client or Client()
     results = []
@@ -187,8 +194,13 @@ def run_episodes(task_list: list[dict], generate, client: Client | None = None, 
                 state = client.request("reset", task=task)
             except BridgeError:
                 state = client.request("reset", task=task)
-            for _ in range(max_steps):
+            # A wait step sleeps two times for `pause` seconds and returns the screen after the wait.
+            state = client.request("step", code="WAIT", pause=READY_SECONDS / 2) | {"instruction": state["instruction"]}
+            for step in range(max_steps):
                 screenshot = _image(state["screenshot"])
+                if shots_dir is not None:
+                    Path(shots_dir).mkdir(parents=True, exist_ok=True)
+                    screenshot.save(Path(shots_dir) / f"{task['id']}-{step}.png")
                 reply = generate([conversation(state["instruction"], screenshot, result["actions"])])[0]
                 result["replies"].append(reply["text"])
                 action = parse_action(reply["text"])

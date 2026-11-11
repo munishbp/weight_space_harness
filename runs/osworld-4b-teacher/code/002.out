@@ -1,0 +1,10 @@
+~/weight_space/.venv/lib/python3.13/site-packages/triton/knobs.py:504: UserWarning: TRITON_DEFAULT_FP_FUSION is unset: defaulting to FP fusion ENABLED for backward compatibility in Triton 3.9. The default will change to DISABLED in Triton 3.10; set TRITON_DEFAULT_FP_FUSION=1 to keep fusion enabled or =0 to adopt the new default early and silence this warning.
+  warn_once(FP_FUSION_DEFAULT_WARNING)
+first | os                   5ea617a3 score 0.0  132 s | click click click click click click click click click click click click click click click | 
+first | os                   5812b315 score 0.0  148 s | click invalid invalid invalid type key key key key key key key key key key | 
+first | solved 0 of 2 | bridge errors 0
+--- I am currently using an Ubuntu system, and I have wrongly deleted a poster of party night. Could you help me recover it from the Trash?
+    replies: ['{"action": "click", "position": [17, 756]}\n', '{"action": "click", "position": [484, 240]}\n', '{"action": "click", "position": [430, 240]}\n', '{"action": "click", "position": [349, 476]}\n', '{"action": "click", "position": [349, 476]}\n', '{"action": "click", "position": [349, 476]}\n']
+--- Please create an SSH user named "charles" with password "Ex@mpleP@55w0rd!" on Ubuntu who is only allowed to access the folder "/home/test1".
+    replies: ['{"action": "click", "position": [17, 560]}\n', '{"action": "type", "text": ["ssh-keygen -t rsa -b 4096 -f /home/test1/.ssh/id_rsa -N \'\' -C', '{"action": "type", "text": ["ssh-keygen -t rsa -b 4096 -f /home/test1/.ssh/id_rsa -N \'\' -C', '{"action": "type", "text": ["ssh-keygen -t rsa -b 4096 -f /home/test1/.ssh/id_rsa -N \'\' -C', '{"action": "type", "text": "sudo useradd -m -d /home/test1 -s /bin/bash charles", "clear":', '{"action": "key", "keys": ["ctrl", "c"]}\n']
+[  4.7 min] first two tasks done
