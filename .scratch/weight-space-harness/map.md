@@ -106,6 +106,9 @@ A negative result is a valid verdict.
   minutes the teacher found that three components suppress the closing token of the thinking. Two
   edits raise held-out accuracy from 10.2% to about 38%, above the published edit (21.9%). The base
   model with thinking off scores 56.2% with no edit.
+- [How the blog's teacher found the direction](issues/07-blog-direction-method.md): it wrote four
+  text pairs by hand, took the activation difference after layers 15 and 19, and reversed that
+  direction at strength 6 in 64 neurons per layer. Its first prompt named the fault.
 
 ## Not yet specified
 

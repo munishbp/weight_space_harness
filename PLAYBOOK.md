@@ -99,6 +99,11 @@ The run directory records the work:
   behavior.
 - **A difference of means can read the surface.** A direction that separates two classes of position
   with a high AUC from the first layers is likely a feature of the local text.
+- **Write contrast texts by hand.** The blog's teacher got its direction from four pairs of short
+  texts that differ in one behavior only. A pair like that isolates the behavior. Natural text mixes
+  it with the surface of the text.
+- **Sweep the strength far past 1.** The blog's final edit uses a strength of 6, which reverses the
+  direction. Our trial of the same layers at a strength of 1 and 2 had no effect.
 - **64 items give a noise of about 5 points.** Do not act on a smaller difference.
 - **A change to `wsp/tools.py` needs a kernel restart.** Save the state that you need to a file first.
 
