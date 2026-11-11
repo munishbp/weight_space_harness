@@ -57,6 +57,22 @@ def logit_shift_values(direction: torch.Tensor, scales: torch.Tensor, margin: fl
     return margin * scales[:, None] * rows / rows.pow(2).sum(dim=1, keepdim=True)
 
 
+def values_before_norm(outputs: torch.Tensor, shifts: torch.Tensor, gain: torch.Tensor) -> torch.Tensor:
+    """Values for `fit_keys_to_values` when an RMS norm sits between the matrix and the residual stream.
+
+    `outputs` holds the output of the matrix at each key (keys @ weight.T). `shifts` holds the
+    wanted change after the norm, from `logit_shift_values`. `gain` is the weight of the norm.
+
+    The norm fixes the size of its output. The result therefore reaches the wanted output in
+    direction only: norm(output + value) is parallel to norm(output) + shift.
+    """
+    rms = lambda rows: rows.pow(2).mean(dim=1, keepdim=True).sqrt()
+    # A dimension with a gain near zero cannot carry a shift. A division by that gain gives a huge value.
+    usable = gain.abs() >= 1e-3 * gain.abs().median()
+    wanted = outputs / rms(outputs) + torch.where(usable, shifts / gain, torch.zeros_like(shifts))
+    return rms(outputs) * wanted / rms(wanted) - outputs
+
+
 def fit_keys_to_values(
     name: str, keys: torch.Tensor, values: torch.Tensor, protect: torch.Tensor, strength: float = 1.0
 ) -> dict:

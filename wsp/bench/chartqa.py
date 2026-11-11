@@ -5,6 +5,7 @@ The score is the relaxed accuracy of the ChartQA paper: a numeric answer can dif
 """
 
 import random
+import re
 
 from datasets import load_dataset
 
@@ -33,7 +34,9 @@ def _number(text: str) -> float | None:
 
 
 def score(item: dict, text: str) -> dict:
-    given, target = text.strip().rstrip("."), item["answer"].strip()
+    # Some families (GLM) mark the final answer with box tokens inside a sentence.
+    boxed = re.search(r"<\|begin_of_box\|>(.*?)<\|end_of_box\|>", text, flags=re.DOTALL)
+    given, target = (boxed.group(1) if boxed else text).strip().rstrip("."), item["answer"].strip()
     given_number, target_number = _number(given), _number(target)
     if given_number is not None and target_number is not None:
         # A target of zero has no relative error, so it needs an exact match.

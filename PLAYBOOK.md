@@ -1,7 +1,7 @@
 # Teacher playbook
 
-Draft 3, written after six runs: the calibration on Qwen3.5-0.8B; ScreenSpot Pro, Meta-World (two
-faults), and MiniWoB++ on Qwen3.5-4B; and MiniWoB++ on a quantized Qwen3.8-27B. A second teacher
+Draft 3, written after seven runs: the calibration on Qwen3.5-0.8B; ScreenSpot Pro, Meta-World (two
+faults), and MiniWoB++ on Qwen3.5-4B; MiniWoB++ on a quantized Qwen3.8-27B; and Meta-World on GLM-4.6V-Flash. A second teacher
 (a different model with this file and the code only) then repeated the Meta-World edit in 30 minutes.
 Draft 3 closes the gaps that it reported.
 
@@ -141,6 +141,11 @@ How the pieces fit:
   token ids of the reply that the student wrote (encode the reply text again). `skip` is the index
   of the target step inside `reply_ids`, counted from the start of the reply (`len(prefix) - 1`), or
   `None` for a prompt of another context.
+- Some families put a norm between the MLP and the residual stream (GLM-4: `post_mlp_layernorm`).
+  `layout.find` lists it in `mlp_write_norms`, the attribution reads the output of that norm, and
+  `habit.fit` converts the values to the change before the norm. On a new family, check `error` of
+  `attribution.attribute_last` first. A value near 1 means that the layout misses a module of this
+  kind: add its name to `wsp/layout.py`.
 - `replay(result, steps)` of the benchmark module gives the prompt at step `steps` of a recorded
   episode. One call starts one episode, so 200 prompts take minutes. Build them one time.
 
@@ -177,6 +182,12 @@ Rules for the recipe, each from a failed attempt:
 - **64 items give a noise of about 5 points.** Do not act on a smaller difference.
 - **A larger student can have the same fault.** The 27B model made the same three wrong choices in
   the email tasks as the 4B model. The contexts and the recipe carried over with a new layer number.
+- **A new family can break a silent assumption.** On GLM the attribution had an error of 1.06,
+  because a norm sits between each MLP and the residual stream. The `error` value showed it before
+  any fit ran. Check it on the first read of a new student.
+- **A habit can be present and not be the fault.** GLM has the `close` habit of the 4B model in
+  button-press, and a forced replay solved 1 of 20 there. The same replay on all tasks found the
+  task where the habit is the fault (pick-place, 11 to 20 of 20) in 6 minutes.
 - **A slow student changes the plan.** At 3 tokens per second one pass of 100 browser episodes takes
   20 minutes. Read probabilities on unseen seeds in place of a trial, and keep trials for the verdict.
 - **Batch composition changes the activations.** Two batch sizes gave keys with a cosine of 0.994 to

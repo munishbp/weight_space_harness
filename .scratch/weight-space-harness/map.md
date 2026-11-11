@@ -154,6 +154,10 @@ A negative result is a valid verdict.
   (Opus 5.5, the playbook and the code only) reached the button edit in 30 minutes. Held-out: 63.0%
   to 71.5%, 17 fixed and 0 broken. It reported four gaps, and all four are closed. A teacher from
   another vendor needs an account from the user.
+- [Choose a student outside the Qwen family](issues/19-student-outside-qwen.md): GLM-4.6V-Flash
+  (10.3B). Every tool ran with no change. The habit recipe raises held-out Meta-World from 51.5% to
+  57.0% (pick-place 12 to 20 of 20) in 30 minutes. The layout now handles a norm between the MLP
+  and the residual stream.
 
 ## Not yet specified
 

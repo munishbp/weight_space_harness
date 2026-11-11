@@ -14,6 +14,7 @@ has a pass or a fail. Each number is a measurement.
 | Robotics: Meta-World through text waypoints | Qwen3.5-4B | First fault: button-press 0 to 18 of 20 held-out episodes in 27 minutes. Second fault, stacked: 15 minutes. Both: 63.0% to 76.0%, 26 episodes fixed, 0 broken, 0.50% of the weights. | Three target tasks only: 60.0% of all episodes, two grasp tasks lost. Nine tasks: 63.0% to 87.5%, no task lost. 64% of the weights. |
 | Computer use, multi-step: MiniWoB++ email tasks through screenshots | Qwen3.5-4B | Held-out 29.0% to 57.0% (29 episodes fixed, 1 broken). First working edit at 19 minutes. One matrix, 0.51% of the weights. The other 78 task types: 63.8% to 65.4%. | Held-out 29.0% to 87.0%. The other 78 task types: 63.8% to 61.5%, with 61 of 312 episodes changed. 65% of the weights. |
 | Scaling: MiniWoB++ email tasks on a quantized 27B model | Qwen3.8-27B NVFP4 | Held-out 30.0% to 68.0% (39 episodes fixed, 1 broken). The recipe and the contexts of the 4B run, layer 60. One matrix, 0.22% of the weights. The other 78 task types: 73.1% to 73.1%. 56 minutes at 3 tokens per second. | not run: no memory for training |
+| A student outside Qwen: Meta-World | GLM-4.6V-Flash (10.3B) | Held-out 51.5% to 57.0% (11 episodes fixed, 0 broken). Pick-place 12 to 20 of 20. Practice trial 30 minutes after the first pass. 0.50% of the weights. | not run |
 | Thinking fault on the 4B model, GSM8K | Qwen3.5-4B | not run | |
 
 ## 1. Calibration on Qwen3.5-0.8B
@@ -187,6 +188,43 @@ back into the same format.
 - No LoRA comparison ran. Training does not fit next to a 27B model on this GPU.
 - The 27B model is a newer generation and a quantized copy. The two sizes differ in more than size.
 
+## 6. A student outside the Qwen family: GLM-4.6V-Flash
+
+`zai-org/GLM-4.6V-Flash` has 10.3 billion weights, 40 layers, and takes images. It runs unquantized
+on the 32 GB GPU (19.2 GB).
+
+- Every tool ran on it with no code change: load, layout, generation with an image, activation
+  reads, an edit, the deviation, and an exact reset.
+- Meta-World, base model: 56.5% of 200 practice episodes.
+- The fault: in pick-place the model moves above the object and writes `close` before it descends
+  (`close` 0.78, `move` 0.22). With `move` forced at that step, practice goes from 11 to 20 of 20.
+- The model also has the `close` habit of the 4B model in button-press. A forced replay shows that
+  the habit is not the fault there (1 of 20), so no edit was tried on it.
+- **Teacher edit: `habit.fit` on the MLP output matrix of layer 34 of 40, rank 1.**
+
+| Held-out episodes (20 per task) | Base | Teacher edit |
+|---|---|---|
+| pick-place (target) | 12 | **20** |
+| peg-insert-side | 5 | 8 |
+| The other eight tasks | 86 | 86 |
+| All ten tasks | 51.5% | **57.0%** (11 fixed, 0 broken, p = 0.001) |
+
+| Measure | Teacher edit |
+|---|---|
+| Time | 30 minutes from the first base pass to the end of the practice trial |
+| Weights changed | 0.50% (1 tensor of 704, 1 layer) |
+| WikiText-2: top-token agreement with the original | 99.0% (KL 0.0004) |
+| Battery | MMLU-Pro 45.5 to 45.5. CountBench 71.0 to 71.0. ChartQA 86.0 to 85.5. RefCOCO 46.5 to 47.5. GSM8K with thinking 90.0 to 89.0. |
+| Random control (same fit, random direction) | pick-place 9 of 20 |
+
+- Two parts of the harness assumed Qwen. A GLM layer has a norm between the MLP and the residual
+  stream, so the attribution was not valid (error 1.06) and the fit wrote its value in the wrong
+  place. The layout now reports that norm, and the attribution and the fit use it (error 0.006).
+  Two battery scorers read only the Qwen answer format, and they now read both.
+- The 30 minutes include 6 minutes on the button-press habit, which a forced replay ruled out, and
+  6 minutes on the norm.
+- No LoRA comparison and no second benchmark ran on this student.
+
 ## What the blocks show
 
 - A closed-form edit works when a fault hides an ability that the model has. The 0.8B model knew
@@ -196,6 +234,8 @@ back into the same format.
   email tasks of a web benchmark. Each edit changed its target and nothing else that we measured.
 - The time to a working edit fell with each use of the recipe: 27 minutes, 15 minutes, and 19
   minutes on a new benchmark.
+- The recipe is not specific to one teacher or one model family. A second teacher repeated an edit
+  from the playbook in 30 minutes, and the recipe gave a held-out gain on a GLM student in 30 minutes.
 - The recipe scales to a 27B student in a 4-bit format. The same fault, the same contexts, and a new
   layer number gave a larger gain there. The time grows with the cost of a forward pass.
 - A closed-form edit did not fix a wrong choice between candidates from the input (two screen

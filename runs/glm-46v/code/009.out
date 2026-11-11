@@ -1,0 +1,5 @@
+write norm of the last MLP: model.language_model.layers.39.post_mlp_layernorm
+attribution of move minus close | total -0.12 | error 0.0062
+MLPs, most negative: [('34', -1.357), ('36', -0.641), ('25', -0.606), ('29', -0.218), ('21', -0.184), ('19', -0.05)] | most positive: [('28', 0.373), ('33', 0.678), ('38', 0.973), ('32', 0.991)]
+late MLPs: [('28', 0.373), ('29', -0.218), ('30', 0.11), ('31', -0.021), ('32', 0.991), ('33', 0.678), ('34', -1.357), ('35', 0.002), ('36', -0.641), ('37', 0.334), ('38', 0.973), ('39', 0.092)]
+[ 20.0 min] attribution done

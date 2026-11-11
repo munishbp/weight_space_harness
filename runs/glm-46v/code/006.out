@@ -1,1 +1,12 @@
 history length of a step-1 prompt: 1 | text: on: [-83, 855, 326] / Goal position: [-83, 855, 215] / Gripper is open. / Primitives so far: / {"action": "move", "position": [-83, 855, 250]} / Write the next primitive.
+forced | reach-v3                   base 19 forced 19 fixed 0 broken 0 | [('move', 18), ('move move move move move move move move move move move move', 1)]
+forced | push-v3                    base  6 forced  6 fixed 0 broken 0 | [('move move move move move move move', 5), ('move move move', 4)]
+forced | pick-place-v3              base 11 forced 20 fixed 9 broken 0 | [('move move close move', 16), ('move move close move move', 4)]
+forced | door-open-v3               base 17 forced 17 fixed 0 broken 0 | [('move move close move', 12), ('move move close move open move move move move move move move', 3)]
+forced | drawer-open-v3             base  1 forced  1 fixed 0 broken 0 | [('move move close move move move move move move move move move', 8), ('move move close move move move move move move move', 4)]
+forced | drawer-close-v3            base 13 forced 13 fixed 0 broken 0 | [('move move', 10), ('move move close move done', 6)]
+forced | button-press-topdown-v3    base  1 forced  1 fixed 0 broken 0 | [('move move close done', 12), ('move move move move close done', 4)]
+forced | peg-insert-side-v3         base  8 forced  9 fixed 1 broken 0 | [('move move close move move move move move', 4), ('move move close move', 3)]
+forced | window-open-v3             base 20 forced 20 fixed 0 broken 0 | [('move move close move move', 8), ('move move move move move move', 3)]
+forced | window-close-v3            base 17 forced 16 fixed 0 broken 1 | [('move move close move move move move move move move move move', 4), ('move move', 3)]
+[ 13.6 min] forced replay on all tasks done

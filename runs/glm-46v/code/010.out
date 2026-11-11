@@ -1,0 +1,10 @@
+[ 21.4 min] protection done
+[ 22.2 min] keys done
+base | pick-place step 1, seeds 0-9 {'move': 0.48, 'close': 0.52, 'open': 0.0, 'done': 0.0} | seeds 10-19 {'move': 0.31, 'close': 0.69, 'open': 0.0, 'done': 0.0} | step 1 of other tasks {'move': 0.67, 'close': 0.32, 'open': 0.01, 'done': 0.0} | pick-place step 2 {'move': 0.0, 'close': 1.0, 'open': 0.0, 'done': 0.0}
+margin 4, relative change 0.025 | pick-place step 1, seeds 0-9 {'move': 0.73, 'close': 0.27, 'open': 0.0, 'done': 0.0} | seeds 10-19 {'move': 0.6, 'close': 0.4, 'open': 0.0, 'done': 0.0} | step 1 of other tasks {'move': 0.67, 'close': 0.32, 'open': 0.01, 'done': 0.0} | pick-place step 2 {'move': 0.0, 'close': 1.0, 'open': 0.0, 'done': 0.0}
+    largest change of p(move) at step 1 of other tasks: 0.035
+margin 8, relative change 0.050 | pick-place step 1, seeds 0-9 {'move': 0.92, 'close': 0.08, 'open': 0.0, 'done': 0.0} | seeds 10-19 {'move': 0.82, 'close': 0.18, 'open': 0.0, 'done': 0.0} | step 1 of other tasks {'move': 0.67, 'close': 0.32, 'open': 0.01, 'done': 0.0} | pick-place step 2 {'move': 0.0, 'close': 1.0, 'open': 0.0, 'done': 0.0}
+    largest change of p(move) at step 1 of other tasks: 0.054
+margin 16, relative change 0.099 | pick-place step 1, seeds 0-9 {'move': 1.0, 'close': 0.0, 'open': 0.0, 'done': 0.0} | seeds 10-19 {'move': 0.98, 'close': 0.02, 'open': 0.0, 'done': 0.0} | step 1 of other tasks {'move': 0.67, 'close': 0.32, 'open': 0.01, 'done': 0.0} | pick-place step 2 {'move': 0.0, 'close': 1.0, 'open': 0.0, 'done': 0.0}
+    largest change of p(move) at step 1 of other tasks: 0.078
+[ 23.9 min] margin sweep done

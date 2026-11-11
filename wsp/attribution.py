@@ -30,6 +30,13 @@ def token_direction(token_id: int, against: list[int]) -> torch.Tensor:
     return (rows[0] - rows[1:].mean(dim=0)) * norm.weight.detach().float().cpu()
 
 
+def _writers(parts: dict) -> dict[str, str]:
+    """Block name to the module whose output joins the residual stream: the block, or the norm after it."""
+    blocks = parts["mlps"] + parts["attentions"]
+    norms = parts["mlp_write_norms"] + parts["attention_write_norms"]
+    return {block: norm or block for block, norm in zip(blocks, norms)} | {parts["embedding"]: parts["embedding"]}
+
+
 def attribute(sequences: list[list[int]], positions: list[list[int]], direction: torch.Tensor) -> dict:
     """One read pass: the share of each part in the logit difference along `direction`, at each position.
 
@@ -40,11 +47,11 @@ def attribute(sequences: list[list[int]], positions: list[list[int]], direction:
     """
     parts = layout.find(tools.MODEL)
     last = parts["layers"][-1]
-    modules = parts["mlps"] + parts["attentions"] + [last, parts["embedding"]]
-    outputs = tools.read_tokens(sequences, modules, positions=positions)
+    writers = _writers(parts)
+    outputs = tools.read_tokens(sequences, [*writers.values(), last], positions=positions)
     final = torch.cat(outputs[last])
     scale = final.pow(2).mean(dim=1).sqrt()
-    joined = {name: torch.cat(outputs[name]) for name in modules if name != last}
+    joined = {block: torch.cat(outputs[module]) for block, module in writers.items()}
     error = float((sum(joined.values()) - final).norm() / final.norm())
     return {
         "shares": {name: (value @ direction) / scale for name, value in joined.items()},
@@ -65,11 +72,11 @@ def attribute_last(
     """
     parts = layout.find(tools.MODEL)
     last = parts["layers"][-1]
-    modules = parts["mlps"] + parts["attentions"] + [last, parts["embedding"]]
-    outputs = tools.read(conversations, modules, thinking=thinking, append_ids=append_ids)
+    writers = _writers(parts)
+    outputs = tools.read(conversations, [*writers.values(), last], thinking=thinking, append_ids=append_ids)
     final = outputs[last]
     scale = final.pow(2).mean(dim=1).sqrt()
-    joined = {name: value for name, value in outputs.items() if name != last}
+    joined = {block: outputs[module] for block, module in writers.items()}
     error = float((sum(joined.values()) - final).norm() / final.norm())
     along = (lambda value: (value * direction).sum(dim=1)) if direction.ndim == 2 else (lambda value: value @ direction)
     return {

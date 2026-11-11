@@ -1,0 +1,53 @@
+margin 12, all practice seeds | pick-place step 1, seeds 0-9 {'move': 0.99, 'close': 0.01, 'open': 0.0, 'done': 0.0} | seeds 10-19 {'move': 0.97, 'close': 0.03, 'open': 0.0, 'done': 0.0} | step 1 of other tasks {'move': 0.67, 'close': 0.32, 'open': 0.01, 'done': 0.0} | pick-place step 2 {'move': 0.0, 'close': 1.0, 'open': 0.0, 'done': 0.0}
+edit: {'tensors_changed': 1, 'tensors_changed_pct': 0.14205, 'layers_changed': [34], 'changed_weights': 51139261, 'changed_weights_pct': 0.49685, 'relative_change_of_model': 0.00418} | matrix relative change 0.0821
+edit practice | reach-v3                   {'n': 20, 'success': 19, 'invalid': 0, 'mean_primitives': 1.6}
+edit practice | push-v3                    {'n': 20, 'success': 6, 'invalid': 0, 'mean_primitives': 6.7}
+edit practice | pick-place-v3              {'n': 20, 'success': 20, 'invalid': 0, 'mean_primitives': 4.2}
+edit practice | door-open-v3               {'n': 20, 'success': 17, 'invalid': 0, 'mean_primitives': 5.0}
+edit practice | drawer-open-v3             {'n': 20, 'success': 1, 'invalid': 0, 'mean_primitives': 11.1}
+edit practice | drawer-close-v3            {'n': 20, 'success': 13, 'invalid': 0, 'mean_primitives': 3.1}
+edit practice | button-press-topdown-v3    {'n': 20, 'success': 1, 'invalid': 0, 'mean_primitives': 4.3}
+edit practice | peg-insert-side-v3         {'n': 20, 'success': 8, 'invalid': 0, 'mean_primitives': 7.8}
+edit practice | window-open-v3             {'n': 20, 'success': 20, 'invalid': 0, 'mean_primitives': 6.8}
+edit practice | window-close-v3            {'n': 20, 'success': 16, 'invalid': 0, 'mean_primitives': 5.5}
+edit practice | all                        {'n': 200, 'success': 121, 'success_pct': 60.5, 'interval_95': [53.6, 67.0]}
+edit practice | against reference: {'fixed': 9, 'broken': 1, 'p_value': 0.021484375}
+edit practice | 335 s
+[ 30.2 min] practice trial done
+deviation: {'mean_kl': 0.0004, 'max_kl': 0.0075, 'top1_agreement_pct': 98.9508, 'perplexity_original': 10.7411, 'perplexity_edited': 10.7432, 'positions': 13439}
+base held-out | reach-v3                   {'n': 20, 'success': 18, 'invalid': 0, 'mean_primitives': 2.3}
+base held-out | push-v3                    {'n': 20, 'success': 7, 'invalid': 0, 'mean_primitives': 6.7}
+base held-out | pick-place-v3              {'n': 20, 'success': 12, 'invalid': 0, 'mean_primitives': 5.2}
+base held-out | door-open-v3               {'n': 20, 'success': 15, 'invalid': 0, 'mean_primitives': 6.0}
+base held-out | drawer-open-v3             {'n': 20, 'success': 0, 'invalid': 0, 'mean_primitives': 11.6}
+base held-out | drawer-close-v3            {'n': 20, 'success': 6, 'invalid': 0, 'mean_primitives': 3.9}
+base held-out | button-press-topdown-v3    {'n': 20, 'success': 0, 'invalid': 0, 'mean_primitives': 4.1}
+base held-out | peg-insert-side-v3         {'n': 20, 'success': 5, 'invalid': 0, 'mean_primitives': 9.2}
+base held-out | window-open-v3             {'n': 20, 'success': 20, 'invalid': 0, 'mean_primitives': 5.3}
+base held-out | window-close-v3            {'n': 20, 'success': 20, 'invalid': 0, 'mean_primitives': 3.5}
+base held-out | all                        {'n': 200, 'success': 103, 'success_pct': 51.5, 'interval_95': [44.6, 58.3]}
+base held-out | 338 s
+[ 35.9 min] base held-out done
+edit held-out | reach-v3                   {'n': 20, 'success': 18, 'invalid': 0, 'mean_primitives': 2.3}
+edit held-out | push-v3                    {'n': 20, 'success': 7, 'invalid': 0, 'mean_primitives': 6.6}
+edit held-out | pick-place-v3              {'n': 20, 'success': 20, 'invalid': 0, 'mean_primitives': 4.2}
+edit held-out | door-open-v3               {'n': 20, 'success': 15, 'invalid': 0, 'mean_primitives': 6.0}
+edit held-out | drawer-open-v3             {'n': 20, 'success': 0, 'invalid': 0, 'mean_primitives': 11.6}
+edit held-out | drawer-close-v3            {'n': 20, 'success': 6, 'invalid': 0, 'mean_primitives': 3.9}
+edit held-out | button-press-topdown-v3    {'n': 20, 'success': 0, 'invalid': 0, 'mean_primitives': 4.1}
+edit held-out | peg-insert-side-v3         {'n': 20, 'success': 8, 'invalid': 0, 'mean_primitives': 9.2}
+edit held-out | window-open-v3             {'n': 20, 'success': 20, 'invalid': 0, 'mean_primitives': 5.3}
+edit held-out | window-close-v3            {'n': 20, 'success': 20, 'invalid': 0, 'mean_primitives': 3.5}
+edit held-out | all                        {'n': 200, 'success': 114, 'success_pct': 57.0, 'interval_95': [50.1, 63.7]}
+edit held-out | against reference: {'fixed': 11, 'broken': 0, 'p_value': 0.0009765625}
+edit held-out | 332 s
+[ 41.5 min] edit held-out done
+random control | relative change 0.0722 | pick-place held-out 9 of 20
+[ 42.4 min] verdict without the battery saved
+[ 53.1 min] battery of the base model done
+battery mmlu_pro {'before_pct': 45.5, 'after_pct': 45.5, 'change_points': 0.0, 'fixed': 0, 'broken': 0, 'p_value': 1.0, 'major_drop': False}
+battery gsm8k_thinking {'before_pct': 90.0, 'after_pct': 89.0, 'change_points': -1.0, 'fixed': 2, 'broken': 3, 'p_value': 1.0, 'major_drop': False}
+battery countbench {'before_pct': 71.0, 'after_pct': 71.0, 'change_points': 0.0, 'fixed': 1, 'broken': 1, 'p_value': 1.0, 'major_drop': False}
+battery chartqa {'before_pct': 0.0, 'after_pct': 0.0, 'change_points': 0.0, 'fixed': 0, 'broken': 0, 'p_value': 1.0, 'major_drop': False}
+battery refcoco {'before_pct': 0.0, 'after_pct': 0.0, 'change_points': 0.0, 'fixed': 0, 'broken': 0, 'p_value': 1.0, 'major_drop': False}
+[ 64.7 min] verdict done

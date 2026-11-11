@@ -34,6 +34,10 @@ def parse_box(text: str) -> list[float] | None:
     """The first box in the reply, as shares of the image width and height."""
     match = re.search(r'"bbox_2d"\s*:\s*\[([^\]]*)\]', text)
     if not match:
+        # Some families (GLM) write the box as a bare list of four numbers on the same 0 to 1000 scale.
+        number = r"\s*-?\d+(?:\.\d+)?\s*"
+        match = re.search(rf"\[({number},{number},{number},{number})\]", text)
+    if not match:
         return None
     try:
         values = [float(value) / 1000 for value in match.group(1).split(",")]

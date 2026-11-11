@@ -20,7 +20,7 @@ Status: research code. The results so far are in [RESULTS.md](RESULTS.md).
 | `wsp/edits.py` | Closed-form edits: remove a direction, wire neurons to a direction, and a least-squares fit of keys to values. |
 | `wsp/habit.py` | The recipe for a habit in the wrong context: keys, protection over all positions, the fit, and a check for stray writes. |
 | `wsp/attribution.py` | The share of each layer part in the logit of one token. |
-| `wsp/layout.py` | Finds the layers, MLPs, and attention blocks of a student by name. |
+| `wsp/layout.py` | Finds the layers, MLPs, and attention blocks of a student by name. Tested on Qwen3.5 (0.8B, 4B), Qwen3.8-27B, and GLM-4.6V-Flash. |
 | `wsp/evaluate.py`, `wsp/stats.py` | Benchmark runs with a fixed seed, intervals, and paired tests. |
 | `wsp/battery.py` | The generalization battery: fixed subsets of general benchmarks that run before and after an edit. |
 | `wsp/bench/` | Benchmarks: ScreenSpot Pro, boxed math (GSM8K), MMLU-Pro, CountBench, ChartQA, RefCOCO, Meta-World through text waypoints, and MiniWoB++ through screenshots. |

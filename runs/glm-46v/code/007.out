@@ -1,0 +1,7 @@
+base, pick-place step 1 | episodes that wrote close: 12 {'move': 0.22, 'close': 0.78, 'open': 0.0, 'done': 0.0} | episodes that wrote move: {'move': 0.66, 'close': 0.34, 'open': 0.0, 'done': 0.0}
+attribution of move minus close | total -0.12 | error 1.0641
+MLPs, most negative: [('0', -0.755), ('3', -0.383), ('4', -0.296), ('25', -0.179), ('1', -0.179), ('34', -0.127)]
+[ 14.4 min] attribution done
+step 1 of other tasks: 79 | later steps: 157
+[ 17.7 min] contexts done
+[ 19.9 min] 171 prompts for the protection

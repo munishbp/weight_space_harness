@@ -16,7 +16,7 @@ Every function reads the student through `wsp.tools`, so the ledger counts the f
 
 import torch
 
-from wsp import edits, tools
+from wsp import edits, layout, tools
 
 # A prompt for the protection: the conversation, the token ids of the forced reply, and the index
 # of one reply position to leave out (the target step), or None.
@@ -92,6 +92,15 @@ def fit(
     """
     keys = [group[0] for group in targets]
     values = [edits.logit_shift_values(direction, scale, margin) for _, scale, direction in targets]
+    parts = layout.find(tools.MODEL)
+    if mlp_out not in parts["mlp_outputs"]:
+        raise ValueError(f"{mlp_out} is not an MLP output matrix. Take a name from layout.find(model)['mlp_outputs'].")
+    norm = parts["mlp_write_norms"][parts["mlp_outputs"].index(mlp_out)]
+    if norm is not None:
+        # A norm sits between this matrix and the residual stream (GLM-4). The values must be the change before it.
+        weight = tools.get_weight(mlp_out + ".weight")
+        gain = tools.MODEL.get_submodule(norm).weight.detach().float().cpu()
+        values = [edits.values_before_norm(group.float().cpu() @ weight.T, value.float().cpu(), gain) for group, value in zip(keys, values)]
     if keep is not None and len(keep):
         keys.append(keep)
         values.append(torch.zeros(len(keep), values[0].shape[1], dtype=values[0].dtype, device=values[0].device))

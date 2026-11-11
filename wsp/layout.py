@@ -13,6 +13,9 @@ ATTENTION_NAMES = ("self_attn", "linear_attn", "attn", "attention")
 MLP_OUTPUT_NAMES = ("down_proj", "fc2", "c_proj")
 ATTENTION_OUTPUT_NAMES = ("o_proj", "out_proj", "c_proj")
 FINAL_NORM_NAMES = ("norm", "ln_f", "final_layer_norm")
+# Some families (GLM-4) pass the output of a block through a norm before it joins the residual stream.
+MLP_WRITE_NORM_NAMES = ("post_mlp_layernorm",)
+ATTENTION_WRITE_NORM_NAMES = ("post_self_attn_layernorm",)
 
 
 def find(model: torch.nn.Module) -> dict:
@@ -39,6 +42,9 @@ def find(model: torch.nn.Module) -> dict:
                 return f"{parent}.{option}"
         raise LookupError(f"The module {parent} has no child named one of {options}. Add its name to wsp/layout.py.")
 
+    def optional_child(parent: str, options: tuple[str, ...]) -> str | None:
+        return next((f"{parent}.{option}" for option in options if f"{parent}.{option}" in named), None)
+
     mlps = [child(layer, MLP_NAMES) for layer in layers]
     attentions = [child(layer, ATTENTION_NAMES) for layer in layers]
     embedding = next(name for name, module in named.items() if module is model.get_input_embeddings())
@@ -48,6 +54,9 @@ def find(model: torch.nn.Module) -> dict:
         "attentions": attentions,
         "mlp_outputs": [child(mlp, MLP_OUTPUT_NAMES) for mlp in mlps],
         "attention_outputs": [child(attention, ATTENTION_OUTPUT_NAMES) for attention in attentions],
+        # One entry per layer: the norm between the block and the residual stream, or None.
+        "mlp_write_norms": [optional_child(layer, MLP_WRITE_NORM_NAMES) for layer in layers],
+        "attention_write_norms": [optional_child(layer, ATTENTION_WRITE_NORM_NAMES) for layer in layers],
         "final_norm": child(stack_name.rsplit(".", 1)[0], FINAL_NORM_NAMES),
         "embedding": embedding,
     }
