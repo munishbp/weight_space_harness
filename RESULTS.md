@@ -11,7 +11,7 @@ has a pass or a fail. Each number is a measurement.
 |---|---|---|---|
 | Calibration: thinking that never ends, GSM8K | Qwen3.5-0.8B | Held-out 10.2% to 38.3% in 29 minutes. 0.98% of the weights. The published edit of the blog reaches 21.9%. | not run |
 | Computer use: ScreenSpot Pro icon targets | Qwen3.5-4B | No edit found in 48 minutes. | Held-out icons 38.2% to 50.2%. Text targets 76.0% to 63.5%. 55% of the weights. |
-| Robotics: Meta-World through text waypoints | Qwen3.5-4B | Button-press 0 to 18 of 20 held-out episodes in 27 minutes. One matrix, 0.48% of the weights. Nothing else changes. A second fault did not yield. | Target tasks 29 to 57 of 60. Two other tasks fall from 37 to 2 of 40. A second run on all tasks is pending. |
+| Robotics: Meta-World through text waypoints | Qwen3.5-4B | Button-press 0 to 18 of 20 held-out episodes in 27 minutes. One matrix, 0.48% of the weights. Nothing else changes. A second fault did not yield. | Three target tasks only: 60.0% of all episodes, two grasp tasks lost. Nine tasks: 63.0% to 87.5%, no task lost. 64% of the weights. |
 | Thinking fault on the 4B model, GSM8K | Qwen3.5-4B | planned | |
 | Scaling: quantized 27B | Qwen3.8-27B NVFP4 | loader written, run planned | |
 
@@ -64,30 +64,35 @@ The ten MT10 tasks, 20 practice seeds and 20 held-out seeds per task.
 - **Teacher edit: a least-squares fit on the MLP output matrix of layer 28, rank 1.** It raises
   `move` over `close` at that step of the button task only.
 
-| Held-out episodes (20 per task) | Base | Teacher edit | LoRA, 15 minutes, target tasks only |
-|---|---|---|---|
-| button-press-topdown (target) | 0 | **18** | 20 |
-| push (target) | 14 | 13 | 17 |
-| window-open (target) | 15 | 15 | 20 |
-| pick-place | 20 | 20 | **2** |
-| peg-insert-side | 17 | 17 | **0** |
-| the other five tasks | 60 | 60 | 61 |
-| All ten tasks | 63.0% | **71.5%** | 60.0% |
+| Held-out episodes (20 per task) | Base | Teacher edit | LoRA, target tasks only | LoRA, nine tasks |
+|---|---|---|---|---|
+| button-press-topdown (target) | 0 | **18** | 20 | 20 |
+| push (target) | 14 | 13 | 17 | 17 |
+| window-open (target) | 15 | 15 | 20 | 19 |
+| pick-place | 20 | 20 | **2** | 20 |
+| peg-insert-side | 17 | 17 | **0** | 19 |
+| drawer-open | 0 | 0 | 1 | **20** |
+| door-open (no training examples) | 0 | 0 | 0 | 0 |
+| reach, drawer-close, window-close | 60 | 60 | 60 | 60 |
+| All ten tasks | 63.0% | 71.5% | 60.0% | **87.5%** |
 
-| Measure | Teacher edit | LoRA, target tasks only |
-|---|---|---|
-| Time | 27 minutes to the edit (first time, fault unknown) | 15 minutes of training, plus hand-written reference plans |
-| Weights changed | 0.48% (1 tensor, 1 layer) | 60.4% (176 tensors, 32 layers) |
-| WikiText-2: top-token agreement with the original | 99.3% | 93.9% |
-| Battery, largest drop | 1.0 point (MMLU-Pro) | 2.0 points (MMLU-Pro) |
-| Random control (same fit, random direction) | 2 of 20 on button-press | |
+| Measure | Teacher edit | LoRA, target tasks only | LoRA, nine tasks |
+|---|---|---|---|
+| Time | 27 minutes to the edit (first time, fault unknown) | 15 minutes of training | 15 minutes of training |
+| Input from a person | none | reference plans for 3 tasks | reference plans for 9 tasks |
+| Weights changed | 0.48% (1 tensor, 1 layer) | 60.4% (176 tensors, 32 layers) | 63.9% (176 tensors, 32 layers) |
+| WikiText-2: top-token agreement with the original | 99.3% | 93.9% | 92.6% |
+| Battery, largest drop | 1.0 point (MMLU-Pro) | 2.0 points (MMLU-Pro) | 2.5 points (ChartQA) |
+| Random control (same fit, random direction) | 2 of 20 on button-press | | |
 
 - A sentence in the system prompt also fixes the button task (18 of 20 practice episodes), and it
   costs 8 episodes in push and window-open.
 - Fault 2 (in push, the first move goes to the goal in place of the object): two closed-form edits
   gave no significant gain on 40 unseen episodes. The LoRA model fixes it.
-- The LoRA model saw only the three target tasks. None of their plans holds a `close`, and the tasks
-  that need a grasp broke.
+- The first LoRA model saw only the three target tasks. None of their plans holds a `close`, and the
+  tasks that need a grasp broke. The second LoRA model saw nine tasks and broke none.
+- With a working plan for each task, LoRA beats the teacher edit by 16 points in the same time. The
+  teacher edit needed no plan from a person.
 - Limits: the tasks are short (2 to 6 primitives), and the prompt holds positions from the simulator
   state. This block does not show a long-horizon gain.
 
@@ -99,7 +104,9 @@ The ten MT10 tasks, 20 practice seeds and 20 held-out seeds per task.
   right action already has a visible probability. The edit changed one robot task and nothing else.
 - A closed-form edit did not fix a wrong choice between candidates from the input (two screen
   elements, two positions). Training fixes that kind in 15 minutes.
-- Training has a price next to the target, in both blocks: 12.5 points on text targets, and two
-  robot tasks lost.
+- Training on the target alone has a price next to the target, in both blocks: 12.5 points on text
+  targets, and two robot tasks lost. Training data that covers the neighbours removes that price.
+- Training needs correct examples. The closed-form edit needs only a fault that the teacher can
+  locate. Where both apply, training on broad examples gave the larger gain.
 - The generalization battery alone does not show the cost of the LoRA model. A near-transfer set
   next to the target does.

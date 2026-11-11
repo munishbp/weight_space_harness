@@ -1,7 +1,7 @@
 # Run the LoRA baseline on the Meta-World target tasks
 
 Type: task
-Status: claimed
+Status: resolved
 Blocked by: 24
 
 ## Question
@@ -73,4 +73,35 @@ to 19%. Training on short replies made the model end its thinking sooner. This i
 ## Answer, part 2: LoRA on all nine tasks with a reference plan
 
 The narrow training set is a harsh setup for LoRA. A second run trains for 15 minutes on the
-reference plans of all nine tasks that have one (502 examples, seeds 0 to 19). Pending.
+reference plans of all nine tasks that have one (502 examples, seeds 0 to 19, 7.4 epochs). Door-open
+has no reference plan, so it has no examples. Files: `runs/mw-4b-lora15-all/`.
+
+| Held-out episodes (20 per task) | Base | Teacher edit | LoRA, target tasks | LoRA, nine tasks |
+|---|---|---|---|---|
+| button-press-topdown | 0 | 18 | 20 | 20 |
+| push | 14 | 13 | 17 | 17 |
+| window-open | 15 | 15 | 20 | 19 |
+| pick-place | 20 | 20 | 2 | 20 |
+| peg-insert-side | 17 | 17 | 0 | 19 |
+| drawer-open | 0 | 0 | 1 | 20 |
+| door-open (no examples) | 0 | 0 | 0 | 0 |
+| reach, drawer-close, window-close | 60 | 60 | 60 | 60 |
+| All ten tasks | 63.0% | 71.5% | 60.0% | 87.5% |
+
+- Held-out against the base model: 52 episodes fixed, 3 broken (p = 2e-12). Practice seeds: 86.0%.
+- Edit size: 63.9% of the weights, 176 tensors, all 32 layers. Relative change of the model 0.0080.
+- WikiText-2: KL 0.0205, top-token agreement 92.6%, perplexity 13.38 to 13.42.
+- Battery: MMLU-Pro 48.0 to 48.5, CountBench 85.0 to 85.0, ChartQA 85.0 to 82.5 (2 fixed, 7 broken,
+  p = 0.18), RefCOCO 90.0 to 88.5, GSM8K with thinking 75.0 to 78.0. No major drop.
+
+### What part 2 shows
+
+- With examples of every task, LoRA beats the teacher edit by 16 points in the same 15 minutes. It
+  also fixes drawer-open (0 to 20), which no closed-form edit fixed.
+- The cost of part 1 (pick-place and peg-insert lost) came from the narrow training set, not from
+  LoRA as a method. Examples of the neighbouring tasks remove it.
+- LoRA needs a plan that works for each task. A person wrote those plans. The teacher edit needed
+  no plan: it used the action that the model already rated at 12%.
+- Door-open stays at 0. A task with no examples gets no gain from the other nine.
+- The LoRA model is farther from the original than the teacher edit on every deviation measure
+  (top-token agreement 92.6% against 99.3%). The battery does not show a significant drop.

@@ -129,15 +129,18 @@ A negative result is a valid verdict.
 - [Check which multi-step computer use benchmark runs here](issues/22-multi-step-benchmark-setup.md):
   MiniWoB++ first, because one pass takes minutes. A portion of OSWorld-Verified follows. KVM and
   Docker work here with no sudo. Both installs reach outside PyPI.
+- [Edit the 4B model for one Meta-World fault](issues/25-teacher-edit-metaworld.md): a rank-1
+  least-squares fit on the MLP output of layer 28 raises held-out button-press from 0 to 18 of 20 in
+  27 minutes. It changes 0.48% of the weights and no other task. A second fault did not yield.
+- [Run the LoRA baseline on the Meta-World target tasks](issues/26-lora-baseline-metaworld.md): LoRA
+  on the three target tasks reaches 57 of 60 there and breaks two grasp tasks (60.0% overall). LoRA
+  on nine tasks reaches 87.5% with no broken task. Both change about 60% of the weights.
 
 ## Not yet specified
 
 - **The OSWorld-Verified portion.** The application, the number of tasks, the agent class for the
   local model, and the time per pass. It becomes a ticket after
   [Install MiniWoB++, run the base model, and choose a portion](issues/27-miniwob-base-and-portion.md).
-- **The 27B block after the path choice.** A target, a baseline, an edit attempt, and the measures.
-  These become tickets when [Find a way to run and edit the 27B model](issues/21-27b-run-and-edit-paths.md)
-  resolves and the user picks a path.
 - **VLABench.** It has long composite tasks and fits the goal better than Meta-World. Its install
   needs a git repository and two Google Drive archives, which the session blocks. The user must
   allow that install.
