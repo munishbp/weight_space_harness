@@ -79,7 +79,31 @@ def metaworld_examples(args) -> list:
     return examples
 
 
-BENCHES = {"screenspot_pro": screenspot_examples, "metaworld": metaworld_examples}
+def miniwob_examples(args) -> list:
+    """One example per step of each recorded MiniWoB episode that succeeded."""
+    from wsp.bench import miniwob_screen as mb
+
+    if not args.episodes:
+        raise SystemExit("The miniwob bench needs --episodes, a JSON file of recorded episodes. Nothing was trained.")
+    examples = []
+    for record in json.loads(Path(args.episodes).read_text()):
+        if not record["correct"]:
+            continue
+        episode = mb.Episode(record["task"], record["seed"])
+        steps = []
+        for action in record["actions"]:
+            if episode.over or action["action"] == "invalid":
+                break
+            steps.append((mb.conversation(episode), json.dumps(action) + END))
+            episode.apply(action)
+        # A replay that does not succeed again gives no example: its steps are not a correct plan.
+        if episode.success:
+            examples += [lambda step=step: step for step in steps]
+    mb.close_all()
+    return examples
+
+
+BENCHES = {"screenspot_pro": screenspot_examples, "metaworld": metaworld_examples, "miniwob": miniwob_examples}
 
 
 def main() -> None:
@@ -90,6 +114,7 @@ def main() -> None:
     parser.add_argument("--key", default="practice")
     parser.add_argument("--seeds", default="0:20", help="metaworld: range of seeds, first:last, last excluded.")
     parser.add_argument("--tasks", help="metaworld: task names with commas between them. The default is every task.")
+    parser.add_argument("--episodes", help="miniwob: JSON file of recorded episodes. The successful episodes give the examples.")
     parser.add_argument("--minutes", type=float, required=True, help="Wall-clock budget for the training loop.")
     parser.add_argument("--out", required=True)
     parser.add_argument("--rank", type=int, default=16)

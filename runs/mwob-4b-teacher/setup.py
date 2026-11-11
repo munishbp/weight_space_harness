@@ -60,4 +60,12 @@ def show(results, task, count=3, failed=True):
     for r in [r for r in results if r["task"] == task and (not r["correct"]) == failed][:count]:
         print(r["id"], "|", r["utterance"]); [print("   ", json.dumps(a)) for a in r["actions"]]
 
+# The target portion (chosen after the base scan) and its seeds.
+EMAIL = ["email-inbox-reply", "email-inbox-forward", "email-inbox", "email-inbox-noscroll", "email-inbox-star-reply"]
+OTHER = [task for task in TASKS if task not in EMAIL]
+PRACTICE = [(task, seed) for task in EMAIL for seed in range(20)]
+HELDOUT = [(task, seed) for task in EMAIL for seed in range(100, 120)]
+HELD_OTHER = [(task, seed) for task in OTHER for seed in range(100, 104)]
+acts = lambda r: " ".join({"click": "c", "type": "t", "key": "k", "done": "d", "invalid": "x"}[a["action"]] for a in r["actions"])
+
 print("setup done:", len(TASKS), "task types of", len(CANDIDATES), "candidates")

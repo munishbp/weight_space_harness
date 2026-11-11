@@ -102,6 +102,29 @@ mostly noise between two base runs. The cause: the composition of a batch change
 (cosine 0.994 to 0.998 between a batch of 5 and a batch of 16). A base repeat with the same batches
 at minute 19 would have shown that.
 
+### LoRA baseline, 15 minutes
+
+Examples: the steps of the practice episodes that succeed in the forced replay (140 examples, 28
+epochs). Files: `runs/mwob-4b-lora15/`.
+
+| Held-out | Base | Teacher edit | LoRA, 15 minutes |
+|---|---|---|---|
+| email-inbox-reply (20) | 0 | 11 | 19 |
+| email-inbox-forward (20) | 0 | 3 | 17 |
+| email-inbox, three mixed types (60) | 29 | 43 | 51 |
+| All five email task types | 29.0% | 57.0% | 87.0% |
+| The other 78 task types (312 episodes) | 63.8% | 65.4% | 61.5% |
+| Episodes of other task types that change | | 7 (6 fixed, 1 broken) | 61 (27 fixed, 34 broken) |
+| Weights changed | | 0.51% | 64.6% |
+| WikiText-2: top-token agreement | | 99.2% | 94.5% |
+| WikiText-2: perplexity (base 13.38) | | 13.38 | 13.81 |
+| Battery: ChartQA, RefCOCO | 85.0, 90.0 | 85.0, 89.5 | 82.5, 87.0 |
+| Battery: GSM8K with thinking | 75.0 | 74.0 | 84.0 |
+
+LoRA gains 30 points more than the edit on the target. It learns where to click in the forward
+form, which the edit cannot give. It changes one in five episodes of the other task types, with no
+significant net loss (p = 0.44). ChartQA and RefCOCO fall by 2.5 and 3.0 points (p = 0.06 and 0.07).
+
 ### What this shows
 
 - The habit recipe works on a multi-step computer use task. The gain is 28 points on held-out

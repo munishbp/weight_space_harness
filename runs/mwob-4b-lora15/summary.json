@@ -1,0 +1,13 @@
+{
+  "model": "Qwen/Qwen3.5-4B",
+  "bench": "miniwob",
+  "examples": 140,
+  "examples_seen": 3920,
+  "epochs": 28.0,
+  "training_seconds": 900.0,
+  "rank": 16,
+  "learning_rate": 0.0001,
+  "adapted_matrices": 176,
+  "trainable_weights": 27918336,
+  "peak_gpu_gb": 10.0
+}

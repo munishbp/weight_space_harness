@@ -12,7 +12,7 @@ has a pass or a fail. Each number is a measurement.
 | Calibration: thinking that never ends, GSM8K | Qwen3.5-0.8B | Held-out 10.2% to 38.3% in 29 minutes. 0.98% of the weights. The published edit of the blog reaches 21.9%. | not run |
 | Computer use: ScreenSpot Pro icon targets | Qwen3.5-4B | No edit found in 48 minutes. | Held-out icons 38.2% to 50.2%. Text targets 76.0% to 63.5%. 55% of the weights. |
 | Robotics: Meta-World through text waypoints | Qwen3.5-4B | First fault: button-press 0 to 18 of 20 held-out episodes in 27 minutes. Second fault, stacked: 15 minutes. Both: 63.0% to 76.0%, 26 episodes fixed, 0 broken, 0.50% of the weights. | Three target tasks only: 60.0% of all episodes, two grasp tasks lost. Nine tasks: 63.0% to 87.5%, no task lost. 64% of the weights. |
-| Computer use, multi-step: MiniWoB++ email tasks through screenshots | Qwen3.5-4B | Held-out 29.0% to 57.0% (29 episodes fixed, 1 broken). First working edit at 19 minutes. One matrix, 0.51% of the weights. The other 78 task types: 63.8% to 65.4%. | pending |
+| Computer use, multi-step: MiniWoB++ email tasks through screenshots | Qwen3.5-4B | Held-out 29.0% to 57.0% (29 episodes fixed, 1 broken). First working edit at 19 minutes. One matrix, 0.51% of the weights. The other 78 task types: 63.8% to 65.4%. | Held-out 29.0% to 87.0%. The other 78 task types: 63.8% to 61.5%, with 61 of 312 episodes changed. 65% of the weights. |
 | Thinking fault on the 4B model, GSM8K | Qwen3.5-4B | planned | |
 | Scaling: quantized 27B | Qwen3.8-27B NVFP4 | loader written, run planned | |
 
@@ -116,26 +116,29 @@ point, `type`, `key`, `done`). It gets no DOM. 83 task types, at most 10 actions
 - **Teacher edit: one least-squares fit on the MLP output matrix of layer 28, rank 2.** It raises
   `click` over `type` and over `key` at those three steps of the email tasks only.
 
-| Held-out episodes | Base | Teacher edit |
-|---|---|---|
-| email-inbox-reply (20) | 0 | **11** |
-| email-inbox-forward (20) | 0 | 3 |
-| email-inbox, three mixed types (60) | 29 | 43 |
-| All five email task types | 29.0% | **57.0%** |
-| The other 78 task types (312 episodes) | 63.8% | 65.4% |
+| Held-out episodes | Base | Teacher edit | LoRA, 15 minutes |
+|---|---|---|---|
+| email-inbox-reply (20) | 0 | 11 | **19** |
+| email-inbox-forward (20) | 0 | 3 | **17** |
+| email-inbox, three mixed types (60) | 29 | 43 | 51 |
+| All five email task types | 29.0% | 57.0% | **87.0%** |
+| The other 78 task types (312 episodes) | 63.8% | 65.4% | 61.5% |
+| Episodes of other task types that change | | **7** (6 fixed, 1 broken) | 61 (27 fixed, 34 broken) |
 
-| Measure | Teacher edit |
-|---|---|
-| Time | 19 minutes to the first edit that works. 58 minutes with the search for side effects. |
-| Weights changed | 0.51% (1 tensor, 1 layer, rank 2) |
-| WikiText-2: top-token agreement with the original | 99.2% |
-| Battery, largest drop | 1.0 point (GSM8K with thinking) |
-| Random control (same fit, random directions) | 29 of 100, no episode changes |
+| Measure | Teacher edit | LoRA, 15 minutes |
+|---|---|---|
+| Time | 19 minutes to the first edit that works. 58 minutes with the search for side effects. | 15 minutes of training on 140 steps of successful practice episodes |
+| Weights changed | 0.51% (1 tensor, 1 layer, rank 2) | 64.6% (176 tensors, 32 layers) |
+| WikiText-2: top-token agreement with the original | 99.2% | 94.5% |
+| Battery, largest drop | 1.0 point (GSM8K with thinking) | 3.0 points (RefCOCO, p = 0.07) |
+| Random control (same fit, random directions) | 29 of 100, no episode changes | |
 
 - A forced replay set the ceiling before the fit: with the three action names forced, the model
   solves 58 of 100 practice episodes. The edit reaches 56.
 - Forward stays low. The edit fixes the choice of the action, and the click on the field goes to a
   wrong place in the forward form.
+- LoRA gains 30 points more on the target. It learns where to click in the forward form. Its
+  examples came from the forced replay, so it used the same diagnosis as the edit.
 - Two base runs with different batches differ in 12 of 312 episodes. A side effect needs that
   number next to it.
 
@@ -152,6 +155,10 @@ point, `type`, `key`, `done`). It gets no DOM. 83 task types, at most 10 actions
   elements, two positions). Training fixes that kind in 15 minutes.
 - Training on the target alone has a price next to the target, in both blocks: 12.5 points on text
   targets, and two robot tasks lost. Training data that covers the neighbours removes that price.
+- In the two blocks where both methods work (robot tasks and email tasks), LoRA on correct examples
+  gains more on the target, and the closed-form edit stays closer to the original model: 0.5% of the
+  weights against 60%, 99% top-token agreement against 93 to 95%, and 7 changed episodes of other
+  web tasks against 61.
 - Training needs correct examples. The closed-form edit needs only a fault that the teacher can
   locate. Where both apply, training on broad examples gave the larger gain.
 - The generalization battery alone does not show the cost of the LoRA model. A near-transfer set

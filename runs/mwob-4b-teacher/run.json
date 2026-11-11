@@ -3,9 +3,9 @@
   "student_revision": null,
   "student_weights": 4539265536,
   "student_dtype": "torch.bfloat16",
-  "harness_commit": "c47fc2a630265aa5f163b75fe0c8e43d88003152",
+  "harness_commit": "16bd6da54df1cecb7a7cf3378bc7190866ad9c04",
   "torch": "2.15.0+cu132",
   "transformers": "5.22.2",
   "gpu": "NVIDIA GeForce RTX 5090",
-  "started": "2026-11-11T08:13:45-0500"
+  "started": "2026-11-11T10:07:31-0500"
 }
