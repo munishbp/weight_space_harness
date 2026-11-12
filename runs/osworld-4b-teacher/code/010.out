@@ -1,0 +1,22 @@
+hint | chrome               35253b65 score 0.0  136 s | key type key key key key key key key key key key key key key | 
+hint | chrome               7b6c7e24 score 0.0  156 s | click click click click click click click click click click click click click click click | 
+hint | chrome               a96b564e score 0.0  155 s | click click click click click click type key wait wait click wait click click click | 
+hint | gimp                 7a4deb26 score 0.0  173 s | click click click key type key click type key click type key click key click | 
+hint | gimp                 554785e9 score 0.0  167 s | click click click click click click click click click click click click click click click | 
+hint | libreoffice_calc     357ef137 score 0.0  151 s | click type key click type key key type key key type key key type key | 
+hint | libreoffice_calc     abed40dc score 0.0  122 s | click invalid invalid invalid invalid invalid invalid invalid invalid invalid invalid invalid invalid invalid invalid | 
+hint | libreoffice_calc     42e0a640 score 0.0  148 s | click invalid key key key key key key key key key key key key key | 
+hint | libreoffice_impress  5d901039 score 0.0  154 s | click click key key key key key key key key key key key key key | 
+hint | libreoffice_impress  550ce7e7 score 0.0  163 s | click key key key key key key key key key key key key key key | 
+hint | libreoffice_writer   0810415c score 0.0  153 s | scroll scroll scroll key key type click key key type click key key key key | 
+hint | libreoffice_writer   0a0faba3 score 0.0  153 s | click type key key key key key key key key key key key key key | 
+hint | os                   5ea617a3 score 0.0  157 s | click click click click click click click click click click click click click click click | 
+hint | os                   5812b315 score 0.0  166 s | click invalid type type key type type key type type key key type type key | 
+hint | vlc                  59f21cfb score 0.0  165 s | click wait click wait click click click click click click click click click click click | 
+hint | vlc                  8f080098 score 0.0  178 s | click click click click click click click click click click click click click click click | 
+hint | vs_code              0ed39f63 score 0.0  123 s | key type type key key key key done | 
+hint | vs_code              276cc624 score 0.0  128 s | type type key wait click type key wait done | 
+hint | solved 0 of 18 | bridge errors 0
+hints {'asked': 86, 'still the same': 75}
+failed base tasks that the hint pass solves: 0 of 18
+[ 23.3 min] hint pass done

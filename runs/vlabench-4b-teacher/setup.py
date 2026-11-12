@@ -23,11 +23,14 @@ def table(rows):
     return out
 
 def trial(label, items, path=None, reference=None, batch=8):
-    t = time.time(); rows = evaluate.run(items, vp.conversation, vp.score, batch_size=batch, **vp.GENERATE); tab = table(rows)
+    t = time.time(); rows = evaluate.run(items, vp.conversation, vp.score, batch_size=batch, **vp.GENERATE)
+    for r in rows: r["dimension"], r["task"] = r["id"].split("/")[:2]
+    # Save before the table, so that a defect in the table does not lose a pass of minutes.
+    if path: json.dump(rows, open(path, "w"))
+    tab = table(rows)
     for task, row in tab.items(): print(f"{label} | {task:32s} {row}", flush=True)
     if reference: print(label, "| against reference:", paired_flips([r["correct"] for r in reference], [r["correct"] for r in rows]), flush=True)
     tools.log("trial", trial=label, **tab["all"], seconds=round(time.time() - t)); print(label, "|", round(time.time() - t), "s", flush=True)
-    if path: json.dump([{k: v for k, v in r.items() if k != "item"} for r in rows], open(path, "w"))
     return rows
 
 print("setup done:", len(PRACTICE), "practice,", len(HELDOUT), "held-out,", len(NEAR), "near-transfer items")

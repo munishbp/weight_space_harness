@@ -161,6 +161,12 @@ A negative result is a valid verdict.
 - [Test the closing-token recipe on the 4B model](issues/23-thinking-fault-4b.md): one removal on
   the MLP of layer 30 raises held-out GSM8K with thinking from 77.3% to 89.1% and cuts the replies
   at the token limit from 30.5% to 8.6%. The working edit came at 8 minutes. Thinking off scores 93.0%.
+- [Run one portion of OSWorld on the 4B model and try the recipe on it](issues/30-osworld-portion.md):
+  negative. The base student solves 4 of 22 sampled tasks. Three forced replays (stop at the loop, a
+  hint, no `type` after `type`) solve 0 failed tasks, so no edit candidate exists.
+- [Run the long-horizon tasks of VLABench on the 4B model and try the recipe on them](issues/31-vlabench-procedure-edit.md):
+  partial. One stacked fit of 46 targets gives all skill names correct in 91 of 150 held-out plans
+  (base 0). No plan is fully correct, the edit needs the plan-only mode, and MMLU-Pro loses 2.5 points.
 
 ## Not yet specified
 
@@ -169,16 +175,21 @@ All tickets of the map are resolved. The destination has its six items: the gene
 `RESULTS.md` holds the verdict, with the answer to the question at its top. What stays open needs a
 decision of the user:
 
-- **A long-horizon benchmark.** OSWorld-Verified (a portion: the application, the number of tasks,
-  the agent class) and VLABench. Both installs reach outside PyPI (a git repository, Google Drive
-  archives, a VM image), and the session may not run them without the user.
+- **The removal of the benchmark installs.** The user asked to keep the OSWorld and VLABench
+  downloads inside the project directory, git-ignored, and to remove them later. The list is in
+  `README.md` under "Temporary installs".
+- **A larger OSWorld sample.** 22 tasks give a wide interval for the base rate. All 267
+  single-application tasks take about 4 hours on three virtual machines.
+- **VLABench in its simulator.** The run used the planning track. The simulator track needs the
+  repository install and its asset archives.
 - **A teacher from another vendor.** It needs an account from the user.
 - **The release form for other users.** The licence of the repository and how a user adds a new
   target. The repository is public and has no licence file.
 - **The user name in the git history.** Some run outputs in earlier commits hold the home path. The
   newest commit does not. A history rewrite needs the request of the user.
 - **The next edit family.** No closed-form edit fixed a wrong choice between candidates from the
-  input. That kind is the largest share of the failures on ScreenSpot Pro and in the push task.
+  input. That kind is the largest share of the failures on ScreenSpot Pro and in the push task, and
+  it is the reason that no VLABench plan became fully correct.
 
 ## Out of scope
 

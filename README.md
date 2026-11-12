@@ -23,7 +23,7 @@ Status: research code. The results so far are in [RESULTS.md](RESULTS.md).
 | `wsp/layout.py` | Finds the layers, MLPs, and attention blocks of a student by name. Tested on Qwen3.5 (0.8B, 4B), Qwen3.8-27B, and GLM-4.6V-Flash. |
 | `wsp/evaluate.py`, `wsp/stats.py` | Benchmark runs with a fixed seed, intervals, and paired tests. |
 | `wsp/battery.py` | The generalization battery: fixed subsets of general benchmarks that run before and after an edit. |
-| `wsp/bench/` | Benchmarks: ScreenSpot Pro, boxed math (GSM8K), MMLU-Pro, CountBench, ChartQA, RefCOCO, Meta-World through text waypoints, and MiniWoB++ through screenshots. |
+| `wsp/bench/` | Benchmarks: ScreenSpot Pro, boxed math (GSM8K), MMLU-Pro, CountBench, ChartQA, RefCOCO, Meta-World through text waypoints, MiniWoB++ through screenshots, OSWorld through screenshots (`osworld_screen.py` with the bridge `osworld_server.py`), and the VLABench planning track (`vlabench_plan.py`). |
 | `wsp/modelopt.py` | Loads a ModelOpt mixed-precision checkpoint. The weights stay in their 4-bit and 8-bit formats, and an edit goes back into the same format. A 27B checkpoint runs on one 32 GB GPU at about 3 tokens per second. |
 | `wsp/lora_baseline.py` | A LoRA fine-tune with a fixed wall-clock budget. It is the comparison, not the method. |
 | `runs/` | One directory per run: the ledger, the teacher code, the outputs, and the edit manifest. |
@@ -60,3 +60,33 @@ A negative result is a valid result, and the harness records it in the same form
   this harness. No published score exists for it.
 - The MiniWoB++ interface (one screenshot per turn, JSON actions, no time limit) is also specific to
   this harness. The benchmark needs Chrome, and Selenium downloads the matching ChromeDriver.
+- OSWorld needs its own environment, because the `desktop-env` package pins old versions of torch.
+  Create it with `uv venv .venv-osworld --python 3.11` and `uv pip install --python .venv-osworld desktop-env`.
+  The task files come from a clone of the OSWorld repository at `data/OSWorld`. The Docker provider
+  downloads a VM image of 12 GB at first use.
+- A running OSWorld VM publishes its control ports (5000, 8006, 8080, 9222 and up) on all network
+  interfaces of the host. That is the default of the package. Run it on a trusted network, and send
+  `close` to the server after a run.
+- The VLABench module reads the dataset `VLABench/vlm_evaluation_v1.0` at `data/vlabench_vlm` and the
+  prompt file of the VLABench repository at `data/VLABench`. It does not use the simulator.
+
+## Temporary installs
+
+The OSWorld and VLABench runs left these downloads. All paths inside the repository are git-ignored.
+Remove them when the benchmark work ends.
+
+| Path | Size | Content |
+|---|---|---|
+| `.venv-osworld/` | 7 GB | The `desktop-env` package and its dependencies. |
+| `data/OSWorld/` | small | Clone of the OSWorld repository (task files). |
+| `data/osworld_vm/` | 35 GB | The Ubuntu VM image, its archive, and the task cache. |
+| `data/osworld_runs/` | small | Screenshots of the OSWorld runs. |
+| `data/VLABench/` | small | Clone of the VLABench repository (prompt file). |
+| `data/vlabench_vlm/` | 6 GB | The VLABench evaluation dataset. |
+
+Outside the repository:
+
+- The Docker image: `docker rmi happysixd/osworld-docker`.
+- The GLM student in the Hugging Face cache: `~/.cache/huggingface/hub/models--zai-org--GLM-4.6V-Flash` (20 GB).
+- The ChromeDriver for MiniWoB++: `~/.cache/selenium`.
+- The package cache of uv: `uv cache clean` (shared with other projects).

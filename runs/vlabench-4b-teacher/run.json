@@ -1,0 +1,11 @@
+{
+  "student": "Qwen/Qwen3.5-4B",
+  "student_revision": null,
+  "student_weights": 4539265536,
+  "student_dtype": "torch.bfloat16",
+  "harness_commit": "c8dfccd02b78fd00e3ecef7b2108d3b9563205b9",
+  "torch": "2.15.0+cu132",
+  "transformers": "5.22.2",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "started": "2026-11-11T19:36:38-0500"
+}

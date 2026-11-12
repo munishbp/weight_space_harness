@@ -4,3 +4,31 @@ sample | chrome               7b6c7e24 score 0.0  145 s | click click click clic
 sample | chrome               35253b65 score 0.0  147 s | key type key key key key key key key key key key key key key | 
 sample | chrome               a96b564e score 0.0  148 s | click type key type key key key key key key key key key key key | 
 sample | gimp                 7a4deb26 score 0.0  145 s | click click type key key done | 
+sample | gimp                 554785e9 score 0.0  159 s | click click click click click click click click click click click click click click click | 
+sample | libreoffice_calc     357ef137 score 0.0  144 s | click type key key type key key key key key key key key key key | 
+sample | libreoffice_calc     42e0a640 score 0.0  142 s | click invalid key key key key key key key key key key key key key | 
+sample | libreoffice_calc     abed40dc score 0.0  136 s | click invalid invalid invalid type type type type type key click key key done | 
+sample | libreoffice_impress  5d901039 score 0.0  148 s | click key key key key key key key key key key key key key key | 
+sample | libreoffice_impress  550ce7e7 score 0.0  157 s | click key key key key key key key key key key key key key key | 
+sample | libreoffice_writer   0810415c score 0.0  152 s | scroll scroll scroll key key type click key key key key key key key key | 
+sample | libreoffice_writer   0a0faba3 score 0.0  146 s | click type key key key key key key key key key key key key key | 
+sample | os                   5ea617a3 score 0.0  153 s | click click click click click click click click click click click click click click click | 
+sample | os                   5812b315 score 0.0  172 s | click invalid type type type type type type type type type type type type type | 
+sample | thunderbird          dfac9ee8 score 1.0  144 s | click click click click click click click click click click click click click click click | 
+sample | thunderbird          15c3b339 score 1.0  119 s | click type click type key done | 
+sample | vlc                  59f21cfb score 0.0  176 s | click wait wait wait wait wait wait wait wait wait wait wait wait wait wait | 
+sample | vlc                  8f080098 score 0.0  171 s | click click click click click click click click click click click click click click click | 
+sample | vs_code              0ed39f63 score 0.0  131 s | key type type key key key type type key key done | 
+sample | vs_code              53ad5833 score 1.0  163 s | click click click type key wait wait wait wait wait wait wait wait wait wait | 
+sample | vs_code              276cc624 score 0.0  122 s | type type key wait wait key done | 
+sample | solved 4 of 22 | bridge errors 0
+chrome               solved 1 of 4 | invalid actions 0 | mean seconds 148
+gimp                 solved 0 of 2 | invalid actions 0 | mean seconds 152
+libreoffice_calc     solved 0 of 3 | invalid actions 4 | mean seconds 140
+libreoffice_impress  solved 0 of 2 | invalid actions 0 | mean seconds 152
+libreoffice_writer   solved 0 of 2 | invalid actions 0 | mean seconds 149
+os                   solved 0 of 2 | invalid actions 1 | mean seconds 162
+thunderbird          solved 2 of 2 | invalid actions 0 | mean seconds 131
+vlc                  solved 0 of 2 | invalid actions 0 | mean seconds 173
+vs_code              solved 1 of 3 | invalid actions 0 | mean seconds 138
+[ 54.6 min] sample done

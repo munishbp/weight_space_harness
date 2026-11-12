@@ -1,0 +1,503 @@
+{
+ "margin": 12.0,
+ "matrix": "model.language_model.layers.27.mlp.down_proj",
+ "sets": {
+  "held_target": 150,
+  "held_other": 100,
+  "near": 200,
+  "prose": 75
+ },
+ "held_target": {
+  "base": {
+   "n": 150,
+   "correct": 0,
+   "parsed": 148,
+   "names_all_correct": 0,
+   "skill_match_score": 0.1996,
+   "entity_match_score": 0.1785,
+   "skill_with_entity_match_score": 0.1129,
+   "exact_match_score": 0.0,
+   "total_score": 0.1512
+  },
+  "edit": {
+   "n": 150,
+   "correct": 0,
+   "parsed": 150,
+   "names_all_correct": 91,
+   "skill_match_score": 0.8639,
+   "entity_match_score": 0.2701,
+   "skill_with_entity_match_score": 0.3027,
+   "exact_match_score": 0.0044,
+   "total_score": 0.4536
+  },
+  "names_all_correct_flips": {
+   "fixed": 91,
+   "broken": 0,
+   "p_value": 8.077935669463161e-28
+  },
+  "correct_flips": {
+   "fixed": 0,
+   "broken": 0,
+   "p_value": 1.0
+  },
+  "total_score_up_down": [
+   149,
+   1
+  ],
+  "plans_changed": 150
+ },
+ "held_target/book_rearrange": {
+  "base": {
+   "n": 50,
+   "correct": 0,
+   "parsed": 50,
+   "names_all_correct": 0,
+   "skill_match_score": 0.1556,
+   "entity_match_score": 0.3,
+   "skill_with_entity_match_score": 0.1378,
+   "exact_match_score": 0.0,
+   "total_score": 0.1822
+  },
+  "edit": {
+   "n": 50,
+   "correct": 0,
+   "parsed": 50,
+   "names_all_correct": 45,
+   "skill_match_score": 0.9667,
+   "entity_match_score": 0.4467,
+   "skill_with_entity_match_score": 0.5978,
+   "exact_match_score": 0.0,
+   "total_score": 0.5653
+  }
+ },
+ "held_target/hammer_nail_and_hang_picture": {
+  "base": {
+   "n": 50,
+   "correct": 0,
+   "parsed": 50,
+   "names_all_correct": 0,
+   "skill_match_score": 0.232,
+   "entity_match_score": 0.16,
+   "skill_with_entity_match_score": 0.152,
+   "exact_match_score": 0.0,
+   "total_score": 0.1568
+  },
+  "edit": {
+   "n": 50,
+   "correct": 0,
+   "parsed": 50,
+   "names_all_correct": 37,
+   "skill_match_score": 0.896,
+   "entity_match_score": 0.228,
+   "skill_with_entity_match_score": 0.228,
+   "exact_match_score": 0.0,
+   "total_score": 0.4496
+  }
+ },
+ "held_target/take_chemistry_experiment": {
+  "base": {
+   "n": 50,
+   "correct": 0,
+   "parsed": 48,
+   "names_all_correct": 0,
+   "skill_match_score": 0.2111,
+   "entity_match_score": 0.0756,
+   "skill_with_entity_match_score": 0.0489,
+   "exact_match_score": 0.0,
+   "total_score": 0.1147
+  },
+  "edit": {
+   "n": 50,
+   "correct": 0,
+   "parsed": 50,
+   "names_all_correct": 9,
+   "skill_match_score": 0.7289,
+   "entity_match_score": 0.1356,
+   "skill_with_entity_match_score": 0.0822,
+   "exact_match_score": 0.0133,
+   "total_score": 0.3458
+  }
+ },
+ "held_other": {
+  "base": {
+   "n": 100,
+   "correct": 0,
+   "parsed": 100,
+   "names_all_correct": 17,
+   "skill_match_score": 0.4851,
+   "entity_match_score": 0.0942,
+   "skill_with_entity_match_score": 0.0942,
+   "exact_match_score": 0.0467,
+   "total_score": 0.2317
+  },
+  "edit": {
+   "n": 100,
+   "correct": 0,
+   "parsed": 100,
+   "names_all_correct": 18,
+   "skill_match_score": 0.4867,
+   "entity_match_score": 0.1102,
+   "skill_with_entity_match_score": 0.0864,
+   "exact_match_score": 0.03,
+   "total_score": 0.2388
+  },
+  "names_all_correct_flips": {
+   "fixed": 3,
+   "broken": 2,
+   "p_value": 1.0
+  },
+  "correct_flips": {
+   "fixed": 0,
+   "broken": 0,
+   "p_value": 1.0
+  },
+  "total_score_up_down": [
+   11,
+   8
+  ],
+  "plans_changed": 33
+ },
+ "near": {
+  "base": {
+   "n": 200,
+   "correct": 24,
+   "parsed": 200,
+   "names_all_correct": 101,
+   "skill_match_score": 0.6775,
+   "entity_match_score": 0.395,
+   "skill_with_entity_match_score": 0.3325,
+   "exact_match_score": 0.13,
+   "total_score": 0.429
+  },
+  "edit": {
+   "n": 200,
+   "correct": 22,
+   "parsed": 200,
+   "names_all_correct": 101,
+   "skill_match_score": 0.6775,
+   "entity_match_score": 0.3925,
+   "skill_with_entity_match_score": 0.3275,
+   "exact_match_score": 0.115,
+   "total_score": 0.428
+  },
+  "names_all_correct_flips": {
+   "fixed": 7,
+   "broken": 7,
+   "p_value": 1.0
+  },
+  "correct_flips": {
+   "fixed": 0,
+   "broken": 2,
+   "p_value": 0.5
+  },
+  "total_score_up_down": [
+   9,
+   10
+  ],
+  "plans_changed": 57
+ },
+ "prose_mode": {
+  "base": {
+   "n": 75,
+   "correct": 0,
+   "parsed": 61,
+   "names_all_correct": 0,
+   "skill_match_score": 0.2676,
+   "entity_match_score": 0.2437,
+   "skill_with_entity_match_score": 0.1514,
+   "exact_match_score": 0.0,
+   "total_score": 0.2045
+  },
+  "edit": {
+   "n": 75,
+   "correct": 0,
+   "parsed": 61,
+   "names_all_correct": 2,
+   "skill_match_score": 0.2957,
+   "entity_match_score": 0.1966,
+   "skill_with_entity_match_score": 0.1431,
+   "exact_match_score": 0.0,
+   "total_score": 0.1969
+  },
+  "names_all_correct_flips": {
+   "fixed": 2,
+   "broken": 0,
+   "p_value": 0.5
+  },
+  "correct_flips": {
+   "fixed": 0,
+   "broken": 0,
+   "p_value": 1.0
+  },
+  "total_score_up_down": [
+   27,
+   31
+  ],
+  "plans_changed": 63
+ },
+ "prose_mode/book_rearrange": {
+  "base": {
+   "n": 25,
+   "correct": 0,
+   "parsed": 21,
+   "names_all_correct": 0,
+   "skill_match_score": 0.2489,
+   "entity_match_score": 0.42,
+   "skill_with_entity_match_score": 0.2133,
+   "exact_match_score": 0.0,
+   "total_score": 0.2676
+  },
+  "edit": {
+   "n": 25,
+   "correct": 0,
+   "parsed": 21,
+   "names_all_correct": 2,
+   "skill_match_score": 0.3244,
+   "entity_match_score": 0.3133,
+   "skill_with_entity_match_score": 0.2133,
+   "exact_match_score": 0.0,
+   "total_score": 0.2551
+  }
+ },
+ "prose_mode/hammer_nail_and_hang_picture": {
+  "base": {
+   "n": 25,
+   "correct": 0,
+   "parsed": 20,
+   "names_all_correct": 0,
+   "skill_match_score": 0.296,
+   "entity_match_score": 0.2,
+   "skill_with_entity_match_score": 0.152,
+   "exact_match_score": 0.0,
+   "total_score": 0.1984
+  },
+  "edit": {
+   "n": 25,
+   "correct": 0,
+   "parsed": 19,
+   "names_all_correct": 0,
+   "skill_match_score": 0.296,
+   "entity_match_score": 0.152,
+   "skill_with_entity_match_score": 0.136,
+   "exact_match_score": 0.0,
+   "total_score": 0.1792
+  }
+ },
+ "prose_mode/take_chemistry_experiment": {
+  "base": {
+   "n": 25,
+   "correct": 0,
+   "parsed": 20,
+   "names_all_correct": 0,
+   "skill_match_score": 0.2578,
+   "entity_match_score": 0.1111,
+   "skill_with_entity_match_score": 0.0889,
+   "exact_match_score": 0.0,
+   "total_score": 0.1476
+  },
+  "edit": {
+   "n": 25,
+   "correct": 0,
+   "parsed": 21,
+   "names_all_correct": 0,
+   "skill_match_score": 0.2667,
+   "entity_match_score": 0.1244,
+   "skill_with_entity_match_score": 0.08,
+   "exact_match_score": 0.0,
+   "total_score": 0.1564
+  }
+ },
+ "deviation": {
+  "mean_kl": 0.0017290883987208655,
+  "max_kl": 0.12417232245206833,
+  "top1_agreement_pct": 97.96795338674436,
+  "perplexity_original": 13.377311730888032,
+  "perplexity_edited": 13.405829101134998,
+  "positions": 13730
+ },
+ "edit": {
+  "tensors_changed": 1,
+  "tensors_changed_pct": 0.13831258644536654,
+  "layers_changed": [
+   27
+  ],
+  "changed_weights": 23516395,
+  "changed_weights_pct": 0.5180660794900895,
+  "relative_change_of_model": 0.033811865586329704,
+  "tensor": {
+   "name": "model.language_model.layers.27.mlp.down_proj.weight",
+   "weights": 23592960,
+   "changed_weights": 23516395,
+   "changed_weights_pct": 99.67547522650824,
+   "relative_change": 1.0567924016868406,
+   "max_abs_change": 0.20037841796875,
+   "cosine_to_original": 0.6874382158239715,
+   "delta_squared_norm": 2270.012687295583,
+   "rows_changed": 2560,
+   "rows_changed_pct": 100.0,
+   "columns_changed": 9216,
+   "columns_changed_pct": 100.0,
+   "delta_rank": 6,
+   "kept_share_of_request": 0.9999992850426477
+  }
+ },
+ "battery": {
+  "mmlu_pro": {
+   "before_pct": 48.0,
+   "after_pct": 45.5,
+   "change_points": -2.5,
+   "fixed": 0,
+   "broken": 5,
+   "p_value": 0.0625,
+   "major_drop": false
+  },
+  "countbench": {
+   "before_pct": 85.0,
+   "after_pct": 84.5,
+   "change_points": -0.5,
+   "fixed": 0,
+   "broken": 1,
+   "p_value": 1.0,
+   "major_drop": false
+  },
+  "chartqa": {
+   "before_pct": 85.0,
+   "after_pct": 85.0,
+   "change_points": 0.0,
+   "fixed": 0,
+   "broken": 0,
+   "p_value": 1.0,
+   "major_drop": false
+  },
+  "refcoco": {
+   "before_pct": 90.0,
+   "after_pct": 90.0,
+   "change_points": 0.0,
+   "fixed": 0,
+   "broken": 0,
+   "p_value": 1.0,
+   "major_drop": false
+  },
+  "gsm8k_thinking": {
+   "before_pct": 75.0,
+   "after_pct": 70.0,
+   "change_points": -5.0,
+   "fixed": 6,
+   "broken": 11,
+   "p_value": 0.332305908203125,
+   "major_drop": false
+  }
+ },
+ "random_control": {
+  "base": {
+   "n": 75,
+   "correct": 0,
+   "parsed": 74,
+   "names_all_correct": 0,
+   "skill_match_score": 0.2065,
+   "entity_match_score": 0.1847,
+   "skill_with_entity_match_score": 0.1147,
+   "exact_match_score": 0.0,
+   "total_score": 0.1565
+  },
+  "edit": {
+   "n": 75,
+   "correct": 0,
+   "parsed": 75,
+   "names_all_correct": 0,
+   "skill_match_score": 0.2172,
+   "entity_match_score": 0.1976,
+   "skill_with_entity_match_score": 0.1173,
+   "exact_match_score": 0.0,
+   "total_score": 0.1659
+  },
+  "names_all_correct_flips": {
+   "fixed": 0,
+   "broken": 0,
+   "p_value": 1.0
+  },
+  "correct_flips": {
+   "fixed": 0,
+   "broken": 0,
+   "p_value": 1.0
+  },
+  "total_score_up_down": [
+   11,
+   4
+  ],
+  "plans_changed": 24
+ },
+ "random_control/book_rearrange": {
+  "base": {
+   "n": 25,
+   "correct": 0,
+   "parsed": 25,
+   "names_all_correct": 0,
+   "skill_match_score": 0.1733,
+   "entity_match_score": 0.34,
+   "skill_with_entity_match_score": 0.1511,
+   "exact_match_score": 0.0,
+   "total_score": 0.2053
+  },
+  "edit": {
+   "n": 25,
+   "correct": 0,
+   "parsed": 25,
+   "names_all_correct": 0,
+   "skill_match_score": 0.1733,
+   "entity_match_score": 0.3333,
+   "skill_with_entity_match_score": 0.1467,
+   "exact_match_score": 0.0,
+   "total_score": 0.2027
+  }
+ },
+ "random_control/hammer_nail_and_hang_picture": {
+  "base": {
+   "n": 25,
+   "correct": 0,
+   "parsed": 25,
+   "names_all_correct": 0,
+   "skill_match_score": 0.224,
+   "entity_match_score": 0.152,
+   "skill_with_entity_match_score": 0.144,
+   "exact_match_score": 0.0,
+   "total_score": 0.1504
+  },
+  "edit": {
+   "n": 25,
+   "correct": 0,
+   "parsed": 25,
+   "names_all_correct": 0,
+   "skill_match_score": 0.256,
+   "entity_match_score": 0.184,
+   "skill_with_entity_match_score": 0.152,
+   "exact_match_score": 0.0,
+   "total_score": 0.176
+  }
+ },
+ "random_control/take_chemistry_experiment": {
+  "base": {
+   "n": 25,
+   "correct": 0,
+   "parsed": 24,
+   "names_all_correct": 0,
+   "skill_match_score": 0.2222,
+   "entity_match_score": 0.0622,
+   "skill_with_entity_match_score": 0.0489,
+   "exact_match_score": 0.0,
+   "total_score": 0.1138
+  },
+  "edit": {
+   "n": 25,
+   "correct": 0,
+   "parsed": 25,
+   "names_all_correct": 0,
+   "skill_match_score": 0.2222,
+   "entity_match_score": 0.0756,
+   "skill_with_entity_match_score": 0.0533,
+   "exact_match_score": 0.0,
+   "total_score": 0.1191
+  }
+ },
+ "reset_restores_weight": true
+}

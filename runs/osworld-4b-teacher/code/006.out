@@ -1,0 +1,7 @@
+prefix [4754, 1265, 763, 328] first tokens {'click': (3552, 'click'), 'double_click': (4190, 'double'), 'right_click': (1246, 'right'), 'drag': (32809, 'drag'), 'scroll': (12242, 'scroll'), 'type': (1267, 'type'), 'key': (767, 'key'), 'wait': (11158, 'wait'), 'done': (10128, 'done'), 'fail': (17854, 'fail')}
+Traceback (most recent call last):
+  File "~/weight_space/wsp/kernel.py", line 70, in handle
+    exec(compile(source, "<teacher>", "exec"), self.server.namespace)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<teacher>", line 10, in <module>
+NameError: name 'parts' is not defined. Did you mean: 'vars'?

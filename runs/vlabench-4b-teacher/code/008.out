@@ -1,0 +1,5 @@
+book_rearrange                 n=16 step 2 | pick 0.0303 place 0.7493 push 0.0949 pull 0.0002 pour 0.0000 | correct name `push`: median 0.00001, max 0.9912
+hammer_nail_and_hang_picture   n=16 step 2 | pick 0.0002 place 0.5001 push 0.0000 pull 0.0000 pour 0.0000 | correct name `push`: median 0.00000, max 0.0001
+take_chemistry_experiment      n=16 step 2 | pick 0.1261 place 0.1889 push 0.0183 pull 0.0001 pour 0.5647 | correct name `pour`: median 0.99839, max 0.9999
+cook_dishes                    n=16 step 2 | pick 0.1250 place 0.8747 push 0.0000 pull 0.0000 pour 0.0000 | correct name `place`: median 0.99936, max 1.0000
+[ 24.2 min] step probabilities done

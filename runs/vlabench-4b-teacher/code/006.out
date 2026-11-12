@@ -1,0 +1,20 @@
+skill tokens {'pull': [22709], 'push': [8804], 'pick': [28288], 'pour': [52689], 'place': [1940]}
+tokens with ]: 320 | tokens that start with a comma: 297
+base, same items | book_rearrange                   {'n': 20, 'correct': 0, 'parsed': 17, 'skill_match': 0.261, 'entity_match': 0.392, 'skill_with_entity_match': 0.228, 'exact_match': 0.0, 'total': 0.261, 'total_score_in': 0.284}
+base, same items | hammer_nail_and_hang_picture     {'n': 20, 'correct': 0, 'parsed': 18, 'skill_match': 0.34, 'entity_match': 0.17, 'skill_with_entity_match': 0.14, 'exact_match': 0.0, 'total': 0.204, 'total_score_in': 0.218}
+base, same items | take_chemistry_experiment        {'n': 20, 'correct': 0, 'parsed': 16, 'skill_match': 0.211, 'entity_match': 0.056, 'skill_with_entity_match': 0.028, 'exact_match': 0.0, 'total': 0.107, 'total_score_in': 0.109}
+base, same items | all                              {'n': 60, 'correct': 0, 'correct_pct': 0.0, 'interval_95': [0.0, 6.0]}
+forced names | book_rearrange                   {'n': 20, 'correct': 1, 'parsed': 11, 'skill_match': 0.55, 'entity_match': 0.325, 'skill_with_entity_match': 0.383, 'exact_match': 0.05, 'total': 0.35, 'total_score_in': 0.393}
+forced names | hammer_nail_and_hang_picture     {'n': 20, 'correct': 0, 'parsed': 2, 'skill_match': 0.1, 'entity_match': 0.02, 'skill_with_entity_match': 0.02, 'exact_match': 0.0, 'total': 0.048, 'total_score_in': 0.05}
+forced names | take_chemistry_experiment        {'n': 20, 'correct': 0, 'parsed': 0, 'skill_match': 0.0, 'entity_match': 0.0, 'skill_with_entity_match': 0.0, 'exact_match': 0.0, 'total': 0.0, 'total_score_in': 0.0}
+forced names | all                              {'n': 60, 'correct': 1, 'correct_pct': 1.7, 'interval_95': [0.3, 8.9]}
+[ 16.4 min] forced replay done
+book_rearran given: [('pick', 2, None), ('push', None, 2), ('pull', None, None), ('pick', 3, None), ('push', None, 3), ('pull', None, None), ('pick', 4, None), ('push', None, 4), ('pull', None, None)]
+book_rearran given: [('pick', 3, None), ('push', None, 3), ('pull', None, None), ('pick', 2, None), ('push', None, 2), ('pull', None, None), ('pick', 4, None), ('push', None, 4), ('pull', None, None)]
+book_rearran given: '"name": "pick",\n        "params": {\n            "target_entity_name": 3\n        }\n    },\n    {\n        "name": "push",\n        "params": {\n            "target_container_name": 1\n        }\n    }\n]\n```\n'
+hammer_nail_ given: '"name": "pick",\n        "params": {\n            "target_entity_name": 2\n        }\n    },\n    {\n        "name": "push",\n        "params": {\n            "target_container_name": 2\n        }\n    }\n]\n```\n'
+hammer_nail_ given: [('pick', 1, None), ('push', None, 1), ('place', None, 1), ('pick', 2, None), ('push', None, 2), ('place', None, 2)]
+hammer_nail_ given: 'ame": "push",\n        "params": {\n            "target_container_name": 2\n        }\n    },\n    {\n        "name": "place",\n        "params": {\n            "target_container_name": 2\n        }\n    }\n```\n'
+take_chemist given: "ttle (5) into Flask (1), Place Flask (1).\n    *   Let's try to construct the JSON based on the most logical flow:\n        1.  **pick** Object 1 (Flask)\n        2.  **pick** Object 5 (Bottle)\n        3"
+take_chemist given: '  "name": "pick",\n        "params": {\n            "target_entity_name": 0\n        }\n    },\n    {\n        "name": "pour",\n        "params": {\n            "target_container_name": 2\n        }\n    }\n```\n'
+take_chemist given: '  "name": "pick",\n        "params": {\n            "target_entity_name": 2\n        }\n    },\n    {\n        "name": "pour",\n        "params": {\n            "target_container_name": 0\n        }\n    }\n```\n'

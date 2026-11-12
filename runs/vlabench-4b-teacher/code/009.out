@@ -1,0 +1,13 @@
+plan only, base | book_rearrange                   {'n': 20, 'correct': 0, 'parsed': 20, 'skill_match': 0.144, 'entity_match': 0.258, 'skill_with_entity_match': 0.122, 'exact_match': 0.0, 'total': 0.161, 'total_score_in': 0.173}
+plan only, base | hammer_nail_and_hang_picture     {'n': 20, 'correct': 0, 'parsed': 20, 'skill_match': 0.25, 'entity_match': 0.21, 'skill_with_entity_match': 0.18, 'exact_match': 0.0, 'total': 0.184, 'total_score_in': 0.202}
+plan only, base | take_chemistry_experiment        {'n': 20, 'correct': 0, 'parsed': 20, 'skill_match': 0.25, 'entity_match': 0.083, 'skill_with_entity_match': 0.044, 'exact_match': 0.0, 'total': 0.133, 'total_score_in': 0.138}
+plan only, base | all                              {'n': 60, 'correct': 0, 'correct_pct': 0.0, 'interval_95': [0.0, 6.0]}
+[ 25.6 min] plan-only base on the small set
+'```json\n[\n    {\n        "name": "pick",\n        "params": {\n            "target_entity_name": 0\n        }\n    },\n    {\n        "name": "lift",\n        "params": {\n        }\n    },\n    {\n        "name": "place",\n        "params": {\n            "target_container_name": 1\n        }\n    }\n]\n```\n'
+book_rearrange                 n=16 step 2 | pick 0.0503 place 0.2436 push 0.0799 pull 0.0243 pour 0.0039 | correct `push`: median 0.07033, quartiles [0.06044, 0.09179]
+book_rearrange                 n=16 step 3 | pick 0.0290 place 0.4413 push 0.1257 pull 0.0905 pour 0.0022 | correct `pull`: median 0.08667, quartiles [0.0718, 0.10255]
+hammer_nail_and_hang_picture   n=16 step 2 | pick 0.0018 place 0.0817 push 0.0293 pull 0.0118 pour 0.0004 | correct `push`: median 0.02616, quartiles [0.0232, 0.03321]
+hammer_nail_and_hang_picture   n=16 step 3 | pick 0.0011 place 0.2154 push 0.0780 pull 0.0472 pour 0.0001 | correct `place`: median 0.20998, quartiles [0.16951, 0.25344]
+take_chemistry_experiment      n=16 step 2 | pick 0.0207 place 0.1538 push 0.0184 pull 0.0124 pour 0.1596 | correct `pour`: median 0.13178, quartiles [0.0832, 0.22183]
+take_chemistry_experiment      n=16 step 3 | pick 0.0856 place 0.3883 push 0.0368 pull 0.0335 pour 0.1523 | correct `place`: median 0.34693, quartiles [0.31437, 0.45041]
+[ 26.1 min] plan-only step probabilities done

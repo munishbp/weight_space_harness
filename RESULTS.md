@@ -19,16 +19,24 @@ its general ability? Does this scale to a 4B model, and is it feasible?
   needs (the fault of the blog). One removal on one matrix fixes it on the 0.8B and the 4B model.
 - **It scales.** The same recipe and the same code ran on Qwen3.5-4B, GLM-4.6V-Flash (10B), and a
   4-bit Qwen3.8-27B. The gain on the 27B model is the largest.
-- **The time is 8 to 30 minutes on a 4B model.** The fault of the blog took 8 minutes. A habit
-  fault took 15 to 30 minutes. The 27B model needs about an hour, because one forward pass is slow.
-- **The model keeps its general ability.** Each edit changes 0.2% to 0.5% of the weights in one
-  matrix. The top token on neutral text stays the same in 99% of the positions. No battery set
-  drops by more than 1 point with significance, and tasks next to the target do not change.
+- **The time is 8 to 30 minutes on a 4B model for one step.** The fault of the blog took 8 minutes.
+  A habit fault took 15 to 30 minutes. A stacked edit for three procedures took 63 minutes. The 27B
+  model needs about an hour, because one forward pass is slow.
+- **The model keeps its general ability, and a large edit costs more.** Each edit changes 0.2% to
+  0.5% of the weights in one matrix. For a one-step edit the top token on neutral text stays the
+  same in 99% of the positions, no battery set drops by more than 1 point with significance, and
+  tasks next to the target do not change. The stacked edit of 46 targets costs 2.5 points on MMLU-Pro.
 - **The gain is local, and the portion does not become "super great".** An edit fixes the steps that
   it targets. The email tasks go from 29% to 57% on the 4B model, because a later click is also
   wrong and no edit of this kind fixes a wrong position.
 - **It does not work when the fault is a wrong choice between things in the input** (which icon,
   which position). ScreenSpot Pro and the Meta-World push task gave no edit. Training fixes that kind.
+- **Long-horizon tasks: one partial gain and one negative result.** In the VLABench planning tasks
+  (5 to 9 steps) one stacked edit teaches the procedure of three tasks: all skill names are correct
+  in 91 of 150 held-out plans (base 0). No plan becomes fully correct, because the objects of each
+  step stay wrong, and the edit costs 2.5 points on one battery set. In OSWorld (real desktop
+  applications) the student solves 4 of 22 tasks and no edit candidate exists: the student does
+  not know the procedures, and the tasks share no step.
 - **A LoRA fine-tune of 15 minutes gains more on the target when correct examples exist** (87%
   against 57% on the email tasks). It changes 60% of the weights and moves tasks next to the target.
   The edit needs no examples, only a fault that the teacher can locate.
@@ -42,11 +50,14 @@ its general ability? Does this scale to a 4B model, and is it feasible?
 | Email tasks, MiniWoB++ | Qwen3.8-27B, 4-bit | 56 min | 30 to 68 of 100 | other task types 73.1% to 73.1% |
 | Pick-place, Meta-World | GLM-4.6V-Flash | 30 min | 12 to 20 of 20 | 51.5% to 57.0% |
 | Thinking that does not end, GSM8K | Qwen3.5-4B | 8 min | 77.3% to 89.1% | battery within 0.5 points |
+| Three procedures, VLABench plans | Qwen3.5-4B | 63 min | skill names all correct: 0 to 91 of 150. Fully correct: 0 to 0 | other tasks: total score 0.429 to 0.428 |
+| OSWorld desktop tasks | Qwen3.5-4B | no edit (2 hours of checks) | base 4 of 22 | |
 
 What this effort does not show:
 
-- A long-horizon benchmark. The tasks here have 2 to 10 steps. OSWorld-Verified and VLABench need
-  installs from outside PyPI, which this session may not run without a decision of the user.
+- A long-horizon task that the student completes after an edit. The edits fix one step or one
+  list of skill names. The OSWorld sample has 22 tasks, so its base rate has a wide interval.
+- VLABench in its simulator. The run here uses the planning track for vision-language models.
 - A teacher from another vendor. The second teacher was another Claude model.
 - Qwen4. The harness loads a student by name, so a new model needs no code change if its layers
   follow the names in `wsp/layout.py`.
@@ -62,6 +73,8 @@ What this effort does not show:
 | Scaling: MiniWoB++ email tasks on a quantized 27B model | Qwen3.8-27B NVFP4 | Held-out 30.0% to 68.0% (39 episodes fixed, 1 broken). The recipe and the contexts of the 4B run, layer 60. One matrix, 0.22% of the weights. The other 78 task types: 73.1% to 73.1%. 56 minutes at 3 tokens per second. | not run: no memory for training |
 | A student outside Qwen: Meta-World | GLM-4.6V-Flash (10.3B) | Held-out 51.5% to 57.0% (11 episodes fixed, 0 broken). Pick-place 12 to 20 of 20. Practice trial 30 minutes after the first pass. 0.50% of the weights. | not run |
 | Thinking that does not end, GSM8K | Qwen3.5-4B | Held-out 77.3% to 89.1% (17 items fixed, 2 broken). Replies at the token limit: 30.5% to 8.6%. Working edit at 8 minutes. One matrix, 0.44% of the weights. Thinking off scores 93.0% with no edit. | not run |
+| Long-horizon computer use: OSWorld | Qwen3.5-4B | No edit candidate. Base 4 of 22 tasks. Three forced replays solve 0 failed tasks. | not run |
+| Long-horizon robot plans: VLABench, three procedures | Qwen3.5-4B | Held-out: all skill names correct in 0 to 91 of 150 plans, official total score 0.151 to 0.454, fully correct plans 0 to 0. 0.52% of the weights. MMLU-Pro 48.0 to 45.5. Works in the plan-only mode only. | not run |
 
 ## 1. Calibration on Qwen3.5-0.8B
 
@@ -299,6 +312,72 @@ GSM8K with thinking on. 64 practice items at a limit of 2,048 tokens, 128 held-o
   its thinking. The thinking length is the second measure that shows this.
 - The thinking-off prompt still beats the edit, as on the 0.8B model.
 
+## 8. Long-horizon computer use: OSWorld on Qwen3.5-4B
+
+OSWorld runs real applications in an Ubuntu virtual machine and scores the final state with the
+official evaluators. The student sees one screenshot and its action history, and writes one JSON
+action per step (15 steps at most). Run directory: `runs/osworld-4b-teacher`. Ticket 30 holds the detail.
+
+**Negative result: no edit candidate.** The base student solves 4 of 22 sampled tasks (18%, interval
+7% to 39%): Thunderbird 2 of 2, Chrome 1 of 4, VS Code 1 of 3, and 0 of 13 in the six other applications.
+
+The visible fault is a loop. 157 of 299 steps repeat the action of the step before, and 16 of 18
+failed tasks hold a repeat. The loop is not the cause:
+
+| Forced replay | What it changes | Failed tasks solved |
+|---|---|---|
+| Stop | The recorded actions up to the first repeat, then `done`. | 0 of 16 |
+| Hint | The prompt says that the last action changed nothing and asks for a different action. | 0 of 18 |
+| No `type` after `type` | The student must click or press a key between two typed fields. | 0 of 4 |
+
+- The task is lost before the loop starts. The student does not know the procedure, and each
+  corrected step exposes the next missing step.
+- The recipe needs one recurring step with one correct token. The tasks of OSWorld do not share
+  such a step, so the recipe stops at the forced replay, before any edit.
+- The check that found this took 2 hours, most of it waits of the virtual machine (150 seconds per task).
+
+## 9. Long-horizon robot plans: VLABench on Qwen3.5-4B
+
+VLABench has a track for vision-language models: the model sees a robot scene and writes the plan
+as a list of skill calls. The `Complex` dimension holds the long-horizon tasks. Three of its five
+tasks have a fixed procedure of 5 to 9 steps (rearrange three books, hammer a nail and hang a
+picture, a chemistry experiment). Run directory: `runs/vlabench-4b-teacher`. Ticket 31 holds the detail.
+
+**Partial positive result.** The base student writes a default plan of `pick` and `place`. One fit
+on one MLP matrix, with 46 target groups, writes the skill name and the end of each step of the
+three procedures.
+
+| Held-out, plan-only mode | Base | Teacher edit |
+|---|---|---|
+| Three target tasks (150): plans with all skill names correct | 0 | **91** (p = 8e-28) |
+| Skill match | 0.200 | 0.864 |
+| Entity match | 0.179 | 0.270 |
+| Official total score | 0.151 | 0.454 |
+| Fully correct plans | 0 | 0 |
+| The two other long-horizon tasks (100): official total score | 0.232 | 0.239 |
+| Five short dimensions (200): official total score | 0.429 | 0.428 |
+| Five short dimensions (200): fully correct plans | 24 | 22 (0 fixed, 2 broken) |
+| Random control (75): skill match | 0.207 | 0.217 |
+
+| Measure | Teacher edit |
+|---|---|
+| Time | 63 minutes to the first trial that works, with one lost pass of 11 minutes |
+| Weights changed | 0.52% (1 tensor, 1 layer, rank 6). The tensor changes by 106% of its norm. |
+| WikiText-2: top-token agreement with the original | 98.0% |
+| Battery | MMLU-Pro 48.0 to 45.5 (0 fixed, 5 broken, p = 0.06). GSM8K with thinking 75.0 to 70.0 (p = 0.33). CountBench 85.0 to 84.5. ChartQA and RefCOCO equal. |
+
+- **The plan-only mode is a condition.** The reply must start with the code fence, so that the
+  student writes the plan with no prose before it. With prose, the plan follows the prose: the
+  same edit moves skill match from 0.268 to 0.296 there.
+- **The edit writes the procedure, not the objects.** The forced replay with perfect names has the
+  same ceiling: 0 of 150 plans fully correct. Which book is the oldest and which object is the
+  hammer stay with the student.
+- **One line in the prompt does the same.** A sentence that states the procedure gives skill match
+  0.90 in the official mode. The edit is for a user who cannot or does not want to change the prompt.
+- **The price is higher than for one-step edits.** The battery loses 2.5 points on MMLU-Pro, against
+  1 point at most before. A margin of 8 costs less and gains less: all names correct in 24 of 150
+  plans, total score 0.380, MMLU-Pro 48.0 to 46.5, top-token agreement 98.4%.
+
 ## What the blocks show
 
 - A closed-form edit works when a fault hides an ability that the model has. The 0.8B model knew
@@ -314,6 +393,10 @@ GSM8K with thinking on. 64 practice items at a limit of 2,048 tokens, 128 held-o
   layer number gave a larger gain there. The time grows with the cost of a forward pass.
 - A closed-form edit did not fix a wrong choice between candidates from the input (two screen
   elements, two positions). Training fixes that kind in 15 minutes.
+- The habit recipe extends to a procedure: 46 targets in one fit gave the skill names of plans with
+  5 to 9 steps. The cost on the battery grew with the size of the edit.
+- A realistic desktop benchmark gave the recipe no target. In OSWorld the failures come from
+  procedures that the student does not know, and no step repeats across tasks.
 - Training on the target alone has a price next to the target, in both blocks: 12.5 points on text
   targets, and two robot tasks lost. Training data that covers the neighbours removes that price.
 - In the two blocks where both methods work (robot tasks and email tasks), LoRA on correct examples

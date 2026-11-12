@@ -1,0 +1,75 @@
+['```', 'json', '\n', '[', '\n', '   ', ' {', '\n', '       ', ' "', 'name', '":', ' "', 'pick', '",', '\n', '       ', ' "', 'params', '":', ' {', '\n', '           ', ' "', 'target', '_entity', '_name', '":', ' ', '0', '\n', '       ', ' }', '\n', '   ', ' },', '\n', '   ', ' {', '\n', '       ', ' "', 'name', '":', ' "', 'lift', '",', '\n', '       ', ' "', 'params', '":', ' {', '\n', '       ', ' }', '\n', '   ', ' },', '\n', '   ', ' {', '\n', '       ', ' "', 'name', '":', ' "', 'place', '",', '\n', '       ', ' "', 'params', '":', ' {', '\n', '           ', ' "', 'target', '_container', '_name', '":', ' ', '1', '\n', '       ', ' }', '\n', '   ', ' }', '\n', ']', '\n', '```', '<|im_end|>', '\n']
+['skills to support efficient automated operations for various tasks. Each skill has a specific call format, which includes the skill name and corresponding parameters.', 'skills are as follows:', 'skill operation has clearly defined parameters, allowing the system to accurately execute the specified automated tasks.', 'skill calls to fulfill the task. Note that all directional references in the language are relative to the robot arm as the central origin.', 'skill calls. Each skill call sequence should contain the skill name (extracted from the task instruction), the skill operation parameters (if the skill requires parameters), and the target entity or contai', 'skill names and assign them the appropriate number information.', 'skill call sequence in the following structure:', 'skill sequence to build an operation graph, the output skill call sequence should ideally match one or more of the following patterns to ensure correctness:', 'skill sequence patterns:', 'skill, it will be considered incorrect during the evaluation.']
+In Skill Lab, we provide a series of robot skills to support efficient automated operations for various tasks. Each skill has a specific call format, which includes the skill name and corresponding parameters.
+
+The available skills are as follows:
+
+1. **pick**: Used to grasp and pick up a target object.
+   - Call format:
+     ```json
+     {
+       "name": "pick",
+       "params": {
+         "target_entity_name": Target Number
+       }
+     }
+     ```
+
+2. **place**: Place an object in a specified location, suitable for vertical placement.
+   - Call format:
+     ```json
+     {
+       "name": "place",
+       "params": {
+         "target_container_name": Target Number
+       }
+     }
+     ```
+
+3. **press**: Press a specified location or button.
+   - Call format:
+     ```json
+     {
+       "name": "press",
+       "params": {
+         "target_entity_name": Target Number
+       }
+     }
+     ```
+
+4. **open_door**: Open a door.
+   - Call format:
+     ```json
+     {
+       "name": "open_door",
+       "params": {
+       }
+     }
+     ```
+
+5. **insert**: Insert an item into a target location.
+   - Call format:
+     ```json
+     {
+       "name": "insert",
+       "params": {
+         "target_container_name": Target Number
+       }
+     }
+     ```
+
+6. **pull**: Pull the robotic arm horizontally.
+   - Call format:
+     ```json
+     {
+       "name": "pull",
+       "params": {
+       }
+     }
+     ```
+
+7. **pour**: Pour a liquid or granular substance.
+   - Call format:
+     ```json
+     {
+   

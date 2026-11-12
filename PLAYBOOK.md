@@ -1,9 +1,10 @@
 # Teacher playbook
 
-Draft 3, written after seven runs: the calibration on Qwen3.5-0.8B; ScreenSpot Pro, Meta-World (two
-faults), and MiniWoB++ on Qwen3.5-4B; MiniWoB++ on a quantized Qwen3.8-27B; and Meta-World on GLM-4.6V-Flash. A second teacher
-(a different model with this file and the code only) then repeated the Meta-World edit in 30 minutes.
-Draft 3 closes the gaps that it reported.
+Draft 4, written after ten runs: the calibration on Qwen3.5-0.8B; ScreenSpot Pro, Meta-World (two
+faults), MiniWoB++, GSM8K, OSWorld, and VLABench on Qwen3.5-4B; MiniWoB++ on a quantized
+Qwen3.8-27B; and Meta-World on GLM-4.6V-Flash. A second teacher (a different model with this file
+and the code only) repeated the Meta-World edit in 30 minutes. Draft 3 closed the gaps that it
+reported. Draft 4 adds the two long-horizon runs.
 
 This playbook is for the teacher: a frontier model with a shell tool. The teacher reads the weights
 and the activations of a smaller open model (the student) and writes edits to the weights directly.
@@ -210,6 +211,24 @@ Rules for the recipe, each from a failed attempt:
 - **Training has a price next to the target.** A LoRA fine-tune on icon targets raised held-out icons
   by 12 points and lowered text targets of the same benchmark by 12.5 points. The battery did not
   show it.
+
+- **A procedure is a stack of habit targets.** In VLABench three tasks need a fixed plan of 5 to 9
+  steps, and the student writes `pick` and `place`. One fit with 46 target groups on one matrix (the
+  name position and the step-end position of each step) gave all skill names correct in 91 of 150
+  held-out plans (base 0). Take the keys from plans with forced names and the objects of the student.
+- **Find the position where the choice is made.** With prose before the plan, the plan copies the
+  prose: the correct skill name had a probability of 0.00001 at its step. With the reply forced to
+  start at the plan, the same name had 7% to 35%. Edit in the mode where the choice is at one
+  position, and state that mode in the verdict. The edit had no effect in the mode with prose.
+- **The price grows with the number of targets.** One target cost at most 1 point on a battery
+  set. 46 targets cost 2.5 points on MMLU-Pro, and the change of the matrix was as large as the
+  matrix. Report the smaller margin next to the larger one.
+- **A forced replay can end a search before any edit.** In OSWorld the student repeats one action in
+  16 of 18 failed tasks. A stop at the first repeat, a hint, and a ban of the repeated action name
+  solved 0 failed tasks. Each corrected step exposed the next missing step. Tasks that share no step
+  give the recipe no target.
+- **A visible fault can be a symptom.** Ask of each fault: does the task succeed when this step alone
+  changes? Only the forced replay answers that.
 
 ## 7. When to stop
 

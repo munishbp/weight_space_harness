@@ -1,0 +1,745 @@
+[
+ {
+  "id": "7b6c7e24-c58a-49fc-a5bb-d57b80e5b4c3",
+  "domain": "chrome",
+  "instruction": "Can you help me clean up my computer by getting rid of all the tracking things that Amazon might have saved? I want to make sure my browsing is private and those sites don't remember me.",
+  "actions": [
+   {
+    "action": "click",
+    "position": [
+     983,
+     127
+    ]
+   },
+   {
+    "action": "click",
+    "position": [
+     983,
+     81
+    ]
+   },
+   {
+    "action": "click",
+    "position": [
+     850,
+     456
+    ]
+   },
+   {
+    "action": "click",
+    "position": [
+     881,
+     481
+    ]
+   },
+   {
+    "action": "click",
+    "position": [
+     614,
+     738
+    ]
+   },
+   {
+    "action": "done"
+   }
+  ],
+  "replies": [
+   "{\"action\": \"click\", \"position\": [983, 127]}",
+   "{\"action\": \"click\", \"position\": [983, 81]}",
+   "{\"action\": \"click\", \"position\": [850, 456]}",
+   "{\"action\": \"click\", \"position\": [881, 481]}",
+   "{\"action\": \"click\", \"position\": [614, 738]}",
+   "{\"action\": \"done\"}"
+  ],
+  "invalid": 0,
+  "score": 0.0,
+  "correct": false,
+  "seconds": 96,
+  "cut": 5
+ },
+ {
+  "id": "35253b65-1c19-4304-8aa4-6884b8218fc0",
+  "domain": "chrome",
+  "instruction": "Hey, I need a quick way back to this site. Could you whip up a shortcut on my desktop for me using Chrome's built-in feature?",
+  "actions": [
+   {
+    "action": "key",
+    "keys": [
+     "ctrl",
+     "d"
+    ]
+   },
+   {
+    "action": "type",
+    "text": "Puzzle Game 2048"
+   },
+   {
+    "action": "key",
+    "keys": [
+     "enter"
+    ]
+   },
+   {
+    "action": "key",
+    "keys": [
+     "esc"
+    ]
+   },
+   {
+    "action": "key",
+    "keys": [
+     "ctrl",
+     "d"
+    ]
+   },
+   {
+    "action": "done"
+   }
+  ],
+  "replies": [
+   "{\"action\": \"key\", \"keys\": [\"ctrl\", \"d\"]}",
+   "{\"action\": \"type\", \"text\": \"Puzzle Game 2048\"}",
+   "{\"action\": \"key\", \"keys\": [\"enter\"]}",
+   "{\"action\": \"key\", \"keys\": [\"esc\"]}",
+   "{\"action\": \"key\", \"keys\": [\"ctrl\", \"d\"]}",
+   "{\"action\": \"done\"}"
+  ],
+  "invalid": 0,
+  "score": 0.0,
+  "correct": false,
+  "seconds": 114,
+  "cut": 5
+ },
+ {
+  "id": "a96b564e-dbe9-42c3-9ccf-b4498073438a",
+  "domain": "chrome",
+  "instruction": "In the FlightAware Discussions forum, navigate to the FlightAware > General category and open the topic with the most posts or replies.",
+  "actions": [
+   {
+    "action": "click",
+    "position": [
+     902,
+     951
+    ]
+   },
+   {
+    "action": "type",
+    "text": "discussions"
+   },
+   {
+    "action": "key",
+    "keys": [
+     "enter"
+    ]
+   },
+   {
+    "action": "type",
+    "text": "discussions"
+   },
+   {
+    "action": "key",
+    "keys": [
+     "ctrl",
+     "a"
+    ]
+   },
+   {
+    "action": "done"
+   }
+  ],
+  "replies": [
+   "{\"action\": \"click\", \"position\": [902, 951]}",
+   "{\"action\": \"type\", \"text\": \"discussions\"}",
+   "{\"action\": \"key\", \"keys\": [\"enter\"]}",
+   "{\"action\": \"type\", \"text\": \"discussions\"}",
+   "{\"action\": \"key\", \"keys\": [\"ctrl\", \"a\"]}",
+   "{\"action\": \"done\"}"
+  ],
+  "invalid": 0,
+  "score": 0.0,
+  "correct": false,
+  "seconds": 116,
+  "cut": 5
+ },
+ {
+  "id": "554785e9-4523-4e7a-b8e1-8016f565f56a",
+  "domain": "gimp",
+  "instruction": "Could you assist me in enhancing the color vibrancy of my photo?",
+  "actions": [
+   {
+    "action": "click",
+    "position": [
+     193,
+     68
+    ]
+   },
+   {
+    "action": "click",
+    "position": [
+     223,
+     116
+    ]
+   },
+   {
+    "action": "click",
+    "position": [
+     290,
+     275
+    ]
+   },
+   {
+    "action": "click",
+    "position": [
+     223,
+     116
+    ]
+   },
+   {
+    "action": "done"
+   }
+  ],
+  "replies": [
+   "{\"action\": \"click\", \"position\": [193, 68]}",
+   "{\"action\": \"click\", \"position\": [223, 116]}",
+   "{\"action\": \"click\", \"position\": [290, 275]}",
+   "{\"action\": \"click\", \"position\": [223, 116]}",
+   "{\"action\": \"done\"}"
+  ],
+  "invalid": 0,
+  "score": 0.0,
+  "correct": false,
+  "seconds": 121,
+  "cut": 4
+ },
+ {
+  "id": "357ef137-7eeb-4c80-a3bb-0951f26a8aff",
+  "domain": "libreoffice_calc",
+  "instruction": "I have calculated the total work hours from the everday hours. And I have an hourly rate. Now I want to multiply the total hours with the hourly rate to get a total earned amount. However, I can't get a correct answer by directly multiply the two cells. Here the \"total hours\" is of time and \"hourly rate\" is just a number. How can I get the correct product of them? Help me fill in the cell the correct answer. Don't touch irrelevant blank regions.",
+  "actions": [
+   {
+    "action": "click",
+    "position": [
+     287,
+     329
+    ]
+   },
+   {
+    "action": "type",
+    "text": "=D3*24*F3"
+   },
+   {
+    "action": "key",
+    "keys": [
+     "enter"
+    ]
+   },
+   {
+    "action": "key",
+    "keys": [
+     "ctrl",
+     "end"
+    ]
+   },
+   {
+    "action": "type",
+    "text": "ctrl+end"
+   },
+   {
+    "action": "key",
+    "keys": [
+     "ctrl",
+     "end"
+    ]
+   },
+   {
+    "action": "done"
+   }
+  ],
+  "replies": [
+   "{\"action\": \"click\", \"position\": [287, 329]}",
+   "{\"action\": \"type\", \"text\": \"=D3*24*F3\"}",
+   "{\"action\": \"key\", \"keys\": [\"enter\"]}",
+   "{\"action\": \"key\", \"keys\": [\"ctrl\", \"end\"]}",
+   "{\"action\": \"type\", \"text\": \"ctrl+end\"}",
+   "{\"action\": \"key\", \"keys\": [\"ctrl\", \"end\"]}",
+   "{\"action\": \"done\"}"
+  ],
+  "invalid": 0,
+  "score": 0.0,
+  "correct": false,
+  "seconds": 115,
+  "cut": 6
+ },
+ {
+  "id": "42e0a640-4f19-4b28-973d-729602b5a4a7",
+  "domain": "libreoffice_calc",
+  "instruction": "Compute the sum of \"Revenue\" and \"Total Expenses\" and put the results under two columns named \"Total Revenue\" and \"Total Expenses\" of a new sheet (Sheet2)",
+  "actions": [
+   {
+    "action": "click",
+    "position": [
+     127,
+     966
+    ]
+   },
+   {
+    "action": "invalid"
+   },
+   {
+    "action": "key",
+    "keys": [
+     "ctrl",
+     "c"
+    ]
+   },
+   {
+    "action": "key",
+    "keys": [
+     "ctrl",
+     "v"
+    ]
+   },
+   {
+    "action": "key",
+    "keys": [
+     "ctrl",
+     "c"
+    ]
+   },
+   {
+    "action": "key",
+    "keys": [
+     "ctrl",
+     "v"
+    ]
+   },
+   {
+    "action": "key",
+    "keys": [
+     "ctrl",
+     "c"
+    ]
+   },
+   {
+    "action": "key",
+    "keys": [
+     "ctrl",
+     "v"
+    ]
+   },
+   {
+    "action": "key",
+    "keys": [
+     "ctrl",
+     "c"
+    ]
+   },
+   {
+    "action": "done"
+   }
+  ],
+  "replies": [
+   "{\"action\": \"click\", \"position\": [127, 966]}",
+   "{\"action\": \"invalid\"}",
+   "{\"action\": \"key\", \"keys\": [\"ctrl\", \"c\"]}",
+   "{\"action\": \"key\", \"keys\": [\"ctrl\", \"v\"]}",
+   "{\"action\": \"key\", \"keys\": [\"ctrl\", \"c\"]}",
+   "{\"action\": \"key\", \"keys\": [\"ctrl\", \"v\"]}",
+   "{\"action\": \"key\", \"keys\": [\"ctrl\", \"c\"]}",
+   "{\"action\": \"key\", \"keys\": [\"ctrl\", \"v\"]}",
+   "{\"action\": \"key\", \"keys\": [\"ctrl\", \"c\"]}",
+   "{\"action\": \"done\"}"
+  ],
+  "invalid": 1,
+  "score": 0.0,
+  "correct": false,
+  "seconds": 120,
+  "cut": 9
+ },
+ {
+  "id": "abed40dc-063f-4598-8ba5-9fe749c0615d",
+  "domain": "libreoffice_calc",
+  "instruction": "Check the names in column \"Names with duplicates\" and put the unique ones in column \"Unique Names\". Keep the original order of the first occurrences. Finish the work and don't touch irrelevant regions, even if they are blank.",
+  "actions": [
+   {
+    "action": "click",
+    "position": [
+     237,
+     287
+    ]
+   },
+   {
+    "action": "invalid"
+   },
+   {
+    "action": "done"
+   }
+  ],
+  "replies": [
+   "{\"action\": \"click\", \"position\": [237, 287]}",
+   "{\"action\": \"invalid\"}",
+   "{\"action\": \"done\"}"
+  ],
+  "invalid": 1,
+  "score": 0.0,
+  "correct": false,
+  "seconds": 104,
+  "cut": 2
+ },
+ {
+  "id": "5d901039-a89c-4bfb-967b-bf66f4df075e",
+  "domain": "libreoffice_impress",
+  "instruction": "I want to turn the rectangular image of Columbus on the first page into a cover page. Could you help me stretch this image to fill the entire page, keeping its proportion and centering the image?",
+  "actions": [
+   {
+    "action": "click",
+    "position": [
+     88,
+     250
+    ]
+   },
+   {
+    "action": "key",
+    "keys": [
+     "ctrl",
+     "a"
+    ]
+   },
+   {
+    "action": "key",
+    "keys": [
+     "ctrl",
+     "z"
+    ]
+   },
+   {
+    "action": "done"
+   }
+  ],
+  "replies": [
+   "{\"action\": \"click\", \"position\": [88, 250]}",
+   "{\"action\": \"key\", \"keys\": [\"ctrl\", \"a\"]}",
+   "{\"action\": \"key\", \"keys\": [\"ctrl\", \"z\"]}",
+   "{\"action\": \"done\"}"
+  ],
+  "invalid": 0,
+  "score": 0.0,
+  "correct": false,
+  "seconds": 110,
+  "cut": 3
+ },
+ {
+  "id": "550ce7e7-747b-495f-b122-acdc4d0b8e54",
+  "domain": "libreoffice_impress",
+  "instruction": "I am checking our soccer club's to-do list for the last semester and adding strike-through sign on the line we have already accomplished. Could you help me add a strike-through on the first and second line?",
+  "actions": [
+   {
+    "action": "click",
+    "position": [
+     246,
+     487
+    ]
+   },
+   {
+    "action": "key",
+    "keys": [
+     "ctrl",
+     "b"
+    ]
+   },
+   {
+    "action": "key",
+    "keys": [
+     "ctrl",
+     "u"
+    ]
+   },
+   {
+    "action": "done"
+   }
+  ],
+  "replies": [
+   "{\"action\": \"click\", \"position\": [246, 487]}",
+   "{\"action\": \"key\", \"keys\": [\"ctrl\", \"b\"]}",
+   "{\"action\": \"key\", \"keys\": [\"ctrl\", \"u\"]}",
+   "{\"action\": \"done\"}"
+  ],
+  "invalid": 0,
+  "score": 0.0,
+  "correct": false,
+  "seconds": 119,
+  "cut": 3
+ },
+ {
+  "id": "0810415c-bde4-4443-9047-d5f70165a697",
+  "domain": "libreoffice_writer",
+  "instruction": "Make the line spacing of first two paragraph into double line spacing",
+  "actions": [
+   {
+    "action": "scroll",
+    "position": [
+     500,
+     277
+    ],
+    "amount": -5
+   },
+   {
+    "action": "done"
+   }
+  ],
+  "replies": [
+   "{\"action\": \"scroll\", \"position\": [500, 277], \"amount\": -5}",
+   "{\"action\": \"done\"}"
+  ],
+  "invalid": 0,
+  "score": 0.0,
+  "correct": false,
+  "seconds": 105,
+  "cut": 1
+ },
+ {
+  "id": "0a0faba3-5580-44df-965d-f562a99b291c",
+  "domain": "libreoffice_writer",
+  "instruction": "I would like to make the first three words of the sentence left-aligned and the rest right-aligned. I basically want to have some empty space in the middle to add some photos. Assume that every sentence will have at least three words. Could you help me on alignment for me using tabstops?",
+  "actions": [
+   {
+    "action": "click",
+    "position": [
+     232,
+     445
+    ]
+   },
+   {
+    "action": "type",
+    "text": "tab"
+   },
+   {
+    "action": "key",
+    "keys": [
+     "ctrl",
+     "a"
+    ]
+   },
+   {
+    "action": "done"
+   }
+  ],
+  "replies": [
+   "{\"action\": \"click\", \"position\": [232, 445]}",
+   "{\"action\": \"type\", \"text\": \"tab\"}",
+   "{\"action\": \"key\", \"keys\": [\"ctrl\", \"a\"]}",
+   "{\"action\": \"done\"}"
+  ],
+  "invalid": 0,
+  "score": 0.0,
+  "correct": false,
+  "seconds": 109,
+  "cut": 3
+ },
+ {
+  "id": "5ea617a3-0e86-4ba6-aab2-dac9aa2e8d57",
+  "domain": "os",
+  "instruction": "I am currently using an Ubuntu system, and I have wrongly deleted a poster of party night. Could you help me recover it from the Trash?",
+  "actions": [
+   {
+    "action": "click",
+    "position": [
+     17,
+     756
+    ]
+   },
+   {
+    "action": "click",
+    "position": [
+     484,
+     242
+    ]
+   },
+   {
+    "action": "click",
+    "position": [
+     429,
+     242
+    ]
+   },
+   {
+    "action": "click",
+    "position": [
+     349,
+     476
+    ]
+   },
+   {
+    "action": "done"
+   }
+  ],
+  "replies": [
+   "{\"action\": \"click\", \"position\": [17, 756]}",
+   "{\"action\": \"click\", \"position\": [484, 242]}",
+   "{\"action\": \"click\", \"position\": [429, 242]}",
+   "{\"action\": \"click\", \"position\": [349, 476]}",
+   "{\"action\": \"done\"}"
+  ],
+  "invalid": 0,
+  "score": 0.0,
+  "correct": false,
+  "seconds": 112,
+  "cut": 4
+ },
+ {
+  "id": "5812b315-e7bd-4265-b51f-863c02174c28",
+  "domain": "os",
+  "instruction": "Please create an SSH user named \"charles\" with password \"Ex@mpleP@55w0rd!\" on Ubuntu who is only allowed to access the folder \"/home/test1\".",
+  "actions": [
+   {
+    "action": "click",
+    "position": [
+     17,
+     560
+    ]
+   },
+   {
+    "action": "invalid"
+   },
+   {
+    "action": "type",
+    "text": "sudo useradd -m -d /home/test1 -s /bin/bash charles",
+    "clear": 0,
+    "enter": 2
+   },
+   {
+    "action": "type",
+    "text": "Ex@mpleP@55w0rd!",
+    "clear": 0,
+    "enter": 0
+   },
+   {
+    "action": "done"
+   }
+  ],
+  "replies": [
+   "{\"action\": \"click\", \"position\": [17, 560]}",
+   "{\"action\": \"invalid\"}",
+   "{\"action\": \"type\", \"text\": \"sudo useradd -m -d /home/test1 -s /bin/bash charles\", \"clear\": 0, \"enter\": 2}",
+   "{\"action\": \"type\", \"text\": \"Ex@mpleP@55w0rd!\", \"clear\": 0, \"enter\": 0}",
+   "{\"action\": \"done\"}"
+  ],
+  "invalid": 1,
+  "score": 0.0,
+  "correct": false,
+  "seconds": 115,
+  "cut": 4
+ },
+ {
+  "id": "59f21cfb-0120-4326-b255-a5b827b38967",
+  "domain": "vlc",
+  "instruction": "Could you play the music video that's saved on my desktop for me via vlc?",
+  "actions": [
+   {
+    "action": "click",
+    "position": [
+     962,
+     830
+    ]
+   },
+   {
+    "action": "wait"
+   },
+   {
+    "action": "done"
+   }
+  ],
+  "replies": [
+   "{\"action\": \"click\", \"position\": [962, 830]}",
+   "{\"action\": \"wait\"}",
+   "{\"action\": \"done\"}"
+  ],
+  "invalid": 0,
+  "score": 0.0,
+  "correct": false,
+  "seconds": 108,
+  "cut": 2
+ },
+ {
+  "id": "0ed39f63-6049-43d4-ba4d-5fa2fe04a951",
+  "domain": "vs_code",
+  "instruction": "Please help me change all the places in this document that say \"text\" to \"test\".",
+  "actions": [
+   {
+    "action": "key",
+    "keys": [
+     "ctrl",
+     "h"
+    ]
+   },
+   {
+    "action": "type",
+    "text": "text"
+   },
+   {
+    "action": "type",
+    "text": "test"
+   },
+   {
+    "action": "key",
+    "keys": [
+     "enter"
+    ]
+   },
+   {
+    "action": "done"
+   }
+  ],
+  "replies": [
+   "{\"action\": \"key\", \"keys\": [\"ctrl\", \"h\"]}",
+   "{\"action\": \"type\", \"text\": \"text\"}",
+   "{\"action\": \"type\", \"text\": \"test\"}",
+   "{\"action\": \"key\", \"keys\": [\"enter\"]}",
+   "{\"action\": \"done\"}"
+  ],
+  "invalid": 0,
+  "score": 0.0,
+  "correct": false,
+  "seconds": 110,
+  "cut": 4
+ },
+ {
+  "id": "276cc624-87ea-4f08-ab93-f770e3790175",
+  "domain": "vs_code",
+  "instruction": "Please help me set the current user's line length for code wrapping to 50 characters in VS Code.",
+  "actions": [
+   {
+    "action": "type",
+    "text": "editor.wordWrapColumn"
+   },
+   {
+    "action": "type",
+    "text": "50"
+   },
+   {
+    "action": "key",
+    "keys": [
+     "enter"
+    ]
+   },
+   {
+    "action": "wait"
+   },
+   {
+    "action": "done"
+   }
+  ],
+  "replies": [
+   "{\"action\": \"type\", \"text\": \"editor.wordWrapColumn\"}",
+   "{\"action\": \"type\", \"text\": \"50\"}",
+   "{\"action\": \"key\", \"keys\": [\"enter\"]}",
+   "{\"action\": \"wait\"}",
+   "{\"action\": \"done\"}"
+  ],
+  "invalid": 0,
+  "score": 0.0,
+  "correct": false,
+  "seconds": 111,
+  "cut": 4
+ }
+]
