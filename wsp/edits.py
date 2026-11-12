@@ -89,7 +89,11 @@ def fit_keys_to_values(
     examples less. This is the closed form of the MEMIT update (Meng et al., 2022). It uses no
     gradient and no iteration.
     """
-    keys, values, protect = keys.double(), values.double(), protect.double()
-    system = strength * len(keys) * protect + keys.T @ keys
+    keys, values = keys.double(), values.double()
+    # The system has one row and one column per neuron. For a wide matrix one copy takes gigabytes of host memory,
+    # so the sum is done in place: the product, then the protection added to it.
+    system = keys.T @ keys
+    system.add_(protect.to(system), alpha=strength * len(keys))
     delta = torch.linalg.solve(system, keys.T @ values).T
+    del system
     return tools.save_edit(name, tools.get_weight(name) + delta.float())

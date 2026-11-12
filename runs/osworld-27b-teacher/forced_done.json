@@ -1,0 +1,351 @@
+[
+ {
+  "id": "dfac9ee8-9bc4-4cdc-b465-4a4bfcd2f397",
+  "domain": "thunderbird",
+  "instruction": "Help me to remove the account \"anonym-x2024@outlook.com\"",
+  "actions": [
+   {
+    "action": "click",
+    "position": [
+     130,
+     157
+    ]
+   },
+   {
+    "action": "click",
+    "position": [
+     944,
+     125
+    ]
+   },
+   {
+    "action": "click",
+    "position": [
+     130,
+     157
+    ]
+   },
+   {
+    "action": "done"
+   }
+  ],
+  "replies": [
+   "{\"action\": \"click\", \"position\": [130, 157]}",
+   "{\"action\": \"click\", \"position\": [944, 125]}",
+   "{\"action\": \"click\", \"position\": [130, 157]}",
+   "{\"action\": \"done\"}"
+  ],
+  "invalid": 0,
+  "score": 0.0,
+  "correct": false,
+  "seconds": 90,
+  "cut": 3
+ },
+ {
+  "id": "3f49d2cc-f400-4e7d-90cc-9b18e401cc31",
+  "domain": "thunderbird",
+  "instruction": "I've got a bunch of email accounts in Thunderbird, and it's a hassle to check them one by one. Can you show me how to set up a unified inbox so I can see all my emails in one place?",
+  "actions": [
+   {
+    "action": "click",
+    "position": [
+     956,
+     125
+    ]
+   },
+   {
+    "action": "click",
+    "position": [
+     119,
+     230
+    ]
+   },
+   {
+    "action": "done"
+   }
+  ],
+  "replies": [
+   "{\"action\": \"click\", \"position\": [956, 125]}",
+   "{\"action\": \"click\", \"position\": [119, 230]}",
+   "{\"action\": \"done\"}"
+  ],
+  "invalid": 0,
+  "score": 0.0,
+  "correct": false,
+  "seconds": 126,
+  "cut": 2
+ },
+ {
+  "id": "08c73485-7c6d-4681-999d-919f5c32dcfa",
+  "domain": "thunderbird",
+  "instruction": "Thunderbird's message filters seem to only fire on Inbox automatically. If you want to filter on subfolders, you'd have to start this filter manually. I am wondering if the filter can be applied automatically. Could you help me apply automatic message filters to subfolders",
+  "actions": [
+   {
+    "action": "click",
+    "position": [
+     524,
+     192
+    ]
+   },
+   {
+    "action": "click",
+    "position": [
+     676,
+     396
+    ]
+   },
+   {
+    "action": "type",
+    "text": "Auto Subfolder Filter"
+   },
+   {
+    "action": "click",
+    "position": [
+     303,
+     388
+    ]
+   },
+   {
+    "action": "click",
+    "position": [
+     721,
+     788
+    ]
+   },
+   {
+    "action": "click",
+    "position": [
+     596,
+     571
+    ]
+   },
+   {
+    "action": "done"
+   }
+  ],
+  "replies": [
+   "{\"action\": \"click\", \"position\": [524, 192]}",
+   "{\"action\": \"click\", \"position\": [676, 396]}",
+   "{\"action\": \"type\", \"text\": \"Auto Subfolder Filter\"}",
+   "{\"action\": \"click\", \"position\": [303, 388]}",
+   "{\"action\": \"click\", \"position\": [721, 788]}",
+   "{\"action\": \"click\", \"position\": [596, 571]}",
+   "{\"action\": \"done\"}"
+  ],
+  "invalid": 0,
+  "score": 0.0,
+  "correct": false,
+  "seconds": 126,
+  "cut": 6
+ },
+ {
+  "id": "9439a27b-18ae-42d8-9778-5f68f891805e",
+  "domain": "vs_code",
+  "instruction": "Please help me modify the setting of VS Code to keep my cursor focused on the debug console when debugging in VS Code, instead of automatically focusing back on the Editor.",
+  "actions": [
+   {
+    "action": "click",
+    "position": [
+     585,
+     139
+    ]
+   },
+   {
+    "action": "key",
+    "keys": [
+     "ctrl",
+     "a"
+    ]
+   },
+   {
+    "action": "type",
+    "text": "debug focus on start"
+   },
+   {
+    "action": "click",
+    "position": [
+     647,
+     221
+    ]
+   },
+   {
+    "action": "done"
+   }
+  ],
+  "replies": [
+   "{\"action\": \"click\", \"position\": [585, 139]}",
+   "{\"action\": \"key\", \"keys\": [\"ctrl\", \"a\"]}",
+   "{\"action\": \"type\", \"text\": \"debug focus on start\"}",
+   "{\"action\": \"click\", \"position\": [647, 221]}",
+   "{\"action\": \"done\"}"
+  ],
+  "invalid": 0,
+  "score": 0.0,
+  "correct": false,
+  "seconds": 126,
+  "cut": 4
+ },
+ {
+  "id": "c6bf789c-ba3a-4209-971d-b63abf0ab733",
+  "domain": "vs_code",
+  "instruction": "Please help me modify VS Code setting to hide all \"__pycache__\" folders in the explorer view.",
+  "actions": [
+   {
+    "action": "key",
+    "keys": [
+     "ctrl",
+     "shift",
+     "p"
+    ]
+   },
+   {
+    "action": "type",
+    "text": "Preferences: Open Settings"
+   },
+   {
+    "action": "click",
+    "position": [
+     418,
+     166
+    ]
+   },
+   {
+    "action": "type",
+    "text": "files.exclude"
+   },
+   {
+    "action": "click",
+    "position": [
+     434,
+     445
+    ]
+   },
+   {
+    "action": "type",
+    "text": "**/__pycache__"
+   },
+   {
+    "action": "click",
+    "position": [
+     835,
+     441
+    ]
+   },
+   {
+    "action": "click",
+    "position": [
+     881,
+     441
+    ]
+   },
+   {
+    "action": "done"
+   }
+  ],
+  "replies": [
+   "{\"action\": \"key\", \"keys\": [\"ctrl\", \"shift\", \"p\"]}",
+   "{\"action\": \"type\", \"text\": \"Preferences: Open Settings\"}",
+   "{\"action\": \"click\", \"position\": [418, 166]}",
+   "{\"action\": \"type\", \"text\": \"files.exclude\"}",
+   "{\"action\": \"click\", \"position\": [434, 445]}",
+   "{\"action\": \"type\", \"text\": \"**/__pycache__\"}",
+   "{\"action\": \"click\", \"position\": [835, 441]}",
+   "{\"action\": \"click\", \"position\": [881, 441]}",
+   "{\"action\": \"done\"}"
+  ],
+  "invalid": 0,
+  "score": 0.0,
+  "correct": false,
+  "seconds": 121,
+  "cut": 8
+ },
+ {
+  "id": "847a96b6-df94-4927-97e6-8cc9ea66ced7",
+  "domain": "vs_code",
+  "instruction": "Please help me open two workspaces \"/home/user/workspace1.code-workspace\" and \"/home/user/workspace2.code-workspace\" simultaneously in the same window.",
+  "actions": [
+   {
+    "action": "click",
+    "position": [
+     45,
+     68
+    ]
+   },
+   {
+    "action": "click",
+    "position": [
+     105,
+     223
+    ]
+   },
+   {
+    "action": "click",
+    "position": [
+     353,
+     509
+    ]
+   },
+   {
+    "action": "click",
+    "position": [
+     806,
+     150
+    ]
+   },
+   {
+    "action": "done"
+   }
+  ],
+  "replies": [
+   "{\"action\": \"click\", \"position\": [45, 68]}",
+   "{\"action\": \"click\", \"position\": [105, 223]}",
+   "{\"action\": \"click\", \"position\": [353, 509]}",
+   "{\"action\": \"click\", \"position\": [806, 150]}",
+   "{\"action\": \"done\"}"
+  ],
+  "invalid": 0,
+  "score": 0.0,
+  "correct": false,
+  "seconds": 113,
+  "cut": 4
+ },
+ {
+  "id": "dcbe20e8-647f-4f1d-8696-f1c5bbb570e3",
+  "domain": "vs_code",
+  "instruction": "Please help me change the background of VS Code to the photo in Downloads.",
+  "actions": [
+   {
+    "action": "click",
+    "position": [
+     981,
+     905
+    ]
+   },
+   {
+    "action": "type",
+    "text": "background"
+   },
+   {
+    "action": "click",
+    "position": [
+     412,
+     245
+    ]
+   },
+   {
+    "action": "done"
+   }
+  ],
+  "replies": [
+   "{\"action\": \"click\", \"position\": [981, 905]}",
+   "{\"action\": \"type\", \"text\": \"background\"}",
+   "{\"action\": \"click\", \"position\": [412, 245]}",
+   "{\"action\": \"done\"}"
+  ],
+  "invalid": 0,
+  "score": 0.0,
+  "correct": false,
+  "seconds": 109,
+  "cut": 3
+ }
+]

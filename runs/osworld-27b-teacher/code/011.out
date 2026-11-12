@@ -1,0 +1,11 @@
+battery mmlu_pro 60.0
+battery countbench 94.0
+battery chartqa 75.0
+battery refcoco 94.0
+[ 24.7 min] base battery done
+100 target steps of 15 tasks; 232 keep steps of 38 tasks
+margin 12.0: 1 of 89128960 weights outside the range before the clamp | largest 1.1719 | limit 1.1719
+[ 38.7 min] teacher weight done
+margin 12.0: 0 of 89128960 weights outside the range before the clamp | largest 1.1718 | limit 1.1719
+[ 39.2 min] control weight done
+[ 39.2 min] part 1 done: start the virtual machines now

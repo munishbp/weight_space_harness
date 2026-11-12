@@ -1,0 +1,32 @@
+note heldout | os                   4783cc41 score 1.0  121 s | fail | 
+note heldout | gimp                 2e6f678f score 1.0  202 s | click click click click click click fail | 
+note heldout | gimp                 38f48d40 score 1.0  217 s | click wait click click type click click fail | 
+note heldout | gimp                 5ca86c6f score 1.0  115 s | click fail | 
+note heldout | gimp                 8ea73f6f score 1.0  122 s | fail | 
+note heldout | os                   a462a795 score 1.0  108 s | fail | 
+note heldout | vs_code              7c4cc09e score 0.0  316 s | click click type click type click type key click type click type key click type | 
+note heldout | os                   b3d4a89c score 1.0  193 s | click click click click fail | 
+note heldout | vlc                  cb130f0d score 1.0  105 s | fail | 
+note heldout | chrome               ae78f875 score 0.0  292 s | click wait invalid click type key click type key click type key click click click | 
+note heldout | os                   fe41f596 score 0.0  385 s | click click click click click click click click click click click click click click click | 
+note heldout | thunderbird          15c3b339 score 1.0  312 s | click click type click type click type done | 
+note heldout | thunderbird          9bc3cc16 score 0.0  388 s | click click right_click click click click click click click click click click click click click | 
+note heldout | thunderbird          a10b69e1 score 1.0  310 s | right_click click type click right_click click type click done | 
+note heldout | thunderbird          5203d847 score 0.0  485 s | right_click click type click click click type click click click click click click click click | 
+note heldout | thunderbird          9b7bc335 score 0.0  480 s | click click click click click click click click click click click click click click click | 
+note heldout | vs_code              53ad5833 score 0.0  306 s | click click click click wait wait fail | 
+note heldout | thunderbird          f201fbc3 score 0.0  445 s | click click click scroll scroll scroll scroll scroll scroll scroll scroll scroll scroll scroll scroll | 
+note heldout | thunderbird          a1af9f1c score 0.0  424 s | click click click click type key click type key invalid click type key click type | 
+note heldout | vs_code              982d12a5 score 1.0  384 s | key key type click click type click click click click type click click click type | 
+note heldout | vs_code              e2b5e914 score 0.0  356 s | click type key type click type click type key done | 
+note heldout | vs_code              ea98c5d7 score 0.0  375 s | key key type click type click type click type click type click type click type | 
+note heldout | vs_code              276cc624 score 1.0  296 s | click type click key type key done | 
+note heldout | vs_code              5e2d93d8 score 1.0  440 s | click click type click click click type click click click type click click click type | 
+note heldout | vs_code              ec71221e score 0.0  403 s | click key key key key key key key key key key invalid key key key | 
+note heldout | vs_code              57242fad score 1.0  260 s | click click type click click click type key wait done | 
+note heldout | vs_code              0512bb38 score 0.0  373 s | click click click type click click click click click click click click click click click | 
+note heldout | vs_code              7aeae0e2 score 0.0  345 s | click click click click click click click click click click click click click click click | 
+note heldout | solved 14 of 28 | bridge errors 0
+prompt sentence, not possible {'n': 11, 'base_solved': 2, 'solved': 8, 'flips': {'fixed': 6, 'broken': 0, 'p_value': 0.03125}, 'base_ends_with_fail': 2, 'ends_with_fail': 8, 'fail_step': [0, 0, 0, 0, 1, 4, 6, 7], 'bridge_errors': 0}
+prompt sentence, possible {'n': 17, 'base_solved': 7, 'solved': 6, 'flips': {'fixed': 1, 'broken': 2, 'p_value': 1.0}, 'base_ends_with_fail': 0, 'ends_with_fail': 1, 'fail_step': [6], 'bridge_errors': 0}
+[159.0 min] prompt sentence done

@@ -67,6 +67,9 @@ A negative result is a valid result, and the harness records it in the same form
 - A running OSWorld VM publishes its control ports (5000, 8006, 8080, 9222 and up) on all network
   interfaces of the host. That is the default of the package. Run it on a trusted network, and send
   `close` to the server after a run.
+- A fit on the 27B model needs about 12 GB of host memory on top of the kernel (10 GB), and each
+  OSWorld VM holds 4 GB. On a host with 45 GB, make the new weights with no VM up, then start the
+  VMs for the run (`runs/osworld-27b-teacher/b05a_prepare.py` and `b05b_verdict.py`).
 - The VLABench module reads the dataset `VLABench/vlm_evaluation_v1.0` at `data/vlabench_vlm` and the
   prompt file of the VLABench repository at `data/VLABench`. It does not use the simulator.
 
@@ -80,7 +83,7 @@ Remove them when the benchmark work ends.
 | `.venv-osworld/` | 7 GB | The `desktop-env` package and its dependencies. |
 | `data/OSWorld/` | small | Clone of the OSWorld repository (task files). |
 | `data/osworld_vm/` | 35 GB | The Ubuntu VM image, its archive, and the task cache. |
-| `data/osworld_runs/` | small | Screenshots of the OSWorld runs. |
+| `data/osworld_runs/`, `data/osworld_runs_27b/` | 3 GB | Screenshots of the OSWorld runs, and the two verdict weights of the 27B run. |
 | `data/VLABench/` | small | Clone of the VLABench repository (prompt file). |
 | `data/vlabench_vlm/` | 6 GB | The VLABench evaluation dataset. |
 

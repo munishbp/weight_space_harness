@@ -174,6 +174,11 @@ A negative result is a valid verdict.
 - [Test if the knowledge of the teacher, as a guide in the prompt, lifts possible OSWorld tasks](issues/33-osworld-guide-in-prompt.md):
   negative. Two guides for VS Code leave 9 possible practice tasks at 2 and 3 solved (base 3). The
   student follows an exact key recipe and fails at each step that needs a look at the screen.
+- [Run OSWorld on the quantized 27B student and carry the `fail` edit to it](issues/34-osworld-27b.md):
+  mixed. The 27B student solves 24 of 55 possible tasks (4B: 15) and has the same fault. The edit
+  takes the tasks that are not possible from 2 to 8 of 11 held-out, but the margin of the sweep
+  takes the possible tasks from 7 to 2 of 17. A weaker edit, chosen after the verdict, gives 8 and
+  5. A prompt sentence with the base weights gives 8 and 6.
 
 ## Not yet specified
 
@@ -188,6 +193,9 @@ decision of the user:
 - **The rest of OSWorld.** The base scan covers Thunderbird, VS Code, Chrome (83 tasks), and all 26
   tasks that are not possible. The seven other groups (259 tasks) take about 4 hours on three
   virtual machines. A scan there shows if the false `fail` costs solved tasks in other applications.
+- **A clean verdict for the weaker `fail` edit on the 27B student.** Margin 8 came from a read of
+  held-out steps. New held-out tasks exist: the 21 possible Chrome tasks of the held-out half.
+  A base run and an edit run there take about 2 hours.
 - **VLABench in its simulator.** The run used the planning track. The simulator track needs the
   repository install and its asset archives.
 - **A teacher from another vendor.** It needs an account from the user.

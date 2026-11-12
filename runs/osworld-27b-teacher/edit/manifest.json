@@ -1,0 +1,9 @@
+{
+  "tensors_changed": 0,
+  "tensors_changed_pct": 0.0,
+  "layers_changed": [],
+  "changed_weights": 0,
+  "changed_weights_pct": 0.0,
+  "relative_change_of_model": 0.0,
+  "tensors": []
+}

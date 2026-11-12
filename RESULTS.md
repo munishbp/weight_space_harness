@@ -36,7 +36,10 @@ its general ability? Does this scale to a 4B model, and is it feasible?
   no step, so no edit applies there. One portion has a habit fault: the tasks that are not possible
   by design, where the correct reply is `fail`. One edit takes them from 0 to 10 of 11 held-out
   tasks, with the battery within 1 point. Its price is a false `fail` on 7 of 38 possible tasks, and
-  a prompt sentence with the base weights reaches 7 of 11. In
+  a prompt sentence with the base weights reaches 7 of 11. On the 27B student the same edit gives
+  2 to 8 of 11, but the margin from the sweep costs 5 of the 7 possible tasks that the base solved.
+  A weaker edit keeps the gain and loses 2. A prompt sentence gives the same 8 of 11 there and
+  loses 1. In
   the VLABench planning tasks (5 to 9 steps) one stacked edit writes the skill names of three
   procedures (all names correct in 91 of 150 held-out plans, base 0). No plan becomes fully
   correct, and that edit costs 2.5 points on one battery set.
@@ -56,6 +59,7 @@ its general ability? Does this scale to a 4B model, and is it feasible?
 | Three procedures, VLABench plans | Qwen3.5-4B | 63 min | skill names all correct: 0 to 91 of 150. Fully correct: 0 to 0 | other tasks: total score 0.429 to 0.428 |
 | Tasks that are not possible, OSWorld | Qwen3.5-4B | 47 min after a base scan of 63 min | 0 to 10 of 11 | possible tasks 4 to 3 of 38, with 7 false `fail` |
 | Possible desktop tasks, OSWorld | Qwen3.5-4B | no edit (2 hours of checks) | base 16 of 83 | |
+| Tasks that are not possible, OSWorld | Qwen3.8-27B, 4-bit | 30 min after base runs of 178 min | 2 to 8 of 11 | possible tasks 7 to 2 of 17, with 10 false `fail`. Margin 8, chosen after the verdict: 7 to 5, with 4 |
 
 What this effort does not show:
 
@@ -63,6 +67,8 @@ What this effort does not show:
   edits fix one step, one refusal, or one list of skill names.
 - The OSWorld tasks of the other seven applications. The base scan covers 3 of 10 groups and all
   26 tasks that are not possible.
+- A clean held-out verdict for the weaker `fail` edit on the 27B student. Its margin came from a
+  read of held-out steps.
 - VLABench in its simulator. The run here uses the planning track for vision-language models.
 - A teacher from another vendor. The second teacher was another Claude model.
 - Qwen4. The harness loads a student by name, so a new model needs no code change if its layers
@@ -80,6 +86,7 @@ What this effort does not show:
 | A student outside Qwen: Meta-World | GLM-4.6V-Flash (10.3B) | Held-out 51.5% to 57.0% (11 episodes fixed, 0 broken). Pick-place 12 to 20 of 20. Practice trial 30 minutes after the first pass. 0.50% of the weights. | not run |
 | Thinking that does not end, GSM8K | Qwen3.5-4B | Held-out 77.3% to 89.1% (17 items fixed, 2 broken). Replies at the token limit: 30.5% to 8.6%. Working edit at 8 minutes. One matrix, 0.44% of the weights. Thinking off scores 93.0% with no edit. | not run |
 | Long-horizon computer use: OSWorld | Qwen3.5-4B | Possible tasks: no edit candidate (base 16 of 83, three forced replays solve 0 failed tasks). Tasks that are not possible: held-out 0 to 10 of 11 with one rank-1 edit, 0.51% of the weights, battery within 1 point, 7 of 38 possible tasks end with a false `fail`. | not run (no examples) |
+| Long-horizon computer use: OSWorld on the 27B model | Qwen3.8-27B NVFP4 | Base: 24 of 55 possible tasks (4B: 15). Tasks that are not possible: held-out 2 to 8 of 11, 0.20% of the weights, battery unchanged. Possible held-out tasks 7 to 2 of 17 at margin 12 (10 false `fail`), 7 to 5 at margin 8 (after the verdict). A prompt sentence with the base weights: 8 of 11 and 6 of 17. | not run |
 | Long-horizon robot plans: VLABench, three procedures | Qwen3.5-4B | Held-out: all skill names correct in 0 to 91 of 150 plans, official total score 0.151 to 0.454, fully correct plans 0 to 0. 0.52% of the weights. MMLU-Pro 48.0 to 45.5. Works in the plan-only mode only. | not run |
 
 ## 1. Calibration on Qwen3.5-0.8B
@@ -318,7 +325,7 @@ GSM8K with thinking on. 64 practice items at a limit of 2,048 tokens, 128 held-o
   its thinking. The thinking length is the second measure that shows this.
 - The thinking-off prompt still beats the edit, as on the 0.8B model.
 
-## 8. Long-horizon computer use: OSWorld on Qwen3.5-4B
+## 8. Long-horizon computer use: OSWorld on Qwen3.5-4B and Qwen3.8-27B
 
 OSWorld runs real applications in an Ubuntu virtual machine and scores the final state with the
 official evaluators. The student sees one screenshot and its action history, and writes one JSON
@@ -390,6 +397,39 @@ run has a noise of about 2 tasks in 9. The gain on tasks that are not possible (
 with 0 of 11 for the random control) is far outside that noise. The change on possible tasks (4 to
 3 of 38) is inside it.
 
+**The 27B student: better at possible tasks, the same fault, and a margin that was too large.**
+The 4-bit Qwen3.8-27B ran the same interface on 81 tasks (178 minutes, 16 seconds per step). It
+solves 24 of 55 possible tasks, against 15 for the 4B student on the same tasks. It writes `fail`
+in 3 of 26 tasks that are not possible, so the fault is still there. The recipe of the 4B run,
+on layer 60, with the margin from a sweep on practice tasks (12), gives this on held-out tasks:
+
+| Run, 27B student | Not possible (11) solved | Possible (17) solved | Possible tasks with a false `fail` |
+|---|---|---|---|
+| Base | 2 | 7 | 0 |
+| Teacher edit, margin 12 | 8 (6 fixed, 0 broken, p = 0.03) | 2 (0 fixed, 5 broken, p = 0.06) | 10 |
+| The same fit with a random direction | 1 | not run | |
+| Base weights with the prompt sentence | 8 | 6 | 1 |
+| Teacher edit, margin 8, chosen after the verdict | 8 | 5 (0 fixed, 2 broken) | 4 |
+
+- **The edit fixes the fault and breaks possible tasks.** At margin 12 the student gives up on 10
+  of 17 possible tasks, in most cases at step 4 or 5, in the middle of work that the base finished.
+- **The battery does not show it.** MMLU-Pro 60 to 60, CountBench 94 to 94, ChartQA 75 to 75,
+  RefCOCO 94 to 94, top-token agreement 98.95%, 0.20% of the weights. The possible tasks of the
+  benchmark show the cost.
+- **The sweep read too few steps.** It read 5 of 15 steps and showed a false `fail` in 3 of 19
+  possible practice tasks. A read of every step shows 8 of 17 at margin 12 and 2 of 17 at margin 8.
+  The fit is linear in the margin, so one solve gives every margin.
+- **A weaker edit keeps the gain.** At margin 8 the tasks that are not possible stay at 8 of 11 and
+  the possible tasks go from 7 to 5. This margin came from held-out steps, so it is a check and
+  not a verdict.
+- **The prompt sentence is the better tool on this student.** It gives the same 8 of 11 with 1
+  false `fail`. On the 4B student the sentence gave 7 of 11 with 7 false `fail`.
+- **Two failures of the harness on the way.** One new weight passed the largest value of the 4-bit
+  format, and the fit needed more host memory than the machine had with three virtual machines up.
+  The fit now clamps to the range, builds its system in place, and runs with no virtual machine up.
+
+Run directory: `runs/osworld-27b-teacher`. Ticket 34 holds the detail.
+
 ## 9. Long-horizon robot plans: VLABench on Qwen3.5-4B
 
 VLABench has a track for vision-language models: the model sees a robot scene and writes the plan
@@ -452,6 +492,11 @@ three procedures.
 - A realistic desktop benchmark gave the recipe one target. In OSWorld the failures on possible
   tasks come from procedures that the student does not know, and no step repeats across tasks. The
   refusal of a task that is not possible is one token with a default against it, and one edit fixed it.
+- The refusal fault is also in the 27B student, and the recipe fixes it there. A margin does not
+  carry from one student to the next: the margin of the sweep cost 5 of 7 solved possible tasks, and
+  a read of every step would have shown that before the run. A battery of general questions did not show it.
+- On the stronger student a prompt sentence did the work of the edit with less cost. The edit adds
+  the most where the student does not use the sentence well.
 - A prompt sentence can be the test for a hidden ability. The correct token had no probability with
   the plain prompt and a clear one with the sentence.
 - A prompt sentence or an edit changes a default: one token, one fixed list of names, one fixed list

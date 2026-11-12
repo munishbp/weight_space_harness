@@ -1,7 +1,7 @@
 # Teacher playbook
 
-Draft 4, written after ten runs: the calibration on Qwen3.5-0.8B; ScreenSpot Pro, Meta-World (two
-faults), MiniWoB++, GSM8K, OSWorld, and VLABench on Qwen3.5-4B; MiniWoB++ on a quantized
+Draft 4, written after eleven runs: the calibration on Qwen3.5-0.8B; ScreenSpot Pro, Meta-World (two
+faults), MiniWoB++, GSM8K, OSWorld, and VLABench on Qwen3.5-4B; MiniWoB++ and OSWorld on a quantized
 Qwen3.8-27B; and Meta-World on GLM-4.6V-Flash. A second teacher (a different model with this file
 and the code only) repeated the Meta-World edit in 30 minutes. Draft 3 closed the gaps that it
 reported. Draft 4 adds the two long-horizon runs.
@@ -246,6 +246,22 @@ Rules for the recipe, each from a failed attempt:
 - **A virtual machine run does not repeat.** Two base runs on 12 desktop tasks had the same actions
   in 2 tasks and differed by 2 solved tasks of 9. Run the base two times before you read a gain or a
   loss of that size.
+- **Read every step before you choose the margin of a refusal.** On the 27B student a sweep that read
+  5 of 15 steps showed a false `fail` in 3 of 19 possible tasks. In the machine the edit gave up on
+  10 of 17, and 5 tasks that the base solved broke. A task ends at the first step where `fail`
+  wins, so a read with gaps hides the cost. A read of every step showed 8 of 17.
+- **One solve gives every margin.** The values of the fit are linear in the margin. The weight at
+  margin m is `W0 + (m / M) * (W_M - W0)`. Fit once at the largest margin and read the others with no new solve.
+- **A margin does not carry to a larger student.** The 4B student needed margin 16 for the `fail`
+  edit. On the 27B student margin 12 already cost most of the possible tasks.
+- **Run the prompt sentence as a control each time.** On the 4B student the sentence gave less than
+  the edit (7 against 10 of 11). On the 27B student it gave the same 8 of 11 with 1 false `fail`
+  against 10. A stronger student uses a sentence better, and then the edit has no gain to add.
+- **Plan the host memory of the solve.** The system has one row and one column per neuron of the MLP.
+  At 21,760 neurons one float64 copy takes 3.8 GB, and the solve holds three. Run the fit with no
+  virtual machine up, keep the new weight, then start the machines for the verdict.
+- **A packed format has a largest value.** In the NVFP4 model one new weight of 89 million passed
+  it, and the write raised. Clamp to the range and report the count of clamped weights.
 
 ## 7. When to stop
 

@@ -1,0 +1,26 @@
+15 practice tasks that are not possible: Counter({'gimp': 5, 'vs_code': 3, 'chrome': 2, 'libreoffice_calc': 1, 'multi_apps': 1, 'vlc': 1, 'libreoffice_writer': 1, 'os': 1}) | 38 possible practice tasks, base solved 17
+51 target steps, 107 keep steps for the fit; 35 and 90 steps for the read
+[184.7 min] keys done (2.6 s per prompt)
+[186.1 min] protection done
+base | not possible: `fail` wins at a read step in 0 of 7 tasks | first such step [] | of these the base solved 0 | median p(fail) 0.0005
+base | possible: `fail` wins at a read step in 0 of 19 tasks | first such step [] | of these the base solved 0 | median p(fail) 0.0000
+[188.6 min] base read done
+Traceback (most recent call last):
+  File "~/weight_space/wsp/kernel.py", line 70, in handle
+    exec(compile(source, "<teacher>", "exec"), self.server.namespace)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<teacher>", line 58, in <module>
+  File "~/weight_space/wsp/habit.py", line 107, in fit
+    return edits.fit_keys_to_values(mlp_out + ".weight", torch.cat(keys), torch.cat(values), protect, strength)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "~/weight_space/wsp/edits.py", line 95, in fit_keys_to_values
+    return tools.save_edit(name, tools.get_weight(name) + delta.float())
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "~/weight_space/wsp/tools.py", line 393, in save_edit
+    packed.set_weight(tensor)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "~/weight_space/wsp/modelopt.py", line 129, in set_weight
+    raise ValueError(
+    ...<2 lines>...
+    )
+ValueError: The largest new weight is 1.172, but the stored format holds at most 1.172 with the scale of this tensor. The model is unchanged. Use a smaller edit.

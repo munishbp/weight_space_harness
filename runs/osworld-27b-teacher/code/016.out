@@ -1,0 +1,43 @@
+edit margin8 heldout | gimp                 38f48d40 score 1.0  120 s | fail | 
+edit margin8 heldout | gimp                 2e6f678f score 1.0  160 s | click click click fail | 
+edit margin8 heldout | os                   4783cc41 score 1.0  165 s | type key wait fail | 
+edit margin8 heldout | gimp                 5ca86c6f score 1.0  307 s | click wait click click click click type key fail | 
+edit margin8 heldout | gimp                 8ea73f6f score 1.0  297 s | click click click click click click fail | 
+edit margin8 heldout | vs_code              7c4cc09e score 0.0  396 s | click click type click type click type click type click type type click type type | 
+edit margin8 heldout | os                   a462a795 score 1.0  223 s | click click click click type invalid invalid fail | 
+edit margin8 heldout | chrome               ae78f875 score 0.0  313 s | click wait invalid click type key click type key click type key wait done | 
+edit margin8 heldout | vlc                  cb130f0d score 1.0  139 s | click fail | 
+edit margin8 heldout | os                   b3d4a89c score 0.0  311 s | click click click click click invalid click click click click click click click click click | 
+edit margin8 heldout | os                   fe41f596 score 1.0  155 s | click click click fail | 
+edit margin8 heldout | thunderbird          15c3b339 score 1.0  239 s | click click type click type click type done | 
+edit margin8 heldout | thunderbird          9bc3cc16 score 0.0  308 s | click key right_click click click click click fail | 
+edit margin8 heldout | thunderbird          5203d847 score 0.0  429 s | right_click click type click click click type click click click click click click click click | 
+edit margin8 heldout | thunderbird          9b7bc335 score 0.0  418 s | click click click click click click click click click type click click click click click | 
+edit margin8 heldout | thunderbird          a10b69e1 score 1.0  276 s | right_click click type click right_click click type click done | 
+edit margin8 heldout | thunderbird          a1af9f1c score 0.0  105 s | fail | 
+edit margin8 heldout | thunderbird          f201fbc3 score 0.0  379 s | click click scroll scroll scroll scroll scroll scroll scroll scroll scroll scroll scroll scroll scroll | 
+edit margin8 heldout | vs_code              53ad5833 score 1.0  295 s | click click click click type key done | 
+edit margin8 heldout | vs_code              982d12a5 score 0.0  254 s | invalid key key type click click type click fail | 
+edit margin8 heldout | vs_code              e2b5e914 score 0.0  267 s | click type key click done | 
+edit margin8 heldout | vs_code              276cc624 score 0.0  229 s | click type click type fail | 
+edit margin8 heldout | vs_code              ea98c5d7 score 0.0  379 s | key key type click click click click click click click click click click click click | 
+edit margin8 heldout | vs_code              ec71221e score 0.0  244 s | click key key key key done | 
+edit margin8 heldout | vs_code              57242fad score 0.0  228 s | click click click type key key done | 
+edit margin8 heldout | vs_code              5e2d93d8 score 1.0  414 s | click click click type click click click click click click click click click click click | 
+edit margin8 heldout | vs_code              0512bb38 score 1.0  347 s | click click click type click click click click click click click click click click click | 
+edit margin8 heldout | vs_code              7aeae0e2 score 0.0  324 s | click click type key click click click click click click click click click click click | 
+edit margin8 heldout | solved 13 of 28 | bridge errors 0
+margin 8, not possible {'n': 11, 'base_solved': 2, 'solved': 8, 'flips': {'fixed': 6, 'broken': 0, 'p_value': 0.03125}, 'base_ends_with_fail': 2, 'ends_with_fail': 8, 'fail_step': [0, 1, 3, 3, 3, 6, 7, 8], 'bridge_errors': 0}
+margin 8, possible {'n': 17, 'base_solved': 7, 'solved': 5, 'flips': {'fixed': 0, 'broken': 2, 'p_value': 0.5}, 'base_ends_with_fail': 0, 'ends_with_fail': 4, 'fail_step': [0, 4, 7, 8], 'bridge_errors': 0}
+[223.7 min] margin 8 held-out tasks done
+deviation: {'mean_kl': 0.00059, 'max_kl': 0.03226, 'top1_agreement_pct': 99.07502, 'perplexity_original': 8.71401, 'perplexity_edited': 8.71017, 'positions': 13730}
+battery mmlu_pro 60.0
+battery countbench 94.0
+battery chartqa 75.0
+battery refcoco 94.0
+battery mmlu_pro {'before_pct': 60.0, 'after_pct': 60.0, 'fixed': 1, 'broken': 1, 'p_value': 1.0}
+battery countbench {'before_pct': 94.0, 'after_pct': 94.0, 'fixed': 0, 'broken': 0, 'p_value': 1.0}
+battery chartqa {'before_pct': 75.0, 'after_pct': 75.0, 'fixed': 0, 'broken': 0, 'p_value': 1.0}
+battery refcoco {'before_pct': 94.0, 'after_pct': 94.0, 'fixed': 0, 'broken': 0, 'p_value': 1.0}
+reset restores the stored bytes: True
+[232.3 min] margin 8 check done

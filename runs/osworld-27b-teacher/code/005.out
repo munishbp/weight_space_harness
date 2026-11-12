@@ -1,0 +1,44 @@
+10 practice tasks that are not possible, 11 held-out tasks that are not possible, 17 possible held-out tasks
+more base | gimp                 58d3eeeb score 1.0  165 s | invalid fail | 
+more base | gimp                 045bf3ff score 0.0  439 s | click click click click click click click click click click click click click click click | 
+more base | libreoffice_calc     2bd59342 score 0.0  455 s | click click click click type click click click click click type click click click click | 
+more base | gimp                 62f7fd55 score 0.0  362 s | click wait click click click type click click click click click click click click click | 
+more base | multi_apps           6d72aad6 score 0.0  441 s | click wait click click click click click click click click click click click click click | 
+more base | vlc                  7882ed6e score 0.0  442 s | click click click click click click click click click click click click click click click | 
+more base | libreoffice_writer   bb8ccc78 score 0.0  410 s | click click click click click click type click wait click click click click click click | 
+more base | os                   c288e301 score 0.0  442 s | type key type key type key type key type key type key type key type | 
+more base | gimp                 e19bd559 score 0.0  432 s | click wait click click click click type type key click click click click click click | 
+more base | gimp                 fbb548ca score 0.0  420 s | click wait click click click click click click click click click click click click click | 
+more base | os                   4783cc41 score 1.0  186 s | type key wait fail | 
+more base | gimp                 2e6f678f score 0.0  480 s | click click click click click click click click click click click click click click click | 
+more base | gimp                 38f48d40 score 0.0  482 s | click click click click double_click type click click click click click click click click click | 
+more base | gimp                 5ca86c6f score 0.0  465 s | click click click click click click click click click click click click click click click | 
+more base | vs_code              7c4cc09e score 0.0  522 s | click click type click type click type click type click type type click type type | 
+more base | gimp                 8ea73f6f score 0.0  529 s | click click click click click click click click click click click click click click click | 
+more base | os                   a462a795 score 0.0  376 s | click click click click type invalid invalid invalid invalid invalid invalid invalid invalid invalid invalid | 
+more base | vlc                  cb130f0d score 1.0  138 s | click fail | 
+more base | os                   b3d4a89c score 0.0  195 s | click click click click click done | 
+more base | chrome               ae78f875 score 0.0  308 s | click type key click type key click click click scroll scroll scroll scroll scroll scroll | 
+more base | thunderbird          15c3b339 score 1.0  279 s | click click type click type click type done | 
+more base | os                   fe41f596 score 0.0  441 s | click click click click click click click click click click click click click click click | 
+more base | thunderbird          9bc3cc16 score 0.0  405 s | click key right_click click click click click type click wait click key right_click click click | 
+more base | thunderbird          5203d847 score 0.0  429 s | right_click click type click click click type click click click click click click click click | 
+more base | thunderbird          a10b69e1 score 1.0  285 s | right_click click type click right_click click type click done | 
+more base | thunderbird          9b7bc335 score 0.0  397 s | click click click click click click click click click click click click click click click | 
+more base | vs_code              53ad5833 score 1.0  324 s | click click click click type key done | 
+more base | thunderbird          f201fbc3 score 0.0  456 s | click click scroll scroll scroll scroll scroll scroll scroll scroll scroll scroll scroll scroll scroll | 
+more base | thunderbird          a1af9f1c score 0.0  440 s | click click click click type key wait invalid click click click type key wait invalid | 
+more base | vs_code              e2b5e914 score 0.0  343 s | click type click type click click type key done | 
+more base | vs_code              982d12a5 score 1.0  465 s | invalid invalid click click click click type click click type click click click click click | 
+more base | vs_code              ea98c5d7 score 0.0  456 s | key key type click click click click click click click click click click click click | 
+more base | vs_code              276cc624 score 1.0  263 s | click type click type key type key done | 
+more base | vs_code              ec71221e score 0.0  267 s | click key key key key done | 
+more base | vs_code              57242fad score 0.0  257 s | click click click type key key done | 
+more base | vs_code              5e2d93d8 score 1.0  422 s | click click click type click click click click click click click click click click click | 
+more base | vs_code              0512bb38 score 1.0  223 s | click click click type click wait done | 
+more base | vs_code              7aeae0e2 score 0.0  321 s | click click click click click click click click click click click click click click click | 
+more base | solved 10 of 38 | bridge errors 0
+27B base, practice, not in the scan | not possible: solved 1 of 10 | 4B base on the same tasks 0 | ends with fail 1 | ends with done 0 | mean seconds 400
+27B base, held-out | possible: solved 7 of 17 | 4B base on the same tasks 3 | ends with fail 0 | ends with done 8 | mean seconds 354
+27B base, held-out | not possible: solved 2 of 11 | 4B base on the same tasks 0 | ends with fail 2 | ends with done 1 | mean seconds 374
+[177.9 min] more base done

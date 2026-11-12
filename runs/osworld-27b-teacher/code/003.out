@@ -1,0 +1,6 @@
+~/weight_space/.venv/lib/python3.13/site-packages/triton/knobs.py:504: UserWarning: TRITON_DEFAULT_FP_FUSION is unset: defaulting to FP fusion ENABLED for backward compatibility in Triton 3.9. The default will change to DISABLED in Triton 3.10; set TRITON_DEFAULT_FP_FUSION=1 to keep fusion enabled or =0 to adopt the new default early and silence this warning.
+  warn_once(FP_FUSION_DEFAULT_WARNING)
+smoke | vs_code              0ed39f63 score 1.0  279 s | click click click click click type click type click click key done | 
+smoke | solved 1 of 1 | bridge errors 0
+steps 12 | seconds 279 | score 1.0 | peak GPU GB 21.2
+['{"action": "click", "position": [47, 70]}', '{"action": "click", "position": [130, 70]}', '{"action": "click", "position": [130, 70]}', '{"action": "click", "position": [143, 231]}', '{"action": "click", "position": [125, 131]}', '{"action": "type", "text": "text"}', '{"action": "click", "position": [125, 165]}', '{"action": "type", "text": "test"}', '{"action": "click", "position": [181, 165]}', '{"action": "click", "position": [581, 559]}', '{"action": "key", "keys": ["ctrl", "s"]}', '{"action": "done"}']

@@ -1,0 +1,11 @@
+{
+  "student": "~/models/Qwen3.8-27B-NVFP4",
+  "student_revision": null,
+  "student_weights": 27356728560,
+  "student_dtype": "torch.bfloat16",
+  "harness_commit": "0460f96f6b4844f8a6806c10fbc5e6d815867c12",
+  "torch": "2.15.0+cu132",
+  "transformers": "5.22.2",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "started": "2026-11-12T12:50:59-0500"
+}

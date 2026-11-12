@@ -1,0 +1,18 @@
+15 practice tasks that are not possible: Counter({'gimp': 5, 'vs_code': 3, 'chrome': 2, 'libreoffice_calc': 1, 'multi_apps': 1, 'vlc': 1, 'libreoffice_writer': 1, 'os': 1}) | 38 possible practice tasks, base solved 17
+51 target steps, 107 keep steps for the fit; 35 and 90 steps for the read
+~/weight_space/.venv/lib/python3.13/site-packages/triton/knobs.py:504: UserWarning: TRITON_DEFAULT_FP_FUSION is unset: defaulting to FP fusion ENABLED for backward compatibility in Triton 3.9. The default will change to DISABLED in Triton 3.10; set TRITON_DEFAULT_FP_FUSION=1 to keep fusion enabled or =0 to adopt the new default early and silence this warning.
+  warn_once(FP_FUSION_DEFAULT_WARNING)
+[  6.6 min] keys done (2.5 s per prompt)
+[  7.9 min] protection done
+base | not possible: `fail` wins at a read step in 0 of 7 tasks | first such step [] | of these the base solved 0 | median p(fail) 0.0005
+base | possible: `fail` wins at a read step in 0 of 19 tasks | first such step [] | of these the base solved 0 | median p(fail) 0.0000
+[ 10.3 min] base read done
+margin 8.0: 1 of 89128960 weights outside the range before the clamp | largest 1.1719 | limit 1.1719
+relative change 0.1679
+margin 8.0 | not possible: `fail` wins at a read step in 4 of 7 tasks | first such step [0, 0, 0, 0] | of these the base solved 0 | median p(fail) 0.1079
+margin 8.0 | possible: `fail` wins at a read step in 1 of 19 tasks | first such step [1] | of these the base solved 0 | median p(fail) 0.0001
+margin 12.0: 1 of 89128960 weights outside the range before the clamp | largest 1.1719 | limit 1.1719
+relative change 0.2472
+margin 12.0 | not possible: `fail` wins at a read step in 6 of 7 tasks | first such step [0, 0, 0, 0, 0, 13] | of these the base solved 0 | median p(fail) 0.3584
+margin 12.0 | possible: `fail` wins at a read step in 3 of 19 tasks | first such step [1, 1, 2] | of these the base solved 0 | median p(fail) 0.0010
+[ 16.3 min] margin sweep done

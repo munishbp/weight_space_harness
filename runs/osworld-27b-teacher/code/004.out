@@ -1,0 +1,50 @@
+scan | thunderbird          3f28fe4f score 1.0  219 s | click click type done | 
+scan | thunderbird          7b1e1ff9 score 0.0  401 s | click click click click type key click type key wait click type key click type | 
+scan | thunderbird          dd84e895 score 1.0  186 s | click click click done | 
+scan | thunderbird          dfac9ee8 score 0.0  423 s | click click click click click click click click click click click click click click click | 
+scan | thunderbird          10a730d5 score 1.0  267 s | click click click click click done | 
+scan | thunderbird          d38192b0 score 1.0  428 s | click type click wait type click type click wait type click type click wait type | 
+scan | thunderbird          3f49d2cc score 0.0  440 s | click click click click click click click click click click click click click click click | 
+scan | thunderbird          08c73485 score 0.0  397 s | click click type click click click click click click click click click click click click | 
+scan | vs_code              eabc805a score 1.0  271 s | click type click click wait done | 
+scan | vs_code              4e60007a score 1.0  389 s | click type click click click click click click click click click click click click click | 
+scan | vs_code              9d425400 score 1.0  161 s | type click done | 
+scan | vs_code              9439a27b score 0.0  385 s | click key type click click click click click click click click click click click click | 
+scan | vs_code              930fdb3b score 0.0  395 s | click click type click double_click type click type click type key type click type key | 
+scan | vs_code              6ed0a554 score 0.0  434 s | click click click click click click click click click click click type key wait wait | 
+scan | vs_code              70745df8 score 0.0  452 s | click click type click click click type click click type click click type click click | 
+scan | vs_code              c6bf789c score 0.0  439 s | key type click type click type click click click click click click click click click | 
+scan | vs_code              847a96b6 score 0.0  436 s | click click click click click click click click click click click click click click click | 
+scan | vs_code              dcbe20e8 score 0.0  456 s | click type click click click click click click click click click click click click click | 
+scan | vs_code              971cbb5b score 0.0  457 s | click type click type click type click type click click type click click type click | 
+scan | solved 8 of 20 | bridge errors 0
+27B base, thunderbird and vs_code practice | possible: solved 8 of 17 | 4B base on the same tasks 6 | ends with fail 0 | ends with done 6 | mean seconds 350
+27B base, thunderbird and vs_code practice | not possible: solved 0 of 3 | 4B base on the same tasks 0 | ends with fail 0 | ends with done 0 | mean seconds 449
+[ 44.8 min] first part of the scan done
+scan | chrome               06fe7178 score 1.0  198 s | key wait done | 
+scan | chrome               bb5e4c0d score 1.0  257 s | click click click click click click done | 
+scan | chrome               35253b65 score 0.0  429 s | click click click click click click click click click click click click click click click | 
+scan | chrome               7a5a7856 score 1.0  442 s | click click click click click click click click click click click click click click click | 
+scan | chrome               480bcfea score 0.0  448 s | click invalid click click click click click click click click click click click click click | 
+scan | chrome               3720f614 score 0.0  390 s | click wait click click click click type wait invalid click click type wait click click | 
+scan | chrome               93eabf48 score 1.0  207 s | click click click click click click done | 
+scan | chrome               12086550 score 1.0  359 s | click click click click type key wait invalid wait wait wait wait wait wait wait | 
+scan | chrome               9656a811 score 1.0  246 s | click click click click click done | 
+scan | chrome               3299584d score 0.0  429 s | click type key click click type key click type key click type key click type | 
+scan | chrome               a96b564e score 0.0  438 s | click click click click click click click click click click click click click click click | 
+scan | chrome               f3b19d1e score 1.0  467 s | click click click click click click click click click click click click click click click | 
+scan | chrome               47543840 score 0.0  465 s | click type click type click type click type click click click click click click click | 
+scan | chrome               6c4c23a1 score 0.0  455 s | click type click click type click click click click click click click click click click | 
+scan | chrome               b7895e80 score 0.0  329 s | click type click click click click click click done | 
+scan | chrome               7f52cab9 score 0.0  452 s | click type click click click click click click click click click click click click click | 
+scan | chrome               2888b4e6 score 0.0  504 s | click wait click click click click click click click click click click click click click | 
+scan | chrome               f5d96daf score 0.0  468 s | click click click click scroll click click click click click click click click click click | 
+scan | chrome               368d9ba4 score 0.0  385 s | click click type key click click click click click click click click click click click | 
+scan | chrome               a728a36e score 1.0  415 s | click click click invalid click click click click click click click click click click click | 
+scan | chrome               0d8b7de3 score 1.0  423 s | click type click type key wait wait wait wait wait wait wait wait wait wait | 
+scan | chrome               f0b971a1 score 0.0  411 s | click click click click click click click click click click click click click click click | 
+scan | chrome               44ee5668 score 0.0  295 s | click click click type key click click click click click click click click click click | 
+scan | solved 17 of 43 | bridge errors 0
+27B base, three applications, practice | possible: solved 17 of 38 | 4B base on the same tasks 12 | ends with fail 0 | ends with done 11 | mean seconds 369
+27B base, three applications, practice | not possible: solved 0 of 5 | 4B base on the same tasks 0 | ends with fail 0 | ends with done 0 | mean seconds 437
+[ 96.5 min] scan done

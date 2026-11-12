@@ -1,0 +1,4 @@
+margin 12.0: 1 of 89128960 weights outside the range before the clamp | largest 1.1719 | limit 1.1719
+relative change 0.2472
+margin 12.0 | not possible: `fail` wins at a read step in 6 of 7 tasks | first such step [0, 0, 0, 0, 0, 13] | of these the base solved 0 | median p(fail) 0.3584
+margin 12.0 | possible: `fail` wins at a read step in 3 of 19 tasks | first such step [1, 1, 2] | of these the base solved 0 | median p(fail) 0.0010
