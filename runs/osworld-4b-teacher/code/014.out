@@ -1,0 +1,84 @@
+~/weight_space/.venv/lib/python3.13/site-packages/triton/knobs.py:504: UserWarning: TRITON_DEFAULT_FP_FUSION is unset: defaulting to FP fusion ENABLED for backward compatibility in Triton 3.9. The default will change to DISABLED in Triton 3.10; set TRITON_DEFAULT_FP_FUSION=1 to keep fusion enabled or =0 to adopt the new default early and silence this warning.
+  warn_once(FP_FUSION_DEFAULT_WARNING)
+scan | thunderbird          3f28fe4f score 1.0  101 s | click click type key done | 
+scan | thunderbird          9bc3cc16 score 0.0  131 s | key type key key key key key key key key key key key key key | 
+scan | thunderbird          7b1e1ff9 score 0.0  134 s | click click type key key click type key wait click type key key click type | 
+scan | thunderbird          5203d847 score 0.0  145 s | click click click type key click type key key key key key key key key | 
+scan | thunderbird          dd84e895 score 1.0  150 s | click click click click click click click click click click click click click click click | 
+scan | thunderbird          9b7bc335 score 0.0  148 s | click click type key click click click click click click click click click click click | 
+scan | thunderbird          a10b69e1 score 1.0  126 s | right_click click type key right_click click type key done | 
+scan | thunderbird          d38192b0 score 0.0  170 s | click type key click wait wait wait wait wait wait wait wait wait wait wait | 
+scan | thunderbird          3f49d2cc score 0.0  151 s | click click type key click click type key wait wait wait type key key click | 
+scan | thunderbird          f201fbc3 score 0.0  145 s | click click click click click click click click type key type key key key key | 
+scan | thunderbird          10a730d5 score 0.0  162 s | click click click click wait click wait wait wait wait wait wait wait wait wait | 
+scan | thunderbird          a1af9f1c score 0.0  146 s | click click type key key type key key type key key type key key type | 
+scan | thunderbird          08c73485 score 0.0  145 s | click click click click click click click click click click click click click click click | 
+scan | vs_code              982d12a5 score 0.0  155 s | click click click click type key type key wait wait wait wait wait wait wait | 
+scan | vs_code              eabc805a score 1.0  162 s | click click type click wait wait wait wait wait wait wait wait wait wait wait | 
+scan | vs_code              4e60007a score 1.0  161 s | click type click wait click click click wait wait wait wait wait wait wait wait | 
+scan | vs_code              9439a27b score 0.0  150 s | type type type type type type type type type type type type type type type | 
+scan | vs_code              e2b5e914 score 0.0  162 s | type type type type type type key key key key key key key key key | 
+scan | vs_code              ea98c5d7 score 0.0  141 s | click type key type key key invalid type key done | 
+scan | vs_code              9d425400 score 1.0  119 s | type click wait wait key done | 
+scan | vs_code              930fdb3b score 0.0  159 s | click type key key key key key key key key key key key key key | 
+scan | vs_code              6ed0a554 score 0.0  126 s | click click type key click type key key done | 
+scan | vs_code              5e2d93d8 score 0.0  149 s | click click click type key wait key wait key key key key key key key | 
+scan | vs_code              ec71221e score 0.0  113 s | click key key done | 
+scan | vs_code              70745df8 score 0.0  126 s | click click type click click type key key done | 
+scan | vs_code              c6bf789c score 0.0  124 s | click click type key type key key done | 
+scan | vs_code              57242fad score 0.0  161 s | click click type key click wait wait wait wait wait wait wait wait wait wait | 
+scan | vs_code              0512bb38 score 0.0  145 s | click click click click click click click click click click click click click click click | 
+scan | vs_code              847a96b6 score 0.0  160 s | click click type key click type key wait wait wait wait wait wait wait wait | 
+scan | vs_code              7aeae0e2 score 0.0  148 s | click wait click click click click click click click click click click click click click | 
+scan | vs_code              dcbe20e8 score 0.0  155 s | click click wait wait wait type key key type key wait wait wait type key | 
+scan | vs_code              7c4cc09e score 0.0  162 s | click click type key wait wait wait wait wait wait wait wait wait wait wait | 
+scan | vs_code              971cbb5b score 0.0  154 s | type type type type type type type type type type type type type type type | 
+scan | chrome               06fe7178 score 0.0  151 s | click key type key key key key key key key key key key key key | 
+scan | chrome               e1e75309 score 0.0  167 s | key click click click click click click click click click click click click click click | 
+scan | chrome               2ad9387a score 0.0  165 s | click click type key wait wait wait wait wait wait wait wait wait wait wait | 
+scan | chrome               7a5a7856 score 0.0  147 s | click type click key key key key key key key key key key key key | 
+scan | chrome               480bcfea score 0.0  156 s | click type key key type key click wait wait wait wait wait wait wait wait | 
+scan | chrome               2ae9ba84 score 0.0  165 s | click click type key wait wait wait wait wait wait wait wait wait wait wait | 
+scan | chrome               af630914 score 0.0  147 s | click click click click click click click click click click click click click click click | 
+scan | chrome               3720f614 score 0.0  154 s | click click click click click click type key wait wait click wait wait wait wait | 
+scan | chrome               99146c54 score 0.0  147 s | click click click click click click click click click click click click click click click | 
+scan | chrome               12086550 score 0.0  145 s | click click click click click click click click click click click click click click click | 
+scan | chrome               6766f2b8 score 0.0  149 s | click wait key type key type key wait key click click key key key key | 
+scan | chrome               93eabf48 score 0.0  163 s | click click type click type key wait wait wait wait wait wait wait wait wait | 
+scan | chrome               ae78f875 score 0.0  158 s | click click invalid type key wait wait click type key wait wait wait wait wait | 
+scan | chrome               3299584d score 1.0  150 s | click click click click type key click click key type key click key type key | 
+scan | chrome               030eeff7 score 0.0  148 s | click click click click click click click click click click click click click click click | 
+scan | chrome               9656a811 score 0.0  148 s | click click click click click click click click click click click click click click click | 
+scan | chrome               fc6d8143 score 0.0  150 s | click type key type key key key key key key key key key key key | 
+scan | chrome               1704f00f score 0.0  148 s | type key type key click type key key type key key key key key key | 
+scan | chrome               f3b19d1e score 1.0  148 s | click type key click key key key key key key key key key key key | 
+scan | chrome               82bc8d6a score 0.0  151 s | click type key type key key key key key key key key key key key | 
+scan | chrome               47543840 score 0.0  149 s | click click click click click click click click click click click click click click click | 
+scan | chrome               c1fa57f3 score 1.0  151 s | click click click type type key type key key key key key key key key | 
+scan | chrome               6c4c23a1 score 0.0  152 s | click type key click type key click key key key key key type key key | 
+scan | chrome               f79439ad score 0.0  149 s | click type key type key key type key type key key key key key key | 
+scan | chrome               b7895e80 score 0.0  156 s | click type key click type key click type key key type key key type key | 
+scan | chrome               9f3f70fc score 0.0  151 s | click type key click click click click click click click click click click click click | 
+scan | chrome               7f52cab9 score 0.0  149 s | click type key click click click type key type key click key click click click | 
+scan | chrome               82279c77 score 0.0  150 s | click type key type key key key key key key key key key key key | 
+scan | chrome               2888b4e6 score 0.0  153 s | click type key click click click type key click click click click type key click | 
+scan | chrome               b4f95342 score 0.0  224 s | click type key wait wait wait wait wait wait wait wait wait wait wait wait | 
+scan | chrome               f5d96daf score 1.0  153 s | click click click click click type key click type key click type key wait wait | 
+scan | chrome               121ba48f score 0.0  151 s | click click click click click click click click click click click click click click click | 
+scan | chrome               368d9ba4 score 0.0  164 s | click type key wait wait wait click type key wait wait wait wait wait wait | 
+scan | chrome               59155008 score 0.0  163 s | click type key wait wait wait click type key wait wait wait wait wait wait | 
+scan | chrome               a728a36e score 1.0  164 s | click click click wait wait wait wait wait wait wait wait wait wait wait wait | 
+scan | chrome               b070486d score 0.0  123 s | click type key click scroll click done | 
+scan | chrome               0d8b7de3 score 0.0  147 s | click click click click click click click click click click click click click click click | 
+scan | chrome               9f935cce score 0.0  164 s | click click type key wait wait wait wait wait wait wait wait wait wait wait | 
+scan | chrome               f0b971a1 score 0.0  166 s | click type key wait wait key key key wait wait key key key wait wait | 
+scan | chrome               cabb3bae score 0.0  153 s | click type key click click click click click click click click click click click click | 
+scan | chrome               44ee5668 score 1.0  150 s | click click click click click click click click click click click click click click click | 
+scan | solved 16 of 83 | bridge errors 0
+thunderbird  practice  solved  3 of  8
+thunderbird  heldout   solved  2 of  7
+vs_code      practice  solved  3 of 12
+vs_code      heldout   solved  1 of 11
+chrome       practice  solved  6 of 23
+chrome       heldout   solved  1 of 22
+[ 62.9 min] scan done

@@ -167,6 +167,10 @@ A negative result is a valid verdict.
 - [Run the long-horizon tasks of VLABench on the 4B model and try the recipe on them](issues/31-vlabench-procedure-edit.md):
   partial. One stacked fit of 46 targets gives all skill names correct in 91 of 150 held-out plans
   (base 0). No plan is fully correct, the edit needs the plan-only mode, and MMLU-Pro loses 2.5 points.
+- [Scan more of OSWorld for a fault that tasks share, and edit it](issues/32-osworld-fail-edit.md):
+  positive for one portion. 26 OSWorld tasks are not possible by design and need the action `fail`.
+  One rank-1 edit takes them from 0 to 10 of 11 held-out tasks. Possible tasks go from 4 to 3 of 38,
+  and 7 of them end with a false `fail`. The battery stays within 1 point.
 
 ## Not yet specified
 
@@ -178,8 +182,9 @@ decision of the user:
 - **The removal of the benchmark installs.** The user asked to keep the OSWorld and VLABench
   downloads inside the project directory, git-ignored, and to remove them later. The list is in
   `README.md` under "Temporary installs".
-- **A larger OSWorld sample.** 22 tasks give a wide interval for the base rate. All 267
-  single-application tasks take about 4 hours on three virtual machines.
+- **The rest of OSWorld.** The base scan covers Thunderbird, VS Code, Chrome (83 tasks), and all 26
+  tasks that are not possible. The seven other groups (259 tasks) take about 4 hours on three
+  virtual machines. A scan there shows if the false `fail` costs solved tasks in other applications.
 - **VLABench in its simulator.** The run used the planning track. The simulator track needs the
   repository install and its asset archives.
 - **A teacher from another vendor.** It needs an account from the user.

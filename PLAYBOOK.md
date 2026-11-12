@@ -229,6 +229,16 @@ Rules for the recipe, each from a failed attempt:
   give the recipe no target.
 - **A visible fault can be a symptom.** Ask of each fault: does the task succeed when this step alone
   changes? Only the forced replay answers that.
+- **A prompt sentence can show an ability that the probabilities hide.** In OSWorld the action `fail`
+  had no probability on tasks that are not possible. With one sentence about such tasks in the
+  prompt, it had 0.41 there and 0.025 in possible tasks. That gap is the hidden ability. The edit
+  then needs no sentence: target keys from every step of the tasks of one kind, keep keys from
+  every step of the other kind. 0 to 10 of 11 held-out tasks.
+- **Count the false positives of a refusal, not only the score.** The `fail` edit also ended 7 of 38
+  possible tasks. The base failed all 7, so the score did not move. Report the count, and read at
+  each margin how many ended tasks the base solved.
+- **Scan before you conclude.** 22 tasks showed no shared fault. 83 tasks and a read of the
+  evaluator names showed a group of 26 tasks with one correct token.
 
 ## 7. When to stop
 

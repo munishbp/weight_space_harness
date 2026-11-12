@@ -1,0 +1,68 @@
+random heldout | gimp                 2e6f678f score 0.0  145 s | click click click click click type key click type key key click click type key | 
+random heldout | gimp                 38f48d40 score 0.0  147 s | click click click click type key click click click click click click click click click | 
+random heldout | os                   4783cc41 score 0.0  168 s | type type key type type type type type type type type key type type type | 
+random heldout | gimp                 5ca86c6f score 0.0  144 s | click click click click click type key click click click key click click click click | 
+random heldout | vs_code              7c4cc09e score 0.0  163 s | click click type key wait wait wait wait wait wait wait wait wait wait wait | 
+random heldout | gimp                 8ea73f6f score 0.0  146 s | click click click click click click click click click click click click click click click | 
+random heldout | os                   a462a795 score 0.0  156 s | click type key type key type key key key key key key key key key | 
+random heldout | chrome               ae78f875 score 0.0  156 s | click click invalid type key wait click click type key wait wait wait wait wait | 
+random heldout | os                   b3d4a89c score 0.0  155 s | click click click click click click click click click click click click click click click | 
+random heldout | vlc                  cb130f0d score 0.0  152 s | click click click click click click click click click click click click click click click | 
+random heldout | os                   fe41f596 score 0.0  153 s | click click click click click click click click click click click click click click click | 
+random heldout | solved 0 of 11 | bridge errors 0
+random control: {'n': 11, 'solved': 0, 'ends_with_fail': 0}
+reset restores the weight: True
+[177.6 min] random control done
+note heldout | gimp                 38f48d40 score 1.0  105 s | click fail | 
+note heldout | gimp                 2e6f678f score 1.0  118 s | click key click click type key fail | 
+note heldout | os                   4783cc41 score 1.0  130 s | click click type key key key key fail | 
+note heldout | gimp                 5ca86c6f score 1.0  104 s | click fail | 
+note heldout | vs_code              7c4cc09e score 0.0  145 s | click click type key key type key wait click click type key key type key | 
+note heldout | gimp                 8ea73f6f score 0.0  144 s | click key click click click click click click click click click click click click click | 
+note heldout | os                   a462a795 score 1.0  120 s | click type key type key fail | 
+note heldout | chrome               ae78f875 score 1.0  105 s | click fail | 
+note heldout | os                   b3d4a89c score 0.0  153 s | click click click click click click click click click click click click click click click | 
+note heldout | vlc                  cb130f0d score 1.0  105 s | click fail | 
+note heldout | os                   fe41f596 score 0.0  155 s | click key key key key key key key key type key wait click key type | 
+note heldout | thunderbird          15c3b339 score 1.0  118 s | click type click type key done | 
+note heldout | chrome               7b6c7e24 score 0.0  145 s | key click click click click click click click click click click click click click click | 
+note heldout | vs_code              276cc624 score 0.0  113 s | type type key key done | 
+note heldout | thunderbird          9bc3cc16 score 0.0  104 s | click fail | 
+note heldout | vs_code              53ad5833 score 1.0  162 s | click click click type key wait wait wait wait wait wait wait wait wait wait | 
+note heldout | thunderbird          5203d847 score 0.0  131 s | click click click type key click type key key done | 
+note heldout | thunderbird          a10b69e1 score 0.0  119 s | right_click click type click type key done | 
+note heldout | thunderbird          9b7bc335 score 0.0  144 s | click click type click click click click click click click click click click click click | 
+note heldout | thunderbird          f201fbc3 score 0.0  146 s | click click click click click click click click click click click click click click click | 
+note heldout | thunderbird          a1af9f1c score 0.0  157 s | click click type key wait wait click click type key wait wait wait wait wait | 
+note heldout | vs_code              982d12a5 score 0.0  160 s | type click click type key wait wait wait wait wait wait wait wait wait wait | 
+note heldout | vs_code              e2b5e914 score 0.0  128 s | type click click type key done | 
+note heldout | vs_code              ea98c5d7 score 0.0  139 s | click type type key key type key key done | 
+note heldout | vs_code              5e2d93d8 score 0.0  143 s | click click click click click click click click click click click click click click click | 
+note heldout | vs_code              ec71221e score 0.0  144 s | type key key key key key key key key key key key key key key | 
+note heldout | vs_code              57242fad score 0.0  116 s | click click type key click done | 
+note heldout | vs_code              0512bb38 score 0.0  143 s | click click click click click click click click click click click click click click click | 
+note heldout | vs_code              7aeae0e2 score 0.0  146 s | click click type key type key type key type type type type key type key | 
+note heldout | chrome               e1e75309 score 0.0  181 s | key click click type key click wait wait wait wait wait wait wait wait wait | 
+note heldout | chrome               2ad9387a score 0.0  147 s | click click type key key key type key key type key key type key key | 
+note heldout | chrome               2ae9ba84 score 0.0  127 s | click click type key wait wait done | 
+note heldout | chrome               99146c54 score 0.0  128 s | click click click click click click click click fail | 
+note heldout | chrome               af630914 score 0.0  146 s | click click click click click key type key click click click click click click click | 
+note heldout | chrome               6766f2b8 score 0.0  144 s | click type key click key click click key key key key key key key key | 
+note heldout | chrome               030eeff7 score 0.0  139 s | click click click click click click click click click click click fail | 
+note heldout | chrome               fc6d8143 score 0.0  149 s | click type type key type key key key key key key key key key key | 
+note heldout | chrome               1704f00f score 0.0  150 s | click type key wait click click click click click click click click click click click | 
+note heldout | chrome               82bc8d6a score 0.0  148 s | click type key type key key key key key key key key key key key | 
+note heldout | chrome               c1fa57f3 score 1.0  156 s | click wait click type type type key type type type type type key key key | 
+note heldout | chrome               9f3f70fc score 0.0  105 s | fail | 
+note heldout | chrome               f79439ad score 0.0  154 s | click type key click type key key key key key key key key key key | 
+note heldout | chrome               82279c77 score 0.0  161 s | click wait click type key click type key click click click type key wait wait | 
+note heldout | chrome               121ba48f score 0.0  112 s | click click click fail | 
+note heldout | chrome               b4f95342 score 0.0  193 s | click type key wait wait wait wait wait wait wait wait wait wait wait wait | 
+note heldout | chrome               59155008 score 0.0  155 s | click click type key wait wait wait key type key wait wait click type key | 
+note heldout | chrome               b070486d score 0.0  126 s | type key type key type key key key fail | 
+note heldout | chrome               cabb3bae score 0.0  105 s | click fail | 
+note heldout | chrome               9f935cce score 0.0  154 s | click click type key wait wait wait type key wait wait type key key key | 
+note heldout | solved 10 of 49 | bridge errors 0
+prompt note not_possible {'n': 11, 'base_solved': 0, 'note_solved': 7, 'flips': {'fixed': 7, 'broken': 0, 'p_value': 0.015625}, 'ends_with_fail': 7}
+prompt note possible {'n': 38, 'base_solved': 4, 'note_solved': 3, 'flips': {'fixed': 0, 'broken': 1, 'p_value': 1.0}, 'ends_with_fail': 7}
+[215.6 min] prompt note done

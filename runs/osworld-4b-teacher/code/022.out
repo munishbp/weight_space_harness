@@ -1,0 +1,64 @@
+225 target steps of 15 tasks; 528 keep steps of 38 tasks
+[119.2 min] final fit done
+11 held-out tasks that are not possible, 38 possible held-out tasks
+edit heldout | gimp                 2e6f678f score 1.0  102 s | fail | 
+edit heldout | gimp                 38f48d40 score 1.0  103 s | fail | 
+edit heldout | os                   4783cc41 score 1.0  109 s | type fail | 
+edit heldout | gimp                 5ca86c6f score 1.0  102 s | fail | 
+edit heldout | gimp                 8ea73f6f score 1.0  100 s | fail | 
+edit heldout | vs_code              7c4cc09e score 0.0  161 s | click click type key wait wait wait wait wait wait wait wait wait wait wait | 
+edit heldout | os                   a462a795 score 1.0  104 s | fail | 
+edit heldout | chrome               ae78f875 score 1.0  101 s | fail | 
+edit heldout | os                   b3d4a89c score 1.0  107 s | click fail | 
+edit heldout | vlc                  cb130f0d score 1.0  102 s | fail | 
+edit heldout | os                   fe41f596 score 1.0  105 s | click fail | 
+edit heldout | chrome               7b6c7e24 score 0.0  145 s | click click click click click click click click click click click click click click click | 
+edit heldout | thunderbird          15c3b339 score 1.0  118 s | click type click type key done | 
+edit heldout | vs_code              53ad5833 score 1.0  161 s | click click click type key wait wait wait wait wait wait wait wait wait wait | 
+edit heldout | thunderbird          9bc3cc16 score 0.0  107 s | click key fail | 
+edit heldout | vs_code              276cc624 score 0.0  142 s | type type type invalid key key key key key key key key key key key | 
+edit heldout | thunderbird          5203d847 score 0.0  144 s | click right_click click type click click click type key click click type click click click | 
+edit heldout | thunderbird          9b7bc335 score 0.0  144 s | click click type key click click key click click key click type key click key | 
+edit heldout | thunderbird          a10b69e1 score 0.0  155 s | right_click click type click type key key click wait click wait click wait click wait | 
+edit heldout | thunderbird          f201fbc3 score 0.0  147 s | click click click click click click type click click click type type type key key | 
+edit heldout | thunderbird          a1af9f1c score 0.0  104 s | click fail | 
+edit heldout | vs_code              982d12a5 score 0.0  133 s | type key click click type key wait wait wait done | 
+edit heldout | vs_code              e2b5e914 score 0.0  157 s | type type type key key key key key key key key key key key key | 
+edit heldout | vs_code              ea98c5d7 score 0.0  160 s | click type type key key type key key wait type key key type key key | 
+edit heldout | vs_code              5e2d93d8 score 0.0  101 s | fail | 
+edit heldout | vs_code              ec71221e score 0.0  111 s | click key key done | 
+edit heldout | vs_code              57242fad score 0.0  100 s | fail | 
+edit heldout | vs_code              0512bb38 score 0.0  104 s | click fail | 
+edit heldout | chrome               e1e75309 score 0.0  102 s | fail | 
+edit heldout | vs_code              7aeae0e2 score 0.0  144 s | click click click click click click click click click click click click click click click | 
+edit heldout | chrome               2ad9387a score 0.0  164 s | click click type key wait wait wait wait wait wait wait wait wait wait wait | 
+edit heldout | chrome               2ae9ba84 score 0.0  165 s | click click type key wait wait wait wait wait wait wait wait wait wait wait | 
+edit heldout | chrome               af630914 score 0.0  147 s | click click click click click click click click click click click click click click click | 
+edit heldout | chrome               99146c54 score 0.0  147 s | click click click click click click click click click click click click click click click | 
+edit heldout | chrome               6766f2b8 score 0.0  101 s | fail | 
+edit heldout | chrome               030eeff7 score 0.0  147 s | click click click click click click click click click click click click click click click | 
+edit heldout | chrome               fc6d8143 score 0.0  151 s | click type key type key key key key key key key key key key key | 
+edit heldout | chrome               1704f00f score 0.0  147 s | click type key click click click key type key click type key click type key | 
+edit heldout | chrome               82bc8d6a score 0.0  150 s | click type key type key key key key key key key key key key key | 
+edit heldout | chrome               c1fa57f3 score 1.0  153 s | click click click click type type type key type key type key key key key | 
+edit heldout | chrome               f79439ad score 0.0  148 s | click type key type key key type key type key type key key key key | 
+edit heldout | chrome               9f3f70fc score 0.0  167 s | click click type key wait wait wait wait wait wait wait wait wait wait wait | 
+edit heldout | chrome               82279c77 score 0.0  150 s | click type key click type key key key key type key key type key key | 
+edit heldout | chrome               b4f95342 score 0.0  196 s | click type key wait wait wait wait wait wait wait wait wait wait wait wait | 
+edit heldout | chrome               121ba48f score 0.0  151 s | click click click click click click click click click click click click click click click | 
+edit heldout | chrome               59155008 score 0.0  161 s | click type key wait wait wait click type key wait wait wait wait wait wait | 
+edit heldout | chrome               b070486d score 0.0  148 s | click type key click scroll click key key key key key key key key key | 
+edit heldout | chrome               9f935cce score 0.0  163 s | click click type key wait wait wait wait wait wait wait wait wait wait wait | 
+edit heldout | chrome               cabb3bae score 0.0  169 s | click type key wait key type key wait wait wait wait wait wait wait wait | 
+edit heldout | solved 13 of 49 | bridge errors 0
+not_possible {'n': 11, 'base_solved': 0, 'edit_solved': 10, 'flips': {'fixed': 10, 'broken': 0, 'p_value': 0.001953125}, 'edit_ends_with_fail': 10, 'bridge_errors': 0}
+possible {'n': 38, 'base_solved': 4, 'edit_solved': 3, 'flips': {'fixed': 0, 'broken': 1, 'p_value': 1.0}, 'edit_ends_with_fail': 7, 'bridge_errors': 0}
+[156.6 min] held-out tasks done
+deviation: {'mean_kl': 0.00092, 'max_kl': 0.39749, 'top1_agreement_pct': 98.71085, 'perplexity_original': 13.37731, 'perplexity_edited': 13.39021, 'positions': 13730}
+edit: {'tensors_changed': 1, 'tensors_changed_pct': 0.13831258644536654, 'layers_changed': [27], 'changed_weights': 22944486, 'changed_weights_pct': 0.5054669267094403, 'relative_change_of_model': 0.015926218597173945, 'tensor': {'name': 'model.language_model.layers.27.mlp.down_proj.weight', 'weights': 23592960, 'changed_weights': 22944486, 'changed_weights_pct': 97.25140889485677, 'relative_change': 0.4977751599693395, 'max_abs_change': 0.123138427734375, 'cosine_to_original': 0.8952321821049889, 'delta_squared_norm': 503.6343713846662, 'rows_changed': 2560, 'rows_changed_pct': 100.0, 'columns_changed': 9216, 'columns_changed_pct': 100.0, 'delta_rank': 1, 'kept_share_of_request': 1.0000056458730462}}
+battery mmlu_pro {'before_pct': 48.0, 'after_pct': 48.0, 'change_points': 0.0, 'fixed': 1, 'broken': 1, 'p_value': 1.0, 'major_drop': False}
+battery countbench {'before_pct': 85.0, 'after_pct': 85.0, 'change_points': 0.0, 'fixed': 0, 'broken': 0, 'p_value': 1.0, 'major_drop': False}
+battery chartqa {'before_pct': 85.0, 'after_pct': 84.5, 'change_points': -0.5, 'fixed': 0, 'broken': 1, 'p_value': 1.0, 'major_drop': False}
+battery refcoco {'before_pct': 90.0, 'after_pct': 90.0, 'change_points': 0.0, 'fixed': 0, 'broken': 0, 'p_value': 1.0, 'major_drop': False}
+battery gsm8k_thinking {'before_pct': 75.0, 'after_pct': 74.0, 'change_points': -1.0, 'fixed': 10, 'broken': 11, 'p_value': 1.0, 'major_drop': False}
+[166.9 min] battery done

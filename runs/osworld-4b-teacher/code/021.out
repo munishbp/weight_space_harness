@@ -1,0 +1,10 @@
+margin 16.0 | not possible: `fail` ends 5 of 7 tasks | first step [0, 0, 0, 11, 14] | of these the base solved 0 | base solved in all 0
+margin 16.0 | possible: `fail` ends 2 of 19 tasks | first step [1, 2] | of these the base solved 0 | base solved in all 5
+   deviation: {'mean_kl': 0.0007, 'top1_agreement_pct': 98.7956}
+margin 20.0 | not possible: `fail` ends 5 of 7 tasks | first step [0, 0, 0, 0, 11] | of these the base solved 0 | base solved in all 0
+margin 20.0 | possible: `fail` ends 3 of 19 tasks | first step [0, 2, 6] | of these the base solved 0 | base solved in all 5
+   deviation: {'mean_kl': 0.0009, 'top1_agreement_pct': 98.7163}
+margin 24.0 | not possible: `fail` ends 5 of 7 tasks | first step [0, 0, 0, 0, 5] | of these the base solved 0 | base solved in all 0
+margin 24.0 | possible: `fail` ends 6 of 19 tasks | first step [0, 1, 2, 3, 6, 12] | of these the base solved 1 | base solved in all 5
+   deviation: {'mean_kl': 0.0011, 'top1_agreement_pct': 98.6688}
+[109.3 min] detail done

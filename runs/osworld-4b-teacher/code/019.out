@@ -1,0 +1,22 @@
+infeasible | gimp                 045bf3ff score 0.0  147 s | click key click click click click click click click click click click click click click | 
+infeasible | gimp                 38f48d40 score 0.0  147 s | click type key type key type key key key key key key key key key | 
+infeasible | gimp                 2e6f678f score 0.0  148 s | click click click click click type key type key key key click type key type | 
+infeasible | gimp                 58d3eeeb score 0.0  145 s | click click type key key key key key key key key key key key key | 
+infeasible | gimp                 62f7fd55 score 0.0  145 s | click click click click type key key key key key key key key key key | 
+infeasible | gimp                 5ca86c6f score 0.0  165 s | click key key type key type key wait wait key key type type key wait | 
+infeasible | gimp                 8ea73f6f score 0.0  146 s | click click click click click click click click click click click click click click click | 
+infeasible | gimp                 e19bd559 score 0.0  144 s | click click click click click click type key key click click click type key key | 
+infeasible | gimp                 fbb548ca score 0.0  144 s | click click click click click click click click click click click click click click click | 
+infeasible | libreoffice_calc     2bd59342 score 0.0  145 s | click key click key click key click key click key click key key key click | 
+infeasible | libreoffice_writer   bb8ccc78 score 0.0  154 s | click click type key wait key key type key wait key key type key wait | 
+infeasible | multi_apps           6d72aad6 score 0.0  146 s | click click click click click click click click click click click click click click click | 
+infeasible | os                   4783cc41 score 0.0  161 s | type key type key type key key type key type key type key type key | 
+infeasible | os                   a462a795 score 0.0  159 s | key type key type type type type type type type type type type type type | 
+infeasible | os                   b3d4a89c score 0.0  156 s | click click click click click click click click click click click click click click click | 
+infeasible | os                   c288e301 score 0.0  127 s | click invalid invalid invalid invalid invalid invalid invalid invalid invalid click type key wait wait | 
+infeasible | os                   fe41f596 score 0.0  155 s | click click key key key key key key key key key key key key key | 
+infeasible | vlc                  7882ed6e score 0.0  151 s | click click click click type key key key key key key key key key key | 
+infeasible | vlc                  cb130f0d score 0.0  152 s | click click click click click click click click click click click click click click click | 
+infeasible | solved 0 of 19 | bridge errors 0
+Counter({('gimp', 'practice', False): 5, ('gimp', 'heldout', False): 4, ('os', 'heldout', False): 4, ('libreoffice_calc', 'practice', False): 1, ('libreoffice_writer', 'practice', False): 1, ('multi_apps', 'practice', False): 1, ('os', 'practice', False): 1, ('vlc', 'practice', False): 1, ('vlc', 'heldout', False): 1})
+[ 86.1 min] base on the other infeasible tasks done

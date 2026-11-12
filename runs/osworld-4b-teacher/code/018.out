@@ -1,0 +1,5 @@
+with the note | infeasible | first step n= 5 | p(fail) median 0.0272 | above 0.5: 0 | top [0.414, 0.052, 0.027, 0.003, 0.001]
+with the note | infeasible | last step  n= 5 | p(fail) median 0.4075 | above 0.5: 1 | top [0.798, 0.499, 0.407, 0.25, 0.017]
+with the note | feasible   | first step n=38 | p(fail) median 0.0010 | above 0.5: 0 | top [0.066, 0.051, 0.048, 0.044, 0.027, 0.022]
+with the note | feasible   | last step  n=38 | p(fail) median 0.0252 | above 0.5: 1 | top [0.732, 0.492, 0.442, 0.381, 0.198, 0.182]
+[ 68.5 min] fail prompt read done

@@ -1,0 +1,4 @@
+infeasible tasks: Counter({('gimp', 'practice'): 5, ('gimp', 'heldout'): 4, ('os', 'heldout'): 4, ('vs_code', 'practice'): 3, ('chrome', 'practice'): 2, ('libreoffice_calc', 'practice'): 1, ('vlc', 'practice'): 1, ('multi_apps', 'practice'): 1, ('vlc', 'heldout'): 1, ('vs_code', 'heldout'): 1, ('chrome', 'heldout'): 1, ('os', 'practice'): 1, ('libreoffice_writer', 'practice'): 1})
+scan practice infeasible n= 5 | p(fail) step 0: median 0.00000 | max over steps: median 0.00055, values [0.0198, 0.0006, 0.0005, 0.0005, 0.0]
+scan practice feasible   n=38 | p(fail) step 0: median 0.00000 | max over steps: median 0.00081, values [0.0504, 0.0134, 0.0064, 0.0054, 0.005, 0.0032, 0.0024, 0.002]
+[ 67.7 min] fail probabilities on the scan done

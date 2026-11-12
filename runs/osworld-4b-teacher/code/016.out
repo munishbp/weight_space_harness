@@ -1,0 +1,10 @@
+infeasible tasks: Counter({('gimp', 'practice'): 5, ('gimp', 'heldout'): 4, ('os', 'heldout'): 4, ('vs_code', 'practice'): 3, ('chrome', 'practice'): 2, ('libreoffice_calc', 'practice'): 1, ('vlc', 'practice'): 1, ('multi_apps', 'practice'): 1, ('vlc', 'heldout'): 1, ('vs_code', 'heldout'): 1, ('chrome', 'heldout'): 1, ('os', 'practice'): 1, ('libreoffice_writer', 'practice'): 1})
+Traceback (most recent call last):
+  File "~/weight_space/wsp/kernel.py", line 70, in handle
+    exec(compile(source, "<teacher>", "exec"), self.server.namespace)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<teacher>", line 30, in <module>
+  File "<teacher>", line 14, in step_probs
+  File "~/weight_space/.venv/lib/python3.13/site-packages/PIL/Image.py", line 3654, in open
+    fp = builtins.open(filename, "rb")
+FileNotFoundError: [Errno 2] No such file or directory: 'data/osworld_runs/scan/bb5e4c0d-f964-439c-97b6-bdb9747de3f4-0.png'

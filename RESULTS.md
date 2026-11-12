@@ -20,7 +20,7 @@ its general ability? Does this scale to a 4B model, and is it feasible?
 - **It scales.** The same recipe and the same code ran on Qwen3.5-4B, GLM-4.6V-Flash (10B), and a
   4-bit Qwen3.8-27B. The gain on the 27B model is the largest.
 - **The time is 8 to 30 minutes on a 4B model for one step.** The fault of the blog took 8 minutes.
-  A habit fault took 15 to 30 minutes. A stacked edit for three procedures took 63 minutes. The 27B
+  A habit fault took 15 to 30 minutes. A stacked edit for three procedures took 63 minutes. In OSWorld the virtual machine sets the time: 150 seconds per task. The 27B
   model needs about an hour, because one forward pass is slow.
 - **The model keeps its general ability, and a large edit costs more.** Each edit changes 0.2% to
   0.5% of the weights in one matrix. For a one-step edit the top token on neutral text stays the
@@ -31,12 +31,15 @@ its general ability? Does this scale to a 4B model, and is it feasible?
   wrong and no edit of this kind fixes a wrong position.
 - **It does not work when the fault is a wrong choice between things in the input** (which icon,
   which position). ScreenSpot Pro and the Meta-World push task gave no edit. Training fixes that kind.
-- **Long-horizon tasks: one partial gain and one negative result.** In the VLABench planning tasks
-  (5 to 9 steps) one stacked edit teaches the procedure of three tasks: all skill names are correct
-  in 91 of 150 held-out plans (base 0). No plan becomes fully correct, because the objects of each
-  step stay wrong, and the edit costs 2.5 points on one battery set. In OSWorld (real desktop
-  applications) the student solves 4 of 22 tasks and no edit candidate exists: the student does
-  not know the procedures, and the tasks share no step.
+- **Long-horizon tasks: the edits fix a default, not a missing procedure.** In OSWorld (real desktop
+  applications) the student solves 16 of 83 scanned tasks, and its failures on possible tasks share
+  no step, so no edit applies there. One portion has a habit fault: the tasks that are not possible
+  by design, where the correct reply is `fail`. One edit takes them from 0 to 10 of 11 held-out
+  tasks, with the battery within 1 point. Its price is a false `fail` on 7 of 38 possible tasks, and
+  a prompt sentence with the base weights reaches 7 of 11. In
+  the VLABench planning tasks (5 to 9 steps) one stacked edit writes the skill names of three
+  procedures (all names correct in 91 of 150 held-out plans, base 0). No plan becomes fully
+  correct, and that edit costs 2.5 points on one battery set.
 - **A LoRA fine-tune of 15 minutes gains more on the target when correct examples exist** (87%
   against 57% on the email tasks). It changes 60% of the weights and moves tasks next to the target.
   The edit needs no examples, only a fault that the teacher can locate.
@@ -51,12 +54,15 @@ its general ability? Does this scale to a 4B model, and is it feasible?
 | Pick-place, Meta-World | GLM-4.6V-Flash | 30 min | 12 to 20 of 20 | 51.5% to 57.0% |
 | Thinking that does not end, GSM8K | Qwen3.5-4B | 8 min | 77.3% to 89.1% | battery within 0.5 points |
 | Three procedures, VLABench plans | Qwen3.5-4B | 63 min | skill names all correct: 0 to 91 of 150. Fully correct: 0 to 0 | other tasks: total score 0.429 to 0.428 |
-| OSWorld desktop tasks | Qwen3.5-4B | no edit (2 hours of checks) | base 4 of 22 | |
+| Tasks that are not possible, OSWorld | Qwen3.5-4B | 47 min after a base scan of 63 min | 0 to 10 of 11 | possible tasks 4 to 3 of 38, with 7 false `fail` |
+| Possible desktop tasks, OSWorld | Qwen3.5-4B | no edit (2 hours of checks) | base 16 of 83 | |
 
 What this effort does not show:
 
-- A long-horizon task that the student completes after an edit. The edits fix one step or one
-  list of skill names. The OSWorld sample has 22 tasks, so its base rate has a wide interval.
+- A possible long-horizon task that the student completes after an edit and fails before it. The
+  edits fix one step, one refusal, or one list of skill names.
+- The OSWorld tasks of the other seven applications. The base scan covers 3 of 10 groups and all
+  26 tasks that are not possible.
 - VLABench in its simulator. The run here uses the planning track for vision-language models.
 - A teacher from another vendor. The second teacher was another Claude model.
 - Qwen4. The harness loads a student by name, so a new model needs no code change if its layers
@@ -73,7 +79,7 @@ What this effort does not show:
 | Scaling: MiniWoB++ email tasks on a quantized 27B model | Qwen3.8-27B NVFP4 | Held-out 30.0% to 68.0% (39 episodes fixed, 1 broken). The recipe and the contexts of the 4B run, layer 60. One matrix, 0.22% of the weights. The other 78 task types: 73.1% to 73.1%. 56 minutes at 3 tokens per second. | not run: no memory for training |
 | A student outside Qwen: Meta-World | GLM-4.6V-Flash (10.3B) | Held-out 51.5% to 57.0% (11 episodes fixed, 0 broken). Pick-place 12 to 20 of 20. Practice trial 30 minutes after the first pass. 0.50% of the weights. | not run |
 | Thinking that does not end, GSM8K | Qwen3.5-4B | Held-out 77.3% to 89.1% (17 items fixed, 2 broken). Replies at the token limit: 30.5% to 8.6%. Working edit at 8 minutes. One matrix, 0.44% of the weights. Thinking off scores 93.0% with no edit. | not run |
-| Long-horizon computer use: OSWorld | Qwen3.5-4B | No edit candidate. Base 4 of 22 tasks. Three forced replays solve 0 failed tasks. | not run |
+| Long-horizon computer use: OSWorld | Qwen3.5-4B | Possible tasks: no edit candidate (base 16 of 83, three forced replays solve 0 failed tasks). Tasks that are not possible: held-out 0 to 10 of 11 with one rank-1 edit, 0.51% of the weights, battery within 1 point, 7 of 38 possible tasks end with a false `fail`. | not run (no examples) |
 | Long-horizon robot plans: VLABench, three procedures | Qwen3.5-4B | Held-out: all skill names correct in 0 to 91 of 150 plans, official total score 0.151 to 0.454, fully correct plans 0 to 0. 0.52% of the weights. MMLU-Pro 48.0 to 45.5. Works in the plan-only mode only. | not run |
 
 ## 1. Calibration on Qwen3.5-0.8B
@@ -318,7 +324,7 @@ OSWorld runs real applications in an Ubuntu virtual machine and scores the final
 official evaluators. The student sees one screenshot and its action history, and writes one JSON
 action per step (15 steps at most). Run directory: `runs/osworld-4b-teacher`. Ticket 30 holds the detail.
 
-**Negative result: no edit candidate.** The base student solves 4 of 22 sampled tasks (18%, interval
+**For tasks that are possible: no edit candidate.** The base student solves 4 of 22 sampled tasks (18%, interval
 7% to 39%): Thunderbird 2 of 2, Chrome 1 of 4, VS Code 1 of 3, and 0 of 13 in the six other applications.
 
 The visible fault is a loop. 157 of 299 steps repeat the action of the step before, and 16 of 18
@@ -335,6 +341,43 @@ failed tasks hold a repeat. The loop is not the cause:
 - The recipe needs one recurring step with one correct token. The tasks of OSWorld do not share
   such a step, so the recipe stops at the forced replay, before any edit.
 - The check that found this took 2 hours, most of it waits of the virtual machine (150 seconds per task).
+
+**A wider scan found one portion with a fault of the habit kind.** A base scan of all 83 tasks of
+Thunderbird, VS Code, and Chrome (16 solved) confirms the picture above for tasks that are possible.
+It also shows a second group: 26 of the 368 OSWorld tasks are not possible by design, and the
+correct reply there is the action `fail`. The base student never writes it and solves 0 of 26. A
+prompt sentence makes the ability visible: with it, `fail` has a median probability of 0.41 at a
+stuck step of a task that is not possible, and 0.025 in a possible task.
+
+One rank-1 fit on one MLP matrix (`fail` against the other action names, margin 16) uses the steps
+of 15 practice tasks that are not possible as targets, and the steps of 38 possible practice tasks as
+contexts to keep. Ticket 32 holds the detail.
+
+| Held-out tasks, in the virtual machine | Base | Teacher edit |
+|---|---|---|
+| Not possible (11, in five applications) | 0 | **10** (10 fixed, 0 broken, p = 0.002) |
+| Possible (38) | 4 | 3 (0 fixed, 1 broken, p = 1.0) |
+| Possible tasks that end with a false `fail` | 0 | 7 (the base failed all 7) |
+| All 49 | 8% | 27% |
+| Not possible (11): the same fit with a random direction | 0 | 0 |
+| Not possible (11): base weights with a prompt sentence about such tasks | 0 | 7 (and 7 false `fail`) |
+
+| Measure | Teacher edit |
+|---|---|
+| Time | 47 minutes from the end of the base scan to the choice of the margin. The scan took 63 minutes. |
+| Weights changed | 0.51% (1 tensor, 1 layer, rank 1) |
+| WikiText-2: top-token agreement with the original | 98.7% |
+| Battery, largest drop | 1.0 point (GSM8K with thinking, 10 fixed and 11 broken) |
+
+- **The gain is one behavior: to refuse a task that the machine cannot do.** The student does not
+  get better at tasks that are possible.
+- **The price is a false `fail`.** The student gives up on 7 of 38 possible tasks. The score does
+  not show it, because the base failed those tasks. A user sees it.
+- **A prompt sentence does most of the same.** With the base weights and one sentence about tasks
+  that are not possible, the student solves 7 of the 11, with the same count of false `fail`. The
+  edit gives 10 of 11 with no change to the prompt. With 11 tasks the difference is not significant.
+- **The time is the time of the virtual machine.** One task takes 150 seconds, so the steps for the
+  keys took 17 minutes and the scan 63 minutes. The fit and its checks took 28 minutes.
 
 ## 9. Long-horizon robot plans: VLABench on Qwen3.5-4B
 
@@ -395,8 +438,11 @@ three procedures.
   elements, two positions). Training fixes that kind in 15 minutes.
 - The habit recipe extends to a procedure: 46 targets in one fit gave the skill names of plans with
   5 to 9 steps. The cost on the battery grew with the size of the edit.
-- A realistic desktop benchmark gave the recipe no target. In OSWorld the failures come from
-  procedures that the student does not know, and no step repeats across tasks.
+- A realistic desktop benchmark gave the recipe one target. In OSWorld the failures on possible
+  tasks come from procedures that the student does not know, and no step repeats across tasks. The
+  refusal of a task that is not possible is one token with a default against it, and one edit fixed it.
+- A prompt sentence can be the test for a hidden ability. The correct token had no probability with
+  the plain prompt and a clear one with the sentence.
 - Training on the target alone has a price next to the target, in both blocks: 12.5 points on text
   targets, and two robot tasks lost. Training data that covers the neighbours removes that price.
 - In the two blocks where both methods work (robot tasks and email tasks), LoRA on correct examples
