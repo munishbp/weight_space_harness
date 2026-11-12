@@ -14,7 +14,8 @@ there is the condition for an edit that writes the guide into the weights.
 
 ## Answer
 
-**No. The student follows an exact key recipe, and nothing else. No edit ran.**
+**No. Neither a guide nor thinking lifts the possible tasks beyond the noise of one run. The student
+follows an exact key recipe, and nothing else. No edit ran.**
 
 The portion is VS Code: 12 practice tasks, of which 9 are possible (base 3 of 9). The teacher wrote
 each guide from its own knowledge of VS Code and from the practice tasks. It saw no held-out task.
@@ -24,6 +25,8 @@ each guide from its own knowledge of VS Code and from the practice tasks. It saw
 | Base | 3 of 9 | | |
 | Guide 1: procedures in words (settings page, replace, shortcuts, folders) | 2 of 9 | 1 | 2 |
 | Guide 2: four exact key recipes, each with its kind of task | 3 of 9 | 1 | 1 |
+| Thinking on, a limit of 512 tokens per step | 3 of 9 | 2 | 2 |
+| Base, a second run with no change | 1 of 9 | 0 | 2 |
 
 - Both guides fix the same task: replace all in a file. Its recipe is five fixed key presses, and
   the student writes them exactly.
@@ -33,6 +36,11 @@ each guide from its own knowledge of VS Code and from the practice tasks. It saw
 - The guides break tasks that the base solved. The student applies a line to a task of another
   kind, and it presses `ctrl+s` where the guide names it for another case.
 - The three tasks that are not possible stay at 0 with both guides.
+- Thinking on does not lift the score. The thinking ends in 95% of the steps (median 103 tokens),
+  so the thinking fault of ticket 23 does not show here, and its edit is not a candidate.
+- **One run is noisy.** A second base run with no change solves 1 of 9, against 3 in the first.
+  Only 2 of 12 tasks have the same actions in both runs. The virtual machine, the timing, and the
+  web content differ between runs. Every difference in the table is inside this noise.
 
 ### What it means
 

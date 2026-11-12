@@ -384,7 +384,11 @@ the system prompt (two versions) leaves the 9 possible practice tasks at 2 and 3
 for the base. Both guides fix one task, replace all in a file, whose recipe is five fixed key
 presses. Both break tasks that the base solved. The student follows an exact key recipe and fails
 at each step that needs a look at the screen. So an edit that writes the guide into the weights has
-no ceiling to reach, and none ran. Ticket 33 holds the detail.
+no ceiling to reach, and none ran. Ticket 33 holds the detail. Thinking on gives the same 3 of 9. A second
+base run with no change gives 1 of 9, and only 2 of 12 tasks repeat their actions, so one OSWorld
+run has a noise of about 2 tasks in 9. The gain on tasks that are not possible (0 to 10 of 11,
+with 0 of 11 for the random control) is far outside that noise. The change on possible tasks (4 to
+3 of 38) is inside it.
 
 ## 9. Long-horizon robot plans: VLABench on Qwen3.5-4B
 

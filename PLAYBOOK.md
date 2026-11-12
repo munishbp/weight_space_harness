@@ -243,6 +243,9 @@ Rules for the recipe, each from a failed attempt:
   one application left 9 possible desktop tasks at 2 and 3 solved (base 3). It fixed the one task
   with a recipe of fixed key presses and broke two others. A prompt that does not help gives an
   edit no ceiling.
+- **A virtual machine run does not repeat.** Two base runs on 12 desktop tasks had the same actions
+  in 2 tasks and differed by 2 solved tasks of 9. Run the base two times before you read a gain or a
+  loss of that size.
 
 ## 7. When to stop
 

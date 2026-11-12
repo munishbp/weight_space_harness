@@ -1,0 +1,17 @@
+base repeat vs_code practice | vs_code              0ed39f63 score 0.0  146 s | key type type key key type type key key key key key key key key | 
+base repeat vs_code practice | vs_code              4e60007a score 0.0  157 s | click type click click click click click wait wait wait wait wait wait wait wait | 
+base repeat vs_code practice | vs_code              eabc805a score 0.0  158 s | click type key click click type key wait wait wait wait wait wait wait wait | 
+base repeat vs_code practice | vs_code              9439a27b score 0.0  148 s | type type type type type type type type type type type type type type type | 
+base repeat vs_code practice | vs_code              930fdb3b score 0.0  160 s | click type key type key type key key key key key key key key key | 
+base repeat vs_code practice | vs_code              9d425400 score 1.0  165 s | type click wait wait wait wait wait wait wait wait wait wait wait wait wait | 
+base repeat vs_code practice | vs_code              6ed0a554 score 0.0  125 s | click click type key click type key key done | 
+base repeat vs_code practice | vs_code              70745df8 score 0.0  119 s | click click click type key key done | 
+base repeat vs_code practice | vs_code              c6bf789c score 0.0  116 s | click click type type key done | 
+base repeat vs_code practice | vs_code              847a96b6 score 0.0  154 s | click wait click key click type key wait key type key wait wait wait wait | 
+base repeat vs_code practice | vs_code              dcbe20e8 score 0.0  148 s | click click wait type key key type key wait type key key type key type | 
+base repeat vs_code practice | vs_code              971cbb5b score 0.0  153 s | type type type type type type type type type type type type type type type | 
+base repeat vs_code practice | solved 1 of 12 | bridge errors 0
+base again, practice | possible: base 3 of 9, now 1 | {'fixed': 0, 'broken': 2, 'p_value': 0.5} | ends with fail 0
+base again, practice | not possible: base 0 of 3, now 0 | {'fixed': 0, 'broken': 0, 'p_value': 1.0} | ends with fail 0
+same actions as the first base run: 2 of 12
+[ 24.2 min] base repeat done
