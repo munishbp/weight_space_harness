@@ -171,6 +171,9 @@ A negative result is a valid verdict.
   positive for one portion. 26 OSWorld tasks are not possible by design and need the action `fail`.
   One rank-1 edit takes them from 0 to 10 of 11 held-out tasks. Possible tasks go from 4 to 3 of 38,
   and 7 of them end with a false `fail`. The battery stays within 1 point.
+- [Test if the knowledge of the teacher, as a guide in the prompt, lifts possible OSWorld tasks](issues/33-osworld-guide-in-prompt.md):
+  negative. Two guides for VS Code leave 9 possible practice tasks at 2 and 3 solved (base 3). The
+  student follows an exact key recipe and fails at each step that needs a look at the screen.
 
 ## Not yet specified
 

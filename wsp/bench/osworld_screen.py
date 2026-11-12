@@ -23,7 +23,6 @@ x and y run from 0 to 1000 across the screenshot. This module turns a valid acti
 import base64
 import io
 import json
-import re
 import socket
 import time
 from pathlib import Path
@@ -148,11 +147,13 @@ def to_code(action: dict | None, width: int, height: int) -> str | None:
 
 def parse_action(text: str) -> dict | None:
     """The first JSON object in the reply, or None when the reply holds no valid JSON object."""
-    match = re.search(r"\{.*?\}", text, flags=re.DOTALL)
-    if not match:
+    # The decoder reads one full object from the first brace. A search to the first closing brace
+    # cuts an action whose text holds a brace (for example typed JSON).
+    start = text.find("{")
+    if start < 0:
         return None
     try:
-        return json.loads(match.group())
+        return json.JSONDecoder().raw_decode(text[start:])[0]
     except json.JSONDecodeError:
         return None
 

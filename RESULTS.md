@@ -379,6 +379,13 @@ contexts to keep. Ticket 32 holds the detail.
 - **The time is the time of the virtual machine.** One task takes 150 seconds, so the steps for the
   keys took 17 minutes and the scan 63 minutes. The fit and its checks took 28 minutes.
 
+**The knowledge of the teacher in the prompt does not lift possible tasks.** A guide for VS Code in
+the system prompt (two versions) leaves the 9 possible practice tasks at 2 and 3 solved, against 3
+for the base. Both guides fix one task, replace all in a file, whose recipe is five fixed key
+presses. Both break tasks that the base solved. The student follows an exact key recipe and fails
+at each step that needs a look at the screen. So an edit that writes the guide into the weights has
+no ceiling to reach, and none ran. Ticket 33 holds the detail.
+
 ## 9. Long-horizon robot plans: VLABench on Qwen3.5-4B
 
 VLABench has a track for vision-language models: the model sees a robot scene and writes the plan
@@ -443,6 +450,9 @@ three procedures.
   refusal of a task that is not possible is one token with a default against it, and one edit fixed it.
 - A prompt sentence can be the test for a hidden ability. The correct token had no probability with
   the plain prompt and a clear one with the sentence.
+- A prompt sentence or an edit changes a default: one token, one fixed list of names, one fixed list
+  of keys. Neither adds an ability. A guide with the procedures of VS Code in the prompt did not
+  lift the possible desktop tasks.
 - Training on the target alone has a price next to the target, in both blocks: 12.5 points on text
   targets, and two robot tasks lost. Training data that covers the neighbours removes that price.
 - In the two blocks where both methods work (robot tasks and email tasks), LoRA on correct examples

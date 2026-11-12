@@ -1,0 +1,18 @@
+~/weight_space/.venv/lib/python3.13/site-packages/triton/knobs.py:504: UserWarning: TRITON_DEFAULT_FP_FUSION is unset: defaulting to FP fusion ENABLED for backward compatibility in Triton 3.9. The default will change to DISABLED in Triton 3.10; set TRITON_DEFAULT_FP_FUSION=1 to keep fusion enabled or =0 to adopt the new default early and silence this warning.
+  warn_once(FP_FUSION_DEFAULT_WARNING)
+guide vs_code practice | vs_code              0ed39f63 score 1.0  103 s | key type key type key key done | 
+guide vs_code practice | vs_code              eabc805a score 0.0  126 s | click click type key click click click click click click click click click click click | 
+guide vs_code practice | vs_code              4e60007a score 0.0  127 s | click type key key type key type key key key key key key key key | 
+guide vs_code practice | vs_code              9439a27b score 0.0  142 s | key type key key key key click type key key type key key key type | 
+guide vs_code practice | vs_code              9d425400 score 1.0  124 s | key type key click click type key key done | 
+guide vs_code practice | vs_code              930fdb3b score 0.0  155 s | key type key key key key key key key key key key key key key | 
+guide vs_code practice | vs_code              6ed0a554 score 0.0  119 s | key type key type key key done | 
+guide vs_code practice | vs_code              70745df8 score 0.0  142 s | key type key type key type key key key key key key key key key | 
+guide vs_code practice | vs_code              c6bf789c score 0.0  116 s | key type key type key done | 
+guide vs_code practice | vs_code              847a96b6 score 0.0  160 s | key type key key type key wait wait wait wait wait wait wait wait wait | 
+guide vs_code practice | vs_code              dcbe20e8 score 0.0  146 s | key type type type type type type type type type type type type type type | 
+guide vs_code practice | vs_code              971cbb5b score 0.0  147 s | type key type key type key type key type key type key type key type | 
+guide vs_code practice | solved 2 of 12 | bridge errors 0
+guide in the prompt, practice | possible: base 3 of 9, now 2 | {'fixed': 1, 'broken': 2, 'p_value': 1.0} | ends with fail 0
+guide in the prompt, practice | not possible: base 0 of 3, now 0 | {'fixed': 0, 'broken': 0, 'p_value': 1.0} | ends with fail 0
+[  9.1 min] guide on practice done

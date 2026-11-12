@@ -239,6 +239,10 @@ Rules for the recipe, each from a failed attempt:
   each margin how many ended tasks the base solved.
 - **Scan before you conclude.** 22 tasks showed no shared fault. 83 tasks and a read of the
   evaluator names showed a group of 26 tasks with one correct token.
+- **Put the knowledge in the prompt before you plan an edit for it.** A guide with the procedures of
+  one application left 9 possible desktop tasks at 2 and 3 solved (base 3). It fixed the one task
+  with a recipe of fixed key presses and broke two others. A prompt that does not help gives an
+  edit no ceiling.
 
 ## 7. When to stop
 

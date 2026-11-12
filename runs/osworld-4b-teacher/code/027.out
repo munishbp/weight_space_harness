@@ -1,0 +1,30 @@
+guide2 vs_code practice | vs_code              0ed39f63 score 1.0  121 s | key type key type key key done | 
+guide2 vs_code practice | vs_code              eabc805a score 1.0  128 s | click type click click wait wait wait done | 
+guide2 vs_code practice | vs_code              4e60007a score 1.0  162 s | click type click click wait wait wait wait wait wait wait wait wait wait wait | 
+guide2 vs_code practice | vs_code              9439a27b score 0.0  124 s | key type key key type key click done | 
+guide2 vs_code practice | vs_code              930fdb3b score 0.0  143 s | key type key type key key invalid invalid invalid invalid invalid invalid invalid invalid invalid | 
+guide2 vs_code practice | vs_code              9d425400 score 0.0  132 s | key type key key invalid invalid type type key wait click done | 
+guide2 vs_code practice | vs_code              6ed0a554 score 0.0  122 s | click click type key type key key done | 
+guide2 vs_code practice | vs_code              70745df8 score 0.0  128 s | key type key key type key wait click done | 
+guide2 vs_code practice | vs_code              c6bf789c score 0.0  120 s | key type key key invalid invalid invalid invalid invalid invalid invalid invalid invalid invalid invalid | 
+guide2 vs_code practice | vs_code              847a96b6 score 0.0  161 s | click click type key type key wait wait wait wait wait wait wait wait wait | 
+guide2 vs_code practice | vs_code              971cbb5b score 0.0  129 s | key type key key invalid invalid invalid invalid invalid invalid invalid invalid invalid invalid invalid | 
+guide2 vs_code practice | vs_code              dcbe20e8 score 0.0  149 s | click click click type key type type type type type type type key type type | 
+guide2 vs_code practice | solved 3 of 12 | bridge errors 0
+guide 2 in the prompt, practice | possible: base 3 of 9, now 3 | {'fixed': 1, 'broken': 1, 'p_value': 1.0} | ends with fail 0
+guide 2 in the prompt, practice | not possible: base 0 of 3, now 0 | {'fixed': 0, 'broken': 0, 'p_value': 1.0} | ends with fail 0
+[ 19.2 min] guide 2 on practice done
+0ed39f63 base False guide2 True | key:['ctrl', 'h'] | type:text | key:['tab'] | type:test | key:['ctrl', 'alt', 'enter'] | key:['ctrl', 's'] | done:
+eabc805a base True guide2 True | click:[49, 279] | type:Python | click:[129, 127] | click:[171, 196] | wait: | wait: | wait: | done:
+4e60007a base True guide2 True | click:[49, 281] | type:autoDocstring | click:[174, 196] | click:[174, 196] | wait: | wait: | wait: | wait: | wait:
+9439a27b base False guide2 False | key:['ctrl', 'shift', 'p'] | type:Preferences: Open User Settings (JSON) | key:['enter'] | key:['ctrl', 'a'] | type:debug.focusEditorOnBreakpoint: false | key:['ctrl', 's'] | click:[597, 574] | done:
+930fdb3b base False guide2 False | key:['ctrl', 'shift', 'p'] | type:Preferences: Open Keyboard Shortcuts (JSO | key:['enter'] | type:Preferences: Open Keyboard Shortcuts (JSO | key:['enter'] | key:['ctrl', 'a'] | invalid: | invalid: | invalid:
+9d425400 base True guide2 False | key:['ctrl', 'shift', 'p'] | type:Preferences: Open User Settings (JSON) | key:['enter'] | key:['ctrl', 'a'] | invalid: | invalid: | type:editor.wrapColumns | type:true | key:['ctrl', 's']
+6ed0a554 base False guide2 False | click:[356, 426] | click:[805, 148] | type:/home/user/data1 | key:['enter'] | type:/home/user/data2 | key:['enter'] | key:['ctrl', 's'] | done:
+70745df8 base False guide2 False | key:['ctrl', 'shift', 'p'] | type:Preferences: Open User Settings (JSON) | key:['enter'] | key:['ctrl', 'a'] | type:[
+  "["autoSave", "true"],
+  "["files.aut | key:['ctrl', 's'] | wait: | click:[598, 574] | done:
+c6bf789c base False guide2 False | key:['ctrl', 'shift', 'p'] | type:Preferences: Open User Settings (JSON) | key:['enter'] | key:['ctrl', 'a'] | invalid: | invalid: | invalid: | invalid: | invalid:
+847a96b6 base False guide2 False | click:[127, 187] | click:[317, 94] | type:/home/user/workspace1.code-workspace | key:['ctrl', 'shift', 'e'] | type:/home/user/workspace2.code-workspace | key:['ctrl', 's'] | wait: | wait: | wait:
+dcbe20e8 base False guide2 False | click:[129, 187] | click:[321, 292] | click:[805, 148] | type:Preferences: Open User Settings (JSON) | key:['enter'] | type:workbench.colorTheme | type:Preferences: Open User Settings (JSON) | type:workbench.colorTheme | type:workbench.colorTheme
+971cbb5b base False guide2 False | key:['ctrl', 'shift', 'p'] | type:Preferences: Open User Settings (JSON) | key:['enter'] | key:['ctrl', 'a'] | invalid: | invalid: | invalid: | invalid: | invalid:
